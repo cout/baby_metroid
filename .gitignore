@@ -1,0 +1,8 @@
+build
+__pycache__
+rooms/*.bin
+rooms/*.bin.orig
+resources/sm_orig.sfc
+resources/sm_orig.srm
+*~
+*.bk
