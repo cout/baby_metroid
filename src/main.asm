@@ -21,9 +21,7 @@
 ; * older flying ship - https://metroidconstruction.com/resource.php?id=39
 ; * prevent early supers somehow
 ; * for kraid, perhaps put mini-kraid into his room instead (and require some trick to get out of the room)
-
-; BUGS:
-; * game crashes if a bomb hits an enemy!
+; * is there a more intuitive way through green pirates room?
 
 !debug_flag = $7E0DE0
 
