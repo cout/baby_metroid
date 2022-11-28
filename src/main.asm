@@ -33,7 +33,6 @@ incsrc enemies.asm
 incsrc freeze_enemies.asm
 incsrc death_quota.asm
 incsrc torizos.asm
-incsrc pirates.asm
 incsrc enemy_drops.asm
 incsrc ceres.asm
 incsrc rooms/climb.asm
