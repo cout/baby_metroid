@@ -22,12 +22,16 @@
 ; * prevent early supers somehow
 ; * for kraid, perhaps put mini-kraid into his room instead (and require some trick to get out of the room)
 
+; BUGS:
+; * game crashes if a bomb hits an enemy!
+
 !debug_flag = $7E0DE0
 
 lorom
 
 incsrc enemies.asm
 incsrc freeze_enemies.asm
+incsrc death_quota.asm
 incsrc torizos.asm
 incsrc pirates.asm
 incsrc enemy_drops.asm

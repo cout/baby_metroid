@@ -6,6 +6,7 @@ COMPRESS = tools/compress.py
 SOURCES = \
 src/main.asm \
 src/freeze_enemies.asm \
+src/death_quota.asm \
 src/torizos.asm \
 src/pirates.asm \
 src/enemy_drops.asm \
