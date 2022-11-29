@@ -31,6 +31,7 @@ incsrc enemies.asm
 incsrc freeze_enemies.asm
 incsrc death_quota.asm
 incsrc torizos.asm
+incsrc spore_spawn.asm
 incsrc enemy_drops.asm
 incsrc ceres.asm
 incsrc rooms/climb.asm

@@ -8,6 +8,7 @@ src/main.asm \
 src/freeze_enemies.asm \
 src/death_quota.asm \
 src/torizos.asm \
+src/spore_spawn.asm \
 src/enemy_drops.asm \
 src/ceres.asm \
 rooms/pit_room.asm \
