@@ -1,17 +1,59 @@
 ;;
+; Palettes
+;
+; The color change order is reversed from normal
+
+org $A5E359 ; initial palette
+dw $3800, $36BA, $29F4, $0089, $0002, $3236, $1DB2, $0D0D, $04CB, $36FC, $19B2, $00CB, $0004, $36FC, $19B2, $00CB
+
+org $A5E379 ; damage palettes
+dw $3800, $36BA, $29F4, $0089, $0002, $3236, $1DB2, $0D0D, $04CB, $36FC, $19B2, $00CB, $0004, $36FC, $19B2, $00CB
+dw $3800, $2E78, $25D2, $0088, $0002, $2E14, $1990, $0D0C, $04CA, $32DA, $19B1, $00CB, $0024, $2EBC, $1593, $00CB
+dw $3800, $2A55, $21B1, $0087, $0001, $25F2, $156F, $08EB, $04A9, $32B9, $1991, $04EA, $0024, $269D, $1173, $00AB
+dw $3800, $2213, $1D8F, $0086, $0001, $21D0, $114D, $08EA, $04A8, $2E97, $1990, $04EA, $0044, $1E5D, $0D54, $00AB
+
+org $A5E3F9 ; death-sequence palettes
+dw $3800, $2213, $1D8F, $0086, $0001, $21D0, $114D, $08EA, $04A8, $2E97, $1990, $04EA, $0044, $1E5D, $0D54, $00AB
+dw $3800, $1DF1, $156D, $0466, $0001, $198F, $112B, $08C8, $04A7, $2E96, $158F, $08EA, $0045, $1A3E, $0D35, $008C
+dw $3800, $15AF, $114B, $0465, $0001, $156D, $0D09, $08C7, $04A6, $2A74, $158E, $08EA, $0065, $11FE, $0916, $008C
+dw $3800, $118C, $0D2A, $0464, $0000, $0D4B, $08E8, $04A6, $0485, $2A53, $156E, $0D09, $0065, $09DF, $04F6, $006C
+dw $3800, $094A, $0908, $0463, $0000, $0929, $04C6, $04A5, $0484, $2631, $156D, $0D09, $0085, $019F, $00D7, $006C
+dw $3800, $15EF, $156B, $00A5, $0063, $15AC, $0D49, $0907, $04C6, $36D6, $21D0, $114B, $00A6, $025F, $0137, $008D
+dw $3800, $2A92, $21CC, $00C4, $0062, $260E, $15AA, $0D27, $04E5, $475A, $2E52, $198C, $00C6, $033F, $01B6, $008F
+dw $0000, $3F57, $2E4D, $00E2, $0060, $3AB0, $220B, $1166, $0924, $57FF, $3AB5, $1DCE, $00E7, $03FF, $0216, $00B0
+
+org $A5E4F9 ; level palette
+dw $0000, $6318, $6318, $0089, $19B2, $0D0D, $0089, $0002, $04CB, $04CB, $092E, $0004, $3236, $29F4, $19B2, $0002
+dw $0000, $6318, $6318, $0488, $19B0, $110B, $0488, $0001, $090B, $08EB, $092C, $0003, $3254, $25B1, $19F2, $0002
+dw $0000, $6318, $6318, $08A6, $19AF, $150A, $0C86, $0000, $0D4A, $0D2A, $0D2B, $0002, $2E52, $1D8F, $1E32, $0002
+dw $0000, $6318, $6318, $0CA5, $19AD, $1908, $1085, $0400, $118A, $114A, $0D29, $0001, $2E70, $194C, $1E72, $0002
+dw $0000, $6318, $6318, $14C4, $1DAC, $2126, $18A4, $0C00, $19EA, $196A, $1147, $0001, $2A6F, $112A, $22B1, $0001
+dw $2003, $6318, $6318, $18C3, $1DAA, $2524, $1CA3, $1000, $1E2A, $1D8A, $1145, $0000, $2A8D, $0CE7, $22F1, $0001
+dw $2003, $6318, $6318, $1CE1, $1DA9, $2923, $24A1, $1400, $2269, $21C9, $1544, $0420, $268B, $04C5, $2731, $0000
+
+org $A5E5D9 ; background palette
+dw $3800, $19B2, $0D0D, $0089, $19B2, $0D0D, $0089, $0002, $04CB, $04CB, $092E, $0004, $7FFF, $7FFF, $19B2, $0002
+dw $3800, $2190, $14EC, $0488, $198F, $110B, $0488, $0402, $090E, $08ED, $092E, $0424, $7FFF, $7FFF, $19D4, $0002
+dw $3800, $2D8D, $1CEA, $0866, $1D6D, $10E9, $0486, $0421, $0971, $090E, $0D0E, $0425, $7FFF, $7FFF, $1A16, $0401
+dw $3800, $356B, $24C9, $0C65, $1D4A, $14E7, $0885, $0821, $0DB4, $0D30, $0D0E, $0845, $7FFF, $7FFF, $1A38, $0401
+dw $3800, $4169, $2CA7, $0C64, $2128, $14C6, $0C84, $0821, $0DF6, $0D72, $110E, $0C45, $7FFF, $7FFF, $1659, $0401
+dw $3800, $4947, $3486, $1063, $2105, $18C4, $1083, $0C21, $1239, $1194, $110E, $1065, $7FFF, $7FFF, $167B, $0401
+dw $3800, $5544, $3C84, $1441, $24E3, $18A2, $1081, $0C40, $129C, $11B5, $14EE, $1066, $7FFF, $7FFF, $16BD, $0800
+
+;;
 ; Spore spawn instruction lists
 
 org $A5E6C7
 
 instruction_list_spore_spawn_alive:
 
+dw $E91C, $0000
 dw $0008, $EF61        ; mouth fully open
 dw $E8BA, $EB1B        ; start fight
 dw $812F               ; sleep
 
 instruction_list_spore_spawn_fight_started:
 
-dw $E91C, $00C0
 dw $E82D, $0000, $0000 ; speed = 00h, angle delta = 0
 
 instruction_list_spore_spawn_main_loop:
@@ -50,5 +92,9 @@ org $A5EB55 ; second instruction in spore spawn movement function
 JMP $EB8A
 
 ; TODO:
-; * Change palette (start dead and get greener)
 ; * Final animation should be a slow close of the mouth
+; * Missiles should not damage spore spawn (only charge shots)
+; * (but - if only charge shots damage spore spawn then it's possible to
+;   softlock!)
+; * Get rid of explosions (but keep dust clouds?)
+; * Spore spawn color change during fight is too subtle
