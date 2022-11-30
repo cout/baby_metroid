@@ -6,7 +6,7 @@
 ;
 ; 9FD4 - Main enemy routine
 ;   |
-;   +-(*)- 903C - checks whether an enemy is frozen
+;   +----- 903C - checks whether an enemy is frozen
 ;     |
 ;     +----- 903E - handle not-frozen enemies
 ;     |      |
@@ -32,7 +32,7 @@
 ;           +----- 977B - JSR A236 - call enemy/bomb handler
 ;           +----- 977E - JSR A07A - call enemy/samus handler
 ;
-; A07A - enemy / samus collsion detection (called from 977E above)
+; (*) A07A - enemy / samus collsion detection (called from 977E above)
 ;  |
 ;  +----- A210 - JSL to A226 (execute enemy shot)
 ;          |
