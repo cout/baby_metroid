@@ -91,10 +91,20 @@ org $A5EB55 ; second instruction in spore spawn movement function
 
 JMP $EB8A
 
+;;
+; Disable spore spawn death explosions
+
+org $A5E9B1
+
+RTL
+
+org $A5E9F5
+
+RTL
+
 ; TODO:
 ; * Final animation should be a slow close of the mouth
 ; * Missiles should not damage spore spawn (only charge shots)
 ; * (but - if only charge shots damage spore spawn then it's possible to
 ;   softlock!)
-; * Get rid of explosions (but keep dust clouds?)
 ; * Spore spawn color change during fight is too subtle
