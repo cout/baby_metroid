@@ -148,6 +148,7 @@ STA $0F8C,x
 ; TODO - change color to black if too much damage?
 ; TODO - (maybe even explode)
 ; TODO - prevent overflow?
+; TODO - allow an exit out of the room
 RTL
 
 .beam:
