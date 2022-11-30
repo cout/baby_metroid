@@ -2,12 +2,12 @@ TODO
 ====
 
 Ideas:
+* If an enemy is moving under Samus and touching Samus, make Samus move
+  with the enemy (like Rippers)
 * Replace space pirates with etecoons
 * Replace climb pirates with dachora (ride the dachor up!)
 * Croc really does take a bath
 * Get rid of "nothing" drops
-* Any rooms where all enemies have to be killed to exit the room will
-  currently softlock
 * Elliott does not like the mosquitoes - replace them with something
   else
 * apple sporespawn - https://metroidconstruction.com/resource.php?id=2
