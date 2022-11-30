@@ -102,6 +102,14 @@ org $A5E9F5
 
 RTL
 
+;; Make spore spawn vulnerable to uncharged beam
+;
+
+org $B4F094
+
+;  80,82,82,82,80,82,82,82,82,82,82,82, 82,82,80,80,80,80,80,04,80,80
+db 02,82,82,82,80,82,82,82,82,82,82,82, 82,82,80,80,80,80,80,04,80,80
+
 ;;
 ; Spore spawn hit with projcetile
 
@@ -139,6 +147,7 @@ STA $0F8C,x
 ; TODO - play "hurt" sound
 ; TODO - change color to black if too much damage?
 ; TODO - (maybe even explode)
+; TODO - prevent overflow?
 RTL
 
 .beam:
