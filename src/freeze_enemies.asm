@@ -77,15 +77,17 @@ org $A0A4A1 ; common touch AI subroutine
 RTS
 
 ;;
+; Disable projectile knockback and damage
+
+org $A0994B
+STZ $18AA
+RTS
+
+;;
 ; Disable damage to Samus
 
 org $91DF51 ; subroutine called by touch AI and projectile collsion handler to deal damage
 RTL
 
 org $91DF71 ; instruction within deal damage subroutine that decrements Samus's health
-RTL
-
-;;
-; Disable projectile collsion
-org $A09785
 RTL
