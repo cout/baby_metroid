@@ -102,6 +102,52 @@ org $A5E9F5
 
 RTL
 
+;;
+; Spore spawn hit with projcetile
+
+org $A5ED62
+
+BRL spore_spawn_projectile_check
+
+org $A5ED6D
+
+spore_spawn_damage:
+
+org $A5F95A ; free space
+
+spore_spawn_projectile_check:
+{
+BIT #$0700
+BNE .missiles_or_supers
+BRA .beam
+
+.missiles_or_supers:
+LDX $0E54
+LDA $0F8C,x
+PHA
+JSL spore_spawn_damage
+PLA
+STA $12
+LDX $0E54
+SEC
+SBC $0F8C,x
+STA $12
+LDA $0F8C,x
+ADC $12
+ADC $12
+STA $0F8C,x
+; TODO - play "hurt" sound
+; TODO - change color to black if too much damage?
+; TODO - (maybe even explode)
+RTL
+
+.beam:
+JML spore_spawn_damage
+; TODO - play soothing sound
+RTL
+
+}
+
 ; TODO:
 ; * Final animation should be a slow close of the mouth
 ; * Missiles should not damage spore spawn (only charge shots)
