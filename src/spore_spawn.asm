@@ -121,7 +121,7 @@ org $A5ED6D
 
 spore_spawn_damage:
 
-org $A5F95A ; free space
+org !FREESPACE_A5
 
 spore_spawn_projectile_check:
 {

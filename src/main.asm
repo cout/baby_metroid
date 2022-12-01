@@ -2,8 +2,10 @@
 
 lorom
 
+incsrc freespace.asm
 incsrc enemies.asm
 incsrc freeze_enemies.asm
+incsrc ride_enemies.asm
 incsrc death_quota.asm
 incsrc torizos.asm
 incsrc spore_spawn.asm
