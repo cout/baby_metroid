@@ -131,19 +131,17 @@ BRA .beam
 
 .missiles_or_supers:
 LDX $0E54
-LDA $0F8C,x
-PHA
+LDA $0F8C,x : PHA      ; Push [enemy HP]
 JSL spore_spawn_damage
-PLA
-STA $12
+PLA : STA $12          ; $12 = [previous enemy HP]
 LDX $0E54
 SEC
 SBC $0F8C,x
-STA $12
-LDA $0F8C,x
-ADC $12
-ADC $12
-STA $0F8C,x
+STA $12                ; $12 = [enemy HP] - [previous enemy HP]
+LDA $0F8C,x            ; A = [enemy HP]
+ADC $12                ; A += [change in enemy HP]
+ADC $12                ; A += [change in enemy HP]
+STA $0F8C,x            ; [enemy HP] = A
 ; TODO - play "hurt" sound
 ; TODO - change color to black if too much damage?
 ; TODO - (maybe even explode)
