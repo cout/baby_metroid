@@ -1,3 +1,26 @@
+;;;;;
+;
+; Allow Samus to "ride" enemies as if they are trippers/kamers.
+;
+; TODO:
+; * Samus still cannot ride enemies up a wall; she will fall off.
+; * It is also not possible to ride enemies up a slope (e.g. in
+;   Terminator)
+; * It is possible to change the touching function from A0AC29 (check
+;   for touching Samus from below) to A0ABE7 (check for touching Samus
+;   anywhere).  This does not fix riding up the wall, but it has another
+;   interesting effect: Reos push Samus a lot farther when they make
+;   contact.
+; * Another interesting change is to not push the processor bits.  Since
+;   wall collision is communicated in the carry bit, this has the effect
+;   of causing rippers to stop at a wall when Samus is riding and
+;   causing zeelas to fall off edges when Samus stands on them.  But I
+;   don't know what other effects this might have so I need to play both
+;   ways and see which way I like best.
+;
+;;;;;
+
+
 ;;
 ; Hook routine to move enemies horizontally to move Samus with them
 
