@@ -121,7 +121,7 @@ org $A5E9F5
 RTL
 
 ;;
-; Spore spawn hit with projcetile
+; Spore spawn hit with projectile
 
 org $A5ED62
 
