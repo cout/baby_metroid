@@ -19,7 +19,7 @@ org $A0C788
 
 move_enemy_vert:
 
-; BRL move_samus_vert_with_enemy
+BRL move_samus_vert_with_enemy
 
 org $A0C790
 
