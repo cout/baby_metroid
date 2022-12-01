@@ -1,4 +1,13 @@
 ;;
+; Disable spore spawn cry -- we will queue sound manually based on
+; projectile type.
+;
+
+org $A0DF4D
+
+dw $0000
+
+;;
 ; Palettes
 ;
 ; The color change order is reversed from normal
@@ -79,6 +88,7 @@ LDA #$0270
 STA $0F7E,x
 LDA instruction_list_spore_spawn_fight_started
 STA $0F92,x
+RTS
 
 ;;
 ; Disable spore spawn movement reaction to being shot
@@ -142,7 +152,7 @@ LDA $0F8C,x            ; A = [enemy HP]
 ADC $12                ; A += [change in enemy HP]
 ADC $12                ; A += [change in enemy HP]
 STA $0F8C,x            ; [enemy HP] = A
-; TODO - play "hurt" sound
+JSR play_sad_sound
 ; TODO - change color to black if too much damage?
 ; TODO - (maybe even explode)
 ; TODO - prevent overflow?
@@ -150,10 +160,42 @@ STA $0F8C,x            ; [enemy HP] = A
 RTL
 
 .beam:
-JML spore_spawn_damage
-; TODO - play soothing sound
+LDA #$0031
+JSL $8090CB
+JSL spore_spawn_damage
+JSR play_happy_sound
 RTL
 
+}
+
+play_sad_sound:
+{
+  PHX
+  JSL $808111
+  AND #$0006
+  TAX
+  LDA .sad_sounds,x
+  JSL $8090CB
+  PLX
+  RTS
+
+.sad_sounds:
+  dw $0016, $001A, $0030, $0059
+}
+
+play_happy_sound:
+{
+  PHX
+  JSL $808111
+  AND #$0006
+  TAX
+  LDA .happy_sounds,x
+  JSL $8090CB
+  PLX
+  RTS
+
+.happy_sounds:
+  dw $0079, $007A, $007B, $0002
 }
 
 ; TODO:
