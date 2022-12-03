@@ -29,13 +29,13 @@ class RoomStateFunction(object):
 
   def __init__(self, type, func, state_header_addr):
     self.type = type
-    self.func = HexValue(func)
+    self.func = HexValue(func) if func is not None else None
     self.state_header_addr = HexValue(state_header_addr)
 
   @classmethod
   def read_from(cls, rom):
     func, = struct.unpack('<H', rom.read(2))
-    if func == 0xE5E6: return None
+    if func == 0xE5E6: return RoomStateFunction('default', None, rom.tell())
     elif func == 0xE5FF: return cls('boss', func, *struct.unpack('<H', rom.read(2)))
     elif func == 0xE612: return RoomEventStateFunction('event', func, *struct.unpack('<BH', rom.read(3)))
     elif func == 0xE562: return cls('zebes_awake', func, *struct.unpack('<H', rom.read(2)))
@@ -57,8 +57,8 @@ class RoomStateFunctionList(object):
     functions = [ ]
     while True:
       func = RoomStateFunction.read_from(rom)
-      if func is None: break
       functions.append(func)
+      if func.type == 'default': break
     return cls(functions)
 
 @dataclass

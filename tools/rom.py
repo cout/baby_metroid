@@ -9,6 +9,9 @@ class Rom(object):
     offset = snes2offset(snes)
     self.stream.seek(offset)
 
+  def tell(self):
+    return offset2snes(self.stream.tell())
+
   def read(self, size):
     return self.stream.read(size)
 
