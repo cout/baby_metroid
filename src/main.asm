@@ -13,3 +13,4 @@ incsrc enemy_drops.asm
 incsrc ceres.asm
 incsrc rooms/climb.asm
 incsrc rooms/pit_room.asm
+incsrc rooms/early_supers.asm
