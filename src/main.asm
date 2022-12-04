@@ -15,3 +15,4 @@ incsrc rooms/climb.asm
 incsrc rooms/pit_room.asm
 incsrc rooms/early_supers.asm
 incsrc rooms/noob_bridge.asm
+incsrc rooms/bat_room.asm

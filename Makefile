@@ -19,6 +19,7 @@ rooms/early_supers.asm \
 rooms/early_supers.bin \
 rooms/noob_bridge.asm \
 rooms/noob_bridge.bin \
+rooms/bat_room.asm \
 
 TARGETS = \
 	build/baby_metroid.sfc \
