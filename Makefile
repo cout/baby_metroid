@@ -17,6 +17,8 @@ rooms/climb.asm \
 rooms/climb.bin \
 rooms/early_supers.asm \
 rooms/early_supers.bin \
+rooms/noob_bridge.asm \
+rooms/noob_bridge.bin \
 
 TARGETS = \
 	build/baby_metroid.sfc \
@@ -57,9 +59,6 @@ build/baby_metroid.ff.sfc: build/.stamp build/ff.sfc src/main.asm $(SOURCES)
 
 build/baby_metroid.ips: build/.stamp build/baby_metroid.00.sfc build/baby_metroid.ff.sfc
 	./resources/create_ips.py ../build/baby_metroid.00.sfc ../build/baby_metroid.ff.sfc ../build/baby_metroid.ips
-
-# rooms/climb.bin: rooms/climb.hex
-#	 cat rooms/climb.hex | $(HEX2BIN) | $(COMPRESS) > rooms/climb.bin
 
 rooms/%.bin: rooms/%.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
