@@ -15,6 +15,8 @@ Then:
 * Figure out Kraid
 
 Later:
+* Rising tide - easy to get stuck in the lava/acid
+* Bubble mountain - will E ride the wavers or find the tunnel?
 * Speed hallway is a challenge - the crumbles are hard
 * The spikes in double chamber are difficult
 * Holding the run button should charge up a shine spark without running
@@ -32,8 +34,7 @@ Ideas:
     add an elevator instead
 * Croc really does take a bath
 * Get rid of "nothing" drops
-* Elliott does not like the mosquitoes - replace them with something
-  else
+* E does not like the mosquitoes - replace them with something else?
 * apple sporespawn - https://metroidconstruction.com/resource.php?id=2
 * easier wall jumps - https://metroidconstruction.com/resource.php?id=545
 * climb room elevator - https://metroidconstruction.com/resource.php?id=445
