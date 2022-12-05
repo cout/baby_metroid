@@ -20,6 +20,7 @@ Later:
 * Holding the run button should charge up a shine spark without running
 * That should be how Samus gets up red tower (replace blocks at the top
     with speed blocks)
+* Ice beam is broken (it no longer freezes enemies)
 
 Ideas:
 * The riding enemies logic does not work if Samus is moving up.  Need to
