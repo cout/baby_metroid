@@ -1,4 +1,4 @@
-ASAR = ../sm_practice_hack/tools/asar
+ASAR = ../sm_practice_hack/tools/asar -w1013
 FLIPS = ../Flips/flips
 HEX2BIN = tools/hex2bin.py
 COMPRESS = tools/compress.py
@@ -20,6 +20,7 @@ rooms/early_supers.bin \
 rooms/noob_bridge.asm \
 rooms/noob_bridge.bin \
 rooms/bat_room.asm \
+rooms/below_spazer.asm \
 
 TARGETS = \
 	build/baby_metroid.sfc \
