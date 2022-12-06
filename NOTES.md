@@ -122,6 +122,8 @@ payload, and a 2-byte pointer to a room state header.  The size of the
 payload depends on which state function is used.  The list terminates
 with a state function of $E5E6.
 
+Common state functions:
+
 | State func | Description            | Payload            |
 +------------+------------------------+--------------------+
 | E5EB       | Door (unused)          | ?                  |
@@ -147,9 +149,12 @@ Room state header (bank 8F starting at $91F8):
 | 14     | 2    | Room scroll                |
 | 16     | 2    | Room var (used for BT)     |
 | 18     | 2    | Room main asm              |
-| 20     | 2    | PLM set                    |
+| 20     | 2    | Room PLM list              |
 | 22     | 2    | Library background         |
 | 24     | 2    | Room setup asm             |
+
+The room PLM list is a list of PLMs for the room, terminated by 0000h;
+see section "PLMs" for the format of the room PLM headers.
 
 Level data (Tilemap/BTS)
 ------------------------
@@ -186,42 +191,50 @@ Block reactions
 
 The following block reaction tables are defined:
 
-| Address  | Description              |
-+----------+--------------------------+
-| $94:94D5 | Block collision (horiz)  |
-| $94:94F5 | Block collision (vert)   |
-| $94:9B40 | Block inside             |
-| $94:A032 | Block bombed             |
-| $94:A175 | Block shot (horiz)       |
-| $94:A195 | Block shot (vert)        |
+| Address  | Description                    |
++----------+--------------------------------+
+| $94:82E1 | Post-grapple collision (horiz) |
+| $94:8301 | Post-grapple collision (vert)  |
+| $94:94D5 | Block collision (horiz)        |
+| $94:94F5 | Block collision (vert)         |
+| $94:9B40 | Block inside                   |
+| $94:A032 | Block bombed                   |
+| $94:A175 | Block shot (horiz)             |
+| $94:A195 | Block shot (vert)              |
+| $94:A83B | Block grappled                 |
+| $94:AB90 | Swinging from grappled block   |
 
 Block types (and their respective reaction handlers in bank $94) are:
 
-|      |      |                      |     Collision      |       Shot         |
-| Type | BTS? | Description          | (h)  | (v)  | (i)  | (h)  | (v)  | (b)  |
-+------+------+----------------------+------+------+------+------+------+------+
-|   0h |      | Air                  | 84F7 | 84F7 | =    | -    | -    | -    |
-|   1h |      | Slope                | 8FBB | 8FDA | 97BF | A147 | A15E | -    |
-|   2h |      | Spike air            | 9018 | 901A | 98CC | -    | -    | -    |
-|   3h | Yes  | Special air          | 906F | 909D | 9B16 | -    | -    | -    |
-|   4h | Yes  | Shootable air        | -    | -    | =    | 9E55 | 9E55 | 9E55 |
-|   5h |      | Horizontal extension | --   | --   | --   | --   | --   | --   |
-|   6h |      | Unused air           | -    | 84F7 | =    | -    | -    | -    |
-|   7h |      | Bombable air         | 92F9 | 9313 | =    | 9FD6 | 9FD6 | 9FD6 |
-|   8h |      | Solid block          | 8F49 | 8F82 | =    | +    | +    | +    |
-|   9h |      | Door block           | 938B | 93CE | =    | +    | +    | +    |
-|   Ah |      | Spike block          | 904B | 905D | =    | +    | +    | +    |
-|   Bh | Yes  | Special block        | 90CB | 9102 | =    | +    | +    | 9D71 |
-|   Ch | Yes  | Shootable block      | 8F49 | 8F82 | =    | 9E73 | 9E73 | 9E73 |
-|   Dh |      | Vertical extension   | !    | !    | !    | !    | !    | !    |
-|   Eh |      | Grapple block        | 8F49 | 8F82 | =    | +    | +    | +    |
-|   Fh |      | Bombable block       | 932D | 934C | =    | 9FF4 | 9FF4 | 9FF4 |
+|      |                 |     Collision      |        Shot/bombed        |          Grapple           |
+| Type | Description     | (h)  | (v)  | (i)  | (h)  | (v)  | (b)  | (B)  | (g)  | (s)  | (h)  | (v)   |
++------+-----------------+------+------+------+------+------+------+------+------+------+------+-------+
+|   0h | Air             | 84F7 | 84F7 | =    | -    | -    | -    | -    | -    | -    | -    | -     |
+|   1h | Slope           | 8FBB | 8FDA | 97BF | A147 | A15E | -    | 9D5D | +    | +    | 82A9 | 82C5  |
+|   2h | Spike air       | 9018 | 901A | 98CC | -    | -    | -    | -    | -    | AA9E | -    | -     |
+| * 3h | Special air     | 906F | 909D | 9B16 | -    | -    | -    | -    | -    | -    | -    | -     |
+| * 4h | Shootable air   | -    | -    | =    | 9E55 | 9E55 | 9E55 | -    | 9E55 | -    | -    | -     |
+|   5h | Horiz extension | --   | --   | --   | --   | --   | --   | --   | --   | --   | -    | -     |
+|   6h | Unused air      | -    | 84F7 | =    | -    | -    | -    | -    | -    | -    | -    | -     |
+|   7h | Bombable air    | 92F9 | 9313 | =    | 9FD6 | 9FD6 | 9FD6 | -    | 9FD6 | -    | -    | -     |
+|   8h | Solid block     | 8F49 | 8F82 | =    | +    | +    | +    | +    | +    | +    | 82BE | 82DA  |
+|   9h | Door block      | 938B | 93CE | =    | +    | +    | +    | +    | +    | +    | 82BE | 82DA  |
+|   Ah | Spike block     | 904B | 905D | =    | +    | +    | +    | +    | A7FD | AB17 | 82BE | 82DA  |
+| * Bh | Special block   | 90CB | 9102 | =    | +    | +    | 9D71 | +    | +    | +    | 82BE | 82DA  |
+| * Ch | Shootable block | 8F49 | 8F82 | =    | 9E73 | 9E73 | 9E73 | +    | 9E73 | +    | 82BE | 82DA  |
+|   Dh | Vert extension  | !    | !    | !    | !    | !    | !    | !    | !    | !    | 82BE | 82DA  |
+|   Eh | Grapple block   | 8F49 | 8F82 | =    | +    | +    | +    | +    | A7D1 | +    | 82BE | 82DA  |
+|   Fh | Bombable block  | 932D | 934C | =    | 9FF4 | 9FF4 | 9FF4 | +    | 9FF4 | +    | 82BE | 82DA  |
 
 Legend:
-* h: horizontal shot or collision
-* v: vertical shot or collision
+* *: BTS ("Behind The Scenes"; customizable via PLM tables)
+* h: horizontal shot, collision, or post-grapple collision
+* v: vertical shot, collision, or post-grapple collision
 * i: inside block
 * b: bombed block
+* B: bomb spread
+* g: grappled
+* s: swinging
 * -: clear carry (either 8F45 or 9D59)
 * +: set carry (either 8F47 or 9D5B)
 * =: set normal momentum indices (97D0 or 98DC)
@@ -235,33 +248,80 @@ For special blocks, BTS is the index into the PLM tables in bank $94.
 PLMs
 ----
 
-PLMs are "Post-Load Modifications".
+PLMs ("Post-Load Modifications") are the primary mechanism for making
+changes to a room after it has been loaded.  PLMs are used for the shot
+and collision reaction handlers for special blocks (type 3h and Bh).
 
-PLMs are shot and collision reaction handlers for special blocks (type
-3h and Bh).
+Similar to other headers, the pointer to the PLM header is known as the
+PLM ID.
+
+There are different kinds of PLM headers.  A block PLM header has two
+parts:
+
+| Offset | Size | Description          |
++--------+------+----------------------+
+| 0      | 2    | Setup routine        |
+| 2      | 2    | Instruction list     |
+
+A door PLM header is similar:
+
+| Offset | Size | Description          |
++--------+------+----------------------+
+| 0      | 2    | Setup routine        |
+| 2      | 2    | Instruction list (?) |
+| 4      | 2    | Instruction list (?) |
+
+Rooms use a list of PLMs, terminated by 0000h.  The room PLM header
+format is:
+
+| Offset | Size | Description          |
++--------+------+----------------------+
+| 0      | 2    | Instruction list     |
+| 2      | 1    | ?                    |
+| 3      | 1    | ?                    |
+| 4      | 2    | Scroll data?         |
+
+The setup routine is invoked when the PLM is spawned; the instruction
+list is executed piecewise as the game progresses.
+
+PLMs can be spawned:
+* By a special block reaction handler (using one of the PLM tables)
+* For scroll PLMs when the room is loaded
+* By the door transition handler to process the transition, close the
+  door, etc. (in this case the PLM is dynamically generated, which is
+  interesting)
+* For other events, by invoking $84:83D7 or $84:84E7 to spawn a PLM
+  programmatically.
+
+### Special Block Reaction Tables
+
+The following special block reaction tables tables are defined:
+
+| Address  | Types  | Bank | Description                | R? | Type |
++----------+--------+------+----------------------------+----+------+
+| $94:9139 | 3h, Bh | $94  | Samus block collision      |    | PLM  |
+| $94:91D9 | 3h, Bh | $94  | Samus block collision      | *  | PLM  |
+| $94:936B | 7h, Fh | $94  | Samus block collision      |    | PLM  |
+| $94:9966 | 3h     | $84  | Inside block               |    | Jump |
+| $94:9A06 | 3h     | $84  | Inside block               | *  | PLM  |
+| $94:9DA4 | Bh     | $94  | Block bombed               |    | PLM  |
+| $94:9DC4 | Bh     | $94  | Block bombed               | *  | PLM  |
+| $94:9EA6 | 4h, Ch | $94  | Block shot/bombed/grappled |    | PLM  |
+| $94:9F46 | 4h, Ch | $94  | Block shot/bombed/grappled | *  | PLM  |
+
+(R indicates the table is region-dependent)
+
+Some of the reaction tables are jump tables; in these cases the table
+holds a pointer to the routine that handles the reaction (TODO: there
+are other jump tables too; these should be included as well).  The
+routines that the jump tables point to are located in bank $94.
 
 PLM table entries point to an instruction list to execute whenever a
 collision or shot occurs; this instruction list is called a PLM.  Most
 of the PLMs are located in bank $84; the inside-block PLMs are located
 in bank $94.
 
-The following PLM tables are defined:
-
-| Address  | Types  | Bank | Description                | R? |
-+----------+--------+------+----------------------------+----+
-| $94:9139 | 3h, Bh | $94  | Samus block collision      |    |
-| $94:91D9 | 3h, Bh | $94  | Samus block collision      | *  |
-| $94:936B | 7h, Fh | $94  | Samus block collision      |    |
-| $94:9966 | 3h     | $84  | Inside block               |    |
-| $94:9A06 | 3h     | $84  | Inside block               | *  |
-| $94:9DA4 | Bh     | $94  | Block bombed               |    |
-| $94:9DC4 | Bh     | $94  | Block bombed               | *  |
-| $94:9EA6 | 4h, Ch | $94  | Block shot/bombed/grappled |    |
-| $94:9F46 | 4h, Ch | $94  | Block shot/bombed/grappled | *  |
-
-(R indicates the table is region-dependent)
-
-The following PLMs are defined in the vanilla ROM:
+The following block reaction PLMs are defined in the vanilla ROM:
 
 | BTS | Block Type 3h/Bh  | Col. | Ins. | Bomb | Block Type 4h/Ch   | Shot |
 +-----+-------------------+------+------+------+--------------------+------+
@@ -303,7 +363,7 @@ Legend:
 * L/R/U/D: left/right/up/down
 * (r): respawning
 
-There are also area-dependant PLMs:
+There are also area-dependent PLMs:
 
 | Area | BTS | Col. | Ins. | Shot | Description                    |
 +------+-----+------+------+------+--------------------------------+
@@ -326,12 +386,82 @@ There are also area-dependant PLMs:
 | 4    | 85  | B73F | B727 |      | Maridia fast sand falls        |
 | 7    | 80  |      | B70F |      | Debug ice physics              |
 
+### PLM Initialization
+
+A PLM is initialized by the setup routine referenced in the PLM header.
+
+The PLM setup routine is called with:
+* X = PLM ID (pointer to the PLM header)
+* Y = List offset for current PLM (same as $1C27)
+
+Each PLM has access to the following variables (where Y is the list
+offset for the PLM):
+
+| Address    | Description                          | Size |
++------------+--------------------------------------+------+
+| $7E:0DC4   | Current block index                  | 2    |
+| $7E:1C27   | List offset for current PLM          | 2    |
+| $7E:1C37+y | List - PLM header table              | 80   |
+| $7E:1C87+y | List - Tilemap offset of PLM's block | 80   |
+| $7E:1CD7+y | List - PLM Pre-instruction           | 80   |
+| $7E:1D27+y | List - Next PLM instruction          | 80   |
+| $7E:1D77+y | List - Variable-use PLM value        | 80   |
+| $7E:1DC7+y | List - PLM room argument             | 80   |
+| $7E:1E17+y | List - Variable-use PLM value        | 80   |
+| $7E:DE1C+y | List - Draw timer                    | 80   |
+| $7E:DE6C+y | List - Draw instruction pointer      | 80   |
+| $7E:DEBC+y | List - Link instruction              | 80   |
+| $7E:DF0C+y | List - Item graphics index           | 80   |
+
+### PLM Instruction List
+
+A PLM instruction list consists of variable-width PLM instructions.  A
+PLM instruction has the following format:
+
+| Condition         | Opcode meaning (bytes) | Operand meaning              (bytes) |
++-------------------+------------------------+--------------------------------------+
+| Opcode >= 8000h   | PLM instruction    (2) | n/a                              (0) |
+| Opcode &lt; 8000h | timer              (2) | Pointer to draw instruction list (2) |
+
+A PLM instruction list is terminated by 0000h.
+
+The draw instruction list consists of variable-width draw instructions.  A draw
+instruction operand has the following format:
+
+    +-------------------- column (1) or row (0)
+    |             +------ number of tiles to change
+    |             |
+    |         /---+---\
+    FEDC BA98 7654 3210
+
+The draw instruction is followed by the new level data (tilemap) values
+to be applied.
+
+A draw instruction list is terminated by 0000h.
+
+### PLM Pre-instruction
+
+The PLM pre-instruction is a pointer to a subroutine that is each time a
+PLM instruction is processed, just before processing the instruction.
+
+### Modifying a block
+
+To modify a block, use instruction $8B17
+
+### PLM Deletion
+
+To delete a PLM, do one of the following:
+* Store #$0000 at $7E:1C37+y
+* Use a delete instruction (such as $B333)
+
 Enemies
 -------
 
 Each room state header has an enemy population pointer (SMM calls this
-the enemy set).  It points to a list in bank $A1 of 16-byte enemy
-population entries:
+the enemy set, but pjboy uses enemy set to refer to the enemy graphic
+list, so I've avoided that term altogether).  The enemy population
+pointer points to a list in bank $A1 of 16-byte enemy population
+entries:
 
 | Offset | Bytes | Description              | Stored at  |
 +--------+-------+--------------------------+------------+
@@ -389,7 +519,9 @@ format for each entry is:
 
 The list is terminated with $FFFF.
 
-The in-memory enemy state is initialized as follows:
+The 64-byte in-memory enemy state is initialized as follows (where y is
+the enemy offset, i.e. $000 for the first enemy $040 for the second
+enemy, $080 for the third enemy, etc.):
 
 | Bytes | Description         | Stored at  | Initial value        |
 +-------+---------------------+------------+----------------------+
@@ -420,8 +552,6 @@ The in-memory enemy state is initialized as follows:
 | 1     | Unused?             | $7E:0FA7+y | [enemy header + 0Dh] |
 | 12    | AI variables        | $7E:0FA8+y | 0                    |
 
-The entire structures is 40h (64) bytes.
-
 Active AI handler bitmask is:
 
                    +----- (3) Time is frozen AI
@@ -429,7 +559,7 @@ Active AI handler bitmask is:
                    ||+--- (1) Hurt AI
                    |||+-- (0) Grapple AI
                    ||||
-    FEDC 8A08 7654 3210
+    FEDC BA98 7654 3210
 
 The lowest set bit of the bitmask controls the active AI handler.  If
 the active AI handler is 0, then main AI is used.
@@ -784,14 +914,14 @@ it is a pointer to a subroutine, and it jumps to that subroutine, with
 Y pointing to the subroutine's argument, which follows the pointer in
 the PLM's instruction list.
 
-Each PLM instruction consists of a 2-byte timer and a 2-byte draw
+Each PLM draw instruction consists of a 2-byte timer and a 2-byte draw
 instruction list pointer.  The draw list instruction is handled by
 $84:861E.
 
-Each draw instruction is either a column instruction (high bit is set)
-or a row instruction (high bit is not set).  The LSB is the number of
-tiles to change.  The draw instruction is followed by the new level data
-values.
+Each draw list instruction is either a column instruction (high bit is
+set) or a row instruction (high bit is not set).  The LSB is the number
+of tiles to change.  The draw instruction is followed by the new level
+data values.
 
 TODO: Some draw instructions (e.g. A219) have "FF 00" and "FF 01"
 following an nistruction; I don't yet know what this means.
