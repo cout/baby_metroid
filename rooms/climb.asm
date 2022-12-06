@@ -43,11 +43,13 @@ org $8F96C3
 
 dw climb_doors
 
-org $8FAD66 ; TODO: use asar to pick free space
+org $8FAD66
 
 climb_doors:
 ; dw $8B3E, $8B4A, $8B56, $8B62, $8B6E, $0000
 dw $8B3E, $8B4A, $8B56, $8B62, $8B6E, $88FC
+
+org !FREESPACE_8F
 
 top_door_sub:
 {
@@ -68,6 +70,10 @@ JSL $90F084
 in_door_transition:
 JMP $B981
 }
+
+climb_freespace_end:
+
+!FREESPACE_8F := climb_freespace_end
 
 ;;
 ; Level data
