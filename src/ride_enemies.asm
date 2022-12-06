@@ -3,8 +3,7 @@
 ; Allow Samus to "ride" enemies as if they are trippers/kamers.
 ;
 ; TODO:
-; * Samus still cannot ride enemies up a wall; she will fall off.
-; * It is also not possible to ride enemies up a slope (e.g. in
+; * Samus cannot ride enemies up a slope without oscillating (e.g. in
 ;   Terminator)
 ; * It is possible to change the touching function from A0AC29 (check
 ;   for touching Samus from below) to A0ABE7 (check for touching Samus
@@ -118,7 +117,7 @@ BRL do_move_enemy_vert
 
 .touching:
 
-LDA $07FE,x : PHA ; Push [enemy Y pos]
+LDA $0F7E,x : PHA ; Push [enemy Y pos]
 LDA $0B5C   : PHA ; Push [Samus Y displacement]
 
 JSL do_move_enemy_vert
@@ -135,7 +134,7 @@ CMP $18
 BNE .return
 
 ; Extra Samus Y displacement = [enemy Y pos] - [previous enemy Y pos]
-LDA $07FE,x
+LDA $0F7E,x
 SEC
 SBC $16
 CLC
