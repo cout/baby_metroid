@@ -4,15 +4,11 @@ TODO
 Top priority:
 * Spore spawn music needs to work again
 * Hint light in Climb
-* Script to generate room list in asm format
-* Extract room script should write out room header(s) as a comment
-* Write out size as a word instead of as bytes
 
 Then:
-* I don't know what to about Below Spazer
-* Getting to Kraid difficult - how do you know to try to bomb the
-    blocks? (maybe an exploding etecoon?)
-* Figure out Kraid
+* Getting to Kraid's area is difficult - how do you know to try to bomb
+  the blocks? (maybe an exploding etecoon?)
+* Figure out what to do for Kraid
 
 Later:
 * Rising tide - easy to get stuck in the lava/acid
@@ -25,10 +21,6 @@ Later:
 * Ice beam is broken (it no longer freezes enemies)
 
 Ideas:
-* The riding enemies logic does not work if Samus is moving up.  Need to
-    revisit the kamer logic to see what it does in this case.
-* Samus should fall in noob bridge (change one of the 1x1 crumbles to a
-    2x1 and make the following block a horizontal extension)
 * Replace space pirates with etecoons
 * Replace climb pirates with dachora (ride the dachora up!) - decided to
     add an elevator instead
@@ -40,7 +32,11 @@ Ideas:
 * climb room elevator - https://metroidconstruction.com/resource.php?id=445
 * flying ship - https://metroidconstruction.com/resource.php?id=73
 * older flying ship - https://metroidconstruction.com/resource.php?id=39
-* prevent early supers (use power bomb blocks)
 * for kraid, perhaps put mini-kraid into his room instead (and require
   some trick to get out of the room)
 * is there a more intuitive way through green pirates room?
+
+Tooling ideas:
+* Script to generate room list in asm format
+* Extract room script should write out room header(s) as a comment
+* Write out size as a word instead of as bytes
