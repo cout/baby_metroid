@@ -153,8 +153,15 @@ Room state header (bank 8F starting at $91F8):
 | 22     | 2    | Library background         |
 | 24     | 2    | Room setup asm             |
 
-The room PLM list is a list of PLMs for the room, terminated by 0000h;
-see section "PLMs" for the format of the room PLM headers.
+The room PLM list is a list of PLMs for the room, terminated by 0000h.
+The format of each entry in this list is:
+
+| Offset | Size | Description                     |
++--------+------+---------------------------------+
+| 0      | 2    | Pointer to PLM                  |
+| 2      | 1    | Row (X) of PLM block            |
+| 3      | 1    | Col (Y) of PLM block            |
+| 4      | 2    | Room argument (or scroll data?) |
 
 Level data (Tilemap/BTS)
 ------------------------
@@ -252,11 +259,8 @@ PLMs ("Post-Load Modifications") are the primary mechanism for making
 changes to a room after it has been loaded.  PLMs are used for the shot
 and collision reaction handlers for special blocks (type 3h and Bh).
 
-Similar to other headers, the pointer to the PLM header is known as the
-PLM ID.
-
-There are different kinds of PLM headers.  A block PLM header has two
-parts:
+There are different kinds of PLM headers.  A room or block PLM header
+has two parts:
 
 | Offset | Size | Description          |
 +--------+------+----------------------+
@@ -270,16 +274,6 @@ A door PLM header is similar:
 | 0      | 2    | Setup routine        |
 | 2      | 2    | Instruction list (?) |
 | 4      | 2    | Instruction list (?) |
-
-Rooms use a list of PLMs, terminated by 0000h.  The room PLM header
-format is:
-
-| Offset | Size | Description          |
-+--------+------+----------------------+
-| 0      | 2    | Instruction list     |
-| 2      | 1    | ?                    |
-| 3      | 1    | ?                    |
-| 4      | 2    | Scroll data?         |
 
 The setup routine is invoked when the PLM is spawned; the instruction
 list is executed piecewise as the game progresses.
@@ -397,21 +391,24 @@ The PLM setup routine is called with:
 Each PLM has access to the following variables (where Y is the list
 offset for the PLM):
 
-| Address    | Description                          | Size |
-+------------+--------------------------------------+------+
-| $7E:0DC4   | Current block index                  | 2    |
-| $7E:1C27   | List offset for current PLM          | 2    |
-| $7E:1C37+y | List - PLM header table              | 80   |
-| $7E:1C87+y | List - Tilemap offset of PLM's block | 80   |
-| $7E:1CD7+y | List - PLM Pre-instruction           | 80   |
-| $7E:1D27+y | List - Next PLM instruction          | 80   |
-| $7E:1D77+y | List - Variable-use PLM value        | 80   |
-| $7E:1DC7+y | List - PLM room argument             | 80   |
-| $7E:1E17+y | List - Variable-use PLM value        | 80   |
-| $7E:DE1C+y | List - Draw timer                    | 80   |
-| $7E:DE6C+y | List - Draw instruction pointer      | 80   |
-| $7E:DEBC+y | List - Link instruction              | 80   |
-| $7E:DF0C+y | List - Item graphics index           | 80   |
+| Address    | Description                             | Size |
++------------+-----------------------------------------+------+
+| $7E:0DC4   | Current block index                     | 2    |
+| $7E:1C27   | List offset for current PLM             | 2    |
+| $7E:1C29   | Calculated PLM X position               | 2    |
+| $7E:1C2B   | Calculated PLM Y position               | 2    |
+| $7E:1C2F   | PLM special graphics pointer (bank $89) | 2    |
+| $7E:1C37+y | List - PLM header table                 | 80   |
+| $7E:1C87+y | List - Tilemap offset of PLM's block    | 80   |
+| $7E:1CD7+y | List - PLM Pre-instruction              | 80   |
+| $7E:1D27+y | List - Next PLM instruction             | 80   |
+| $7E:1D77+y | List - Variable-use PLM value           | 80   |
+| $7E:1DC7+y | List - PLM room argument                | 80   |
+| $7E:1E17+y | List - Variable-use PLM value           | 80   |
+| $7E:DE1C+y | List - Draw timer                       | 80   |
+| $7E:DE6C+y | List - Draw instruction pointer         | 80   |
+| $7E:DEBC+y | List - Link instruction                 | 80   |
+| $7E:DF0C+y | List - Item PLM graphics index          | 80   |
 
 ### PLM Instruction List
 
@@ -927,6 +924,12 @@ TODO: Some draw instructions (e.g. A219) have "FF 00" and "FF 01"
 following an nistruction; I don't yet know what this means.
 
 The draw instruction list is always terminated by $0000.
+
+Room PLMs
+---------
+
+Room PLMs are spawned by $84:846A.  It is called when the room is
+loaded, before the room setup routine is called (see $82:E7D3).
 
 Important memory locations
 --------------------------
