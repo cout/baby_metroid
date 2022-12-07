@@ -163,6 +163,10 @@ The format of each entry in this list is:
 | 3      | 1    | Col (Y) of PLM block            |
 | 4      | 2    | Room argument (or scroll data?) |
 
+There is no room to add a new entry to the end of the list, but it
+should be possible to explicitly call $84:846A in the room setup routine
+to manually spawn a room PLM.
+
 Level data (Tilemap/BTS)
 ------------------------
 
@@ -443,7 +447,12 @@ PLM instruction is processed, just before processing the instruction.
 
 ### Modifying a block
 
-To modify a block, use instruction $8B17
+TODO: I am still learning how this works.
+
+AFAICT the instruction lists in Bank 84 have drawing instructions and
+following the drawing instructions have 8B17.  But I don't understand
+how that works -- how can we execute 8B17 to draw the PLM block if we
+haven't finished executing the drawing instructions?
 
 ### PLM Deletion
 
