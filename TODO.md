@@ -4,6 +4,9 @@ TODO
 Top priority:
 * Spore spawn music needs to work again
 * Hint light in Climb
+  * Idea: instead of lights that come on, can I have a "ghost Samus"?
+    This would also work for other rooms such as the entrance to Kraid's
+    lair.
 
 Then:
 * Getting to Kraid's area is difficult - how do you know to try to bomb
