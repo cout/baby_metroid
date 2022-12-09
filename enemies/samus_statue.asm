@@ -5,6 +5,9 @@
 ; -i samus_statue.png \
 ; -t enemies/samus_statue_tiles.bin \
 ; -p enemies/samus_statue_palette.bin
+;
+; Note: when changing image mode to Indexed in GIMP, make sure to
+; uncheck "remove unused colors" to ensure correct color order.
 
 org !FREESPACE_A0
 
