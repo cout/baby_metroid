@@ -617,6 +617,12 @@ enemy, $080 for the third enemy, etc.):
 | 2     | Parameter 1         | $7E:0FB4+y | [pop entry + 0Ch]    |
 | 2     | Parameter 2         | $7E:0FB6+y | [pop entry + 0Eh]    |
 
+### Other common variables
+
+| Addresss | Bytes | Description          |
++----------+-------+----------------------+
+| $7E:0E54 | 2     | Current enemy index  |
+
 ### Init routine
 
 It is important in the init routine to set the instruction pointer,
