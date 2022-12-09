@@ -28,6 +28,10 @@ state_start_transport_sequence:
   LDA #$0100
   STA $18A8
 
+  ; Make Samus glow with charge effect
+  LDA #$0100
+  STA $0B18
+
   LDA #$0080
   STA $0FB0
 
