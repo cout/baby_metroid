@@ -25,6 +25,7 @@ Data
 +----------+-------------------------------------+
 | $83      | Door headers                        |
 | $84      | Item PLMs, shot block PLMs          |
+| $86      | Enemy projectile headers            |
 | $8F      | Room headers, room PLMs             |
 | $94      | Block reaction handlers, PLM tables |
 | $A0      | Enemy headers                       |
@@ -39,7 +40,7 @@ Graphics
 | $83      | Area palettes                       |
 | $8A      | Layer 3 tilemaps                    |
 | $8C      | Title/cutscene graphics             |
-| $8D      | Enemy projectiles                   |
+| $8D      | Enemy projectile spritemaps         |
 | $8E      | Menu BG tiles                       |
 | $92      | Samus spritemaps                    |
 | $95..$9A | Tiles/palettes                      |
@@ -645,6 +646,75 @@ Active AI handler bitmask is:
 
 The lowest set bit of the bitmask controls the active AI handler.  If
 the active AI handler is 0, then main AI is used.
+
+Enemy Projectiles
+-----------------
+
+### Enemy projectile header
+
+Headers for enemy projectiles are in bank $86.  The format is:
+
+| Offset | Bytes | Description               |
++--------+-------+---------------------------+
+| 0h     | 2     | Init AI routine           |
+| 2h     | 2     | Pre-instruction routine   |
+| 4h     | 2     | Instruction list          |
+| 6h     | 1     | X radius                  |
+| 7h     | 1     | Y radius                  |
+| 8h     | 2     | Properties                |
+| Ah     | 2     | Hit instruction list      |
+| Ch     | 2     | Shot instruction list     |
+
+### Spawning an enemy projectile
+
+An enemy projectile is spawned by invoking $86:8097 with:
+
+| Register | Value                                        |
++----------+----------------------------------------------+
+| Y        | Projectile ID (address of projectile header) |
+| A        | Projectile initialization parameter          |
+
+The init AI routine will be called with Y=projectile offset.
+
+### Enemy projectile state
+
+Projectile have the following in-memory state (kept as lists rather than
+a structure for each projectile):
+
+| Address    | Bytes | Description              | Initial value        |
++------------+-------+--------------------------+----------------------+
+| $7E:1997+y | 2     | Projectile ID            | X                    |
+| $7E:19BB+y | 2     | VRAM tiles index         | 0000h                |
+| $7E:19DF+y | 2     | Timer                    | uninitialized        |
+| $7E:1A03+y | 2     | Pre-instruction          | [X + 2]              |
+| $7E:1A27+y | 2     | ?                        | 0000h                |
+| $7E:1A4B+y | 2     | X position               | uninitialized        |
+| $7E:1A6F+y | 2     | X subpixel position      | 0000h                |
+| $7E:1A93+y | 2     | Y position               | uninitialized        |
+| $7E:1AB7+y | 2     | Y subpixel position      | uninitialized        |
+| $7E:1ADB+y | 2     | ?                        | uninitialized        |
+| $7E:1AFF+y | 2     | ?                        | 0000h                |
+| $7E:1B23+y | 2     | ?                        | 0000h                |
+| $7E:1B47+y | 2     | Instruction list pointer | [X + 4]              |
+| $7E:1B6B+y | 2     | Spritemap pointer        | 8000h                |
+| $7E:1B8F+y | 2     | Instruction delay        | uninitialized        |
+| $7E:1BB3+y | 2     | X / Y radius             | [X + 6]              |
+| $7E:1BD7+y | 2     | Properties               | [X + 8]              |
+| $7E:1BFB+y | 2     | ?                        | 0000h                |
+
+### Enemy projectile init routine
+
+The init routine is invoked when the projectile is spawned.  It is
+called with Y = offset into state lists for the projectile.
+
+### Enemy projectile pre-instruction routine
+
+The projectile pre-instruction routine is like the main AI for an enemy.
+It is a routine that is invoked every time the projectile is processed,
+just before the instruction list is processed.
+
+It is called with X = offset into the state lists for the projectile
+(note the difference with the init routine which uses Y as the offset).
 
 Graphics
 ========
