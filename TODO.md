@@ -38,6 +38,10 @@ Ideas:
 * for kraid, perhaps put mini-kraid into his room instead (and require
   some trick to get out of the room)
 * is there a more intuitive way through green pirates room?
+* Perhaps power bombs (w/ ice beam) should freeze enemies (so they
+  become "freeze bombs").  If so then Ridley could be defeated with a
+  single power bomb (which would cause him to spit ice or snow balls
+  instead of fireballs).
 
 Tooling ideas:
 * Script to generate room list in asm format
