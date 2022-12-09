@@ -32,12 +32,30 @@ state_start_transport_sequence:
   LDA #$0100
   STA $0B18
 
-  LDA #$0080
+  LDA #$0060
+  STA $0FB0
+
+  LDA.w #state_transporter_samus_disappear
+  STA $0FA8 ; next state
+
+  RTS
+}
+
+state_transporter_samus_disappear:
+{
+  DEC $0FB0
+  BNE .return
+
+  LDA #$EBF2
+  STA $0A5C
+
+  LDA #$0020
   STA $0FB0
 
   LDA.w #state_transporter_operating
   STA $0FA8 ; next state
 
+.return
   RTS
 }
 
