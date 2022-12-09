@@ -29,7 +29,7 @@ Data
 | $94      | Block reaction handlers, PLM tables |
 | $A0      | Enemy headers                       |
 | $A1      | Enemy population lists              |
-| $B4      | Enemy graphics lists                |
+| $B4      | Enemy graphics sets                 |
 
 Graphics
 --------
@@ -463,6 +463,8 @@ To delete a PLM, do one of the following:
 Enemies
 -------
 
+### Enemy population
+
 Each room state header has an enemy population pointer (SMM calls this
 the enemy set, but pjboy uses enemy set to refer to the enemy graphic
 list, so I've avoided that term altogether).  The enemy population
@@ -487,6 +489,11 @@ The list is terminated with:
 | 0h     | 2     | $FFFF                         |
 | 2h     | 1     | Kill quota to open grey doors |
 
+The enemy pointer is a 16-byte offset into bank $A0, pointing to the
+enemy header for the enemy to be spawned.
+
+#### Enemy property bits
+
 The enemy property bits are:
 
 
@@ -503,6 +510,8 @@ The enemy property bits are:
     |||| ||||        ||
     FEDC BA98 7654 3210
 
+#### Extra property bits
+
 Extra property bits are:
 
     +-------------------- (F) graphics need to be updated
@@ -511,10 +520,9 @@ Extra property bits are:
     |               | |
     FEDC BA98 7654 3210
 
-The enemy pointer is a 16-byte offset into bank $A0, pointing to the
-enemy header for the enemy to be spawned.
+### Enemy graphics set
 
-There is also a corresponding enemy graphics list in bank $B4; it must
+There is also a corresponding enemy graphics set in bank $B4; it must
 also be updated for the enemies to have the correct graphics.  The
 format for each entry is:
 
@@ -524,6 +532,55 @@ format for each entry is:
 | 2h     | 2     | Palette?         |
 
 The list is terminated with $FFFF.
+
+### Enemy header
+
+At the end of bank $A0 is a list of enemy headers; these define the
+characteristics for each enemy in the game.
+
+The format of the enemy header is:
+
+| Offset | Bytes | Description               |
++--------+-------+---------------------------+
+| 0h     | 2     | Tile data size            |
+| 2h     | 2     | Palette                   |
+| 4h     | 2     | Health                    |
+| 6h     | 2     | Damage                    |
+| 8h     | 2     | X Radius                  |
+| Ah     | 2     | Y Radius                  |
+| Ch     | 1     | Bank                      |
+| Dh     | 1     | Hurt AI time              |
+| Eh     | 2     | Cry                       |
+| 10h    | 2     | Boss Value                |
+| 12h    | 2     | Init AI routine           |
+| 14h    | 2     | Number of parts           |
+| 16h    | 2     | 0000h                     |
+| 18h    | 2     | Main AI routine           |
+| 1Ah    | 2     | Grapple AI routine        |
+| 1Ch    | 2     | Hurt AI routine           |
+| 1Eh    | 2     | Frozen AI routine         |
+| 20h    | 2     | Time is frozen AI routine |
+| 22h    | 2     | Death animation           |
+| 24h    | 8     | 00000000h                 |
+| 28h    | 2     | Power bomb reaction       |
+| 2Ah    | 2     | 0000h                     |
+| 2Ch    | 8     | 00000000h                 |
+| 30h    | 2     | Enemy touch routine       |
+| 32h    | 2     | Enemy shot routine        |
+| 34h    | 2     | 0000h                     |
+| 36h    | 1     | Tile data                 |
+| 39h    | 1     | Layer                     |
+| 3Ah    | 2     | Drop chances              |
+| 3Ch    | 2     | Vulnerabilities           |
+| 3Eh    | 2     | Enemy name                |
+
+TODO: I do not know if the enemy headers need to be contiguous or if
+there can be a gap (I believe it is OK to store the headers anywhere in
+bank $A0 but have not confirmed).
+
+TODO: Tile data size is NOT the number of bytes in tile data.
+
+### Enemy state
 
 The 64-byte in-memory enemy state is initialized as follows (where y is
 the enemy offset, i.e. $000 for the first enemy $040 for the second
@@ -558,6 +615,17 @@ enemy, $080 for the third enemy, etc.):
 | 1     | Unused?             | $7E:0FA7+y | [enemy header + 0Dh] |
 | 12    | AI variables        | $7E:0FA8+y | 0                    |
 
+### Init routine
+
+It is important in the init routine to set the instruction pointer,
+otherwise the game will hang.
+
+### AI routines
+
+In addition to the init AI routine, there are five other AI routines;
+which is invoked on any frame depends on which bits are set in the
+active AI handler bitmask.
+
 Active AI handler bitmask is:
 
                    +----- (3) Time is frozen AI
@@ -569,6 +637,9 @@ Active AI handler bitmask is:
 
 The lowest set bit of the bitmask controls the active AI handler.  If
 the active AI handler is 0, then main AI is used.
+
+Graphics
+========
 
 Palettes
 --------
@@ -616,6 +687,111 @@ Useful functions:
 * $A9:D2E4 - Write [A] colors from [DB]:[Y] to colour index [X]
 * $B4:98DA - Debug sprite palette viewer
 * $B4:9925 - Debug background palette viewer
+
+Tilesets
+--------
+
+A tile is the pixel grid for a drawable entity.
+
+A tileset is a group of tiles.  Each layer can use one tileset, so
+different rooms use different tilesets depending on which room elements
+need to be drawn.
+
+Elements common to all rooms are called Common Room Elements (CRE).  CRE
+tiles are stored in the CRE tileset.  The CRE tileset is stored in
+compressed form in bank $B9.
+
+The Scene Elements (SCE) are part of the tileset specified in a room's
+state header; this is an index into the tileset pointer table at
+$8F:E7A7.  There are a total of 29 different tilesets in the vanilla
+ROM.
+
+The tileset pointer table holds pointers into the tileset table at
+$8F:E6A2.  The entries in the tileset table have the following format:
+
+| Offset | Size | Description        |
++--------+------+--------------------+
+| 0h     | 3    | Tile table pointer |
+| 3h     | 3    | Tiles pointer      |
+| 6h     | 3    | Palette pointer    |
+
+The tile table, tiles, and palette are all stored in compressed form.
+
+The tile table is an array of tile table entries.  The format of a tile
+table entry is:
+
+| Offset | Size | Description        |
++--------+------+--------------------+
+| 0h     | 2    | Top left           |
+| 2h     | 2    | Top right          |
+| 4h     | 2    | Bottom left        |
+| 6h     | 2    | Bottom right       |
+
+
+Spritemaps
+----------
+
+A spritemap is a structure that represents the tiles to use for a single
+animation frame.  It is stored as an array of spritemap entries,
+preceded by a 2-byte count of the number of entries in the array:
+
+| Offset | Size | Description       |
++--------+------+-------------------+
+| 0      | 2    | Number of entries |
+| 2      | 5    | Entry 0           |
+| ...    | 5    | Entry ...
+
+The format of a spritemap entry is:
+
+    +--------------------------------------------- s: size bit
+    |    +---------------------------------------- S: debug size bit
+    |    |      +--------------------------------- x: X offset from center
+    |    |      |        +------------------------ y: Y offset from center
+    |    |      |        |     +------------------ Y: Y flip
+    |    |      |        |     |+----------------- X: X flip
+    |    |      |        |     || +--------------- p: priority
+    |    |      |        |     || | +------------- P: palette
+    |    |      |        |     || | |      +------ t: tile number
+    |    |      |        |     || | |      |
+    |    | /----+---\ /--+---\ ||/+/+\/----+---\
+    s0000S0x.xxxxxxxx yyyyyyyy YXppPPPt.tttttttt
+    \-----word------/ \-byte-/ \-----word------/
+
+The format is similar to (the same as?) used for OAM sprite properties
+(TODO - I think it's the first byte is the size and the next for bytes
+are the OAM properties for the sprite slot);
+see:
+* https://sneslab.net/wiki/YXPPCCCT)
+* https://wiki.superfamicom.org/snes-sprites
+* https://wiki.superfamicom.org/sprites
+* https://snes.nesdev.org/wiki/Sprites
+
+TODO: What is the format of x and y for negative coordinates?  Is it
+ones-complement or twos-complement?
+
+Extended spritemaps
+-------------------
+
+Larger drawables use extended spritemaps, which connect many smaller
+spritemaps into a single larger one.  It also holds the hitboxes for the
+entity.
+
+Samus
+-----
+
+In addition to spritemaps, Samus uses tile definitions, tile definition
+lists, animation definitions, animation definition lists, spritemap
+tables, and spritemap table index lists.  All of these are located in
+bank $92.
+
+Tilemaps
+--------
+
+Tiles are the pixel graphics graphics for room tiles.  A tilemap maps
+tiles to a room, a map, or to layer 3 graphics.
+
+A tileset is a pixel grid that contains a group of tiles.  It is stored
+in compressed form.
 
 Code Analysis
 =============
