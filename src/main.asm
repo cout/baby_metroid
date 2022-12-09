@@ -12,6 +12,7 @@ incsrc spore_spawn.asm
 incsrc enemy_drops.asm
 incsrc ceres.asm
 incsrc enemies/samus_statue.asm
+incsrc projectiles/transporter_electricity.asm
 incsrc rooms/climb.asm
 incsrc rooms/pit_room.asm
 incsrc rooms/early_supers.asm
