@@ -1,13 +1,28 @@
 ;;
 ; Replace pirates with elevators
 
-org $A188C9
+org $A188C9 ; enemy population for state $96EB (zebes awake)
 
-;                 x      y   init  props   xtra     p1     p2
-dw !elevator, $0180, $08A2, $0000, $2C00, $0000, $0001, $0018
-; dw !elevator, $0180, $0073, $0000, $2C00, $0000, $0000, $0140
+;                    x      y   init  props   xtra     p1     p2
+dw !elevator,     $0180, $08A2, $0000, $2C00, $0000, $0001, $0018
+dw !samus_statue, $0178, $0894, $0000, $2400, $0000, $0001, $0000
 dw $FFFF
 db $00
+
+org !FREESPACE_B4
+
+climb_graphics_set:
+
+dw !samus_statue, $0001, $FFFF
+db $00
+
+end_climb_graphics_set:
+!FREESPACE_B4 := end_climb_graphics_set
+
+org $8F96EB : skip 10 ; enemy graphics set pointer for state $96EB
+
+
+dw climb_graphics_set
 
 ;;
 ; Top door is an elevator door now

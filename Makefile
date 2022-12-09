@@ -12,6 +12,9 @@ src/torizos.asm \
 src/spore_spawn.asm \
 src/enemy_drops.asm \
 src/ceres.asm \
+enemies/samus_statue.asm \
+enemies/samus_statue_tiles.bin \
+enemies/samus_statue_palette.bin \
 rooms/pit_room.asm \
 rooms/climb.asm \
 rooms/climb.bin \

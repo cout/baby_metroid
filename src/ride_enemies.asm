@@ -171,3 +171,6 @@ PLP
 RTL
 
 }
+
+end_ride_enemies_freespace_a0:
+!FREESPACE_A0 := end_ride_enemies_freespace_a0
