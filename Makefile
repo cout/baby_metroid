@@ -2,28 +2,14 @@ ASAR = ../sm_practice_hack/tools/asar -w1013
 FLIPS = ../Flips/flips
 HEX2BIN = tools/hex2bin.py
 COMPRESS = tools/compress.py
+GENERATE_DEPS = tools/generate_deps.py
 
 SOURCES = \
-src/main.asm \
-src/freeze_enemies.asm \
-src/ride_enemies.asm \
-src/death_quota.asm \
-src/torizos.asm \
-src/spore_spawn.asm \
-src/enemy_drops.asm \
-src/ceres.asm \
-enemies/samus_statue.asm \
-enemies/samus_statue_tiles.bin \
-enemies/samus_statue_palette.bin \
-rooms/pit_room.asm \
-rooms/climb.asm \
-rooms/climb.bin \
-rooms/early_supers.asm \
-rooms/early_supers.bin \
-rooms/noob_bridge.asm \
-rooms/noob_bridge.bin \
-rooms/bat_room.asm \
-rooms/below_spazer.asm \
+src/main.asm
+
+DEPENDENCY_FILES = \
+	build/baby_metroid.00.sfc.d \
+	build/baby_metroid.ff.sfc.d \
 
 TARGETS = \
 	build/baby_metroid.sfc \
@@ -53,11 +39,13 @@ build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.ip
 	$(FLIPS) --apply build/baby_metroid.ips resources/sm_orig.sfc build/baby_metroid.sfc
 
 build/baby_metroid.00.sfc: build/.stamp build/00.sfc src/main.asm $(SOURCES)
+	echo "build/baby_metroid.00.sfc: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.00.sfc.d
 	cp build/00.sfc build/.baby_metroid.00.sfc
 	$(ASAR) --no-title-check "$$@" src/main.asm build/.baby_metroid.00.sfc
 	mv build/.baby_metroid.00.sfc build/baby_metroid.00.sfc
 
 build/baby_metroid.ff.sfc: build/.stamp build/ff.sfc src/main.asm $(SOURCES)
+	echo "build/baby_metroid.ff.sfc: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.ff.sfc.d
 	cp build/ff.sfc build/.baby_metroid.ff.sfc
 	$(ASAR) --no-title-check "$$@" src/main.asm build/.baby_metroid.ff.sfc
 	mv build/.baby_metroid.ff.sfc build/baby_metroid.ff.sfc
@@ -67,3 +55,5 @@ build/baby_metroid.ips: build/.stamp build/baby_metroid.00.sfc build/baby_metroi
 
 rooms/%.bin: rooms/%.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
+
+-include $(DEPENDENCY_FILES)
