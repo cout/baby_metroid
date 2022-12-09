@@ -5,7 +5,7 @@ org $A188C9 ; enemy population for state $96EB (zebes awake)
 
 ;                    x      y   init  props   xtra     p1     p2
 dw !elevator,     $0180, $08A2, $0000, $2C00, $0000, $0001, $0018
-dw !samus_statue, $0178, $0894, $0000, $2400, $0000, $0001, $0000
+dw !samus_statue, $0178, $0894, $0000, $2400, $0000, $0000, $0000
 dw $FFFF
 db $00
 
