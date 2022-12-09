@@ -20,9 +20,11 @@ state_start_transport_sequence:
   LDX #$0000
   JSL $868097
 
-  ; TODO:
-  ; 1. Play a sound for the transport sequence
-  ; 2. Give Samus iframes for effect
+  ; Queue save sound (library 1, sound 9h)
+  LDA #$0009
+  JSL $809049
+
+  ; TODO: give Samus iframes for effect
   LDA #$0080
   STA $0FB0
 
