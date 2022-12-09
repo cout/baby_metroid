@@ -24,7 +24,10 @@ state_start_transport_sequence:
   LDA #$0009
   JSL $809049
 
-  ; TODO: give Samus iframes for effect
+  ; Give Samus iframes for effect
+  LDA #$0100
+  STA $18A8
+
   LDA #$0080
   STA $0FB0
 
