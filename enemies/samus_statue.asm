@@ -56,7 +56,20 @@ incbin "enemies/samus_statue_tiles.bin"
 
 samus_statue_palette:
 
-incbin "enemies/samus_statue_palette.bin"
+; incbin "enemies/samus_statue_palette.bin"
+
+samus_statue_lower_crateria_palette:
+dw $7c00, $28e7, $41ad, $5a73, $7f9c, $0844, $0000, $0000
+dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
+samus_statue_warehouse_entrance_palette:
+dw $7c00, $2c22, $4167, $5a2d, $7fb9, $1820, $0000, $0000
+dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
+samus_statue_palettes:
+
+dw samus_statue_lower_crateria_palette
+dw samus_statue_warehouse_entrance_palette
 
 samus_statue_looking_up_spritemap:
 {
@@ -75,11 +88,6 @@ dw $8000 : db $01 : dw $210a ; (  0,   1)
 
 samus_statue_looking_right_spritemap:
 {
-
-; TODO TODO TODO - for some odd reason this isn't showing up right.  the
-; bottom left tile of this statue is combined with the top tile of the
-; other statue.
-;
 
 dw $0004 ; number of entries
 
@@ -110,12 +118,33 @@ dw samus_statue_looking_right_instruction_list
 
 samus_statue_init_ai:
 {
+  ; X = current enemy index
   LDX $0E54
+
+  ; Pick instruction list based on parameter 1
   LDA $0FB4,x
   ASL
   TAY
   LDA samus_statue_instruction_lists,y
   STA $0F92,x
+
+  ; Copy palette based on parameter 2
+  LDA $0FB6,x
+  ASL
+  TAY
+  LDA samus_statue_palettes,y
+  TAY ; y is now pointing to the source palette
+  LDA $0F96,x
+  LSR : LSR : LSR : LSR
+  TAX ; x is now pointing to the dest palette
+  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
 
   RTL
 }

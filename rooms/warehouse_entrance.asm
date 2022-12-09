@@ -4,7 +4,7 @@ warehouse_entrance_enemy_population:
 
 ;                    x      y   init  props   xtra     p1     p2
 dw !elevator,     $0080, $00A0, $0000, $2C00, $0000, $0000, $0140
-dw !samus_statue, $00E4, $0094, $0000, $2400, $0000, $0001, $0000
+dw !samus_statue, $00E4, $0094, $0000, $2400, $0000, $0001, $0001
 dw $FFFF
 db $00
 
