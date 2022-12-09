@@ -614,6 +614,8 @@ enemy, $080 for the third enemy, etc.):
 | 1     | Bank                | $7E:0FA6+y | [enemy header + 0Ch] |
 | 1     | Unused?             | $7E:0FA7+y | [enemy header + 0Dh] |
 | 12    | AI variables        | $7E:0FA8+y | 0                    |
+| 2     | Parameter 1         | $7E:0FB4+y | [pop entry + 0Ch]    |
+| 2     | Parameter 2         | $7E:0FB6+y | [pop entry + 0Eh]    |
 
 ### Init routine
 
