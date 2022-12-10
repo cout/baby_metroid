@@ -21,3 +21,4 @@ incsrc rooms/noob_bridge.asm
 incsrc rooms/bat_room.asm
 incsrc rooms/below_spazer.asm
 incsrc rooms/warehouse_entrance.asm
+incsrc rooms/rising_tide.asm
