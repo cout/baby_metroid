@@ -22,7 +22,7 @@ Data
 ----
 
 | Bank     | Contents                            |
-+----------+-------------------------------------+
+| -------- | ----------------------------------- |
 | $83      | Door headers                        |
 | $84      | Item PLMs, shot block PLMs          |
 | $86      | Enemy projectile headers            |
@@ -36,7 +36,7 @@ Graphics
 --------
 
 | Bank     | Contents                            |
-+----------+-------------------------------------+
+| -------- | ----------------------------------- |
 | $83      | Area palettes                       |
 | $8A      | Layer 3 tilemaps                    |
 | $8C      | Title/cutscene graphics             |
@@ -57,7 +57,7 @@ Code
 ----
 
 | Bank     | Contents                            |
-+----------+-------------------------------------+
+| -------- | ----------------------------------- |
 | $80      | Hardware interaction                |
 | $81      | Menus                               |
 | $82      | Gameplay functions                  |
@@ -84,7 +84,7 @@ Areas
 -----
 
 | Area | Name         |
-+------+--------------+
+| ---- | ------------ |
 | 0    | Crateria     |
 | 1    | Brinstar     |
 | 2    | Norfair      |
@@ -98,14 +98,14 @@ Rooms
 -----
 
 | Structure         | Bank | Offset            |
-+-------------------+------+-------------------+
+| ----------------- | ---- | ----------------- |
 | Room header       | 8F   | 91F8              |
 | Room state header | 8F   | after room header |
 
 Room header (bank 8F starting at $91F8):
 
 | Offset | Size | Description              |
-+--------+------+--------------------------+
+| ------ | ---- | ------------------------ |
 | 0      | 1    | Room index               |
 | 1      | 1    | Area                     |
 | 2      | 1    | X position on map        |
@@ -126,7 +126,7 @@ with a state function of $E5E6.
 Common state functions:
 
 | State func | Description            | Payload            |
-+------------+------------------------+--------------------+
+| ---------- | ---------------------- | ------------------ |
 | E5EB       | Door (unused)          | ?                  |
 | E5FF       | Main area boss         | none               |
 | E612       | Event                  | event id (2 bytes) |
@@ -138,7 +138,7 @@ Common state functions:
 Room state header (bank 8F starting at $91F8):
 
 | Offset | Size | Description                |
-+--------+------+----------------------------+
+| ------ | ---- | -------------------------- |
 | 0      | 3    | Level data                 |
 | 3      | 1    | Tileset                    |
 | 4      | 1    | Music data index           |
@@ -158,7 +158,7 @@ The room PLM list is a list of PLMs for the room, terminated by 0000h.
 The format of each entry in this list is:
 
 | Offset | Size | Description                     |
-+--------+------+---------------------------------+
+| ------ | ---- | ------------------------------- |
 | 0      | 2    | Pointer to PLM                  |
 | 2      | 1    | Row (X) of PLM block            |
 | 3      | 1    | Col (Y) of PLM block            |
@@ -174,28 +174,28 @@ Level data (Tilemap/BTS)
 The level data for each room is stored in a compressed format:
 
 | Bytes  | Description              | Copied to |
-+--------+--------------------------+-----------+
+| ------ | ------------------------ | --------- |
 | 2      | Size of level data       | 7F:0000   |
 | size   | Level data (tilemap)     | 7F:0002   |
 | size/2 | BTS (for special blocks) | 7F:0002   |
 
 Level data is stored in the following format:
 
-     +------------------- t = block type
-     |  +---------------- y = Y flip
-     |  |+--------------- x = X flip
-     |  ||      +-------- n = block index
+     | ------------------ t = block type
+     |  | --------------- y = Y flip
+     |  || -------------- x = X flip
+     |  ||      | ------- n = block index
      |  ||      |
-    /+-\||/----+----\
+    /| \||/--- | ---\
     ttttyxnn nnnnnnnn
 
 Custom background ($9602) is stored in a similar format:
 
-        +---------------- y = Y flip
-        |+--------------- x = X flip
-        ||      +-------- n = block index
+        | --------------- y = Y flip
+        || -------------- x = X flip
+        ||      | ------- n = block index
         ||      |
-        ||/----+----\
+        ||/--- | ---\
     0000yxnn nnnnnnnn
 
 Block reactions
@@ -204,7 +204,7 @@ Block reactions
 The following block reaction tables are defined:
 
 | Address  | Description                    |
-+----------+--------------------------------+
+| -------- | ------------------------------ |
 | $94:82E1 | Post-grapple collision (horiz) |
 | $94:8301 | Post-grapple collision (vert)  |
 | $94:94D5 | Block collision (horiz)        |
@@ -220,7 +220,7 @@ Block types (and their respective reaction handlers in bank $94) are:
 
 |      |                 |     Collision      |        Shot/bombed        |          Grapple           |
 | Type | Description     | (h)  | (v)  | (i)  | (h)  | (v)  | (b)  | (B)  | (g)  | (s)  | (h)  | (v)   |
-+------+-----------------+------+------+------+------+------+------+------+------+------+------+-------+
+| ---- | --------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ----- |
 |   0h | Air             | 84F7 | 84F7 | =    | -    | -    | -    | -    | -    | -    | -    | -     |
 |   1h | Slope           | 8FBB | 8FDA | 97BF | A147 | A15E | -    | 9D5D | +    | +    | 82A9 | 82C5  |
 |   2h | Spike air       | 9018 | 901A | 98CC | -    | -    | -    | -    | -    | AA9E | -    | -     |
@@ -268,14 +268,14 @@ There are different kinds of PLM headers.  A room or block PLM header
 has two parts:
 
 | Offset | Size | Description          |
-+--------+------+----------------------+
+| ------ | ---- | -------------------- |
 | 0      | 2    | Setup routine        |
 | 2      | 2    | Instruction list     |
 
 A door PLM header is similar:
 
 | Offset | Size | Description          |
-+--------+------+----------------------+
+| ------ | ---- | -------------------- |
 | 0      | 2    | Setup routine        |
 | 2      | 2    | Instruction list (?) |
 | 4      | 2    | Instruction list (?) |
@@ -297,7 +297,7 @@ PLMs can be spawned:
 The following special block reaction tables tables are defined:
 
 | Address  | Types  | Bank | Description                | R? | Type |
-+----------+--------+------+----------------------------+----+------+
+| -------- | ------ | ---- | -------------------------- | -- | ---- |
 | $94:9139 | 3h, Bh | $94  | Samus block collision      |    | PLM  |
 | $94:91D9 | 3h, Bh | $94  | Samus block collision      | *  | PLM  |
 | $94:936B | 7h, Fh | $94  | Samus block collision      |    | PLM  |
@@ -323,7 +323,7 @@ in bank $94.
 The following block reaction PLMs are defined in the vanilla ROM:
 
 | BTS | Block Type 3h/Bh  | Col. | Ins. | Bomb | Block Type 4h/Ch   | Shot |
-+-----+-------------------+------+------+------+--------------------+------+
+| --- | ----------------- | ---- | ---- | ---- | ------------------ | ---- |
 | 00h | 1x1 crumble (r)   | D044 |      | CFFC | 1x1 shot (r)       | D064 |
 | 01h | 2x1 crumble (r)   | D048 |      | D000 | 2x1 shot (r)       | D068 |
 | 02h | 1x2 crumble (r)   | D04C |      | D004 | 1x2 shot (r)       | D06C |
@@ -365,7 +365,7 @@ Legend:
 There are also area-dependent PLMs:
 
 | Area | BTS | Col. | Ins. | Shot | Description                    |
-+------+-----+------+------+------+--------------------------------+
+| ---- | --- | ---- | ---- | ---- | ------------------------------ |
 | 0    | 80  |      | B70F |      | Crateria ice physics           |
 | 1    | 80  | B633 | B6CB |      | Brinstar floor plant           |
 | 1    | 81  | B633 |      |      | Brinstar nothing               |
@@ -397,7 +397,7 @@ Each PLM has access to the following variables (where Y is the list
 offset for the PLM):
 
 | Address    | Description                             | Size |
-+------------+-----------------------------------------+------+
+| ---------- | --------------------------------------- | ---- |
 | $7E:0DC4   | Current block index                     | 2    |
 | $7E:1C27   | List offset for current PLM             | 2    |
 | $7E:1C29   | Calculated PLM X position               | 2    |
@@ -421,7 +421,7 @@ A PLM instruction list consists of variable-width PLM instructions.  A
 PLM instruction has the following format:
 
 | Condition         | Opcode meaning (bytes) | Operand meaning              (bytes) |
-+-------------------+------------------------+--------------------------------------+
+| ----------------- | ---------------------- | ------------------------------------ |
 | Opcode >= 8000h   | PLM instruction    (2) | n/a                              (0) |
 | Opcode &lt; 8000h | timer              (2) | Pointer to draw instruction list (2) |
 
@@ -430,10 +430,10 @@ A PLM instruction list is terminated by 0000h.
 The draw instruction list consists of variable-width draw instructions.  A draw
 instruction operand has the following format:
 
-    +-------------------- column (1) or row (0)
-    |             +------ number of tiles to change
+    | ------------------- column (1) or row (0)
+    |             | ----- number of tiles to change
     |             |
-    |         /---+---\
+    |         /-- | --\
     FEDC BA98 7654 3210
 
 The draw instruction is followed by the new level data (tilemap) values
@@ -473,7 +473,7 @@ pointer points to a list in bank $A1 of 16-byte enemy population
 entries:
 
 | Offset | Bytes | Description              | Stored at  |
-+--------+-------+--------------------------+------------+
+| ------ | ----- | ------------------------ | ---------- |
 | 0h     | 2     | Enemy pointer            | $7E:0F78+y |
 | 2h     | 2     | X pos in room            | $7E:07FA+y |
 | 4h     | 2     | Y pos in room            | $7E:0F7E+y |
@@ -486,7 +486,7 @@ entries:
 The list is terminated with:
 
 | Offset | Bytes | Description                   |
-+--------+-------+-------------------------------+
+| ------ | ----- | ----------------------------- |
 | 0h     | 2     | $FFFF                         |
 | 2h     | 1     | Kill quota to open grey doors |
 
@@ -498,16 +498,16 @@ enemy header for the enemy to be spawned.
 The enemy property bits are:
 
 
-    +-------------------- (F) whether hitbox is solid to Samus
-    |+------------------- (E) automatically respawn
-    ||+------------------ (D) whether to process enemy's graphic AI
-    |||+----------------- (C) enemy can block plasma shots
-    |||| +--------------- (B) enemy processes offscreen
-    |||| |+-------------- (A) enemy ignores Samus/projectiles
-    |||| ||+------------- (9) whether enemy should be deleted
-    |||| |||+------------ (8) invisible?
-    |||| ||||        +--- (2) orientation (geemers)
-    |||| ||||        |+-- (1) orientation (geemers)
+    | ------------------- (F) whether hitbox is solid to Samus
+    || ------------------ (E) automatically respawn
+    ||| ----------------- (D) whether to process enemy's graphic AI
+    |||| ---------------- (C) enemy can block plasma shots
+    |||| | -------------- (B) enemy processes offscreen
+    |||| || ------------- (A) enemy ignores Samus/projectiles
+    |||| ||| ------------ (9) whether enemy should be deleted
+    |||| |||| ----------- (8) invisible?
+    |||| ||||        | -- (2) orientation (geemers)
+    |||| ||||        || - (1) orientation (geemers)
     |||| ||||        ||
     FEDC BA98 7654 3210
 
@@ -515,9 +515,9 @@ The enemy property bits are:
 
 Extra property bits are:
 
-    +-------------------- (F) graphics need to be updated
-    |               +---- (2) enable multiple hitbox/reactions (extended spritemaps?)
-    |               | +-- (0) disable processing of movement AI
+    | ------------------- (F) graphics need to be updated
+    |               | --- (2) enable multiple hitbox/reactions (extended spritemaps?)
+    |               | | - (0) disable processing of movement AI
     |               | |
     FEDC BA98 7654 3210
 
@@ -528,7 +528,7 @@ also be updated for the enemies to have the correct graphics.  The
 format for each entry is:
 
 | Offset | Bytes | Description      |
-+--------+-------+------------------+
+| ------ | ----- | ---------------- |
 | 0h     | 2     | Enemy pointer    |
 | 2h     | 2     | Palette?         |
 
@@ -542,7 +542,7 @@ characteristics for each enemy in the game.
 The format of the enemy header is:
 
 | Offset | Bytes | Description               |
-+--------+-------+---------------------------+
+| ------ | ----- | ------------------------- |
 | 0h     | 2     | Tile data size            |
 | 2h     | 2     | Palette                   |
 | 4h     | 2     | Health                    |
@@ -588,7 +588,7 @@ the enemy offset, i.e. $000 for the first enemy $040 for the second
 enemy, $080 for the third enemy, etc.):
 
 | Bytes | Description         | Stored at  | Initial value        |
-+-------+---------------------+------------+----------------------+
+| ----- | ------------------- | ---------- | -------------------- |
 | 2     | Pointer (ID)        | $7E:0F78+y | [pop entry + 00h]    |
 | 2     | X pos               | $7E:0F7A+y | [pop entry + 02h]    |
 | 2     | X subpixel pos      | $7E:0F7C+y | 0?                   |
@@ -621,7 +621,7 @@ enemy, $080 for the third enemy, etc.):
 ### Other common variables
 
 | Addresss | Bytes | Description          |
-+----------+-------+----------------------+
+| -------- | ----- | -------------------- |
 | $7E:0E54 | 2     | Current enemy index  |
 
 ### Init routine
@@ -637,10 +637,10 @@ active AI handler bitmask.
 
 Active AI handler bitmask is:
 
-                   +----- (3) Time is frozen AI
-                   |+---- (2) Frozen AI
-                   ||+--- (1) Hurt AI
-                   |||+-- (0) Grapple AI
+                   | ---- (3) Time is frozen AI
+                   || --- (2) Frozen AI
+                   ||| -- (1) Hurt AI
+                   |||| - (0) Grapple AI
                    ||||
     FEDC BA98 7654 3210
 
@@ -655,7 +655,7 @@ Enemy Projectiles
 Headers for enemy projectiles are in bank $86.  The format is:
 
 | Offset | Bytes | Description               |
-+--------+-------+---------------------------+
+| ------ | ----- | ------------------------- |
 | 0h     | 2     | Init AI routine           |
 | 2h     | 2     | Pre-instruction routine   |
 | 4h     | 2     | Instruction list          |
@@ -670,7 +670,7 @@ Headers for enemy projectiles are in bank $86.  The format is:
 An enemy projectile is spawned by invoking $86:8097 with:
 
 | Register | Value                                        |
-+----------+----------------------------------------------+
+| -------- | -------------------------------------------- |
 | Y        | Projectile ID (address of projectile header) |
 | A        | Projectile initialization parameter          |
 
@@ -682,7 +682,7 @@ Projectile have the following in-memory state (kept as lists rather than
 a structure for each projectile):
 
 | Address    | Bytes | Description              | Initial value        |
-+------------+-------+--------------------------+----------------------+
+| ---------- | ----- | ------------------------ | -------------------- |
 | $7E:1997+y | 2     | Projectile ID            | X                    |
 | $7E:19BB+y | 2     | VRAM tiles index         | 0000h                |
 | $7E:19DF+y | 2     | Timer                    | uninitialized        |
@@ -725,7 +725,7 @@ Palettes
 Palette memory:
 
 | Address  | Bytes | Description                                           |
-+----------+-------+-------------------------------------------------------+
+| -------- | ----- | ----------------------------------------------------- |
 | $7E:C000 | 512   | Actual palette; uploaded to CGRAM before drawing      |
 | $7E:C200 | 512   | Target palette; this is copied to $7E:C000 before NMI |
 | $7E:C400 | 2     | Palette change fraction, numerator                    |
@@ -735,7 +735,7 @@ Palette memory:
 The palettes are allocated as follows:
 
 | Actual   | Target   | FX   | OAM  | Colors | Type   | Index | Notes                        |
-+----------+----------+------|------+--------+--------+-------+------------------------------+
+| -------- | -------- | -----|----- | ------ | ------ | ----- | ---------------------------- |
 | $7E:C000 | $7E:C200 |      |      | 16     | BG1/2  | 0     | CRE, grey doors              |
 | $7E:C020 | $7E:C220 |      |      | 16     | BG1/2  | 1     | CRE, green doors             |
 | $7E:C000 | $7E:C210 |      |      | 4?     | BG3    | 0     |                              |
@@ -788,7 +788,7 @@ The tileset pointer table holds pointers into the tileset table at
 $8F:E6A2.  The entries in the tileset table have the following format:
 
 | Offset | Size | Description        |
-+--------+------+--------------------+
+| ------ | ---- | ------------------ |
 | 0h     | 3    | Tile table pointer |
 | 3h     | 3    | Tiles pointer      |
 | 6h     | 3    | Palette pointer    |
@@ -799,7 +799,7 @@ The tile table is an array of tile table entries.  The format of a tile
 table entry is:
 
 | Offset | Size | Description        |
-+--------+------+--------------------+
+| ------ | ---- | ------------------ |
 | 0h     | 2    | Top left           |
 | 2h     | 2    | Top right          |
 | 4h     | 2    | Bottom left        |
@@ -814,24 +814,24 @@ animation frame.  It is stored as an array of spritemap entries,
 preceded by a 2-byte count of the number of entries in the array:
 
 | Offset | Size | Description       |
-+--------+------+-------------------+
+| ------ | ---- | ----------------- |
 | 0      | 2    | Number of entries |
 | 2      | 5    | Entry 0           |
 | ...    | 5    | Entry ...
 
 The format of a spritemap entry is:
 
-    +--------------------------------------------- s: size bit
-    |    +---------------------------------------- S: debug size bit
-    |    |      +--------------------------------- x: X offset from center
-    |    |      |        +------------------------ y: Y offset from center
-    |    |      |        |     +------------------ Y: Y flip
-    |    |      |        |     |+----------------- X: X flip
-    |    |      |        |     || +--------------- p: priority
-    |    |      |        |     || | +------------- P: palette
-    |    |      |        |     || | |      +------ t: tile number
+    | -------------------------------------------- s: size bit
+    |    | --------------------------------------- S: debug size bit
+    |    |      | -------------------------------- x: X offset from center
+    |    |      |        | ----------------------- y: Y offset from center
+    |    |      |        |     | ----------------- Y: Y flip
+    |    |      |        |     || ---------------- X: X flip
+    |    |      |        |     || | -------------- p: priority
+    |    |      |        |     || | | ------------ P: palette
+    |    |      |        |     || | |      | ----- t: tile number
     |    |      |        |     || | |      |
-    |    | /----+---\ /--+---\ ||/+/+\/----+---\
+    |    | /--- | --\ /- | --\ ||/+/+\/--- | --\
     s0000S0x.xxxxxxxx yyyyyyyy YXppPPPt.tttttttt
     \-----word------/ \-byte-/ \-----word------/
 
@@ -1019,7 +1019,7 @@ Overview:
 The following DMA write are performed:
 
 | Sub   | Ch | Source                  | Size       | Register      | Offset     | Description       |
-+-------+----+-------------------------+------------+---------------+------------+-------------------+
+| ----- | -- | ----------------------- | ---------- | ------------- | ---------- | ----------------- |
 | $933A | 0  | $7E:0370                | 544        | $2104 (OAM)   |            |                   |
 | $933A | 1  | $7E:C000                | 544        | $2104 (CGRAM) |            |                   |
 | $9376 | 1  | ($0721):($071F)         | ($0722)    | $2118 (VRAM)  | $6000      | Samus top         |
@@ -1048,7 +1048,7 @@ The following DMA write are performed:
 The following registers are set by $80:91EE:
 
 | Register(s)  | Value            | Description                                 |
-+--------------+------------------+---------------------------------------------+
+| ------------ | ---------------- | ------------------------------------------- |
 | $4200        | ($7E:0084)       | Interrupt and auto-joypad enable            |
 | $2100        | ($7E:0051)       | Forced blank and brightness                 |
 | $2101        | ($7E:0052)       | Sprite size and tiles base address          |
@@ -1117,7 +1117,7 @@ PLMs
 Bank $94 contains block PLM subroutines:
 
 | Subroutine | Description                                                 |
-+------------+-------------------------------------------------------------+
+| ---------- | ----------------------------------------------------------- |
 | $94:906F   | Samus block collision reaction - horizontal - special air   |
 | $94:909D   | Samus block collision reaction - vertical - special air     |
 | $94:90CB   | Samus block collision reaction - horizontal - special block |
@@ -1126,7 +1126,7 @@ Bank $94 contains block PLM subroutines:
 These routines are listed in the collision reaction tables:
 
 | Address  | Description                                          |
-+----------+------------------------------------------------------+
+| -------- | ---------------------------------------------------- |
 | $94:94D5 | Samus block collision reaction pointers - horizontal |
 | $94:94F5 | Samus block collision reaction pointers - vertical   |
 
@@ -1138,7 +1138,7 @@ The collision reaction functions are invoked in the following
 conditions:
 
 | Subroutine | Direction  | Condition               |
-+------------+------------+-------------------------+
+| ---------- | ---------- | ----------------------- |
 | $94:96E3   | vertical   | Change of pose          |
 | $94:9763   | vertical   | Move samus vertically   |
 | $94:967F   | horizontal | Wall jump pose          |
@@ -1153,7 +1153,7 @@ register A.  First, it finds an empty PLM slot and assigns its index to
 register X.  It then stores the following into memory:
 
 | Address    | Description                   |
-+------------+-------------------------------+
+| ---------- | ----------------------------- |
 | $7E:1C27+x | 0                             |
 | $7E:1C37+x | PLM ID                        |
 | $7E:1C87+x | PLM block index (n*2)         |
