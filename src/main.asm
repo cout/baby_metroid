@@ -4,12 +4,12 @@ lorom
 
 incsrc freespace.asm
 incsrc enemies.asm
-incsrc freeze_enemies.asm
-incsrc ride_enemies.asm
-incsrc death_quota.asm
+incsrc patches/freeze_enemies.asm
+incsrc patches/ride_enemies.asm
+incsrc patches/death_quota.asm
+incsrc patches/enemy_drops.asm
 incsrc torizos.asm
 incsrc spore_spawn.asm
-incsrc enemy_drops.asm
 incsrc ceres.asm
 incsrc enemies/samus_statue.asm
 incsrc projectiles/transporter_electricity.asm
