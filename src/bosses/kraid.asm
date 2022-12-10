@@ -25,3 +25,11 @@ dw $B633, $812F
 org $A78887 ; walk backward
 
 dw $B633, $812F
+
+;;
+; Play elevator music instead of boss music
+;
+
+org $A7C8AF
+
+LDA #$0003
