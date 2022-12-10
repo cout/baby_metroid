@@ -33,3 +33,11 @@ dw $B633, $812F
 org $A7C8AF
 
 LDA #$0003
+
+;;
+; Clear the spikes and unfix the camera
+;
+
+org $A7A9E7
+
+JSR $C171
