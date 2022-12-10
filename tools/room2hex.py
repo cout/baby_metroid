@@ -7,13 +7,15 @@ import re
 final_format = \
 '''
 ; Size:
-%s
+; {width_s} screens x {height_s} screens
+; ({width_t} tiles x {height_t} tiles, {bytes} bytes)
+{size}
 
 ; Tilemap:
-%s
+{tilemap}
 
 ; BTS:
-%s
+{bts}
 '''
 
 def bin2room(b):
@@ -68,7 +70,16 @@ def room2hex(b, w, h):
   hex_size = '%02X %02X' % (tilemap_bytes & 0xff, tilemap_bytes >> 8)
   hex_tilemap = format_tilemap(tilemap, w, h)
   hex_bts = format_bts(bts, w, h)
-  return (final_format % (hex_size, hex_tilemap, hex_bts)).lstrip()
+  return final_format.format(
+      width_s=w//16,
+      height_s=h//16,
+      width_t=w,
+      height_t=h,
+      bytes=w*h*2,
+      size=hex_size,
+      tilemap=hex_tilemap,
+      bts=hex_bts,
+  ).lstrip()
 
 def main():
   ws = int(sys.argv[1])
