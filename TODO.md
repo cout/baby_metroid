@@ -4,11 +4,10 @@ TODO
 Top priority:
 * Spore spawn music needs to work again
 * Figure out what to do for Kraid
+* Speed hallway - it is too easy to get stuck under the crumbles
 
 Later:
-* Rising tide - easy to get stuck in the lava/acid
 * Bubble mountain - will E ride the wavers or find the tunnel?
-* Speed hallway is a challenge - the crumbles are hard
 * The spikes in double chamber are difficult
 * Holding the run button should charge up a shine spark without running
 * That should be how Samus gets up red tower (replace blocks at the top
