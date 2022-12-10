@@ -41,3 +41,11 @@ LDA #$0003
 org $A7A9E7
 
 JSR $C171
+
+;;
+; Replace Kraid roar with a less intimidating sound
+;
+
+org $A7AF95
+
+LDA #$0060
