@@ -4,6 +4,7 @@ lorom
 
 incsrc freespace.asm
 incsrc enemies.asm
+incsrc physics_constants.asm
 incsrc patches/freeze_enemies.asm
 incsrc patches/ride_enemies.asm
 incsrc patches/death_quota.asm
