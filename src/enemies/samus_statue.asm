@@ -52,11 +52,11 @@ end_samus_statue_freespace_a0:
 org !FREESPACE_A3
 
 samus_statue_tile_data:
-incbin "enemies/samus_statue_tiles.bin"
+incbin "samus_statue_tiles.bin"
 
 samus_statue_palette:
 
-; incbin "enemies/samus_statue_palette.bin"
+; incbin "samus_statue_palette.bin"
 
 samus_statue_lower_crateria_palette:
 dw $7c00, $28e7, $41ad, $5a73, $7f9c, $0844, $0000, $0000
