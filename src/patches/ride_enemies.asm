@@ -61,9 +61,16 @@ RTL
 
 .nonzero_movement:
 
+; if enemy is intangible then do not move Samus
+LDA $0F86,x
+AND #$8000
+BNE .not_touching
+
 ; if not touching then we just move the enemy and not Samus
 JSL $A0AC29
 BNE .touching
+
+.not_touching
 BRL do_move_enemy_horiz
 
 .touching
@@ -122,9 +129,16 @@ RTL
 
 .nonzero_movement:
 
+; if enemy is intangible then do not move Samus
+LDA $0F86,x
+AND #$8000
+BNE .not_touching
+
 ; if not touching then we just move the enemy and not Samus
 JSL $A0AC29
 BNE .touching
+
+.not_touching
 BRL do_move_enemy_vert
 
 .touching:
