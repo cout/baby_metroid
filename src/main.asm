@@ -11,6 +11,7 @@ incsrc patches/enemy_drops.asm
 incsrc bosses/torizos.asm
 incsrc bosses/spore_spawn.asm
 incsrc bosses/ceres.asm
+incsrc bosses/kraid.asm
 incsrc enemies/samus_statue.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc rooms/climb.asm
