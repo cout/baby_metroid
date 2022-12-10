@@ -22,7 +22,7 @@ all: build/baby_metroid.sfc
 .PHONY: all
 
 clean:
-	rm -f $(TARGETS)
+	rm -f $(TARGETS) $(DEPENDENCY_FILES)
 
 .PHONY: clean
 
