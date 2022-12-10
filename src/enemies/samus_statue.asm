@@ -66,10 +66,15 @@ samus_statue_warehouse_entrance_palette:
 dw $7c00, $2c22, $4167, $5a2d, $7fb9, $1820, $0000, $0000
 dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
+samus_statue_bubble_mountain_palette:
+dw $7c00, $10c2, $25c5, $4309, $53ec, $0885, $0000, $0000
+dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
 samus_statue_palettes:
 
 dw samus_statue_lower_crateria_palette
 dw samus_statue_warehouse_entrance_palette
+dw samus_statue_bubble_mountain_palette
 
 samus_statue_looking_up_spritemap:
 {
