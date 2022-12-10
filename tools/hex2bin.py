@@ -4,7 +4,7 @@ import sys
 import re
 
 def strip_comments(s):
-  return re.sub('\s*;.*(?=\n|\r)', '', s, re.MULTILINE)
+  return "\n".join(re.sub(';.*', '', l) for l in s.splitlines())
 
 def replace_non_hex_with_whitespace(s):
   return re.sub('[^A-Za-z0-9]', ' ', s)
