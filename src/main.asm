@@ -9,6 +9,7 @@ incsrc patches/freeze_enemies.asm
 incsrc patches/ride_enemies.asm
 incsrc patches/death_quota.asm
 incsrc patches/enemy_drops.asm
+incsrc patches/easy_blue_suit.asm
 incsrc bosses/torizos.asm
 incsrc bosses/spore_spawn.asm
 incsrc bosses/ceres.asm
