@@ -257,6 +257,56 @@ BTS is set to 0 for non-special blocks.
 
 For special blocks, BTS is the index into the PLM tables in bank $94.
 
+Slopes
+------
+
+Slopes use BTS to determine the type of slope:
+
+     +-------- Y flip
+     |+------- X flip
+     ||  +---- Shape
+     ||  |
+     ||/-+\
+    7YXsssss
+
+The possible slope shapes are:
+
+|       |        |   Slope definition   |                    |
+| Shape | Type   | (Samus)  | (Enemies) | Description        |
+| ----- | ------ | -------- | --------- | ------------------ |
+|    0h | quad   | $94:8E54 | $A0:C434  | top empty          |
+|    1h | quad   | $94:8E58 | $A0:C438  | left empty         |
+|    2h | quad   | $94:8E5C | $A0:C43C  | top-left empty     |
+|    3h | quad   | $94:8E60 | $A0:C440  | bottom-right solid |
+|    4h | quad   | $95:8E64 | $A0:C444  | all quads solid    |
+|    5h | sloped |          |           |                    |
+|    6h | sloped |          |           |                    |
+|    7h | sloped |          |           |                    |
+|    8h | sloped |          |           |                    |
+|    9h | sloped |          |           |                    |
+|    Ah | sloped |          |           |                    |
+|    Bh | sloped |          |           |                    |
+|    Ch | sloped |          |           |                    |
+|    Dh | sloped |          |           |                    |
+|    Eh | sloped |          |           |                    |
+|    Fh | sloped |          |           |                    |
+|   10h | sloped |          |           |                    |
+|   11h | sloped |          |           |                    |
+|   12h | sloped |          |           |                    |
+|   13h | sloped |          |           |                    |
+|   14h | sloped |          |           |                    |
+|   15h | sloped |          |           |                    |
+|   16h | sloped |          |           |                    |
+|   17h | sloped |          |           |                    |
+|   18h | sloped |          |           |                    |
+|   19h | sloped |          |           |                    |
+|   1Ah | sloped |          |           |                    |
+|   1Bh | sloped |          |           |                    |
+|   1Ch | sloped |          |           |                    |
+|   1Dh | sloped |          |           |                    |
+|   1Eh | sloped |          |           |                    |
+|   1Fh | sloped |          |           |                    |
+
 PLMs
 ----
 
