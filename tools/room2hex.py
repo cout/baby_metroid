@@ -62,7 +62,7 @@ def format_tilemap(tilemap, w, h):
 
 def format_bts(bts, w, h):
   rows = split_into_rows(bts, w, h)
-  return format_grid(rows, '%02X')
+  return format_grid(rows, ' %02X ')
 
 def room2hex(b, w, h):
   size, tilemap, bts = bin2room(b)
