@@ -98,6 +98,10 @@ do_easy_blue_suit_check:
   BRA .cancel_blue_suit
 
 .maybe_keep_blue_suit:
+  ; If Samus no longer has blue suit, then cancel easy blue suit
+  LDA $0B3E
+  BEQ .cancel_blue_suit
+
   ; If Samus has iframes then cancel blue suit (this prevents chain
   ; damage).
   LDA $18A8

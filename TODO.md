@@ -13,10 +13,6 @@ Later:
     with speed blocks)
 * Ice beam is broken (it no longer freezes enemies)
 
-Bugs:
-* Samus loses easy blue suit after a wall jump while pressing run, and 
-  there is no windup sound when using easy blue suit after that
-
 Ideas:
 * Replace space pirates with etecoons
 * Replace climb pirates with dachora (ride the dachora up!) - decided to
