@@ -11,6 +11,8 @@
 ; * Samus can acquire blue suit slightly faster the first time easy blue
 ;   suit is used if the memory used by this patch gets initialized to a
 ;   a value between 400h and 4FFh.
+; * Samus loses blue suit if holding B and running into a wall (this can
+;   be a problem e.g. in frog speedway)
 ;
 ;;;;;
 
@@ -34,6 +36,10 @@ org !FREEMEM_7F
 easy_blue_suit_counter:
 skip 2
 
+; Room where easy blue suit was acquired
+easy_blue_suit_room:
+skip 2
+
 easy_blue_suit_end_freemem_7f:
 
 !FREEMEM_7F := easy_blue_suit_end_freemem_7f
@@ -49,6 +55,13 @@ org !FREESPACE_90
 
 do_easy_blue_suit_check:
 {
+  ; Disallow carrying easy blue suit to another room
+  LDA $079B
+  CMP easy_blue_suit_room
+  BNE .cancel_blue_suit
+
+.same_room
+  ; Check to see if player is holding the run button
   LDA $8B
   BIT $09B6
   BEQ .not_holding_run
@@ -93,8 +106,6 @@ do_easy_blue_suit_check:
   BRA .return
 
 .not_holding_run
-  LDA easy_blue_suit_counter
-
   ; If the counter is too large then we will never reach echoes, so
   ; reset it.  On snes9x, memory is initialized to 5555h, so this will
   ; set it to zero.  On other platforms it could be initialized to some
@@ -104,6 +115,7 @@ do_easy_blue_suit_check:
   ; TODO - it would be better to explicitly initialize this memory
   ; somewhere, but I don't know how to do that yet.  It's good to have
   ; this check anyway in case of a stray memory write.
+  LDA easy_blue_suit_counter
   CMP #$04FF
   BCS .cancel_blue_suit
 
@@ -133,13 +145,15 @@ do_easy_blue_suit_check:
   LDA #$0001
   STA $0B3C
 
+.call_cancel_blue_suit_routine:
   ; Cancel blue suit if the run button is not pressed and we didn't
   ; acquire blue suit via a "standing run".
   ; (TODO - it's OK to call this routine even if we have blue suit, as
   ; long as $0B3C is zero)
   JSL $91DE53
 
-  BRA .return
+  LDA $079B
+  STA easy_blue_suit_room
 
 .return:
   RTL
