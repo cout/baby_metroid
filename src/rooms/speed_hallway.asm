@@ -17,3 +17,13 @@ org $B48ABB ; enemy graphics set
 
 skip 4 ; geruda
 dw !samus_statue, $0002, $FFFF
+
+;;
+; Limit how high the lava will rise
+;
+
+org $8385E0 ; Room $ACF0 state $ACFD FX
+
+skip 4
+
+dw $019A
