@@ -33,6 +33,7 @@ Ideas:
   become "freeze bombs").  If so then Ridley could be defeated with a
   single power bomb (which would cause him to spit ice or snow balls
   instead of fireballs).
+* Keep blue suit in lava?
 
 Tooling ideas:
 * Script to generate room list in asm format
