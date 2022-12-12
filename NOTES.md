@@ -168,8 +168,7 @@ There is no room to add a new entry to the end of the list, but it
 should be possible to explicitly call $84:846A in the room setup routine
 to manually spawn a room PLM.
 
-Level data (Tilemap/BTS)
-------------------------
+### Level data (Tilemap/BTS)
 
 The level data for each room is stored in a compressed format:
 
@@ -198,8 +197,7 @@ Custom background ($9602) is stored in a similar format:
         ||/--- | ---\
     0000yxnn nnnnnnnn
 
-Block reactions
----------------
+### Block reactions
 
 The following block reaction tables are defined:
 
@@ -257,8 +255,7 @@ BTS is set to 0 for non-special blocks.
 
 For special blocks, BTS is the index into the PLM tables in bank $94.
 
-Slopes
-------
+### Slopes
 
 Slopes use BTS to determine the type of slope:
 
@@ -306,6 +303,47 @@ The possible slope shapes are:
 |   1Dh | sloped |          |           |                    |
 |   1Eh | sloped |          |           |                    |
 |   1Fh | sloped |          |           |                    |
+
+### FX
+
+The room FX pointer points to a list of 16-byte FX entries in bank $83.
+
+Each entry has the form:
+
+| Offset | Size | Description                                |
+| ------ | ---- | ------------------------------------------ |
+| 0h     | 2    | Door pointer                               |
+| 2h     | 2    | Base Y position                            |
+| 4h     | 2    | Target Y position                          |
+| 6h     | 2    | Y velocity                                 |
+| 8h     | 1    | Timer                                      |
+| 9h     | 1    | Type                                       |
+| Ah     | 1    | FX A: Default layer blending configuration |
+| Bh     | 1    | FX B: FX layer 3 blending configuration    |
+| Ch     | 1    | FX C: FX liquid options                    |
+| Dh     | 1    | Palette FX bitset                          |
+| Eh     | 1    | Animated tiles bitset                      |
+| Fh     | 1    | Palette blend                              |
+
+The list is terminated with a door pointer of 0000h.
+
+The following FX types are available:
+
+| Type | Description    | Tilemap | FX Routine | FX A |     FX B    | FX C |
+| ---- | -------------- | ------- | ---------- | ---- | ----------- | ---- |
+|   2h | Lava           |         |            |      | 1Eh         |      |
+|   4h | Acid           | 8A:8840 | 88:B279    |      | 1Eh         |      |
+|   6h | Water          | 8A:9080 | 88:C3FF    |      | 14h/16h/18h |      |
+|   8h | Spores         | 8A:A100 | 88:DA11    |      | Ah          |      |
+|   Ah | Rain           | 8A:A940 | 88:D950    |      | Eh          |      |
+|   Ch | Fog            |         | 88:DB08    |      | 30h         |      |
+|  20h | Scrolling sky  |         | 88:A7D8    |      |             |      |
+|  22h | Scrolling sky  |         | 88:A61B    |      |             |      |
+|  24h | Fireflea       |         | 88:B07C    |      | 2h          |      |
+|  26h | G4             |         | 88:DB8A    |      | 18h         |      |
+|  28h | Ceres Ridley   |         | 88:D8DE    |      | 2h          |      |
+|  2Ah | Ceres elevator |         | 88:D928    |      | 2h          |      |
+|  2Ch | Haze           |         | 88:DDC7    |      |             |      |
 
 PLMs
 ----
