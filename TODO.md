@@ -9,10 +9,13 @@ Top priority:
 Later:
 * Bubble mountain - will E ride the wavers or find the tunnel?
 * The spikes in double chamber are difficult
-* Holding the run button should charge up a shine spark without running
 * That should be how Samus gets up red tower (replace blocks at the top
     with speed blocks)
 * Ice beam is broken (it no longer freezes enemies)
+
+Bugs:
+* Samus loses easy blue suit after a wall jump while pressing run, and 
+  there is no windup sound when using easy blue suit after that
 
 Ideas:
 * Replace space pirates with etecoons
