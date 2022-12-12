@@ -1,3 +1,20 @@
+;;;;;
+;
+; Easy blue suit - lets players get blue suit by holding the run button
+; while standing.
+;
+; Bugs/Limitations:
+; * Since this code is only executed when Samus is in the standing
+;   position, it is possible for Samus to lose blue suit while not in
+;   the standing position and then quickly reacquire blue suit by
+;   pressing and holding the run button prior to standing.
+; * Samus can acquire blue suit slightly faster the first time easy blue
+;   suit is used if the memory used by this patch gets initialized to a
+;   a value between 400h and 4FFh.
+;
+;;;;;
+
+
 ;;
 ; Constants
 ;
