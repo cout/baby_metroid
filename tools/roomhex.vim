@@ -12,7 +12,7 @@ syn match specialblock "\<B[0-9A-F][0-9A-F][0-9A-F]\>"
 syn match shootableblock "\<C[0-9A-F][0-9A-F][0-9A-F]\>"
 syn match vertextension "\<D[0-9A-F][0-9A-F][0-9A-F]\>"
 syn match grappleblock "\<E[0-9A-F][0-9A-F][0-9A-F]\>"
-syn match bombableblock "\<E[0-9A-F][0-9A-F][0-9A-F]\>"
+syn match bombableblock "\<F[0-9A-F][0-9A-F][0-9A-F]\>"
 syn match emptyblock "\<00FF\>"
 
 hi solidblock ctermbg=DarkGreen ctermfg=White
