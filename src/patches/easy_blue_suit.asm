@@ -26,7 +26,7 @@ easy_blue_suit_end_freemem_7f:
 
 org $90A3D0
 
-JSR do_easy_blue_suit_check
+JSL do_easy_blue_suit_check
 
 org !FREESPACE_90
 
@@ -103,7 +103,7 @@ do_easy_blue_suit_check:
   JSL $91DE53
 
 .return:
-  RTS
+  RTL
 }
 
 queue_echoes_sound:
