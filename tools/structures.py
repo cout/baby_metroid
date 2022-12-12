@@ -93,7 +93,7 @@ class RoomHeader(object):
 
 @dataclass
 class RoomStateHeader(object):
-  fmt = struct.Struct("<HBBBHHHHHHHHHH")
+  fmt = struct.Struct("<HBBBBHHHHHHHHH")
 
   level_data_offset: HexValue
   level_data_bank: HexValue
