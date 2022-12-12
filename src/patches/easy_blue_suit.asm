@@ -59,6 +59,10 @@ do_easy_blue_suit_check:
 .full_run_speed
   ; TODO - set Samus contact damage index to 1 ($0A6E)?
   ; (I think the answer is no)
+  ; PHA
+  ; LDA #$0001
+  ; STA $0A6E
+  ; PLA
 
   ; Simulate the oscillator in the least significant byte of the real
   ; speed counter (though I do not think this has any real effect)
@@ -86,21 +90,35 @@ do_easy_blue_suit_check:
   CMP #$04FF
   BCS .cancel_blue_suit
 
+  ; If the counter is greater than 400h then we have easy blue suit and
+  ; we don't want to clear it.
   CMP #$0400
-  BCS .return
+  BCS .maybe_keep_blue_suit
+
+  BRA .cancel_blue_suit
+
+.maybe_keep_blue_suit:
+  ; If Samus has iframes then cancel blue suit (this prevents chain
+  ; damage).
+  LDA $18A8
+  BEQ .return
 
 .cancel_blue_suit:
   ; Clear the easy blue suit counter
   LDA #$0000
   STA easy_blue_suit_counter
   
-  ; TODO - I can't remember why I set this nor whether it has any effect
-  LDA #$0000
+  ; Set $0B3C so blue suit is no longer permanent
+  LDA #$0001
   STA $0B3C
 
   ; Cancel blue suit if the run button is not pressed and we didn't
   ; acquire blue suit via a "standing run".
+  ; (TODO - it's OK to call this routine even if we have blue suit, as
+  ; long as $0B3C is zero)
   JSL $91DE53
+
+  BRA .return
 
 .return:
   RTL
