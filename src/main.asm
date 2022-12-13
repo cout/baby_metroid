@@ -29,4 +29,5 @@ incsrc rooms/bat_cave.asm
 incsrc rooms/speed_hallway.asm
 incsrc rooms/red_tower.asm
 incsrc rooms/hellway.asm
+incsrc rooms/alpha_power_bombs.asm
 incsrc rooms/moat.asm
