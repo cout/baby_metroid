@@ -12,6 +12,8 @@ Later:
 * That should be how Samus gets up red tower (replace blocks at the top
     with speed blocks)
 * Ice beam is broken (it no longer freezes enemies)
+* Ice beam gate room is hard without knowing how to use the run button
+* Need to make it easier to get unstuck from spikes in bat room
 
 Ideas:
 * Replace space pirates with etecoons
