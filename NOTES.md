@@ -513,8 +513,11 @@ PLM instruction has the following format:
 | ----------------- | ---------------------- | ------------------------------------ |
 | Opcode >= 8000h   | PLM instruction    (2) | n/a                              (0) |
 | Opcode &lt; 8000h | timer              (2) | Pointer to draw instruction list (2) |
+| Opcode == 0000h   | terminate              | n/a                              (0) |
 
 A PLM instruction list is terminated by 0000h.
+
+### PLM Draw Instruction List
 
 A draw instruction list consists of variable-width draw instructions.  A draw
 instruction operand has the following format:
@@ -535,9 +538,9 @@ A draw instruction list is terminated by 0000h.
 The PLM pre-instruction is a pointer to a subroutine that is each time a
 PLM instruction is processed, just before processing the instruction.
 
-### PLM Instructrion Routines
+### PLM Instruction Routines
 
-The following routines can be used as instructions in PLM instruction lists:
+The following general-purpose routines can be used as instructions in PLM instruction lists:
 
 | Address | Description                          | Arguments (Bytes)              | Arg Bytes |
 | ------- | ------------------------------------ | ------------------------------ | --------- |
@@ -545,7 +548,6 @@ The following routines can be used as instructions in PLM instruction lists:
 | 86BC    | delete                               |                                |           |
 | 86C1    | set pre-instruction                  | pre-instruction (2)            | 2         |
 | 86CA    | clear pre-instruction                |                                |           |
-| 86D1    | call subroutine                      | subroutine (3)                 | 3         |
 | 86EB    | call subroutine with arg             | subroutine (3), arg (2)        | 5         |
 | 870B    | call subroutine                      | subroutine (3)                 | 3         |
 | 8724    | goto                                 | instruction ptr (2)            | 2         |
@@ -568,48 +570,26 @@ The following routines can be used as instructions in PLM instruction lists:
 | 88B0    | pick up beam and display msg         | beam (2), msg (1)              | 3         |
 | 88F3    | pick up equipment and display msg    | item (2), msg (1)              | 3         |
 | 8891    | pick up item and add grapple to hud  | item (2)                       | 2         |
-| 8968    | collect energy tank                  | tank capacity (2)              | 2         |
-| 8986    | collect reserve tank                 | tank capacity (2)              | 2         |
-| 89A9    | collect missile tank                 | tank capacity (2)              | 2         |
-| 89D2    | collect super missile tank           | tank capacity (2)              | 2         |
-| 89FB    | collect power bomb tank              | tank capacity (2)              | 2         |
 | 8A24    | link instruction                     | instruction ptr (2)            | 2         |
 | 8A2E    | call instruction                     | instruction ptr (2)            | 2         |
 | 8A3E    | return from call                     |                                |           |
-| 8A40    | wait until enemy 0 is dead           |                                |           |
-| 8A59    | wait until enemy 1 is dead           |                                |           |
 | 8A72    | goto if PLM room arg door bit set    | instruction ptr (2)            | 2         |
 | 8865    | set PLM room arg door bit and goto   | hit cond (1), instr ptr (2)    | 2         |
 | 8ACD    | inc PLM room arg and goto if >=      | cond (1), instr ptr (2)        | 2         |
 | 8AF1    | set PLM bts                          | new bts value (1)              | 1         |
-| 8B05    | draw PLM block                       |                                |           |
 | 8B17    | draw PLM block                       |                                |           |
-| 8B55    | process air scroll                   |                                |           |
-| 8B93    | process solid scroll                 |                                |           |
 | 8BD1    | queue music track                    | track (1)                      | 1         |
 | 8BDD    | clear music queue and queue track    | track (1)                      | 1         |
 | 8C07    | queue sound from library 1 (max 6)   | sound (1)                      | 1         |
 | 8C10    | queue sound from library 2 (max 6)   | sound (1)                      | 1         |
 | 8C19    | queue sound from library 3 (max 6)   | sound (1)                      | 1         |
-| 8C22    | queue sound from library 1 (max 15)  | sound (1)                      | 1         |
-| 8C2B    | queue sound from library 2 (max 15)  | sound (1)                      | 1         |
-| 8C34    | queue sound from library 3 (max 15)  | sound (1)                      | 1         |
-| 8C3D    | queue sound from library 2 (max 3)   | sound (1)                      | 1         |
-| 8C46    | queue sound from library 2 (max 3)   | sound (1)                      | 1         |
-| 8C4F    | queue sound from library 3 (max 3)   | sound (1)                      | 1         |
-| 8C58    | queue sound from library 1 (max 9)   | sound (1)                      | 1         |
-| 8C61    | queue sound from library 2 (max 9)   | sound (1)                      | 1         |
-| 8C6A    | queue sound from library 3 (max 9)   | sound (1)                      | 1         |
-| 8C73    | queue sound from library 1 (max 1)   | sound (1)                      | 1         |
-| 8C7C    | queue sound from library 2 (max 1)   | sound (1)                      | 1         |
-| 8C85    | queue sound from library 3 (max 1)   | sound (1)                      | 1         |
-| 8C8F    | activate map station                 |                                |           |
-| 8CAF    | activate energy station              |                                |           |
-| 8CD0    | activate missile station             |                                |           |
-| 8CF1    | activate save station and goto if no | instruction ptr (2)            | 2         |
-| 8D39    | resume music in 6 seconds            |                                |           |
 | 8D41    | goto if samus is close               | columns (1), rows (1)          | 2         |
-| 8D89    | move PLM down one block              |                                |           |
+| BBDD    | clear PLM timer                      |                                |           |
+| BBE1    | spawn enemy projectile               | projectile (2)                 | 2         |
+| BBF0    | wake enemy projectile at PLM's pos   | unused (2)                     | 2         |
+| D155    | goto if PLM room arg &lt;            | instruction ptr (2), cond (2)  | 4         |
+| D5E6    | disable samus controls               |                                |           |
+| D5EE    | enable samus controls                |                                |           |
 
 ### Modifying a block
 
@@ -1035,6 +1015,136 @@ tiles to a room, a map, or to layer 3 graphics.
 
 A tileset is a pixel grid that contains a group of tiles.  It is stored
 in compressed form.
+
+Complete Lists
+==============
+
+PLM Instruction Routines
+------------------------
+
+| Address | Description                          | Arguments (Bytes)              | Arg Bytes |
+| ------- | ------------------------------------ | ------------------------------ | --------- |
+| 86B4    | sleep                                |                                |           |
+| 86BC    | delete                               |                                |           |
+| 86C1    | set pre-instruction                  | pre-instruction (2)            | 2         |
+| 86CA    | clear pre-instruction                |                                |           |
+| 86D1    | call subroutine                      | subroutine (3)                 | 3         |
+| 86EB    | call subroutine with arg             | subroutine (3), arg (2)        | 5         |
+| 870B    | call subroutine                      | subroutine (3)                 | 3         |
+| 8724    | goto                                 | instruction ptr (2)            | 2         |
+| 8729    | goto (rel)                           | offset (2)                     | 2         |
+| 873F    | dec timer and goto unless 0          | instruction ptr (2)            | 2         |
+| 8747    | dec timer and goto unless 0 (rel)    | offset (2)                     | 2         |
+| 874E    | set timer                            | timer value (1)                | 1         |
+| 875A    | set timer (16-bit)                   | timer value (2)                | 2         |
+| 8763    | nop                                  |                                |           |
+| 8764    | load item plm graphics               | TODO                           | 10?       |
+| 87E5    | copy to vram                         | TODO                           | 7         |
+| 880E    | goto if boss bits set                | TODO                           | 2         |
+| 8821    | set boss bits for current area       | boss mask (1)                  | 1         |
+| 882D    | goto if event is set                 | instruction ptr (2), event (1) | 3         |
+| 883E    | set event                            | event (1)                      | 1         |
+| 8848    | goto if PLM room arg chozo bit set   | instruction ptr (2)            | 2         |
+| 8865    | set PLM room arg chozo bit           |                                |           |
+| 887C    | goto if PLM room arg item bit set    | instruction ptr (2)            | 2         |
+| 8869    | set PLM room arg item bit            |                                |           |
+| 88B0    | pick up beam and display msg         | beam (2), msg (1)              | 3         |
+| 88F3    | pick up equipment and display msg    | item (2), msg (1)              | 3         |
+| 8891    | pick up item and add grapple to hud  | item (2)                       | 2         |
+| 8968    | collect energy tank                  | tank capacity (2)              | 2         |
+| 8986    | collect reserve tank                 | tank capacity (2)              | 2         |
+| 89A9    | collect missile tank                 | tank capacity (2)              | 2         |
+| 89D2    | collect super missile tank           | tank capacity (2)              | 2         |
+| 89FB    | collect power bomb tank              | tank capacity (2)              | 2         |
+| 8A24    | link instruction                     | instruction ptr (2)            | 2         |
+| 8A2E    | call instruction                     | instruction ptr (2)            | 2         |
+| 8A3E    | return from call                     |                                |           |
+| 8A40    | wait until enemy 0 is dead           |                                |           |
+| 8A59    | wait until enemy 1 is dead           |                                |           |
+| 8A72    | goto if PLM room arg door bit set    | instruction ptr (2)            | 2         |
+| 8865    | set PLM room arg door bit and goto   | hit cond (1), instr ptr (2)    | 2         |
+| 8ACD    | inc PLM room arg and goto if >=      | cond (1), instr ptr (2)        | 2         |
+| 8AF1    | set PLM bts                          | new bts value (1)              | 1         |
+| 8B05    | draw PLM block                       |                                |           |
+| 8B17    | draw PLM block                       |                                |           |
+| 8B55    | process air scroll                   |                                |           |
+| 8B93    | process solid scroll                 |                                |           |
+| 8BD1    | queue music track                    | track (1)                      | 1         |
+| 8BDD    | clear music queue and queue track    | track (1)                      | 1         |
+| 8C07    | queue sound from library 1 (max 6)   | sound (1)                      | 1         |
+| 8C10    | queue sound from library 2 (max 6)   | sound (1)                      | 1         |
+| 8C19    | queue sound from library 3 (max 6)   | sound (1)                      | 1         |
+| 8C22    | queue sound from library 1 (max 15)  | sound (1)                      | 1         |
+| 8C2B    | queue sound from library 2 (max 15)  | sound (1)                      | 1         |
+| 8C34    | queue sound from library 3 (max 15)  | sound (1)                      | 1         |
+| 8C3D    | queue sound from library 2 (max 3)   | sound (1)                      | 1         |
+| 8C46    | queue sound from library 2 (max 3)   | sound (1)                      | 1         |
+| 8C4F    | queue sound from library 3 (max 3)   | sound (1)                      | 1         |
+| 8C58    | queue sound from library 1 (max 9)   | sound (1)                      | 1         |
+| 8C61    | queue sound from library 2 (max 9)   | sound (1)                      | 1         |
+| 8C6A    | queue sound from library 3 (max 9)   | sound (1)                      | 1         |
+| 8C73    | queue sound from library 1 (max 1)   | sound (1)                      | 1         |
+| 8C7C    | queue sound from library 2 (max 1)   | sound (1)                      | 1         |
+| 8C85    | queue sound from library 3 (max 1)   | sound (1)                      | 1         |
+| 8C8F    | activate map station                 |                                |           |
+| 8CAF    | activate energy station              |                                |           |
+| 8CD0    | activate missile station             |                                |           |
+| 8CF1    | activate save station and goto if no | instruction ptr (2)            | 2         |
+| 8D39    | resume music in 6 seconds            |                                |           |
+| 8D41    | goto if samus is close               | columns (1), rows (1)          | 2         |
+| 8D89    | move PLM down one block              |                                |           |
+| AB00    | move PLM down one block              |                                |           |
+| AB51    | set scrolls 0 and 1 to blue          |                                |           |
+| AB59    | move PLM down one block              |                                |           |
+| ABD6    | move PLM right one block             |                                |           |
+| AC9D    | deal 2 damage to samus               |                                |           |
+| ACB1    | give samus 30 iframes                |                                |           |
+| AD43    | draw 56 tiles of rightward treadmill |                                |           |
+| AD58    | draw 56 tiles of leftward treadmill  |                                |           |
+| AE35    | goto if energy refill done           | instruction ptr (2)            | 2         |
+| AEBF    | goto if missile refill done          | instruction ptr (2)            | 2         |
+| B00E    | move samus to save station           |                                |           |
+| B024    | display game saved message           |                                |           |
+| B030    | finish at save station               |                                |           |
+| B9B9    | set animals rescued event            |                                |           |
+| BA6F    | goto if samus does not have bombs    | instruction ptr (2)            | 2         |
+| ABD6    | move PLM right four blocks           |                                |           |
+| BBDD    | clear trigger                        |                                |           |
+| BBE1    | spawn enemy projectile               | projectile (2)                 | 2         |
+| BBF0    | wake enemy projectile at PLM's pos   | unused (2)                     | 2         |
+| BE3F    | set grey door pre-instruction        |                                |           |
+| D155    | set FX base Y position = 733         |                                |           |
+| D155    | goto if PLM room arg &lt;            | instruction ptr (2), cond (2)  | 4         |
+| D03B    | shatter mother brain glass           | TODO                           | 8         |
+| D357    | break BT statue with arg             | argument (2)                   | 2         |
+| D3C7    | queue song 1 music track             |                                |           |
+| D3D7    | transform WS chozo spikes to slopes  |                                |           |
+| D3F4    | revert WS chozo slopes to spikes     |                                |           |
+| D476    | drain acid lake                      |                                |           |
+| D489    | set FX base Y position = 722         |                                |           |
+| D4BE    | nop                                  |                                |           |
+| D525    | enable water physics                 |                                |           |
+| D52C    | spawn glass tube crack projectile    |                                |           |
+| D536    | earthquake                           |                                |           |
+| D543    | spawn glass shards and air bubbles   |                                |           |
+| D5E6    | disable samus controls               |                                |           |
+| D5EE    | enable samus controls                |                                |           |
+| D7AA    | shoot eye door projectile with arg   | argument (2)                   | 2         |
+| D790    | spawn eye door sweat with arg        | argument (2)                   | 2         |
+| D79F    | spawn two eye door smoke             |                                |           |
+| D7B6    | spawn one eye door smoke             |                                |           |
+| D7C3    | move PLM up, blue door facing right  |                                |           |
+| D7DA    | move PLM up, blue door facing left   |                                |           |
+| DB8E    | damage Drayon turret                 |                                |           |
+| DBBE    | damage Drayon turret facing dn/rt    |                                |           |
+| DBF7    | damage Drayon turret facing up/rt    |                                |           |
+| DC36    | damage Drayon turret                 |                                |           |
+| DC60    | damage Drayon turret facing dn/lt    |                                |           |
+| DC9F    | damage Drayon turret facing up/lt    |                                |           |
+| E04F    | draw item frame 0                    |                                |           |
+| E067    | draw item frame 0                    |                                |           |
+| E29D    | clear charge beam counter            |                                |           |
+| E63B    | set FX Y velocity to -31             |                                |           |
 
 Code Analysis
 =============
