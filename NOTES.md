@@ -327,6 +327,8 @@ Each entry has the form:
 
 The list is terminated with a door pointer of 0000h.
 
+#### FX Types
+
 The following FX types are available:
 
 | Type | Description    | Tilemap | FX Routine | FX A |     FX B    | FX C |
@@ -344,6 +346,43 @@ The following FX types are available:
 |  28h | Ceres Ridley   |         | 88:D8DE    |      | 2h          |      |
 |  2Ah | Ceres elevator |         | 88:D928    |      | 2h          |      |
 |  2Ch | Haze           |         | 88:DDC7    |      |             |      |
+
+#### Palette Blends
+
+Palette blends are defined in the table at $89:AA02:
+
+| Value | Description                     |
+| ----- | ------------------------------- |
+|    2h | Tourian acid/lava rooms         |
+|   22h | Landing site before power bombs |
+|   42h | Yellow Maridia                  |
+|   48h | Water rooms                     |
+|   62h | Fog and rain                    |
+|   E2h | Lower green/pink Maridia        |
+|   E8h | Sandy Maridia                   |
+|   EEh | Upper green/pink Maridia        |
+
+#### FX State
+
+FX1 state for the current room is:
+
+| Address  | Bytes | Description              |
+| -------- | ----- | ------------------------ |
+| $7E:1964 | 2     | FX tilemap pointer       |
+| $7E:1966 | 2     | Current FX entry pointer |
+| $7E:1968 | 2     | Current FX entry offset  |
+| $7E:196A | 2     | Palette bitset           |
+| $7E:196E | 2     | FX type                  |
+| $7E:1978 | 2     | Base Y position          |
+| $7E:197A | 2     | Target Y position        |
+| $7E:197C | 2     | Y velocity               |
+| $7E:197E | 2     | Liquid options           |
+| $7E:1980 | 2     | Timer                    |
+| $7E:1982 | 2     | Default layer blend      |
+| $7E:1984 | 2     | Layer 3 blend            |
+| $7E:C232 | 6     | Palette (3 colors)       |
+
+TODO: Is there a difference between FX1/2/3 and FX A/B/C?
 
 PLMs
 ----
