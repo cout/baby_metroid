@@ -53,11 +53,43 @@
 ; AFAICT Samus cannot get hurt by moving into a solid enemy, but she can be
 ; hurt by a solid enemy that is moving toward her.
 ;
-org $A0A9DF
-BRA solid_enemy_collision_detection
+org $A0A9DC
+; BRA treat_enemy_as_solid
+JMP check_solid_enemy_detection
 
 org $A0A9EC
-solid_enemy_collision_detection:
+treat_enemy_as_solid:
+
+org $A0AABF
+treat_enemy_as_ethereal:
+
+org !FREESPACE_A0
+
+check_solid_enemy_detection:
+{
+  ; If shine sparking then we want to do the normal checks
+  LDA $0A1F
+  AND #$00FF
+  CMP #$001B
+  BNE .treat_enemy_as_solid
+
+  ; If the enemy frozen timer is nonzero, the enemy is solid
+  LDA $0F9E,x
+  BNE .treat_enemy_as_solid
+
+  ; If the enemy hitbox is solid to samus, the enemy is solid
+  LDA $0F86,x
+  BIT #$8000
+  BNE .treat_enemy_as_solid
+
+  JMP treat_enemy_as_ethereal
+
+.treat_enemy_as_solid:
+  JMP treat_enemy_as_solid
+}
+
+end_freeze_enemies_freespace_a0:
+!FREESPACE_A0 := end_freeze_enemies_freespace_a0
 
 ;;
 ; Disable Samus/enemy collsion handling.  This causes enemies to be
