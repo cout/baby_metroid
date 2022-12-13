@@ -482,6 +482,11 @@ The PLM setup routine is called with:
 * X = PLM ID (pointer to the PLM header)
 * Y = List offset for current PLM (same as $1C27)
 
+The setup routine should set the carry flag to treat the block as solid
+or leave the carry flag clear to treat it as air.
+
+### PLM State
+
 Each PLM has access to the following variables (where Y is the list
 offset for the PLM):
 
@@ -515,12 +520,13 @@ PLM instruction has the following format:
 | Opcode &lt; 8000h | timer              (2) | Pointer to draw instruction list (2) |
 | Opcode == 0000h   | terminate              | n/a                              (0) |
 
-A PLM instruction list is terminated by 0000h.
+A PLM instruction list is NOT terminated.
 
 ### PLM Draw Instruction List
 
-A draw instruction list consists of variable-width draw instructions.  A draw
-instruction operand has the following format:
+A draw instruction list is used to animate blocks as they change.  The
+list consists of variable-width draw instructions.  A draw instruction
+operand has the following format:
 
     | ------------------- column (1) or row (0)
     |             | ----- number of tiles to change
@@ -542,54 +548,54 @@ PLM instruction is processed, just before processing the instruction.
 
 The following general-purpose routines can be used as instructions in PLM instruction lists:
 
-| Address | Description                          | Arguments (Bytes)              | Arg Bytes |
-| ------- | ------------------------------------ | ------------------------------ | --------- |
-| 86B4    | sleep                                |                                |           |
-| 86BC    | delete                               |                                |           |
-| 86C1    | set pre-instruction                  | pre-instruction (2)            | 2         |
-| 86CA    | clear pre-instruction                |                                |           |
-| 86EB    | call subroutine with arg             | subroutine (3), arg (2)        | 5         |
-| 870B    | call subroutine                      | subroutine (3)                 | 3         |
-| 8724    | goto                                 | instruction ptr (2)            | 2         |
-| 8729    | goto (rel)                           | offset (2)                     | 2         |
-| 873F    | dec timer and goto unless 0          | instruction ptr (2)            | 2         |
-| 8747    | dec timer and goto unless 0 (rel)    | offset (2)                     | 2         |
-| 874E    | set timer                            | timer value (1)                | 1         |
-| 875A    | set timer (16-bit)                   | timer value (2)                | 2         |
-| 8763    | nop                                  |                                |           |
-| 8764    | load item plm graphics               | TODO                           | 10?       |
-| 87E5    | copy to vram                         | TODO                           | 7         |
-| 880E    | goto if boss bits set                | TODO                           | 2         |
-| 8821    | set boss bits for current area       | boss mask (1)                  | 1         |
-| 882D    | goto if event is set                 | instruction ptr (2), event (1) | 3         |
-| 883E    | set event                            | event (1)                      | 1         |
-| 8848    | goto if PLM room arg chozo bit set   | instruction ptr (2)            | 2         |
-| 8865    | set PLM room arg chozo bit           |                                |           |
-| 887C    | goto if PLM room arg item bit set    | instruction ptr (2)            | 2         |
-| 8869    | set PLM room arg item bit            |                                |           |
-| 88B0    | pick up beam and display msg         | beam (2), msg (1)              | 3         |
-| 88F3    | pick up equipment and display msg    | item (2), msg (1)              | 3         |
-| 8891    | pick up item and add grapple to hud  | item (2)                       | 2         |
-| 8A24    | link instruction                     | instruction ptr (2)            | 2         |
-| 8A2E    | call instruction                     | instruction ptr (2)            | 2         |
-| 8A3E    | return from call                     |                                |           |
-| 8A72    | goto if PLM room arg door bit set    | instruction ptr (2)            | 2         |
-| 8865    | set PLM room arg door bit and goto   | hit cond (1), instr ptr (2)    | 2         |
-| 8ACD    | inc PLM room arg and goto if >=      | cond (1), instr ptr (2)        | 2         |
-| 8AF1    | set PLM bts                          | new bts value (1)              | 1         |
-| 8B17    | draw PLM block                       |                                |           |
-| 8BD1    | queue music track                    | track (1)                      | 1         |
-| 8BDD    | clear music queue and queue track    | track (1)                      | 1         |
-| 8C07    | queue sound from library 1 (max 6)   | sound (1)                      | 1         |
-| 8C10    | queue sound from library 2 (max 6)   | sound (1)                      | 1         |
-| 8C19    | queue sound from library 3 (max 6)   | sound (1)                      | 1         |
-| 8D41    | goto if samus is close               | columns (1), rows (1)          | 2         |
-| BBDD    | clear PLM timer                      |                                |           |
-| BBE1    | spawn enemy projectile               | projectile (2)                 | 2         |
-| BBF0    | wake enemy projectile at PLM's pos   | unused (2)                     | 2         |
-| D155    | goto if PLM room arg &lt;            | instruction ptr (2), cond (2)  | 4         |
-| D5E6    | disable samus controls               |                                |           |
-| D5EE    | enable samus controls                |                                |           |
+| Address | Description                          | Arguments (Bytes)                 | Arg Bytes |
+| ------- | ------------------------------------ | --------------------------------- | --------- |
+| 86B4    | sleep                                |                                   |           |
+| 86BC    | delete                               |                                   |           |
+| 86C1    | set pre-instruction                  | pre-instruction (2)               | 2         |
+| 86CA    | clear pre-instruction                |                                   |           |
+| 86EB    | call subroutine with arg             | subroutine (3), arg (2)           | 5         |
+| 870B    | call subroutine                      | subroutine (3)                    | 3         |
+| 8724    | goto                                 | instruction ptr (2)               | 2         |
+| 8729    | goto (rel)                           | offset (2)                        | 2         |
+| 873F    | dec timer and goto unless 0          | instruction ptr (2)               | 2         |
+| 8747    | dec timer and goto unless 0 (rel)    | offset (2)                        | 2         |
+| 874E    | set timer                            | timer value (1)                   | 1         |
+| 875A    | set timer (16-bit)                   | timer value (2)                   | 2         |
+| 8763    | nop                                  |                                   |           |
+| 8764    | load item plm graphics               | TODO                              | 10?       |
+| 87E5    | copy to vram                         | TODO                              | 7         |
+| 880E    | goto if boss bits set                | TODO                              | 2         |
+| 8821    | set boss bits for current area       | boss mask (1)                     | 1         |
+| 882D    | goto if event is set                 | instruction ptr (2), event (1)    | 3         |
+| 883E    | set event                            | event (1)                         | 1         |
+| 8848    | goto if PLM room arg chozo bit set   | instruction ptr (2)               | 2         |
+| 8865    | set PLM room arg chozo bit           |                                   |           |
+| 887C    | goto if PLM room arg item bit set    | instruction ptr (2)               | 2         |
+| 8869    | set PLM room arg item bit            |                                   |           |
+| 88B0    | pick up beam and display msg         | beam (2), msg (1)                 | 3         |
+| 88F3    | pick up equipment and display msg    | item (2), msg (1)                 | 3         |
+| 8891    | pick up item and add grapple to hud  | item (2)                          | 2         |
+| 8A24    | link instruction                     | instruction ptr (2)               | 2         |
+| 8A2E    | call instruction                     | instruction ptr (2)               | 2         |
+| 8A3E    | return from call                     |                                   |           |
+| 8A72    | goto if PLM room arg door bit set    | instruction ptr (2)               | 2         |
+| 8865    | set PLM room arg door bit and goto   | hit cond (1), instr ptr (2)       | 2         |
+| 8ACD    | inc PLM room arg and goto if >=      | cond (1), instr ptr (2)           | 2         |
+| 8AF1    | set PLM bts                          | new bts value (1)                 | 1         |
+| 8B17    | draw PLM block                       |                                   |           |
+| 8BD1    | queue music track                    | track (1)                         | 1         |
+| 8BDD    | clear music queue and queue track    | track (1)                         | 1         |
+| 8C07    | queue sound from library 1 (max 6)   | sound (1)                         | 1         |
+| 8C10    | queue sound from library 2 (max 6)   | sound (1)                         | 1         |
+| 8C19    | queue sound from library 3 (max 6)   | sound (1)                         | 1         |
+| 8D41    | goto if samus is close               | cols (1), rows (1), instr ptr (2) | 4         |
+| BBDD    | clear PLM timer                      |                                   |           |
+| BBE1    | spawn enemy projectile               | projectile (2)                    | 2         |
+| BBF0    | wake enemy projectile at PLM's pos   | unused (2)                        | 2         |
+| D155    | goto if PLM room arg &lt;            | instruction ptr (2), cond (2)     | 4         |
+| D5E6    | disable samus controls               |                                   |           |
+| D5EE    | enable samus controls                |                                   |           |
 
 ### Modifying a block
 
