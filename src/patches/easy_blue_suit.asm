@@ -60,6 +60,11 @@ do_easy_blue_suit_check:
   CMP easy_blue_suit_room
   BNE .cancel_blue_suit
 
+  ; If speed booster is not equipped then follow the normal code path
+  LDA $09A2
+  BIT #$2000
+  BEQ .call_cancel_blue_suit_routine
+
 .same_room
   ; Check to see if player is holding the run button
   LDA $8B
