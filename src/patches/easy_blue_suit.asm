@@ -40,6 +40,9 @@ skip 2
 easy_blue_suit_room:
 skip 2
 
+easy_blue_suit_held_run_last_check:
+skip 2
+
 easy_blue_suit_end_freemem_7f:
 
 !FREEMEM_7F := easy_blue_suit_end_freemem_7f
@@ -72,6 +75,16 @@ do_easy_blue_suit_check:
   BEQ .not_holding_run
 
 .holding_run:
+  ; If the player lets go of run and then presses run again, cancel blue
+  ; suit
+  LDA easy_blue_suit_held_run_last_check
+  BNE .was_holding_run
+
+  LDA #$0001
+  STA easy_blue_suit_held_run_last_check
+  BRA .cancel_blue_suit
+
+.was_holding_run
   LDA easy_blue_suit_counter
   CMP !FULL_ECHOES_SPEED
   BCS .full_run_speed
@@ -111,6 +124,9 @@ do_easy_blue_suit_check:
   BRA .return
 
 .not_holding_run
+  LDA #$0000
+  STA easy_blue_suit_held_run_last_check
+
   ; If the counter is too large then we will never reach echoes, so
   ; reset it.  On snes9x, memory is initialized to 5555h, so this will
   ; set it to zero.  On other platforms it could be initialized to some
