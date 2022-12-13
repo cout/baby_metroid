@@ -34,7 +34,9 @@ give_blue_suit:
 
   ; Give Samus "easy" blue suit
   ; TODO: that this is needed at all means the easy blue suit patch
-  ; isn't correclty letting the player keep non-easy blue suit
+  ; isn't correctly letting the player keep non-easy blue suit.  But
+  ; this is what we want to do anyway, to prevent this blue suit from
+  ; being carried to another room.
   LDA #$0400
   STA easy_blue_suit_counter
   LDA $079B
