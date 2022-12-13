@@ -429,13 +429,14 @@ The following block reaction PLMs are defined in the vanilla ROM:
 | 0Eh | speed boost (r)   | D038 |      | D024 |                    |      |
 | 0Fh | speed boost       | D040 |      | D024 |                    |      |
 | 10h |                   |      |      |      | shot/bomb/grapple  | B974 |
+| ... |                   |      |      |      |                    |      |
 | 40h |                   |      |      |      | blue door facing L | C8A2 |
 | 41h |                   |      |      |      | blue door facing R | C8A8 |
 | 42h |                   |      |      |      | blue door facing U | C8AE |
 | 43h |                   |      |      |      | blue door facing D | C8B4 |
 | 44h | generic shot PLM  | C83E |      |      | generic shot PLM   | C83E |
 | 45h | item              | EED3 |      |      | item               | EED3 |
-| 46h | scroll            | B6FF |      |      | blue gate L        | C816 |
+| 46h | scroll            | B6FF | 9956 |      | blue gate L        | C816 |
 | 47h | map station R     | B6D7 |      |      | blue gate R        | C81A |
 | 48h | map station L     | B6DB |      |      | red gate R         | C80E |
 | 49h | energy station R  | B6E3 |      |      | red gate R         | C812 |
@@ -515,7 +516,7 @@ PLM instruction has the following format:
 
 A PLM instruction list is terminated by 0000h.
 
-The draw instruction list consists of variable-width draw instructions.  A draw
+A draw instruction list consists of variable-width draw instructions.  A draw
 instruction operand has the following format:
 
     | ------------------- column (1) or row (0)
@@ -534,6 +535,82 @@ A draw instruction list is terminated by 0000h.
 The PLM pre-instruction is a pointer to a subroutine that is each time a
 PLM instruction is processed, just before processing the instruction.
 
+### PLM Instructrion Routines
+
+The following routines can be used as instructions in PLM instruction lists:
+
+| Address | Description                          | Arguments (Bytes)              | Arg Bytes |
+| ------- | ------------------------------------ | ------------------------------ | --------- |
+| 86B4    | sleep                                |                                |           |
+| 86BC    | delete                               |                                |           |
+| 86C1    | set pre-instruction                  | pre-instruction (2)            | 2         |
+| 86CA    | clear pre-instruction                |                                |           |
+| 86D1    | call subroutine                      | subroutine (3)                 | 3         |
+| 86EB    | call subroutine with arg             | subroutine (3), arg (2)        | 5         |
+| 870B    | call subroutine                      | subroutine (3)                 | 3         |
+| 8724    | goto                                 | instruction ptr (2)            | 2         |
+| 8729    | goto (rel)                           | offset (2)                     | 2         |
+| 873F    | dec timer and goto unless 0          | instruction ptr (2)            | 2         |
+| 8747    | dec timer and goto unless 0 (rel)    | offset (2)                     | 2         |
+| 874E    | set timer                            | timer value (1)                | 1         |
+| 875A    | set timer (16-bit)                   | timer value (2)                | 2         |
+| 8763    | nop                                  |                                |           |
+| 8764    | load item plm graphics               | TODO                           | 10?       |
+| 87E5    | copy to vram                         | TODO                           | 7         |
+| 880E    | goto if boss bits set                | TODO                           | 2         |
+| 8821    | set boss bits for current area       | boss mask (1)                  | 1         |
+| 882D    | goto if event is set                 | instruction ptr (2), event (1) | 3         |
+| 883E    | set event                            | event (1)                      | 1         |
+| 8848    | goto if PLM room arg chozo bit set   | instruction ptr (2)            | 2         |
+| 8865    | set PLM room arg chozo bit           |                                |           |
+| 887C    | goto if PLM room arg item bit set    | instruction ptr (2)            | 2         |
+| 8869    | set PLM room arg item bit            |                                |           |
+| 88B0    | pick up beam and display msg         | beam (2), msg (1)              | 3         |
+| 88F3    | pick up equipment and display msg    | item (2), msg (1)              | 3         |
+| 8891    | pick up item and add grapple to hud  | item (2)                       | 2         |
+| 8968    | collect energy tank                  | tank capacity (2)              | 2         |
+| 8986    | collect reserve tank                 | tank capacity (2)              | 2         |
+| 89A9    | collect missile tank                 | tank capacity (2)              | 2         |
+| 89D2    | collect super missile tank           | tank capacity (2)              | 2         |
+| 89FB    | collect power bomb tank              | tank capacity (2)              | 2         |
+| 8A24    | link instruction                     | instruction ptr (2)            | 2         |
+| 8A2E    | call instruction                     | instruction ptr (2)            | 2         |
+| 8A3E    | return from call                     |                                |           |
+| 8A40    | wait until enemy 0 is dead           |                                |           |
+| 8A59    | wait until enemy 1 is dead           |                                |           |
+| 8A72    | goto if PLM room arg door bit set    | instruction ptr (2)            | 2         |
+| 8865    | set PLM room arg door bit and goto   | hit cond (1), instr ptr (2)    | 2         |
+| 8ACD    | inc PLM room arg and goto if >=      | cond (1), instr ptr (2)        | 2         |
+| 8AF1    | set PLM bts                          | new bts value (1)              | 1         |
+| 8B05    | draw PLM block                       |                                |           |
+| 8B17    | draw PLM block                       |                                |           |
+| 8B55    | process air scroll                   |                                |           |
+| 8B93    | process solid scroll                 |                                |           |
+| 8BD1    | queue music track                    | track (1)                      | 1         |
+| 8BDD    | clear music queue and queue track    | track (1)                      | 1         |
+| 8C07    | queue sound from library 1 (max 6)   | sound (1)                      | 1         |
+| 8C10    | queue sound from library 2 (max 6)   | sound (1)                      | 1         |
+| 8C19    | queue sound from library 3 (max 6)   | sound (1)                      | 1         |
+| 8C22    | queue sound from library 1 (max 15)  | sound (1)                      | 1         |
+| 8C2B    | queue sound from library 2 (max 15)  | sound (1)                      | 1         |
+| 8C34    | queue sound from library 3 (max 15)  | sound (1)                      | 1         |
+| 8C3D    | queue sound from library 2 (max 3)   | sound (1)                      | 1         |
+| 8C46    | queue sound from library 2 (max 3)   | sound (1)                      | 1         |
+| 8C4F    | queue sound from library 3 (max 3)   | sound (1)                      | 1         |
+| 8C58    | queue sound from library 1 (max 9)   | sound (1)                      | 1         |
+| 8C61    | queue sound from library 2 (max 9)   | sound (1)                      | 1         |
+| 8C6A    | queue sound from library 3 (max 9)   | sound (1)                      | 1         |
+| 8C73    | queue sound from library 1 (max 1)   | sound (1)                      | 1         |
+| 8C7C    | queue sound from library 2 (max 1)   | sound (1)                      | 1         |
+| 8C85    | queue sound from library 3 (max 1)   | sound (1)                      | 1         |
+| 8C8F    | activate map station                 |                                |           |
+| 8CAF    | activate energy station              |                                |           |
+| 8CD0    | activate missile station             |                                |           |
+| 8CF1    | activate save station and goto if no | instruction ptr (2)            | 2         |
+| 8D39    | resume music in 6 seconds            |                                |           |
+| 8D41    | goto if samus is close               | columns (1), rows (1)          | 2         |
+| 8D89    | move PLM down one block              |                                |           |
+
 ### Modifying a block
 
 TODO: I am still learning how this works.
@@ -547,7 +624,7 @@ haven't finished executing the drawing instructions?
 
 To delete a PLM, do one of the following:
 * Store #$0000 at $7E:1C37+y
-* Use a delete instruction (such as $B333)
+* Use a delete instruction (such as $86BC)
 
 Enemies
 -------
