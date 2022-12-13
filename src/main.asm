@@ -28,3 +28,4 @@ incsrc rooms/rising_tide.asm
 incsrc rooms/bat_cave.asm
 incsrc rooms/speed_hallway.asm
 incsrc rooms/red_tower.asm
+incsrc rooms/hellway.asm

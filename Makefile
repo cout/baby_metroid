@@ -25,6 +25,7 @@ ROOMS = \
 	src/rooms/early_supers.bin \
 	src/rooms/speed_hallway.bin \
 	src/rooms/red_tower.bin \
+	src/rooms/hellway.bin \
 
 all: build/baby_metroid.sfc
 
