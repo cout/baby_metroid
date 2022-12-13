@@ -9,8 +9,14 @@ blue_suit_plm_instruction_list:
 
 blue_suit_plm_init:
 {
+  ; If speed booster is not equipped then follow the normal code path
+  LDA $09A2
+  BIT #$2000
+  BEQ .set_block_as_solid_and_return
+
   JSR give_blue_suit
 
+.set_block_as_solid_and_return:
   ; Set the carry flag to indicate a collision (i.e. treat the block as
   ; solid)
   SEC
