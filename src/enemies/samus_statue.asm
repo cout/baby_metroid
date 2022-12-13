@@ -1,11 +1,6 @@
 ; Generated binary files with:
 ;
-; superfamiconv \
-; -W 16 -H 16 -R 1 -D 1 \
-; -i samus_statue.png \
-; -t enemies/samus_statue_tiles.bin \
-; -p enemies/samus_statue_palette.bin
-;
+; ./tools/SuperFamiconv/build/superfamiconv -W 16 -H 16 -R 1 -D 1 -i src/enemies/samus_statue.png -t src/enemies/samus_statue_tiles.bin -p src/enemies/samus_statue_palette.bin ;
 ; Note: when changing image mode to Indexed in GIMP, make sure to
 ; uncheck "remove unused colors" to ensure correct color order.
 
@@ -74,12 +69,22 @@ samus_statue_red_norfair_palette:
 dw $7c00, $0c49, $0c72, $0c99, $1e7d, $0c41, $0000, $0000
 dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
+samus_statue_red_brinstar_palette:
+dw $7c00, $104c, $14b0, $2117, $2d7c, $0c48, $0804, $0000
+dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
+samus_statue_red_brinstar_green_palette:
+dw $7c00, $0884, $1529, $19af, $2a54, $0821, $0000, $0000
+dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
 samus_statue_palettes:
 
-dw samus_statue_lower_crateria_palette
-dw samus_statue_warehouse_entrance_palette
-dw samus_statue_bubble_mountain_palette
-dw samus_statue_red_norfair_palette
+dw samus_statue_lower_crateria_palette     ; 0
+dw samus_statue_warehouse_entrance_palette ; 1
+dw samus_statue_bubble_mountain_palette    ; 2
+dw samus_statue_red_norfair_palette        ; 3
+dw samus_statue_red_brinstar_palette       ; 4
+dw samus_statue_red_brinstar_green_palette ; 5
 
 samus_statue_looking_up_spritemap:
 {
@@ -109,6 +114,21 @@ dw $8000 : db $FC : dw $2122 ; (  0,   1)
 
 }
 
+samus_statue_looking_down_spritemap:
+{
+
+dw $0006 ; number of entries
+
+;  s xxx       yy       pfnn
+dw $81F0 : db $E1 : dw $2124 ; (-15, -30)
+dw $8000 : db $E1 : dw $2126 ; (  0, -30)
+dw $81F0 : db $F1 : dw $2128 ; (-15, -14)
+dw $8000 : db $F1 : dw $212a ; (  0, -14)
+dw $81F0 : db $01 : dw $212c ; (-15,   1)
+dw $8000 : db $01 : dw $212e ; (  0,   1)
+
+}
+
 samus_statue_looking_up_instruction_list:
 {
 dw $7FFF, samus_statue_looking_up_spritemap
@@ -121,10 +141,17 @@ dw $7FFF, samus_statue_looking_right_spritemap
 dw $812F ; Sleep
 }
 
+samus_statue_looking_down_instruction_list:
+{
+dw $7FFF, samus_statue_looking_down_spritemap
+dw $812F ; Sleep
+}
+
 samus_statue_instruction_lists:
 
 dw samus_statue_looking_up_instruction_list
 dw samus_statue_looking_right_instruction_list
+dw samus_statue_looking_down_instruction_list
 
 samus_statue_init_ai:
 {
