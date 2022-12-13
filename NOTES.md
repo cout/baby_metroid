@@ -688,16 +688,16 @@ enemy header for the enemy to be spawned.
 The enemy property bits are:
 
 
-    | ------------------- (F) whether hitbox is solid to Samus
-    || ------------------ (E) automatically respawn
-    ||| ----------------- (D) whether to process enemy's graphic AI
-    |||| ---------------- (C) enemy can block plasma shots
-    |||| | -------------- (B) enemy processes offscreen
-    |||| || ------------- (A) enemy ignores Samus/projectiles
-    |||| ||| ------------ (9) whether enemy should be deleted
-    |||| |||| ----------- (8) invisible?
-    |||| ||||        | -- (2) orientation (geemers)
-    |||| ||||        || - (1) orientation (geemers)
+    +-------------------- (F) whether hitbox is solid to Samus
+    |+------------------- (E) automatically respawn
+    ||+------------------ (D) whether to process enemy's graphic AI
+    |||+----------------- (C) enemy can block plasma shots
+    |||| +--------------- (B) enemy processes offscreen
+    |||| |+-------------- (A) enemy ignores Samus/projectiles
+    |||| ||+------------- (9) whether enemy should be deleted
+    |||| |||+------------ (8) invisible?
+    |||| ||||        +--- (2) orientation (geemers)
+    |||| ||||        |+-- (1) orientation (geemers)
     |||| ||||        ||
     FEDC BA98 7654 3210
 
@@ -705,9 +705,9 @@ The enemy property bits are:
 
 Extra property bits are:
 
-    | ------------------- (F) graphics need to be updated
-    |               | --- (2) enable multiple hitbox/reactions (extended spritemaps?)
-    |               | | - (0) disable processing of movement AI
+    +-------------------- (F) graphics need to be updated
+    |               +---- (2) enable multiple hitbox/reactions (extended spritemaps?)
+    |               | +-- (0) disable processing of movement AI
     |               | |
     FEDC BA98 7654 3210
 
