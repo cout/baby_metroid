@@ -1,1 +1,4 @@
-incbin "moat.hex" -> $C3BD6D
+org $C3BD6D
+
+incbin "moat.bin"
+warnpc $C3C145
