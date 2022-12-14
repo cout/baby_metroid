@@ -31,3 +31,4 @@ incsrc rooms/red_tower.asm
 incsrc rooms/hellway.asm
 incsrc rooms/alpha_power_bombs.asm
 incsrc rooms/moat.asm
+incsrc rooms/west_ocean.asm
