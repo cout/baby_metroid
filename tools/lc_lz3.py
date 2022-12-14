@@ -194,7 +194,6 @@ def generate_ops(d, settings):
   return ops
 
 def encode_ops(ops, stats):
-  print("Compressing %d ops" % len(ops))
   o = bytearray()
   for op in ops:
     stats.tally(op.cmd)
