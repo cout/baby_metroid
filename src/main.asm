@@ -10,10 +10,12 @@ incsrc patches/ride_enemies.asm
 incsrc patches/death_quota.asm
 incsrc patches/enemy_drops.asm
 incsrc patches/easy_blue_suit.asm
+incsrc patches/boss_exit_fix.asm
 incsrc bosses/torizos.asm
 incsrc bosses/spore_spawn.asm
 incsrc bosses/ceres.asm
 incsrc bosses/kraid.asm
+incsrc bosses/phantoon.asm
 incsrc enemies/samus_statue.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
