@@ -27,7 +27,7 @@ class RoomEventStateFunction(object):
 class RoomStateFunction(object):
   type: str
   func: HexValue
-  state_header_addr: HexValue
+  state_header_addr: HexValue # TODO: rename to state_header_offset
 
   def __init__(self, type, func, state_header_addr):
     self.type = type
@@ -37,7 +37,7 @@ class RoomStateFunction(object):
   @classmethod
   def read_from(cls, rom):
     func, = struct.unpack('<H', rom.read(2))
-    if func == 0xE5E6: return RoomStateFunction('default', None, rom.tell())
+    if func == 0xE5E6: return RoomStateFunction('default', None, rom.tell() & 0xFFFF)
     elif func == 0xE5FF: return cls('boss', func, *struct.unpack('<H', rom.read(2)))
     elif func == 0xE612: return RoomEventStateFunction('event', func, *struct.unpack('<BH', rom.read(3)))
     elif func == 0xE562: return cls('zebes_awake', func, *struct.unpack('<H', rom.read(2)))
