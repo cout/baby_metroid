@@ -77,16 +77,6 @@ def format_room_enemy_population_entry(enemy_pop):
   return f'''
 dw ${enemy_pop.enemy_id:04X}, ${enemy_pop.x:04X}, ${enemy_pop.y:04X}, ${enemy_pop.init_param:04X}, ${enemy_pop.properties:04X}, ${enemy_pop.extra_properties:04X}, ${enemy_pop.parameter_1:04X}, ${enemy_pop.parameter_2:04X}
 '''.strip()
-#   return align_comments(f'''
-# dw ${enemy_pop.enemy_id             :04X} ; Enemy offest (bank $A0)
-# dw ${enemy_pop.x                    :04X} ; X pos in room
-# dw ${enemy_pop.y                    :04X} ; Y pos in room
-# dw ${enemy_pop.init_param           :04X} ; Init parameter
-# dw ${enemy_pop.properties           :04X} ; Initial properties
-# dw ${enemy_pop.extra_properties     :04X} ; Initial extra properties
-# dw ${enemy_pop.parameter_1          :04X} ; Parameter 1
-# dw ${enemy_pop.parameter_2          :04X} ; Parameter 2
-# '''.strip())
 
 def format_room_enemy_population(room_id, state_id, addr, enemy_pop):
   s = align_comments(f'''
