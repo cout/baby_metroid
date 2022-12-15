@@ -97,6 +97,7 @@ class RoomHeader(object):
 class RoomStateHeader(object):
   fmt = struct.Struct("<HBBBBHHHHHHHHH")
 
+  state_id: HexValue
   level_data_offset: HexValue
   level_data_bank: HexValue
   tileset: HexValue
@@ -114,10 +115,11 @@ class RoomStateHeader(object):
 
   @classmethod
   def read_from(cls, rom):
+    state_id = rom.tell() & 0xFFFF
     b = rom.read(cls.fmt.size)
     values = cls.fmt.unpack(b)
     values = [ HexValue(v) if type(v) is int else v for v in values ]
-    return cls(*values)
+    return cls(state_id, *values)
 
   @classmethod
   def extract(cls, rom, offset, bank=0x8f):
@@ -167,3 +169,48 @@ class RoomLevelData(object):
       return size, tilemap, bts, layer2_tilemap
     else:
       raise RuntimeError("Size of data (%s) did not match level data size (%s) -- expected either %s or %s" % (len(b), size, size*3+2, size*5+2)) # TODO
+
+@dataclass
+class RoomEnemyPopulationEntry(object):
+  fmt = struct.Struct("<HHHHHHH")
+
+  enemy_id: HexValue
+  x: HexValue
+  y: HexValue
+  init_param: HexValue
+  properties: HexValue
+  extra_properties: HexValue
+  parameter_1: HexValue
+  parameter_2: HexValue
+
+  @classmethod
+  def read_from(cls, rom):
+    # TODO: duplicated with RoomStateHeader
+    enemy_id, = struct.unpack('<H', rom.read(2))
+    if enemy_id == 0xFFFF: return None
+
+    b = rom.read(cls.fmt.size)
+    values = cls.fmt.unpack(b)
+    values = [ HexValue(v) if type(v) is int else v for v in values ]
+    return cls(HexValue(enemy_id), *values)
+
+@dataclass
+class RoomEnemyPopulation(object):
+  population: list
+  death_quota: HexValue
+
+  @classmethod
+  def read_from(cls, rom):
+    population = [ ]
+    while True:
+      entry = RoomEnemyPopulationEntry.read_from(rom)
+      if entry is None: break
+      population.append(entry)
+    death_quota, = struct.unpack('<B', rom.read(1))
+    return cls(population, HexValue(death_quota))
+
+  @classmethod
+  def extract(cls, rom, offset, bank=0xA1):
+    addr = (bank << 16) | offset
+    rom.seek(addr)
+    return cls.read_from(rom)
