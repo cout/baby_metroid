@@ -1,3 +1,5 @@
+from lc_lz3 import decompress
+
 import struct
 from dataclasses import dataclass
 
@@ -126,3 +128,42 @@ class RoomStateHeader(object):
   @property
   def level_data_addr(self):
     return (self.level_data_bank << 16) | self.level_data_offset
+
+@dataclass
+class RoomLevelData(object):
+  size: HexValue
+  tilemap: bytearray
+  bts: bytearray
+  layer2_tilemap: bytearray
+
+  @classmethod
+  def read_from(cls, rom):
+    # TODO: read exact size instead of reading extra bytes
+    level_data = decompress(rom.read(0x4000))
+    size, tilemap, bts, layer2_tilemap = cls.bin2room(level_data)
+    return cls(size, tilemap, bts, layer2_tilemap)
+
+  @classmethod
+  def extract(cls, rom, addr):
+    rom.seek(addr)
+    return cls.read_from(rom)
+
+  @classmethod
+  def bin2room(cls, b):
+    size, = struct.unpack('<H', b[0:2])
+    size = size // 2
+    if len(b) == 2 + size * 3:
+      fmt = '%dH%dB' % (size, size)
+      l = struct.unpack(fmt, b[2:])
+      tilemap = l[0:size]
+      bts = l[size:]
+      return size, tilemap, bts, None
+    elif len(b) == 2 + size * 5:
+      fmt = '%dH%dB%dH' % (size, size, size)
+      l = struct.unpack(fmt, b[2:])
+      tilemap = l[0:size]
+      bts = l[size:size*2]
+      layer2_tilemap = l[size*2:]
+      return size, tilemap, bts, layer2_tilemap
+    else:
+      raise RuntimeError("Size of data (%s) did not match level data size (%s) -- expected either %s or %s" % (len(b), size, size*3+2, size*5+2)) # TODO

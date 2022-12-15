@@ -5,7 +5,7 @@ import sys
 from rom import Rom
 from lc_lz3 import decompress
 from room2hex import room2hex
-from structures import RoomHeader, RoomStateHeader
+from structures import RoomHeader, RoomStateHeader, RoomLevelData
 
 # TODO: A tilemap _may_ be used by multiple states
 header = \
@@ -38,9 +38,7 @@ def main():
   room_state_header = RoomStateHeader.extract(rom, state_id)
   if verbose: print(room_state_header)
 
-  # TODO: read exact size instead of reading extra bytes
-  rom.seek(room_state_header.level_data_addr)
-  room = decompress(rom.read(0x4000))
+  level_data = RoomLevelData.extract(rom, room_state_header.level_data_addr)
 
   print(header.format(
     room=room_id,
@@ -54,7 +52,7 @@ def main():
     setup_routine=room_state_header.room_setup_func,
     main_routine=room_state_header.room_main_func,
   ).lstrip())
-  print(room2hex(room, room_header.w * 16, room_header.h * 16))
+  print(room2hex(level_data, room_header.w * 16, room_header.h * 16))
 
 if __name__ == '__main__':
   main()
