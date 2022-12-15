@@ -105,7 +105,7 @@ class RoomStateHeader(object):
   music_track_index: HexValue
   fx_addr: HexValue
   enemy_pop_addr: HexValue
-  enemy_set_addr: HexValue
+  enemy_graphics_set_addr: HexValue
   layer_2_scroll: HexValue
   room_var: HexValue
   room_main_func: HexValue
@@ -211,6 +211,41 @@ class RoomEnemyPopulation(object):
 
   @classmethod
   def extract(cls, rom, offset, bank=0xA1):
+    addr = (bank << 16) | offset
+    rom.seek(addr)
+    return cls.read_from(rom)
+@dataclass
+
+class RoomEnemyGraphicsSetEntry(object):
+  fmt = struct.Struct("<H")
+
+  enemy_id: HexValue
+  palette_index: int
+
+  @classmethod
+  def read_from(cls, rom):
+    # TODO: duplicated with RoomStateHeader
+    enemy_id, = struct.unpack('<H', rom.read(2))
+    if enemy_id == 0xFFFF: return None
+
+    b = rom.read(cls.fmt.size)
+    values = cls.fmt.unpack(b)
+    values = [ HexValue(v) if type(v) is int else v for v in values ]
+    return cls(HexValue(enemy_id), *values)
+
+@dataclass
+class RoomEnemyGraphicsSet(list):
+  @classmethod
+  def read_from(cls, rom):
+    entries = cls()
+    while True:
+      entry = RoomEnemyGraphicsSetEntry.read_from(rom)
+      if entry is None: break
+      entries.append(entry)
+    return entries
+
+  @classmethod
+  def extract(cls, rom, offset, bank=0xB4):
     addr = (bank << 16) | offset
     rom.seek(addr)
     return cls.read_from(rom)

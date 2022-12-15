@@ -5,7 +5,7 @@ import sys
 from rom import Rom
 from lc_lz3 import decompress
 from room2hex import room2hex
-from structures import RoomHeader, RoomStateHeader, RoomEnemyPopulation
+from structures import RoomHeader, RoomStateHeader, RoomEnemyPopulation, RoomEnemyGraphicsSet
 
 def align_comment(s, pos):
   if s[0] == ';': return s
@@ -40,37 +40,37 @@ def format_room_state_function(room_id, func):
   state_id = func.state_header_addr
   if func.type == 'default':
     return align_comments(f'''
-dw ${0xE5E6                         :04X} ; State ${state_id:04X} function ({func.type})
+dw ${0xE5E6                               :04X} ; State ${state_id:04X} function ({func.type})
 '''.lstrip())
   elif func.type == 'event':
     return align_comments(f'''
-dw ${func.func                      :04X} ; State ${state_id:04X} function ({func.type})
-dw ${func.state_header_addr         :04X} ; State header address
-dw ${func.event                     :04X} ; Event
+dw ${func.func                            :04X} ; State ${state_id:04X} function ({func.type})
+dw ${func.state_header_addr               :04X} ; State header address
+dw ${func.event                           :04X} ; Event
 '''.lstrip())
   else:
     s = align_comments(f'''
-dw ${func.func                      :04X} ; State ${state_id:04X} function ({func.type})
-dw ${func.state_header_addr         :04X} ; State header address
+dw ${func.func                            :04X} ; State ${state_id:04X} function ({func.type})
+dw ${func.state_header_addr               :04X} ; State header address
 '''.strip())
 
 def format_room_state_header(room_id, state_header):
   return align_comments(f'''
 ; Room ${room_id:04X} state ${state_header.state_id:04X}: Header
 org $8F{state_header.state_id:04X}
-dl ${state_header.level_data_addr   :06X} ; Level data address
-db ${state_header.tileset           :02X} ; Tileset (bank TODO)
-db ${state_header.music_data_index  :02X} ; Music data index
-db ${state_header.music_track_index :02X} ; Music track index
-dw ${state_header.fx_addr           :04X} ; FX address (bank TODO)
-dw ${state_header.enemy_pop_addr    :04X} ; Enemy population offset (bank $A1)
-dw ${state_header.enemy_set_addr    :04X} ; Enemy graphics set offset (bank $B4)
-dw ${state_header.layer_2_scroll    :04X} ; Layer 2 scroll
-dw ${state_header.room_var          :04X} ; Room var
-dw ${state_header.room_main_func    :04X} ; Room main routine (bank TODO)
-dw ${state_header.plm               :04X} ; Room PLM list address (bank TODO)
-dw ${state_header.library_background:04X} ; Library background (bank TODO)
-dw ${state_header.room_setup_func   :04X} ; Room setup routine (bank TODO)
+dl ${state_header.level_data_addr         :06X} ; Level data address
+db ${state_header.tileset                 :02X} ; Tileset (bank TODO)
+db ${state_header.music_data_index        :02X} ; Music data index
+db ${state_header.music_track_index       :02X} ; Music track index
+dw ${state_header.fx_addr                 :04X} ; FX address (bank TODO)
+dw ${state_header.enemy_pop_addr          :04X} ; Enemy population offset (bank $A1)
+dw ${state_header.enemy_graphics_set_addr :04X} ; Enemy graphics set offset (bank $B4)
+dw ${state_header.layer_2_scroll          :04X} ; Layer 2 scroll
+dw ${state_header.room_var                :04X} ; Room var
+dw ${state_header.room_main_func          :04X} ; Room main routine (bank TODO)
+dw ${state_header.plm                     :04X} ; Room PLM list address (bank TODO)
+dw ${state_header.library_background      :04X} ; Library background (bank TODO)
+dw ${state_header.room_setup_func         :04X} ; Room setup routine (bank TODO)
 '''.strip())
 
 def format_room_enemy_population_entry(enemy_pop):
@@ -93,12 +93,33 @@ dw ${enemy_pop.death_quota:02X} ; death quota
 '''.strip())
   return s
 
+def format_room_enemy_graphics_set_entry(entry):
+  return f'''
+dw ${entry.enemy_id:04X}, ${entry.palette_index:04X}
+'''.strip()
+
+def format_room_enemy_graphics_set(room_id, state_id, addr, enemy_graphics_set):
+  s = align_comments(f'''
+; Room ${room_id:04X} state ${state_id:04X}: Enemy graphics set
+org $B4{addr}
+;  enemy  palette
+'''.strip())
+  for entry in enemy_graphics_set:
+    s += "\n%s" % align_comments(format_room_enemy_graphics_set_entry(entry))
+  s += "\n"
+  s += align_comments(f'''
+dw $FFFF                        ; end of list
+'''.strip())
+  return s
+
 def print_full_room_data(rom, room_id, room_header, out=sys.stdout):
   state_functions = room_header.state_functions
   state_header_addrs = sorted(set(func.state_header_addr for func in room_header.state_functions))
   state_headers = [ RoomStateHeader.extract(rom, addr) for addr in state_header_addrs ]
   enemy_pop_addrs = sorted(set((state_header.state_id, state_header.enemy_pop_addr) for state_header in state_headers))
   enemy_pops = [ (state_id, addr, RoomEnemyPopulation.extract(rom, addr)) for (state_id, addr) in enemy_pop_addrs ]
+  enemy_graphics_set_addrs = sorted(set((state_header.state_id, state_header.enemy_graphics_set_addr) for state_header in state_headers))
+  enemy_graphics_sets = [ (state_id, addr, RoomEnemyGraphicsSet.extract(rom, addr)) for (state_id, addr) in enemy_graphics_set_addrs ]
 
   print(format_room_header(room_id, room_header), file=out)
 
@@ -112,6 +133,10 @@ def print_full_room_data(rom, room_id, room_header, out=sys.stdout):
   for (state_id, addr, enemy_pop) in enemy_pops:
     print('', file=out)
     print(format_room_enemy_population(room_id, state_id, addr, enemy_pop))
+
+  for (state_id, addr, enemy_graphics_set) in enemy_graphics_sets:
+    print('', file=out)
+    print(format_room_enemy_graphics_set(room_id, state_id, addr, enemy_graphics_set))
 
 def main():
   filename = sys.argv[1]
