@@ -115,7 +115,7 @@ Room header (bank 8F starting at $91F8):
 | 6      | 1    | Up scroller              |
 | 7      | 1    | Down scroller            |
 | 8      | 1    | Special graphics bitflag |
-| 9      | 1    | Doorout pointer          |
+| 9      | 2    | Doorout pointer          |
 
 The room state function list follows the room header; it consists of a
 series of entries with a 2-byte pointer to a state function, a variable
