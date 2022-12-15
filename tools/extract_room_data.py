@@ -104,8 +104,7 @@ dw ${enemy_pop.death_quota:02X} ; death quota
   return s
 
 # TODO: All state headers not just one
-# TODO: really should be "room data" not "room metadata"...
-def print_full_room_metadata(rom, room_id, state_idx, room_header, out=sys.stdout):
+def print_full_room_data(rom, room_id, state_idx, room_header, out=sys.stdout):
   state_id = room_header.state_functions[state_idx].state_header_addr
   room_state_header = RoomStateHeader.extract(rom, state_id)
   state_functions = room_header.state_functions
@@ -135,7 +134,7 @@ def main():
   rom = Rom(open(filename, 'rb'))
 
   room_header = RoomHeader.extract(rom, room_id)
-  print_full_room_metadata(rom, room_id, state_idx, room_header)
+  print_full_room_data(rom, room_id, state_idx, room_header)
 
 if __name__ == '__main__':
   main()
