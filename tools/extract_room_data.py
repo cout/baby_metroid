@@ -103,10 +103,7 @@ dw ${enemy_pop.death_quota:02X} ; death quota
 '''.strip())
   return s
 
-# TODO: All state headers not just one
-def print_full_room_data(rom, room_id, state_idx, room_header, out=sys.stdout):
-  state_id = room_header.state_functions[state_idx].state_header_addr
-  room_state_header = RoomStateHeader.extract(rom, state_id)
+def print_full_room_data(rom, room_id, room_header, out=sys.stdout):
   state_functions = room_header.state_functions
   state_header_addrs = sorted(set(func.state_header_addr for func in room_header.state_functions))
   state_headers = [ RoomStateHeader.extract(rom, addr) for addr in state_header_addrs ]
@@ -129,12 +126,11 @@ def print_full_room_data(rom, room_id, state_idx, room_header, out=sys.stdout):
 def main():
   filename = sys.argv[1]
   room_id = int(sys.argv[2], 16)
-  state_idx = int(sys.argv[3]) if len(sys.argv) >= 4 else 0
 
   rom = Rom(open(filename, 'rb'))
 
   room_header = RoomHeader.extract(rom, room_id)
-  print_full_room_data(rom, room_id, state_idx, room_header)
+  print_full_room_data(rom, room_id, room_header)
 
 if __name__ == '__main__':
   main()
