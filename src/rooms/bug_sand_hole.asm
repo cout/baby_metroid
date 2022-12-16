@@ -38,7 +38,7 @@ dw $D7FF, $00B0, $00C0, $00A8, $A000, $0000, $0000, $1010 ; tripper
 ;; dw $E7BF, $004D, $00F0, $0000, $2000, $0000, $0040, $0001 ; yapping maw
 ; D7FF,0100,00A8,0000,A000,0000,0000,1010
 dw $FFFF     ; end of list
-dw $01       ; death quota
+db $01       ; death quota
 
 ; Room $D433 state $D440: Enemy graphics set
 org $B4904C

@@ -93,7 +93,7 @@ org $A1{addr:04X}
   s += "\n"
   s += align_comments(f'''
 dw $FFFF                        ; end of list
-dw ${enemy_pop.death_quota:02X} ; death quota
+db ${enemy_pop.death_quota:02X} ; death quota
 '''.strip())
   return s
 

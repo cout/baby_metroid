@@ -46,7 +46,7 @@ dw $D3BF,         $0270, $00EC, $0000, $2000, $0000, $0001, $0010 ; choot
 dw $D6FF,         $0300, $0420, $0000, $2800, $0000, $0010, $0210 ; fish
 dw $D6FF,         $0270, $0488, $0000, $2800, $0000, $0110, $0210 ; fish
 dw $FFFF     ; end of list
-dw $0B       ; death quota
+db $0B       ; death quota
 
 ;;; ; Room $D340 state $D34D: Enemy graphics set
 ;;; org $B48F22

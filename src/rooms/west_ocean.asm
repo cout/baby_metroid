@@ -17,7 +17,7 @@ dw $D7FF,         $0150, $00D8, $0000, $A000, $0000, $0000, $0010 ; horizontal k
 dw $D7FF,         $0388, $0058, $0000, $A000, $0000, $0000, $0010 ; horizontal kamer
 dw $D7FF,         $0370, $0160, $0000, $A000, $0000, $0001, $0010 ; horizontal kamer
 dw $FFFF     ; end of list
-dw $07       ; death quota
+db $07       ; death quota
 warnpc $A1A6FA
 
 ; Room $93FE state $940B: Enemy graphics set
