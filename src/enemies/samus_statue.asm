@@ -81,6 +81,10 @@ samus_statue_wrecked_ship_green_palette:
 dw $7c00, $04c6, $0d08, $25ce, $3e94, $0843, $0000, $0000
 dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
+samus_statue_yellow_maridia_palette:
+dw $7c00, $0087, $0ce9, $114c, $19f2, $6024, $0000, $0000
+dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
 samus_statue_palettes:
 
 dw samus_statue_lower_crateria_palette        ; 0
@@ -90,6 +94,7 @@ dw samus_statue_red_norfair_palette           ; 3
 dw samus_statue_red_brinstar_palette          ; 4
 dw samus_statue_red_brinstar_green_palette    ; 5
 dw samus_statue_wrecked_ship_green_palette    ; 6
+dw samus_statue_yellow_maridia_palette        ; 7
 
 samus_statue_looking_up_spritemap:
 {
@@ -172,6 +177,8 @@ samus_statue_init_ai:
 
   ; Copy palette based on parameter 2
   LDA $0FB6,x
+  CMP $FFFF
+  BEQ .return
   ASL
   TAY
   LDA samus_statue_palettes,y
@@ -188,6 +195,7 @@ samus_statue_init_ai:
   LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
   LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
 
+.return:
   RTL
 }
 

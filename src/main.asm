@@ -40,3 +40,4 @@ incsrc rooms/wrecked_ship_etank.asm
 incsrc rooms/east_ocean.asm
 incsrc rooms/crab_maze.asm
 incsrc rooms/bug_sand_hole.asm
+incsrc rooms/plasma_spark_room.asm
