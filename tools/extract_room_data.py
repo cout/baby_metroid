@@ -61,18 +61,18 @@ def format_room_state_header(room_id, state_header):
 ; Room ${room_id:04X} state ${state_header.state_id:04X}: Header
 org $8F{state_header.state_id:04X}
 dl ${state_header.level_data_addr         :06X} ; Level data address
-db ${state_header.tileset                 :02X} ; Tileset (bank TODO)
+db ${state_header.tileset                 :02X} ; Tileset
 db ${state_header.music_data_index        :02X} ; Music data index
 db ${state_header.music_track_index       :02X} ; Music track index
-dw ${state_header.fx_addr                 :04X} ; FX address (bank TODO)
+dw ${state_header.fx_addr                 :04X} ; FX address (bank $83)
 dw ${state_header.enemy_pop_addr          :04X} ; Enemy population offset (bank $A1)
 dw ${state_header.enemy_graphics_set_addr :04X} ; Enemy graphics set offset (bank $B4)
 dw ${state_header.layer_2_scroll          :04X} ; Layer 2 scroll
 dw ${state_header.room_var                :04X} ; Room var
-dw ${state_header.room_main_func          :04X} ; Room main routine (bank TODO)
-dw ${state_header.plm                     :04X} ; Room PLM list address (bank TODO)
-dw ${state_header.library_background      :04X} ; Library background (bank TODO)
-dw ${state_header.room_setup_func         :04X} ; Room setup routine (bank TODO)
+dw ${state_header.room_main_func          :04X} ; Room main routine (bank $8F)
+dw ${state_header.plm                     :04X} ; Room PLM list address (bank $8F)
+dw ${state_header.library_background      :04X} ; Library background (bank $8F)
+dw ${state_header.room_setup_func         :04X} ; Room setup routine (bank $8F)
 '''.strip())
 
 def format_room_enemy_population_entry(enemy_pop, enemies):
