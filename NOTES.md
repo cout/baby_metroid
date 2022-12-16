@@ -117,6 +117,8 @@ Room header (bank 8F starting at $91F8):
 | 8      | 1    | Special graphics bitflag |
 | 9      | 2    | Doorout pointer          |
 
+### Room state function list
+
 The room state function list follows the room header; it consists of a
 series of entries with a 2-byte pointer to a state function, a variable
 payload, and a 2-byte pointer to a room state header.  The size of the
@@ -135,24 +137,28 @@ Common state functions:
 | E669       | Power bombs            | none               |
 | E678       | Speed booster (unused) | ?                  |
 
+### Room state header
+
 Room state header (bank 8F starting at $91F8):
 
 | Offset | Size | Description                |
 | ------ | ---- | -------------------------- |
-| 0      | 3    | Level data                 |
-| 3      | 1    | Tileset                    |
-| 4      | 1    | Music data index           |
-| 5      | 1    | Music track index          |
-| 6      | 2    | FX pointer                 |
-| 8      | 2    | Enemy population pointer   |
-| 10     | 2    | Enemy graphics set pointer |
-| 12     | 2    | Layer 2 scroll             |
-| 14     | 2    | Room scroll                |
-| 16     | 2    | Room var (used for BT)     |
-| 18     | 2    | Room main asm              |
-| 20     | 2    | Room PLM list              |
-| 22     | 2    | Library background         |
-| 24     | 2    | Room setup asm             |
+|  0h    | 3    | Level data                 |
+|  3h    | 1    | Tileset                    |
+|  4h    | 1    | Music data index           |
+|  5h    | 1    | Music track index          |
+|  6h    | 2    | FX pointer                 |
+|  8h    | 2    | Enemy population pointer   |
+|  Ah    | 2    | Enemy graphics set pointer |
+|  Ch    | 2    | Layer 2 scroll             |
+|  Eh    | 2    | Room scroll                |
+| 10h    | 2    | Room var (used for BT)     |
+| 12h    | 2    | Room main asm              |
+| 14h    | 2    | Room PLM list              |
+| 16h    | 2    | Library background         |
+| 18h    | 2    | Room setup asm             |
+
+### Room PLMs
 
 The room PLM list is a list of PLMs for the room, terminated by 0000h.
 The format of each entry in this list is:
@@ -167,6 +173,43 @@ The format of each entry in this list is:
 There is no room to add a new entry to the end of the list, but it
 should be possible to explicitly call $84:846A in the room setup routine
 to manually spawn a room PLM.
+
+### Current room state
+
+The state of the current room is stored in memory as:
+
+| Addresss  | Bytes | Description               |
+| --------- | ----- | ------------------------- |
+| $7E:078D  | 2     | Entry door pointer        |
+| $7E:078F  | 2     | Door BTS                  |
+| $7E:079B  | 2     | Room header pointer       |
+| $7E:079D  | 2     | Room index                |
+| $7E:079F  | 2     | Area                      |
+| $7E:07A1  | 2     | X position on map         |
+| $7E:07A3  | 2     | Y position on map         |
+| $7E:07A5  | 2     | Room width (in blocks)    |
+| $7E:07A7  | 2     | Room height (in blocks)   |
+| $7E:07A9  | 2     | Room width (in screens)   |
+| $7E:07AB  | 2     | Room height (in screens)  |
+| $7E:07AD  | 2     | Up scroller               |
+| $7E:07AF  | 2     | Down scroller             |
+| $7E:07B5  | 2     | Door out pointer          |
+| $7E:07B9  | 2     | Area of room (in blocks)  |
+| $7E:07BB  | 2     | Room state header pointer |
+| $7E:07BD  | 2     | Level data pointer        |
+| $7E:07C0  | 3     | Room tile table pointer   |
+| $7E:07C3  | 3     | Room tiles pointer        |
+| $7E:07C6  | 3     | Room tilemap pointer      |
+| $7E:07C9  | 2     | Music track index         |
+| $7E:07CB  | 2     | Music data index          |
+| $7E:07CD  | 2     | FX pointer                |
+| $7E:07CF  | 2     | Enemy population pointer  |
+| $7E:07D1  | 2     | Enemy set pointer         |
+| $7E:07DF  | 2     | Room main routine         |
+
+TODO: What is the difference between a "graphic set", a "tileset", and a "tile table"?
+
+TODO: room "layer 2 scroll" is copied to $091B; what is this, and how is it different from "room scroll"?
 
 ### Level data (Tilemap/BTS)
 
@@ -650,6 +693,49 @@ haven't finished executing the drawing instructions?
 To delete a PLM, do one of the following:
 * Store #$0000 at $7E:1C37+y
 * Use a delete instruction (such as $86BC)
+
+### Tileset
+
+The tileset is an index into the tileset pointer table at $8F:E7A7.
+
+The tileset pointer table stores pointers into the tileset table at
+$8F:E6A2.
+
+| Tileset | Address  | Tile table | Tiles    | Palette  | Description                       |
+| ------- | -------- | ---------- | -------- | -------- | --------------------------------- |
+| 0h      | $8F:E6A2 | $C1:B6F6   | $BA:C629 | $C2:AD7C | Upper Crateria                    |
+| 1h      | $8F:E6AB | $C1:B6F6   | $BA:C629 | $C2:AE5D | Red Crateria                      |
+| 2h      | $8F:E6B4 | $C1:BEEE   | $BA:F911 | $C2:AF43 | Lower Crateria                    |
+| 3h      | $8F:E6BD | $C1:BEEE   | $BA:F911 | $C2:B015 | Old Tourian                       |
+| 4h      | $8F:E6C6 | $C1:C5CF   | $BB:AE9E | $C2:B0E7 | Wrecked Ship - power on           |
+| 5h      | $8F:E6CF | $C1:C5CF   | $BB:AE9E | $C2:B1A6 | Wrecked Ship - power off          |
+| 6h      | $8F:E6D8 | $C1:CFA6   | $BB:E6B0 | $C2:B264 | Green/blue Brinstar               |
+| 7h      | $8F:E6E1 | $C1:D8DC   | $BC:A5AA | $C2:B35F | Red Brinstar / Kraid's lair       |
+| 8h      | $8F:E6EA | $C1:D8DC   | $BC:A5AA | $C2:B447 | Pre Tourian entrance corridor     |
+| 9h      | $8F:E6F3 | $C1:E361   | $BD:C3F9 | $C2:B5E4 | Heated Norfair                    |
+| Ah      | $8F:E6FC | $C1:E361   | $BD:C3F9 | $C2:B6BB | Unheated Norfair                  |
+| Bh      | $8F:E705 | $C1:F4B1   | $BE:B130 | $C2:B83C | Sandless Maridia                  |
+| Ch      | $8F:E70E | $C2:855F   | $BE:E78D | $C2:B92E | Sandy Maridia                     |
+| Dh      | $8F:E717 | $C2:9B01   | $BF:D414 | $C2:BAED | Tourian                           |
+| Eh      | $8F:E720 | $C2:9B01   | $BF:D414 | $C2:BBC1 | Mother Brain's room               |
+| Fh      | $8F:E729 | $C2:A75E   | $C0:B004 | $C2:C104 | Blue Ceres                        |
+| 10h     | $8F:E732 | $C2:A75E   | $C0:B004 | $C2:C1E3 | White Ceres                       |
+| 11h     | $8F:E73B | $C2:A75E   | $C0:E22A | $C2:C104 | Blue Ceres elevator               |
+| 12h     | $8F:E744 | $C2:A75E   | $C0:E22A | $C2:C1E3 | White Ceres elevator              |
+| 13h     | $8F:E74D | $C2:A75E   | $C1:8DA9 | $C2:C104 | Blue Ceres Ridley's room          |
+| 14h     | $8F:E756 | $C2:A75E   | $C1:8DA9 | $C2:C1E3 | White Ceres Ridley's room         |
+| 15h     | $8F:E75F | $C2:A27B   | $C0:860B | $C2:BC9C | Map room / Tourian entrance       |
+| 16h     | $8F:E768 | $C2:A27B   | $C0:860B | $C2:BD7B | Wrecked Ship map room - power off |
+| 17h     | $8F:E771 | $C2:A27B   | $C0:860B | $C2:BE58 | Blue refill room                  |
+| 18h     | $8F:E77A | $C2:A27B   | $C0:860B | $C2:BF3D | Yellow refill room                |
+| 19h     | $8F:E783 | $C2:A27B   | $C0:860B | $C2:C021 | Save room                         |
+| 1Ah     | $8F:E78C | $C1:E189   | $BC:DFF0 | $C2:B510 | Kraid's room                      |
+| 1Bh     | $8F:E795 | $C1:F3AF   | $BD:FE2A | $C2:B798 | Crocomire's room                  |
+| 1Ch     | $8F:E80E | $C2:960D   | $BF:9DEA | $C2:BA2C | Draygon's room                    |
+
+### Music
+
+TODO
 
 Enemies
 -------
