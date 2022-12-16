@@ -28,7 +28,8 @@ ROOMS = \
 	src/rooms/hellway.bin \
 	src/rooms/alpha_power_bombs.bin \
 	src/rooms/moat.bin \
-	src/rooms/west_ocean.bin
+	src/rooms/west_ocean.bin \
+	src/rooms/bowling.bin
 
 all: build/baby_metroid.sfc
 
