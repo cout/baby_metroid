@@ -82,12 +82,16 @@ def room2hex(level_data, w, h):
   return s
 
 def main():
+  from structures import RoomLevelData
+
   ws = int(sys.argv[1])
   hs = int(sys.argv[2])
   w = ws * 16
   h = hs * 16
   b = sys.stdin.buffer.read()
-  s = room2hex(b, w, h)
+  size, tilemap, bts, layer2_tilemap = RoomLevelData.bin2room(b)
+  level_data = RoomLevelData(size, tilemap, bts, layer2_tilemap)
+  s = room2hex(level_data, w, h)
   sys.stdout.write(s)
 
 if __name__ == '__main__':
