@@ -68,6 +68,7 @@ dw ${state_header.fx_addr                 :04X} ; FX address (bank $83)
 dw ${state_header.enemy_pop_addr          :04X} ; Enemy population offset (bank $A1)
 dw ${state_header.enemy_graphics_set_addr :04X} ; Enemy graphics set offset (bank $B4)
 dw ${state_header.layer_2_scroll          :04X} ; Layer 2 scroll
+dw ${state_header.room_scroll             :04X} ; Room scroll data (bank $8F)
 dw ${state_header.room_var                :04X} ; Room var
 dw ${state_header.room_main_func          :04X} ; Room main routine (bank $8F)
 dw ${state_header.plm                     :04X} ; Room PLM list address (bank $8F)
