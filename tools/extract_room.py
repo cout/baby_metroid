@@ -48,7 +48,7 @@ def main():
     tilemap=room_state_header.level_data_addr,
     tileset=room_state_header.tileset,
     enemy_pop=room_state_header.enemy_pop_addr,
-    enemy_gfx_set=room_state_header.enemy_set_addr,
+    enemy_gfx_set=room_state_header.enemy_graphics_set_addr,
     setup_routine=room_state_header.room_setup_func,
     main_routine=room_state_header.room_main_func,
   ).lstrip())
