@@ -29,7 +29,8 @@ ROOMS = \
 	src/rooms/alpha_power_bombs.bin \
 	src/rooms/moat.bin \
 	src/rooms/west_ocean.bin \
-	src/rooms/bowling.bin
+	src/rooms/bowling.bin \
+	src/rooms/spiky_room.bin \
 
 all: build/baby_metroid.sfc
 
