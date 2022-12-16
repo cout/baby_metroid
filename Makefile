@@ -33,7 +33,9 @@ ROOMS = \
 	src/rooms/spiky_room.bin \
 	src/rooms/wrecked_ship_etank.bin \
 	src/rooms/east_ocean.bin \
-	src/rooms/crab_maze.bin
+	src/rooms/crab_maze.bin \
+	src/rooms/east_sand_hall.bin \
+	src/rooms/west_sand_hall.bin \
 
 all: build/baby_metroid.sfc
 
