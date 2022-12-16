@@ -84,7 +84,7 @@ dw ${enemy_pop.enemy_id:04X}, ${enemy_pop.x:04X}, ${enemy_pop.y:04X}, ${enemy_po
 def format_room_enemy_population(room_id, state_id, addr, enemy_pop, enemies):
   s = align_comments(f'''
 ; Room ${room_id:04X} state ${state_id:04X}: Enemy population
-org $A1{addr}
+org $A1{addr:04X}
 ;  enemy  x      y      init   props  extra  param1 param2
 '''.strip())
   for entry in enemy_pop.population:
@@ -105,7 +105,7 @@ dw ${entry.enemy_id:04X}, ${entry.palette_index:04X} ; {enemy_name}
 def format_room_enemy_graphics_set(room_id, state_id, addr, enemy_graphics_set, enemies):
   s = align_comments(f'''
 ; Room ${room_id:04X} state ${state_id:04X}: Enemy graphics set
-org $B4{addr}
+org $B4{addr:04X}
 ;  enemy  palette
 '''.strip())
   for entry in enemy_graphics_set:
