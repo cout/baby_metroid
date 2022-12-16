@@ -54,11 +54,11 @@ def format_grid(rows, fmt):
   return '\n'.join(rows)
 
 def format_tilemap(tilemap, w, h):
-  rows = split_into_rows(tilemap, w, h)
+  rows = split_into_rows(tilemap, w, len(tilemap)//w)
   return format_grid(rows, '%04X')
 
 def format_bts(bts, w, h):
-  rows = split_into_rows(bts, w, h)
+  rows = split_into_rows(bts, w, len(bts)//w)
   return format_grid(rows, ' %02X ')
 
 def room2hex(level_data, w, h):
