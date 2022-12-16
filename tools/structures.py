@@ -96,7 +96,7 @@ class RoomHeader(object):
 
 @dataclass
 class RoomStateHeader(object):
-  fmt = struct.Struct("<HBBBBHHHHHHHHH")
+  fmt = struct.Struct("<HBBBBHHHHHHHHHH")
 
   state_id: HexValue
   level_data_offset: HexValue
@@ -108,6 +108,7 @@ class RoomStateHeader(object):
   enemy_pop_addr: HexValue
   enemy_graphics_set_addr: HexValue
   layer_2_scroll: HexValue
+  room_scroll: HexValue
   room_var: HexValue
   room_main_func: HexValue
   plm: HexValue
