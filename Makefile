@@ -32,6 +32,7 @@ ROOMS = \
 	src/rooms/bowling.bin \
 	src/rooms/spiky_room.bin \
 	src/rooms/wrecked_ship_etank.bin \
+	src/rooms/east_ocean.bin
 
 all: build/baby_metroid.sfc
 

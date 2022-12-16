@@ -37,3 +37,4 @@ incsrc rooms/west_ocean.asm
 incsrc rooms/bowling.asm
 incsrc rooms/spiky_room.asm
 incsrc rooms/wrecked_ship_etank.asm
+incsrc rooms/east_ocean.asm
