@@ -36,6 +36,8 @@ ROOMS = \
 	src/rooms/crab_maze.bin \
 	src/rooms/east_sand_hall.bin \
 	src/rooms/west_sand_hall.bin \
+	src/rooms/pants_room_a.bin \
+	src/rooms/pants_room_b.bin \
 
 all: build/baby_metroid.sfc
 

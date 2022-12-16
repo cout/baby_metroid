@@ -43,3 +43,5 @@ incsrc rooms/bug_sand_hole.asm
 incsrc rooms/plasma_spark_room.asm
 incsrc rooms/east_sand_hall.asm
 incsrc rooms/west_sand_hall.asm
+incsrc rooms/pants_room_a.asm
+incsrc rooms/pants_room_b.asm
