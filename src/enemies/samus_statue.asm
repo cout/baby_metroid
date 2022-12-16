@@ -77,14 +77,19 @@ samus_statue_red_brinstar_green_palette:
 dw $7c00, $0884, $1529, $19af, $2a54, $0821, $0000, $0000
 dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
+samus_statue_wrecked_ship_green_palette:
+dw $7c00, $04c6, $0d08, $25ce, $3e94, $0843, $0000, $0000
+dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
 samus_statue_palettes:
 
-dw samus_statue_lower_crateria_palette     ; 0
-dw samus_statue_warehouse_entrance_palette ; 1
-dw samus_statue_bubble_mountain_palette    ; 2
-dw samus_statue_red_norfair_palette        ; 3
-dw samus_statue_red_brinstar_palette       ; 4
-dw samus_statue_red_brinstar_green_palette ; 5
+dw samus_statue_lower_crateria_palette        ; 0
+dw samus_statue_warehouse_entrance_palette    ; 1
+dw samus_statue_bubble_mountain_palette       ; 2
+dw samus_statue_red_norfair_palette           ; 3
+dw samus_statue_red_brinstar_palette          ; 4
+dw samus_statue_red_brinstar_green_palette    ; 5
+dw samus_statue_wrecked_ship_green_palette    ; 6
 
 samus_statue_looking_up_spritemap:
 {
