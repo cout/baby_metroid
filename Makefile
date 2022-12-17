@@ -38,6 +38,7 @@ ROOMS = \
 	src/rooms/west_sand_hall.bin \
 	src/rooms/pants_room_a.bin \
 	src/rooms/pants_room_b.bin \
+	src/rooms/crocomire_speedway.bin \
 
 all: build/baby_metroid.sfc
 
