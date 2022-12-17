@@ -40,3 +40,9 @@ Tooling ideas:
 * Script to generate room list in asm format
 * Extract room script should write out room header(s) as a comment
 * Write out size as a word instead of as bytes
+
+Bugs:
+* Ice beam cannot freeze enemies that take more than one shot
+* Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
+    in acid snake room after getting ice)
+* Cannot run through pirates in croc speedway with speed
