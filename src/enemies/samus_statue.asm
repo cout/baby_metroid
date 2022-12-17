@@ -85,6 +85,13 @@ samus_statue_yellow_maridia_palette:
 dw $7c00, $0087, $0ce9, $114c, $19f2, $6024, $0000, $0000
 dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
+; TODO: Top line of colors are the right colors, but the statue gets
+; drawn on top of FX, so the colors show up wrong
+samus_statue_pink_maridia_palette:
+; dw $7c00, $34AB, $5133, $6A19, $7fff, $2066, $0000, $0000
+dw $7c00, $1C09, $3891, $5177, $675D, $0804, $0000, $0000
+dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
 samus_statue_palettes:
 
 dw samus_statue_lower_crateria_palette        ; 0
@@ -95,6 +102,7 @@ dw samus_statue_red_brinstar_palette          ; 4
 dw samus_statue_red_brinstar_green_palette    ; 5
 dw samus_statue_wrecked_ship_green_palette    ; 6
 dw samus_statue_yellow_maridia_palette        ; 7
+dw samus_statue_pink_maridia_palette          ; 8
 
 samus_statue_looking_up_spritemap:
 {

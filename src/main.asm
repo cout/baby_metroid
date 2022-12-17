@@ -47,3 +47,4 @@ incsrc rooms/pants_room_a.asm
 incsrc rooms/pants_room_b.asm
 incsrc rooms/crocomire_speedway.asm
 incsrc rooms/spiky_acid_snakes.asm
+incsrc rooms/crab_shaft.asm
