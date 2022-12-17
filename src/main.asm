@@ -46,3 +46,4 @@ incsrc rooms/west_sand_hall.asm
 incsrc rooms/pants_room_a.asm
 incsrc rooms/pants_room_b.asm
 incsrc rooms/crocomire_speedway.asm
+incsrc rooms/spiky_acid_snakes.asm
