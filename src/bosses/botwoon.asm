@@ -171,8 +171,10 @@ set_segment_hidden:
   EOR #$0001
   STA botwoon_segment_behind_wall,x
 
-  LDA $7E8832,x
-  BNE .samus_is_not_hiding
+  ; TODO - I can't check this flag this way here, because x is the
+  ; projectile index not the enemy index
+  ; LDA $7E8832,x
+  ; BNE .samus_is_not_hiding
 
   LDA samus_is_hiding
   BNE .samus_is_hiding
