@@ -37,7 +37,7 @@ org $B3995D
 botwoon_set_action_from_health:
 {
   ; Never come out of hiding in the first round
-  LDA $7E8026,x
+  LDA $7E8832,x
   BNE .return
 
   ; Stay in the hole if Samus is not hiding
@@ -150,7 +150,7 @@ check_samus_is_hiding:
 
 get_mouth_close_instruction:
 {
-  LDA $7E8026,x
+  LDA $7E8832,x
   BNE .samus_is_not_hiding
 
   LDA samus_is_hiding
@@ -171,7 +171,7 @@ set_segment_hidden:
   EOR #$0001
   STA botwoon_segment_behind_wall,x
 
-  LDA $7E8026,x
+  LDA $7E8832,x
   BNE .samus_is_not_hiding
 
   LDA samus_is_hiding
