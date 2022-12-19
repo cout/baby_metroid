@@ -61,8 +61,8 @@ samus_is_hiding:
 print "Variable samus_is_hiding: $", pc
 skip 2
 
-botwon_segment_behind_wall:
-print "Variable botwon_segment_behind_wall: $", pc
+botwoon_segment_behind_wall:
+print "Variable botwoon_segment_behind_wall: $", pc
 skip 36
 
 end_botwoon_freemem_7f:
@@ -95,24 +95,24 @@ botwoon_extra_init:
   STA samus_is_hiding
 
   PHX
-  LDX #$0000 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0002 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0004 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0006 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0008 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$000A : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$000C : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$000E : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0010 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0012 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0014 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0016 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0018 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$001A : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$001C : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$001E : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0020 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
-  LDX #$0022 : LDA $7E7820,x : STA botwon_segment_behind_wall,x
+  LDX #$0000 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0002 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0004 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0006 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0008 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$000A : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$000C : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$000E : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0010 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0012 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0014 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0016 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0018 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$001A : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$001C : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$001E : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0020 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
+  LDX #$0022 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
   PLX
 
   RTS
@@ -167,9 +167,9 @@ get_mouth_close_instruction:
 
 set_segment_hidden:
 {
-  LDA botwon_segment_behind_wall,x
+  LDA botwoon_segment_behind_wall,x
   EOR #$0001
-  STA botwon_segment_behind_wall,x
+  STA botwoon_segment_behind_wall,x
 
   LDA $7E8026,x
   BNE .samus_is_not_hiding
@@ -183,7 +183,7 @@ set_segment_hidden:
   RTS
 
 .samus_is_hiding:
-  LDA botwon_segment_behind_wall,x
+  LDA botwoon_segment_behind_wall,x
   STA $7E7820,x
   RTS
 }
