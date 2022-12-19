@@ -981,10 +981,8 @@ a structure for each projectile):
 | $7E:1A03+y | 2     | Pre-instruction                 | [X + 2]              |
 | $7E:1A27+y | 2     | ?                               | 0000h                |
 | $7E:1A4B+y | 2     | X position                      | uninitialized        |
-| $7E:1A4D+y | 2     | ?                               |                      |
 | $7E:1A6F+y | 2     | X subpixel position             | 0000h                |
 | $7E:1A93+y | 2     | Y position                      | uninitialized        |
-| $7E:1A95+y | 2     | ?                               |                      |
 | $7E:1AB7+y | 2     | Y subpixel position             | uninitialized        |
 | $7E:1ADB+y | 2     | ?                               | uninitialized        |
 | $7E:1AFF+y | 2     | ?                               | 0000h                |
