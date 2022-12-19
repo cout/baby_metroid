@@ -40,6 +40,7 @@ ROOMS = \
 	src/rooms/pants_room_b.bin \
 	src/rooms/crocomire_speedway.bin \
 	src/rooms/spiky_acid_snakes.bin \
+	src/rooms/botwoon.bin \
 
 all: build/baby_metroid.sfc
 

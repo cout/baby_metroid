@@ -16,6 +16,7 @@ incsrc bosses/spore_spawn.asm
 incsrc bosses/ceres.asm
 incsrc bosses/kraid.asm
 incsrc bosses/phantoon.asm
+incsrc bosses/botwoon.asm
 incsrc enemies/samus_statue.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
@@ -48,3 +49,4 @@ incsrc rooms/pants_room_b.asm
 incsrc rooms/crocomire_speedway.asm
 incsrc rooms/spiky_acid_snakes.asm
 incsrc rooms/crab_shaft.asm
+incsrc rooms/botwoon.asm
