@@ -941,6 +941,20 @@ Headers for enemy projectiles are in bank $86.  The format is:
 | Ah     | 2     | Hit instruction list      |
 | Ch     | 2     | Shot instruction list     |
 
+### Enemy projcetile properties
+
+    +---------- projectile collision detection
+    |+--------- projectile is deleted on contact?
+    ||+-------- collisions with Samus disabled
+    |||+------- high priority
+    ||||
+    8765 4321
+
+TODO - see $A0:9443 for "enemy projectile deleted on contact"
+$A0:9A34 - upper bits are "don't detect collision with projectiles, die
+on contact, enable collisions with Samus, high priority"
+
+
 ### Spawning an enemy projectile
 
 An enemy projectile is spawned by invoking $86:8097 with:
@@ -957,26 +971,31 @@ The init AI routine will be called with Y=projectile offset.
 Projectile have the following in-memory state (kept as lists rather than
 a structure for each projectile):
 
-| Address    | Bytes | Description              | Initial value        |
-| ---------- | ----- | ------------------------ | -------------------- |
-| $7E:1997+y | 2     | Projectile ID            | X                    |
-| $7E:19BB+y | 2     | VRAM tiles index         | 0000h                |
-| $7E:19DF+y | 2     | Timer                    | uninitialized        |
-| $7E:1A03+y | 2     | Pre-instruction          | [X + 2]              |
-| $7E:1A27+y | 2     | ?                        | 0000h                |
-| $7E:1A4B+y | 2     | X position               | uninitialized        |
-| $7E:1A6F+y | 2     | X subpixel position      | 0000h                |
-| $7E:1A93+y | 2     | Y position               | uninitialized        |
-| $7E:1AB7+y | 2     | Y subpixel position      | uninitialized        |
-| $7E:1ADB+y | 2     | ?                        | uninitialized        |
-| $7E:1AFF+y | 2     | ?                        | 0000h                |
-| $7E:1B23+y | 2     | ?                        | 0000h                |
-| $7E:1B47+y | 2     | Instruction list pointer | [X + 4]              |
-| $7E:1B6B+y | 2     | Spritemap pointer        | 8000h                |
-| $7E:1B8F+y | 2     | Instruction delay        | uninitialized        |
-| $7E:1BB3+y | 2     | X / Y radius             | [X + 6]              |
-| $7E:1BD7+y | 2     | Properties               | [X + 8]              |
-| $7E:1BFB+y | 2     | ?                        | 0000h                |
+| Address    | Bytes | Description                     | Initial value        |
+| ---------- | ----- | ------------------------------- | -------------------- |
+| $7E:0C18+y | 2     | Projectile type                 |                      |
+| $7E:18A6   | 2     | Current projectile index        |                      |
+| $7E:1997+y | 2     | Projectile ID                   | X                    |
+| $7E:19BB+y | 2     | VRAM tiles index                | 0000h                |
+| $7E:19DF+y | 2     | Timer                           | uninitialized        |
+| $7E:1A03+y | 2     | Pre-instruction                 | [X + 2]              |
+| $7E:1A27+y | 2     | ?                               | 0000h                |
+| $7E:1A4B+y | 2     | X position                      | uninitialized        |
+| $7E:1A4D+y | 2     | ?                               |                      |
+| $7E:1A6F+y | 2     | X subpixel position             | 0000h                |
+| $7E:1A93+y | 2     | Y position                      | uninitialized        |
+| $7E:1A95+y | 2     | ?                               |                      |
+| $7E:1AB7+y | 2     | Y subpixel position             | uninitialized        |
+| $7E:1ADB+y | 2     | ?                               | uninitialized        |
+| $7E:1AFF+y | 2     | ?                               | 0000h                |
+| $7E:1B23+y | 2     | ?                               | 0000h                |
+| $7E:1B47+y | 2     | Instruction list pointer        | [X + 4]              |
+| $7E:1B6B+y | 2     | Spritemap pointer               | 8000h                |
+| $7E:1B8F+y | 2     | Instruction delay               | uninitialized        |
+| $7E:1BB3+y | 2     | X / Y radius                    | [X + 6]              |
+| $7E:1BD7+y | 2     | Properties                      | [X + 8]              |
+| $7E:1BFB+y | 2     | ?                               | 0000h                |
+| $7E:F380+y | 2     | Projectile/projectile collision |                      |
 
 ### Enemy projectile init routine
 
