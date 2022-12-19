@@ -8,7 +8,7 @@ warnpc $B39668
 ; Hide the body unless Samus is hidden
 org $B39CBC
 
-JSR set_segment_hidden
+JSR set_segment_hidden_flag
 JMP $9CC3
 
 warnpc $B39CC3
@@ -165,7 +165,7 @@ get_mouth_close_instruction:
   RTS
 }
 
-set_segment_hidden:
+set_segment_hidden_flag:
 {
   LDA botwoon_segment_behind_wall,x
   EOR #$0001
