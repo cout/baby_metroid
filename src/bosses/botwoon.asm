@@ -173,18 +173,27 @@ check_botwoon_is_near_wall:
   CMP #$00D0
   BMI .return
 
+.break_wall:
+  JSR break_botwoon_wall
+
+  ; TODO: set boss defeated flag
+
+.return:
+  RTS
+}
+
+break_botwoon_wall:
+{
   LDA botwoon_wall_crumble_started
   BNE .return
 
   LDA #$0001
   STA botwoon_wall_crumble_started
 
-.break_wall:
   JSL $8483D7
   db $0F, $04
   dw $B79B
-
-  ; TODO: set boss defeated flag
+  RTS
 
 .return:
   RTS
