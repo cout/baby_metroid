@@ -4,6 +4,10 @@ samus_is_hiding:
 print "Variable samus_is_hiding: $", pc
 skip 2
 
+botwoon_wall_crumble_started:
+print "Variable botwoon_wall_crumble_started: $", pc
+skip 2
+
 end_botwoon_freemem_7f:
 !FREEMEM_7F := end_botwoon_freemem_7f
 
@@ -85,6 +89,7 @@ botwoon_extra_init:
 
   LDA #$0000
   STA samus_is_hiding
+  STA botwoon_wall_crumble_started
 
   RTS
 }
@@ -162,10 +167,17 @@ check_botwoon_is_near_wall:
   ; - botwoon must be visible (7E:8026?)
   ; - botwoon should be heading toward the right (7E:8034)
 
+  ; Check to see if botwoon is near the wall
   LDX $0E54
   LDA $0F7A,x
   CMP #$00D0
   BMI .return
+
+  LDA botwoon_wall_crumble_started
+  BNE .return
+
+  LDA #$0001
+  STA botwoon_wall_crumble_started
 
 .break_wall:
   JSL $8483D7
