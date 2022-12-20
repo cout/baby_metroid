@@ -43,6 +43,7 @@ ROOMS = \
 	src/rooms/botwoon.bin \
 	src/rooms/botwoon_etank.bin \
 	src/rooms/halfie_climb.bin \
+	src/rooms/colosseum.bin \
 
 all: build/baby_metroid.sfc
 

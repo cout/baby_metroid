@@ -52,3 +52,4 @@ incsrc rooms/crab_shaft.asm
 incsrc rooms/botwoon.asm
 incsrc rooms/botwoon_etank.asm
 incsrc rooms/halfie_climb.asm
+incsrc rooms/colosseum.asm
