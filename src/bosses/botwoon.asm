@@ -56,12 +56,10 @@ org $B396C6
 botwoon_death_check:
 {
   JSR check_samus_is_hiding
-
-  ; TODO - if botwoon is visible and botwoon is near the column, then
-  ; knock it down and open the door
+  JSR check_botwoon_is_near_wall
 
   ; TODO - if Samus is on the right side of the column, then knock it
-  ; down
+  ; down (so she can't get stuck)
 
   RTS
 }
@@ -154,6 +152,29 @@ check_samus_is_hiding:
 .clear_samus_is_hiding:
   LDA #$0000
   STA samus_is_hiding
+  RTS
+}
+
+check_botwoon_is_near_wall:
+{
+  ; TODO:
+  ; - only do this once
+  ; - botwoon must be visible (7E:8026?)
+  ; - botwoon should be heading toward the right (7E:8034)
+
+  LDX $0E54
+  LDA $0F7A,x
+  CMP #$00D0
+  BMI .return
+
+.break_wall:
+  JSL $8483D7
+  db $0F, $04
+  dw $B79B
+
+  ; TODO: set boss defeated flag
+
+.return:
   RTS
 }
 
