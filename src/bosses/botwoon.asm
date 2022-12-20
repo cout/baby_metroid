@@ -4,6 +4,10 @@ samus_is_hiding:
 print "Variable samus_is_hiding: $", pc
 skip 2
 
+botwoon_is_seeking:
+print "Variable botwoon_is_seeking: $", pc
+skip 2
+
 botwoon_wall_crumble_started:
 print "Variable botwoon_wall_crumble_started: $", pc
 skip 2
@@ -89,6 +93,7 @@ botwoon_extra_init:
 
   LDA #$0000
   STA samus_is_hiding
+  STA botwoon_is_seeking
   STA botwoon_wall_crumble_started
 
   RTS
@@ -101,11 +106,17 @@ filter_hole_state:
   BNE .samus_is_hiding
 
 .samus_is_not_hiding:
+  ; If Samus is not hiding, keep Botwoon invisible during movement
   PLA
   LDA #$0008
   RTS
 
 .samus_is_hiding:
+  ; If Samus is hiding, set the seeking flag
+  LDA #$0001
+  STA botwoon_is_seeking
+
+  ; If Samus is hiding, revert to original behavior
   PLA
   AND #$000E
 
@@ -119,11 +130,13 @@ filter_hole_state_after_spitting:
   BNE .samus_is_hiding
 
 .samus_is_not_hiding:
+  ; If Samus is not hiding, keep spitting
   PLA
   LDA #$0001
   RTS
 
 .samus_is_hiding:
+  ; If Samus is hiding, revert to original behavior
   PLA
   AND #$0001
 
@@ -162,6 +175,10 @@ check_samus_is_hiding:
 
 check_botwoon_is_near_wall:
 {
+  ; Check to see if Botwoon is seeking
+  LDA botwoon_is_seeking
+  BEQ .return
+
   ; Check to see if this is the first round
   ; TODO - this check does not work; Botwoon can still break the wall
   ; before entering the hole on the first round if he is close enough to
