@@ -14,6 +14,9 @@ Later:
 * Ice beam is broken (it no longer freezes enemies)
 * Ice beam gate room is hard without knowing how to use the run button
 * Need to make it easier to get unstuck from spikes in bat room
+* Stop gadora from shooting
+* Keep gadora eyes open?
+* Make gadora vulnerable to charge?
 
 Ideas:
 * Replace space pirates with etecoons
