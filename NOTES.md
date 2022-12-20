@@ -753,7 +753,7 @@ entries:
 | 0h     | 2     | Enemy pointer            | $7E:0F78+y |
 | 2h     | 2     | X pos in room            | $7E:07FA+y |
 | 4h     | 2     | Y pos in room            | $7E:0F7E+y |
-| 6h     | 2     | Init parameter           | $7E:0F92+y |
+| 6h     | 2     | Init parameter           | $7E:0F92+y | TODO: instruction pointer?
 | 8h     | 2     | Initial properties       | $7E:0F86+y |
 | Ah     | 2     | Initial Extra properties | $7E:0F88+y |
 | Ch     | 2     | Parameter 1              | $7E:0FB4+y |
