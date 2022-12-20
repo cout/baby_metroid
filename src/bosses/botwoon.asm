@@ -1,20 +1,18 @@
+org !FREEMEM_7F
+
+samus_is_hiding:
+print "Variable samus_is_hiding: $", pc
+skip 2
+
+end_botwoon_freemem_7f:
+!FREEMEM_7F := end_botwoon_freemem_7f
+
 ; Init extra variables
 org $B39663
 JSR botwoon_extra_init
 RTL
 
 warnpc $B39668
-
-; Hide the body unless Samus is hidden
-org $B39CBC
-
-JSR set_segment_hidden_flag
-JMP $9CC3
-
-warnpc $B39CC3
-
-; Hide the head except when coming out of the hole or Samus is hidden
-org $B39E1F : JSR get_mouth_close_instruction
 
 ; Disable botwoon spit
 org $B39F0A : JMP $9F17
@@ -53,21 +51,6 @@ botwoon_set_action_from_health:
   RTS
 }
 
-warnpc $B399A4
-
-org !FREEMEM_7F
-
-samus_is_hiding:
-print "Variable samus_is_hiding: $", pc
-skip 2
-
-botwoon_segment_behind_wall:
-print "Variable botwoon_segment_behind_wall: $", pc
-skip 36
-
-end_botwoon_freemem_7f:
-!FREEMEM_7F := end_botwoon_freemem_7f
-
 org $B396C6
 
 botwoon_death_check:
@@ -85,6 +68,17 @@ botwoon_death_check:
 
 warnpc $B396F5
 
+
+org $B398C5
+JSR filter_hole_state
+warnpc $B398C8
+
+org $B39A1E
+JSR filter_hole_state_after_spitting
+warnpc $B39A21
+
+; -----------------------
+
 org !FREESPACE_B3
 
 botwoon_extra_init:
@@ -94,26 +88,41 @@ botwoon_extra_init:
   LDA #$0000
   STA samus_is_hiding
 
-  PHX
-  LDX #$0000 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0002 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0004 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0006 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0008 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$000A : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$000C : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$000E : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0010 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0012 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0014 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0016 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0018 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$001A : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$001C : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$001E : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0020 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  LDX #$0022 : LDA $7E7820,x : STA botwoon_segment_behind_wall,x
-  PLX
+  RTS
+}
+
+filter_hole_state:
+{
+  PHA
+  LDA samus_is_hiding
+  BNE .samus_is_hiding
+
+.samus_is_not_hiding:
+  PLA
+  LDA #$0008
+  RTS
+
+.samus_is_hiding:
+  PLA
+  AND #$000E
+
+  RTS
+}
+
+filter_hole_state_after_spitting:
+{
+  PHA
+  LDA samus_is_hiding
+  BNE .samus_is_hiding
+
+.samus_is_not_hiding:
+  PLA
+  LDA #$0001
+  RTS
+
+.samus_is_hiding:
+  PLA
+  AND #$0001
 
   RTS
 }
@@ -145,48 +154,6 @@ check_samus_is_hiding:
 .clear_samus_is_hiding:
   LDA #$0000
   STA samus_is_hiding
-  RTS
-}
-
-get_mouth_close_instruction:
-{
-  LDA $7E8832,x
-  BNE .samus_is_not_hiding
-
-  LDA samus_is_hiding
-  BNE .samus_is_hiding
-
-.samus_is_not_hiding:
-  LDA #$9389
-  RTS
-
-.samus_is_hiding:
-  LDA $946B,y
-  RTS
-}
-
-set_segment_hidden_flag:
-{
-  LDA botwoon_segment_behind_wall,x
-  EOR #$0001
-  STA botwoon_segment_behind_wall,x
-
-  ; TODO - I can't check this flag this way here, because x is the
-  ; projectile index not the enemy index
-  ; LDA $7E8832,x
-  ; BNE .samus_is_not_hiding
-
-  LDA samus_is_hiding
-  BNE .samus_is_hiding
-
-.samus_is_not_hiding:
-  LDA #$0001
-  STA $7E7820,x
-  RTS
-
-.samus_is_hiding:
-  LDA botwoon_segment_behind_wall,x
-  STA $7E7820,x
   RTS
 }
 
