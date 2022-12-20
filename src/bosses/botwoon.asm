@@ -113,6 +113,10 @@ filter_hole_state:
 
 .samus_is_hiding:
   ; If Samus is hiding, set the seeking flag
+  ; TODO TODO TODO - sometimes this never gets set and Botwoon has
+  ; seeking behavior without the seeking flag set.  In that case Botwoon
+  ; keeps seeking even when Samus is out of the hole (desirable after
+  ; the wall is broken, but undesirable before).
   LDA #$0001
   STA botwoon_is_seeking
 
@@ -130,12 +134,27 @@ filter_hole_state_after_spitting:
   BNE .samus_is_hiding
 
 .samus_is_not_hiding:
+  ; TODO TODO - I probably want to unset botwoon_is_seeking here, in
+  ; case Botwoon goes back into the hole.
+  ;
+  ; I am not sure whether I want to also unset it in filter_hole_state,
+  ; because I don't want to unset it until Botwoon is fully in the hole,
+  ; and I'm not 100% confident I remember the conditions when
+  ; filter_hole_state is called.
+
   ; If Samus is not hiding, keep spitting
   PLA
   LDA #$0001
   RTS
 
 .samus_is_hiding:
+  ; If Samus is hiding, set the seeking flag
+  ; TODO - I thought setting the seeking flag here would be unnecessary
+  ; (and the wrong thing to do -- since other than on init this makes
+  ; botwoon_is_seeking the same as checking $7E;8026.
+  LDA #$0001
+  STA botwoon_is_seeking
+
   ; If Samus is hiding, revert to original behavior
   PLA
   AND #$0001
@@ -204,6 +223,9 @@ check_botwoon_is_near_wall:
   BNE .return
 
   ; Check to see if botwoon is heading back into a hole
+  ; TODO - this check might be a little too aggressive, because it means
+  ; that to break the wall Botwoon has to be near the wall but not
+  ; heading into the right-side hole.
   LDA $7E802A
   BNE .return
 
