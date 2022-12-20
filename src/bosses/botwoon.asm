@@ -162,16 +162,30 @@ check_samus_is_hiding:
 
 check_botwoon_is_near_wall:
 {
-  ; TODO:
-  ; - only do this once
-  ; - botwoon must be visible (7E:8026?)
-  ; - botwoon should be heading toward the right (7E:8034)
+  ; Check to see if this is the first round
+  LDA $7E8832
+  BNE .return
 
   ; Check to see if botwoon is near the wall
   LDX $0E54
   LDA $0F7A,x
   CMP #$00D0
   BMI .return
+
+  ; Check to see it botwoon is invisible
+  LDA $7E8026
+  BNE .return
+
+  ; Check to see if botwoon is spitting
+  LDA $7E8834
+  BNE .return
+
+  LDA $7E8002
+  BNE .return
+
+  ; Check to see if botwoon is heading back into a hole
+  LDA $7E802A
+  BNE .return
 
 .break_wall:
   JSR break_botwoon_wall
