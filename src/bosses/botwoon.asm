@@ -163,6 +163,9 @@ check_samus_is_hiding:
 check_botwoon_is_near_wall:
 {
   ; Check to see if this is the first round
+  ; TODO - this check does not work; Botwoon can still break the wall
+  ; before entering the hole on the first round if he is close enough to
+  ; the wall
   LDA $7E8832
   BNE .return
 
@@ -190,8 +193,6 @@ check_botwoon_is_near_wall:
 .break_wall:
   JSR break_botwoon_wall
 
-  ; TODO: set boss defeated flag
-
 .return:
   RTS
 }
@@ -204,10 +205,15 @@ break_botwoon_wall:
   LDA #$0001
   STA botwoon_wall_crumble_started
 
+  ; Spawn PLM to break the wall
   JSL $8483D7
   db $0F, $04
   dw $B79B
   RTS
+
+  ; Set mini boss bits for current area
+  LDA #$0002
+  JSL $8081A6
 
 .return:
   RTS
