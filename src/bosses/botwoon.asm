@@ -48,12 +48,25 @@ botwoon_set_action_from_health:
 
   ; Stay in the hole if Samus is not hiding
   LDA samus_is_hiding
-  BEQ .return
+  BEQ .samus_is_not_hiding
 
+.samus_is_hiding:
   ; Come out of the hole if Samus is hiding
   LDA #$0002 : STA $7E803E,x
   LDA #$0003 : STA $7E8030,x
   LDA #$000C : STA $7E0FAC,x
+
+  ; Set the seeking flag is Samus is hiding
+  ; TODO - I think this should be unnecessary, but apparently this flag
+  ; does not get set in some cases from the other two places it can get
+  ; set, and I don't know why.
+  LDA #$0001
+  STA botwoon_is_seeking
+  BRA .return
+
+.samus_is_not_hiding
+  LDA #$0000
+  STA botwoon_is_seeking
 
 .return:
   RTS
@@ -81,7 +94,7 @@ warnpc $B398C8
 
 org $B39A1E
 JSR filter_hole_state_after_spitting
-warnpc $B39A21
+warnpc $B39A21 ; patch for $B3:98C5
 
 ; -----------------------
 
@@ -99,7 +112,7 @@ botwoon_extra_init:
   RTS
 }
 
-filter_hole_state:
+filter_hole_state: ; patch for $B3:98C5 (AND #$000E)
 {
   PHA
   LDA samus_is_hiding
@@ -127,7 +140,7 @@ filter_hole_state:
   RTS
 }
 
-filter_hole_state_after_spitting:
+filter_hole_state_after_spitting: ; patch for $B3:9A1E (AND #$0001)
 {
   PHA
   LDA samus_is_hiding
