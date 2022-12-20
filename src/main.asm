@@ -51,3 +51,4 @@ incsrc rooms/spiky_acid_snakes.asm
 incsrc rooms/crab_shaft.asm
 incsrc rooms/botwoon.asm
 incsrc rooms/botwoon_etank.asm
+incsrc rooms/halfie_climb.asm

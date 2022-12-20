@@ -42,6 +42,7 @@ ROOMS = \
 	src/rooms/spiky_acid_snakes.bin \
 	src/rooms/botwoon.bin \
 	src/rooms/botwoon_etank.bin \
+	src/rooms/halfie_climb.bin \
 
 all: build/baby_metroid.sfc
 
