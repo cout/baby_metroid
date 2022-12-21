@@ -17,6 +17,7 @@ incsrc bosses/ceres.asm
 incsrc bosses/kraid.asm
 incsrc bosses/phantoon.asm
 incsrc bosses/botwoon.asm
+incsrc bosses/draygon.asm
 incsrc enemies/samus_statue.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
@@ -53,3 +54,4 @@ incsrc rooms/botwoon.asm
 incsrc rooms/botwoon_etank.asm
 incsrc rooms/halfie_climb.asm
 incsrc rooms/colosseum.asm
+incsrc rooms/draygon.asm
