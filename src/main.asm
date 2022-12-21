@@ -62,3 +62,4 @@ incsrc rooms/acid_statue.asm
 incsrc rooms/pillars.asm
 incsrc rooms/writg.asm
 incsrc rooms/red_kihunter_shaft.asm
+incsrc rooms/wasteland.asm

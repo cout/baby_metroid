@@ -47,6 +47,7 @@ ROOMS = \
 	src/rooms/east_cactus_alley.bin \
 	src/rooms/butterfly_room.bin \
 	src/rooms/acid_statue.bin \
+	src/rooms/wasteland.bin \
 
 all: build/baby_metroid.sfc
 
