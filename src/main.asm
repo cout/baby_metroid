@@ -58,3 +58,4 @@ incsrc rooms/colosseum.asm
 incsrc rooms/draygon.asm
 incsrc rooms/east_cactus_alley.asm
 incsrc rooms/butterfly_room.asm
+incsrc rooms/acid_statue.asm
