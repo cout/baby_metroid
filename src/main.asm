@@ -55,3 +55,4 @@ incsrc rooms/botwoon_etank.asm
 incsrc rooms/halfie_climb.asm
 incsrc rooms/colosseum.asm
 incsrc rooms/draygon.asm
+incsrc rooms/east_cactus_alley.asm
