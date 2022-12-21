@@ -45,6 +45,7 @@ ROOMS = \
 	src/rooms/halfie_climb.bin \
 	src/rooms/colosseum.bin \
 	src/rooms/east_cactus_alley.bin \
+	src/rooms/butterfly_room.bin \
 
 all: build/baby_metroid.sfc
 
