@@ -24,7 +24,7 @@ warnpc $A1A6FA
 org $B48161
 ;  enemy          palette
 dw $D6FF,         $0001 ; fish
-dw !samus_statue, $0002 ; zeb
+dw !samus_statue, $0002 ; statue
 dw $D3FF,         $0003 ; ripper2 (green)
 dw $D7FF,         $0007 ; horizontal kamer
 dw $FFFF                ; end of list
