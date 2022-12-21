@@ -49,6 +49,7 @@ skip 2
 easy_blue_suit_end_freemem_7f:
 
 !FREEMEM_7F := easy_blue_suit_end_freemem_7f
+
 ;;
 ; "Cancel speed boosting" hook for Samus standing position
 ;
