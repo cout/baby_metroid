@@ -14,7 +14,7 @@ header = \
 ; Map position: ({x}, {y})
 ;
 ; State: {state:X}
-; Tilemap: {tilemap:X}
+; Tilemap: {tilemap:X} .. {end_tilemap:X}
 ; Tileset: {tileset:X}
 ; Enemy population: {enemy_pop:X}
 ; Enemy graphics set: {enemy_gfx_set:X}
@@ -40,12 +40,18 @@ def main():
 
   level_data = RoomLevelData.extract(rom, room_state_header.level_data_addr)
 
+  tilemap = room_state_header.level_data_addr
+  tilemap_size = len(level_data.tilemap) + len(level_data.bts)
+  if level_data.layer2_tilemap is not None: tilemap_size += len(level_data.layer2_tilemap)
+  end_tilemap = tilemap + tilemap_size
+
   print(header.format(
     room=room_id,
     x=int(room_header.x),
     y=int(room_header.y),
     state=state_id,
-    tilemap=room_state_header.level_data_addr,
+    tilemap=tilemap,
+    end_tilemap=end_tilemap,
     tileset=room_state_header.tileset,
     enemy_pop=room_state_header.enemy_pop_addr,
     enemy_gfx_set=room_state_header.enemy_graphics_set_addr,
