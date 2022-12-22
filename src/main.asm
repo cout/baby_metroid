@@ -18,6 +18,7 @@ incsrc bosses/kraid.asm
 incsrc bosses/phantoon.asm
 incsrc bosses/botwoon.asm
 incsrc bosses/draygon.asm
+incsrc bosses/ridley.asm
 incsrc enemies/samus_statue.asm
 incsrc enemies/fune.asm
 incsrc projectiles/transporter_electricity.asm
