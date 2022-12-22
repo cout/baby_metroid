@@ -1114,17 +1114,17 @@ preceded by a 2-byte count of the number of entries in the array:
 
 The format of a spritemap entry is:
 
-    | -------------------------------------------- s: size bit
-    |    | --------------------------------------- S: debug size bit
-    |    |      | -------------------------------- x: X offset from center
-    |    |      |        | ----------------------- y: Y offset from center
-    |    |      |        |     | ----------------- Y: Y flip
-    |    |      |        |     || ---------------- X: X flip
-    |    |      |        |     || | -------------- p: priority
-    |    |      |        |     || | | ------------ P: palette
-    |    |      |        |     || | |      | ----- t: tile number
-    |    |      |        |     || | |      |
-    |    | /--- | --\ /- | --\ ||/+/+\/--- | --\
+    +--------------------------------------------- s: size bit
+    |    +---------------------------------------- S: debug size bit
+    |    |      +--------------------------------- x: X offset from center
+    |    |      |        +------------------------ y: Y offset from center
+    |    |      |        |     +------------------ Y: Y flip
+    |    |      |        |     |+----------------- X: X flip
+    |    |      |        |     || +--------------- p: priority
+    |    |      |        |     || | +------------- P: palette
+    |    |      |        |     || | |      +------ t: tile number
+    |    |  ____|___   __|___  || | |  ____|___
+    |    | /        \ /      \ ||/|/ \/        \
     s0000S0x.xxxxxxxx yyyyyyyy YXppPPPt.tttttttt
     \-----word------/ \-byte-/ \-----word------/
 
