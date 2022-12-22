@@ -6,7 +6,7 @@ import os
 from rom import Rom
 from lc_lz3 import decompress
 from room2hex import room2hex
-from structures import RoomHeader, RoomStateHeader, RoomEnemyPopulation, RoomEnemyGraphicsSet
+from structures import RoomHeader, RoomStateHeader, RoomEnemyPopulation, RoomEnemyGraphicsSet, RoomFxList
 from enemies import Enemies
 
 def align_comment(s, pos):
@@ -117,6 +117,38 @@ dw $FFFF                        ; end of list
 '''.strip())
   return s
 
+def format_room_fx_long(room_id, state_id, addr, fx):
+  return align_comments(f'''
+org $B4{addr:04X}
+dw ${fx.door_id:04X}            ; Door ID
+dw ${fx.base_y_position:04X}    ; Base Y position
+dw ${fx.target_y_position:04X}  ; Target Y position
+db ${fx.timer:04X}              ; Timer
+db ${fx.fx_type:04X}            ; FX Type
+db ${fx.fx_a:04X}               ; FX A (default layer blending configuration)
+db ${fx.fx_b:04X}               ; FX B (layer 3 blending configuration)
+db ${fx.fx_c:04X}               ; FX C (liquid options)
+db ${fx.palette_fx:04X}         ; Palette FX bitset
+db ${fx.animated_tiles:04X}     ; Animated tiles bitset
+db ${fx.palette_blend:04X}      ; Palette blend
+'''.strip())
+  return s
+
+def format_room_fx_short(fx):
+  return f'''
+dw ${fx.door_id:04X}, ${fx.base_y_position:04X}, ${fx.target_y_position:04X}, ${fx.y_velocity:04X} : db ${fx.timer:02X}, ${fx.fx_type:02X}, ${fx.fx_a:02X}, ${fx.fx_b:02X}, ${fx.fx_c:02X}, ${fx.palette_fx:02X}, ${fx.animated_tiles:02X}, ${fx.palette_blend:02X}
+'''.strip()
+
+def format_room_fx_list(room_id, state_id, addr, fx_list):
+  s = align_comments(f'''
+; Room ${room_id:04X} state ${state_id:04X}: FX
+org $B4{addr:04X}
+;  door   base   target veloc     time  type  A    B    C   pal  anim blend
+'''.strip())
+  for fx in fx_list:
+    s += "\n%s" % align_comments(format_room_fx_short(fx))
+  return s
+
 def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
   state_functions = room_header.state_functions
   state_header_addrs = sorted(set(func.state_header_addr for func in room_header.state_functions))
@@ -125,6 +157,8 @@ def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
   enemy_pops = [ (state_id, addr, RoomEnemyPopulation.extract(rom, addr)) for (state_id, addr) in enemy_pop_addrs ]
   enemy_graphics_set_addrs = sorted(set((state_header.state_id, state_header.enemy_graphics_set_addr) for state_header in state_headers))
   enemy_graphics_sets = [ (state_id, addr, RoomEnemyGraphicsSet.extract(rom, addr)) for (state_id, addr) in enemy_graphics_set_addrs ]
+  fx_list_addrs = sorted(set((state_header.state_id, state_header.fx_addr) for state_header in state_headers))
+  fx_lists = [ (state_id, addr, RoomFxList.extract(rom, addr)) for (state_id, addr) in fx_list_addrs ]
 
   print(format_room_header(room_id, room_header), file=out)
 
@@ -142,6 +176,10 @@ def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
   for (state_id, addr, enemy_graphics_set) in enemy_graphics_sets:
     print('', file=out)
     print(format_room_enemy_graphics_set(room_id, state_id, addr, enemy_graphics_set, enemies))
+
+  for (state_id, addr, fx_list) in fx_lists:
+    print('', file=out)
+    print(format_room_fx_list(room_id, state_id, addr, fx_list))
 
 def main():
   filename = sys.argv[1]

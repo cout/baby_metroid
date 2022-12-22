@@ -251,3 +251,50 @@ class RoomEnemyGraphicsSet(list):
     addr = (bank << 16) | offset
     rom.seek(addr)
     return cls.read_from(rom)
+
+@dataclass
+class RoomFx(object):
+  fmt = struct.Struct("<HHHHBBBBBBBB")
+
+  door_id: HexValue
+  base_y_position: HexValue
+  target_y_position: HexValue
+  y_velocity: HexValue
+  timer: HexValue
+  fx_type: HexValue
+  fx_a: HexValue
+  fx_b: HexValue
+  fx_c: HexValue
+  palette_fx: HexValue
+  animated_tiles: HexValue
+  palette_blend: HexValue
+
+  @classmethod
+  def read_from(cls, rom):
+    b = rom.read(cls.fmt.size)
+    values = cls.fmt.unpack(b)
+    values = [ HexValue(v) if type(v) is int else v for v in values ]
+    return cls(*values)
+
+  @classmethod
+  def extract(cls, rom, offset, bank=0x83):
+    addr = (bank << 16) | offset
+    rom.seek(addr)
+    return cls.read_from(rom)
+
+@dataclass
+class RoomFxList(list):
+  @classmethod
+  def read_from(cls, rom):
+    entries = cls()
+    while True:
+      entry = RoomFx.read_from(rom)
+      entries.append(entry)
+      if entry.door_id == 0: break
+    return entries
+
+  @classmethod
+  def extract(cls, rom, offset, bank=0x83):
+    addr = (bank << 16) | offset
+    rom.seek(addr)
+    return cls.read_from(rom)
