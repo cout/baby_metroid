@@ -54,4 +54,4 @@ dw $FFFF     ; end of list
 org $83885C
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 ; dw $0000, $FFFF, $FFFF, $0000 : db $00, $04, $02, $1E, $02, $1F, $02, $00
-dw $0000, $01D0, $FFFF, $0000 : db $00, $04, $02, $1E, $02, $1F, $03, $00
+dw $0000, $01D4, $FFFF, $0000 : db $00, $04, $02, $1E, $02, $1F, $03, $00
