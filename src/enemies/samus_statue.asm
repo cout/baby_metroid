@@ -147,6 +147,19 @@ dw $8000 : db $01 : dw $212e ; (  0,   1)
 
 }
 
+samus_statue_looking_left_spritemap:
+{
+
+dw $0004 ; number of entries
+
+;  s xxx       yy       pfnn
+dw $8000 : db $EC : dw $610c ; (-15, -14)
+dw $81F0 : db $EC : dw $610e ; (  0, -14)
+dw $8000 : db $FC : dw $6120 ; (-15,   1)
+dw $81F0 : db $FC : dw $6122 ; (  0,   1)
+
+}
+
 samus_statue_looking_up_instruction_list:
 {
 dw $7FFF, samus_statue_looking_up_spritemap
@@ -165,11 +178,18 @@ dw $7FFF, samus_statue_looking_down_spritemap
 dw $812F ; Sleep
 }
 
+samus_statue_looking_left_instruction_list:
+{
+dw $7FFF, samus_statue_looking_left_spritemap
+dw $812F ; Sleep
+}
+
 samus_statue_instruction_lists:
 
 dw samus_statue_looking_up_instruction_list
 dw samus_statue_looking_right_instruction_list
 dw samus_statue_looking_down_instruction_list
+dw samus_statue_looking_left_instruction_list
 
 samus_statue_init_ai:
 {
@@ -200,8 +220,8 @@ samus_statue_init_ai:
   LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
   LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
   LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
-  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
-  LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  ; LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
+  ; LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
 
 .return:
   RTL

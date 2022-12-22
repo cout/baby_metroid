@@ -36,26 +36,31 @@ dw $0000     ; Room setup routine (bank $8F)
 ; Room $B6EE state $B6FB: Enemy population
 org $A1AB80
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $E6FF, $01F0, $02D0, $0000, $A000, $0000, $0100, $0F07 ; fune
-dw $E6FF, $0110, $01E8, $0000, $A000, $0000, $0110, $0F07 ; fune
-dw $E6FF, $01F0, $01B0, $0000, $A000, $0000, $0100, $0F07 ; fune
-dw $E6FF, $01D0, $00D8, $0000, $A000, $0000, $0100, $0F07 ; fune
-dw $E6FF, $01F0, $0380, $0000, $A000, $0000, $0100, $0F07 ; fune
-dw $DFBF, $0150, $0130, $0050, $2000, $0000, $0000, $0080 ; boulder
-dw $DFBF, $01B8, $01D0, $0050, $2800, $0000, $0100, $0080 ; boulder
-dw $DFBF, $0128, $0260, $0050, $2800, $0000, $0000, $0080 ; boulder
-dw $D6BF, $0156, $0558, $0000, $2000, $0000, $0002, $0520 ; fireflea
-dw $D6BF, $01C8, $0538, $0000, $2000, $0000, $0003, $0518 ; fireflea
-dw $D6BF, $0238, $0558, $0000, $2000, $0000, $0002, $0520 ; fireflea
-dw $D6BF, $02A8, $0538, $0000, $2000, $0000, $0003, $0518 ; fireflea
-dw $D6BF, $0170, $0476, $0000, $2000, $0000, $0002, $0720 ; fireflea
+; dw $E6FF, $01F0, $02D0, $0000, $A000, $0000, $0100, $0F07 ; fune
+; dw $E6FF, $0110, $01E8, $0000, $A000, $0000, $0110, $0F07 ; fune
+; dw $E6FF, $01F0, $01B0, $0000, $A000, $0000, $0100, $0F07 ; fune
+; dw $E6FF, $01D0, $00D8, $0000, $A000, $0000, $0100, $0F07 ; fune
+; dw $E6FF, $01F0, $0380, $0000, $A000, $0000, $0100, $0F07 ; fune
+;  enemy          x      y      init   props  extra  param1 param2
+dw !samus_statue, $0130, $0094, $0000, $2400, $0000, $0003, $0000 ; statue
+dw $DFBF,         $01F0, $0380, $0000, $2000, $0000, $0000, $0080 ; boulder
+dw $DFBF,         $0150, $0130, $0050, $2000, $0000, $0000, $0080 ; boulder
+dw $DFBF,         $01B8, $01D0, $0050, $2800, $0000, $0100, $0080 ; boulder
+dw $DFBF,         $0128, $0260, $0050, $2800, $0000, $0000, $0080 ; boulder
+dw $D6BF,         $0156, $0558, $0000, $2000, $0000, $0002, $0520 ; fireflea
+dw $D6BF,         $01C8, $0538, $0000, $2000, $0000, $0003, $0518 ; fireflea
+dw $D6BF,         $0238, $0558, $0000, $2000, $0000, $0002, $0520 ; fireflea
+dw $D6BF,         $02A8, $0538, $0000, $2000, $0000, $0003, $0518 ; fireflea
+dw $D6BF,         $0170, $0476, $0000, $2000, $0000, $0002, $0720 ; fireflea
 dw $FFFF     ; end of list
-db $0A       ; death quota
+db $00       ; death quota
 
 ; Room $B6EE state $B6FB: Enemy graphics set
 org $B48871
-;  enemy  palette
-dw $D6BF, $0001 ; fireflea
-dw $DFBF, $0002 ; boulder
-dw $E6FF, $0003 ; fune
+;  enemy          palette
+dw $D6BF,         $0001 ; fireflea
+dw $DFBF,         $0002 ; boulder
+; dw $E6FF,         $0003 ; fune
+dw !samus_statue, $0007 ; statue
 dw $FFFF     ; end of list
+db $00
