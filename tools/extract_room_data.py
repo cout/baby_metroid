@@ -142,7 +142,7 @@ dw ${fx.door_id:04X}, ${fx.base_y_position:04X}, ${fx.target_y_position:04X}, ${
 def format_room_fx_list(room_id, state_id, addr, fx_list):
   s = align_comments(f'''
 ; Room ${room_id:04X} state ${state_id:04X}: FX
-org $B4{addr:04X}
+org $83{addr:04X}
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 '''.strip())
   for fx in fx_list:
