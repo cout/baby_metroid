@@ -51,3 +51,4 @@ Bugs:
 * Cannot run through pirates in croc speedway with speed
 * Enemies that can move through walls can pull Samus through the floor
     (this is particularly bad with rinkas in MB room)
+* Screw attack does not work
