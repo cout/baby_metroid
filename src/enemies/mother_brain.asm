@@ -18,3 +18,10 @@ LDA #$BDD2
 
 org $A9C849
 RTS
+
+;;
+; Skip phase 3
+;
+
+org $A9C059
+LDA #$AF54
