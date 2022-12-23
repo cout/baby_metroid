@@ -23,6 +23,7 @@ incsrc enemies/samus_statue.asm
 incsrc enemies/fune.asm
 incsrc enemies/zebetite.asm
 incsrc enemies/mother_brain.asm
+incsrc enemies/baby.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
 incsrc rooms/climb.asm
@@ -69,3 +70,4 @@ incsrc rooms/wasteland.asm
 incsrc rooms/ridley_etank.asm
 incsrc rooms/firefleas.asm
 incsrc rooms/spring_ball_maze.asm
+incsrc rooms/tourian_escape_1.asm
