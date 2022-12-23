@@ -74,10 +74,36 @@ JMP $B31A
 
 org $A9B33C
 
-LDA #$0000
-STA $1840
+LDA.w #mother_brain_state_disable_earthquake
+STA $0FA8
 RTS
 
 ; TODO - diagnose baby graphical glitch by pointing various state
 ; changes here to find out which one causes the glitch
 mother_brain_null_state = $A9B345
+
+org !FREESPACE_A9
+
+mother_brain_state_disable_earthquake:
+{
+  ; Disable earthquake timer
+  LDA #$0000
+  STA $1840
+
+  ; Queue elevator music track
+  LDA #$0003
+  JSL $808FC1
+
+  LDA.w #mother_brain_state_final
+  STA $0FA8
+
+  RTS
+}
+
+mother_brain_state_final:
+{
+  RTS
+}
+
+end_mother_brain_freespace_a9:
+!FREESPACE_A9 = end_mother_brain_freespace_a9
