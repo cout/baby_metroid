@@ -45,7 +45,31 @@ JMP $AF91
 ;
 
 org $A9B127
-JMP $B1EE
+
+mother_brain_state_final_death_sequence:
+{
+  ; Set Mother Brain as intangible/invisible and disable processing
+  ; instructions
+  LDA $0FC6
+  ORA #$0500
+  AND #$DFFF
+  STA $0FC6
+
+  ; Disable all Mother Brain hitboxes
+  LDA #$0000
+  STA $7E7808
+
+  ; Clear Mother Brain extra properties
+  STZ $0FC8
+
+  ; Next state is $B211 (wait for timer)
+  LDA #$B211
+  STA $0FA8
+  LDA #$0014
+  STA $0FB2
+
+  RTS
+}
 
 ;;
 ; Disable time bomb text; queue elevator music
