@@ -21,6 +21,7 @@ incsrc bosses/draygon.asm
 incsrc bosses/ridley.asm
 incsrc enemies/samus_statue.asm
 incsrc enemies/fune.asm
+incsrc enemies/zebetite.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
 incsrc rooms/climb.asm
