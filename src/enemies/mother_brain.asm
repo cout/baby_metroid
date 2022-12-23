@@ -11,3 +11,10 @@ RTL
 
 org $A98F3F
 LDA #$BDD2
+
+;;
+; Don't put Samus into drained pose when baby latches
+;
+
+org $A9C849
+RTS
