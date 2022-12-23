@@ -44,10 +44,14 @@ JMP $AF91
 ; Skip head falling
 ;
 
-org $A9B127
+org $A9B115
 
 mother_brain_state_final_death_sequence:
 {
+  ; Stop drawing neck
+  LDA #$87D0
+  STA $0FE8
+
   ; Set Mother Brain as intangible/invisible and disable processing
   ; instructions
   LDA $0FC6
