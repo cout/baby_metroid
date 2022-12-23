@@ -26,7 +26,8 @@ dw tourian_escape_1_enemy_graphics_set ; Enemy graphics set offset (bank $B4)
 dw $C1C1     ; Layer 2 scroll
 dw $DE78     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
-dw $E5A0     ; Room main routine (bank $8F)
+; dw $E5A0     ; Room main routine (bank $8F)
+dw $E5A3     ; Room main routine (bank $8F)
 dw $C87B     ; Room PLM list address (bank $8F)
 dw $E439     ; Library background (bank $8F)
 dw $C91F     ; Room setup routine (bank $8F)
