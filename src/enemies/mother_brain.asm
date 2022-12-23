@@ -45,7 +45,7 @@ JMP $AF91
 ;
 
 org $A9B127
-JMP $B1BE
+JMP $B1EE
 
 ;;
 ; Disable time bomb text
@@ -77,10 +77,6 @@ org $A9B33C
 LDA.w #mother_brain_state_disable_earthquake
 STA $0FA8
 RTS
-
-; TODO - diagnose baby graphical glitch by pointing various state
-; changes here to find out which one causes the glitch
-mother_brain_null_state = $A9B345
 
 org !FREESPACE_A9
 
