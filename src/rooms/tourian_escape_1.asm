@@ -30,7 +30,8 @@ dw $0000     ; Room var
 dw $E5A3     ; Room main routine (bank $8F)
 dw $C87B     ; Room PLM list address (bank $8F)
 dw $E439     ; Library background (bank $8F)
-dw $C91F     ; Room setup routine (bank $8F)
+; dw $C91F     ; Room setup routine (bank $8F)
+dw $C932     ; Room setup routine (bank $8F)
 
 org !FREESPACE_A1
 
