@@ -25,3 +25,10 @@ RTS
 
 org $A9C059
 LDA #$AF54
+
+;;
+; Don't put Samus into drained pose when baby tries to heal
+;
+
+org $A9C977
+JMP $C97E
