@@ -49,3 +49,5 @@ Bugs:
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
 * Cannot run through pirates in croc speedway with speed
+* Enemies that can move through walls can pull Samus through the floor
+    (this is particularly bad with rinkas in MB room)
