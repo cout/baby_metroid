@@ -22,8 +22,8 @@
 !FREESPACE_A6 = $A6FEBC ; 324 bytes
 !FREESPACE_A7 = $A7FF82 ; 126 bytes
 !FREESPACE_A8 = $A8F9BE ; 1602 bytes
-!FREESPACE_A9 = $A8FB70 ; 1168 bytes
-!FREESPACE_AA = $A8F7D3 ; 2093 bytes
+!FREESPACE_A9 = $A9FB70 ; 1168 bytes
+!FREESPACE_AA = $AAF7D3 ; 2093 bytes
 
 ; TODO TODO TODO - above values are unaligned addresses; could this be
 ; the cause of mysterious crashes when I try to put an enemy (samus
