@@ -48,11 +48,60 @@ org $A9B127
 JMP $B1EE
 
 ;;
-; Disable time bomb text
+; Disable time bomb text; queue elevator music
 ;
 
 org $A9B21C
-LDA #$B2F9 ; TODO - this skips "Load exploded escape door particles tiles"
+LDA #$B26D
+
+org $A9B26D
+
+mother_brain_state_start_escape_sequence:
+{
+  ; Load exploding door tiles
+  LDX #$902F
+  JSR $C5BE
+
+  ; Return if not finished loading
+  BCS .next_state
+  RTS
+
+.next_state:
+  ; Set palette for exploding door
+  LDY #$9534
+  LDX #$0122
+  LDA #$000E
+  JSL $A9D2E4
+
+  ; Queue elevator music track
+  LDA #$0003
+  JSL $808FC1
+
+  ; Set earthquake type/timer
+  LDA #$0005
+  STA $183E
+  LDA #$FFFF
+  STA $1840
+
+  ; Set room palette to flashing
+  LDY #$FFC9 ; shutter
+  JSL $8DC4E9
+  LDY #$FFCD ; background
+  JSL $8DC4E9
+  LDY #$FFD1 ; level
+  JSL $8DC4E9
+  LDY #$FFD5 ; orbs
+  JSL $8DC4E9
+
+  ; Disable unpause hook
+  LDA #$0000
+  STA $7E7844
+
+  LDA #$B2F9
+  STA $0FA8
+
+  RTS
+}
 
 ;;
 ; Disable escape timer
@@ -85,10 +134,6 @@ mother_brain_state_disable_earthquake:
   ; Disable earthquake timer
   LDA #$0000
   STA $1840
-
-  ; Queue elevator music track
-  LDA #$0003
-  JSL $808FC1
 
   LDA.w #mother_brain_state_final
   STA $0FA8
