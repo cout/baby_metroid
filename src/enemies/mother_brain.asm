@@ -32,3 +32,17 @@ LDA #$AF54
 
 org $A9C977
 JMP $C97E
+
+;;
+; Disable palette change (messes up baby graphics)
+;
+
+org $A9AF77
+JMP $AF91
+
+;;
+; Skip head falling
+;
+
+org $A9B127
+JMP $B1BE
