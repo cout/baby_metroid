@@ -1,3 +1,5 @@
+!BABY_HYPER_FIRING_RATE = #$0030
+
 org !FREESPACE_A0
 
 baby:
@@ -121,7 +123,7 @@ LDX #$0000
   ; state.
   JSL baby_fire_hyper_beam
 
-  LDA #$0100
+  LDA !BABY_HYPER_FIRING_RATE
   STA $0FB2
   LDA.w #baby_state_follow_samus
   STA $0FA8,x
