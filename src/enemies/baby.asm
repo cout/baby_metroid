@@ -230,6 +230,9 @@ baby_fire_hyper_beam:
   STX $14
   JSL $90B197 ; set initial speed for projectile (including boost from Samus)
 
+  ; TODO - can we give the baby hyper colors like Samus does when she
+  ; fires?
+
 .return:
   PLX ; TODO - does this affect the carry flag?
   RTL
