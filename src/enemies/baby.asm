@@ -193,11 +193,6 @@ baby_fire_hyper_beam:
   ; 1. Set direction correctly (0..9 for one of 8 possible directions,
   ;    up and down are duplicated)
   ; 2. Compute vector from baby to target then set X/Y speed accordingly
-  ; 3. Are the baby's shots being blocked by the shutters or by the
-  ;    baby?
-  ; 4. The shutters definitely do not respond to hyper beam currently.
-  ;    To test if this is because of the baby: remove baby from the
-  ;    room, give Samus hyper beam, and see if she can get out.
   LDA #$0007  : STA $0C04,x ; direction
   LDA $0F7A,y : STA $0B64,x ; X pos
   LDA $0F7E,y : STA $0B78,x ; Y pos
