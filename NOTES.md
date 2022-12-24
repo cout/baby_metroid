@@ -966,6 +966,31 @@ An enemy projectile is spawned by invoking $86:8097 with:
 
 The init AI routine will be called with Y=projectile offset.
 
+### Samus projectile state
+
+TODO: Move this to an appropriate location
+
+| Address    | Bytes | Description                     | Initial value        |
+| ---------- | ----- | ------------------------------- | -------------------- |
+| $7E:0DDE   | 2     | Current projectile index?       |                      |
+| $7E:0BDC+y | 2     | Projectile X speed              |                      |
+| $7E:0BF0+y | 2     | Projectile Y speed              |                      |
+| $7E:0C18+y | 2     | Projectile type                 |                      |
+| $7E:0C2C+y | 2     | Projectile damage               |                      |
+
+Direction:
+
+      8  9  0  1
+       \  ||  /
+        \ || /
+    7 ___\||/___ 2
+         /||\
+        / || \
+       /  ||  \
+      6  5  4  3
+
+
+
 ### Enemy projectile state
 
 Projectile have the following in-memory state (kept as lists rather than
@@ -973,7 +998,6 @@ a structure for each projectile):
 
 | Address    | Bytes | Description                     | Initial value        |
 | ---------- | ----- | ------------------------------- | -------------------- |
-| $7E:0C18+y | 2     | Projectile type                 |                      |
 | $7E:18A6   | 2     | Current projectile index        |                      |
 | $7E:1997+y | 2     | Projectile ID                   | X                    |
 | $7E:19BB+y | 2     | VRAM tiles index                | 0000h                |
