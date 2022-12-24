@@ -32,6 +32,15 @@ handle_projectile_damage_beam:
   AND #$0004
   BNE .handle_beam_shot
 
+  ; If the projectile type is hyper bean, handle the beam shot normally
+  PHX
+  LDA $18A6
+  TAX
+  LDA $0C18,x
+  PLX
+  AND #$1000
+  BNE .handle_beam_shot
+
 .spawn_drops:
   LDA $0F7A,x : STA $12 ; $12 = enemy x pos
   LDA $0F7E,x : STA $14 ; $14 = enemy y pos
@@ -40,6 +49,7 @@ handle_projectile_damage_beam:
 
   ; return with no damage
   JML $A0A7D2
+
 .handle_beam_shot:
   ; handle the beam shot
   JML $A0A72D
