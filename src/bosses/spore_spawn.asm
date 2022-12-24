@@ -63,40 +63,45 @@ db $02,$82,$82,$82,$80,$82,$82,$82,$82,$82,$82,$82, $82,$82,$80,$80,$80,$80,$80,
 org $A5E6C7
 
 instruction_list_spore_spawn_alive:
-
-dw $E91C, $0000
-dw $0008, $EF61        ; mouth fully open
-dw $E8BA, $EB1B        ; start fight
-dw $812F               ; sleep
+{
+  dw $E91C, $0000
+  dw $0008, $EF61        ; mouth fully open
+  dw $E8BA, $EB1B        ; start fight
+  dw $812F               ; sleep
+}
 
 instruction_list_spore_spawn_fight_started:
-
-dw $E82D, $0000, $0000 ; speed = 00h, angle delta = 0
+{
+  dw $E82D, $0000, $0000 ; speed = 00h, angle delta = 0
+}
 
 instruction_list_spore_spawn_main_loop:
-
-dw $E8BA, $EB52        ; handle spore spawn movement
-dw $812F               ; sleep
+{
+  dw $E8BA, $EB52        ; handle spore spawn movement
+  dw $812F               ; sleep
+}
 
 org $A5E729
 
 instruction_list_spore_spawn_close_mouth:
-
-; Prevent the mouth from closing
-dw $E771
-dw $80ED, instruction_list_spore_spawn_fight_started
+{
+  ; Prevent the mouth from closing
+  dw $E771
+  dw $80ED, instruction_list_spore_spawn_fight_started
+}
 
 ;;
 ; Skip the descent into the room
 
 org $A5EB1B ; spore spawn descent function
-
-LDX $0E54
-LDA #$0270
-STA $0F7E,x
-LDA instruction_list_spore_spawn_fight_started
-STA $0F92,x
-RTS
+{
+  LDX $0E54
+  LDA #$0270
+  STA $0F7E,x
+  LDA instruction_list_spore_spawn_fight_started
+  STA $0F92,x
+  RTS
+}
 
 ;;
 ; Disable spore spawn movement reaction to being shot
@@ -135,37 +140,36 @@ org !FREESPACE_A5
 
 spore_spawn_projectile_check:
 {
-BIT #$0700
-BNE .missiles_or_supers
-BRA .beam
+  BIT #$0700
+  BNE .missiles_or_supers
+  BRA .beam
 
 .missiles_or_supers:
-LDX $0E54
-LDA $0F8C,x : PHA      ; Push [enemy HP]
-JSL spore_spawn_damage
-PLA : STA $12          ; $12 = [previous enemy HP]
-LDX $0E54
-SEC
-SBC $0F8C,x
-STA $12                ; $12 = [enemy HP] - [previous enemy HP]
-LDA $0F8C,x            ; A = [enemy HP]
-ADC $12                ; A += [change in enemy HP]
-ADC $12                ; A += [change in enemy HP]
-STA $0F8C,x            ; [enemy HP] = A
-JSR play_sad_sound
-; TODO - change color to black if too much damage?
-; TODO - (maybe even explode)
-; TODO - prevent overflow?
-; TODO - allow an exit out of the room
-RTL
+  LDX $0E54
+  LDA $0F8C,x : PHA      ; Push [enemy HP]
+  JSL spore_spawn_damage
+  PLA : STA $12          ; $12 = [previous enemy HP]
+  LDX $0E54
+  SEC
+  SBC $0F8C,x
+  STA $12                ; $12 = [enemy HP] - [previous enemy HP]
+  LDA $0F8C,x            ; A = [enemy HP]
+  ADC $12                ; A += [change in enemy HP]
+  ADC $12                ; A += [change in enemy HP]
+  STA $0F8C,x            ; [enemy HP] = A
+  JSR play_sad_sound
+  ; TODO - change color to black if too much damage?
+  ; TODO - (maybe even explode)
+  ; TODO - prevent overflow?
+  ; TODO - allow an exit out of the room
+  RTL
 
 .beam:
-LDA #$0031
-JSL $8090CB
-JSL spore_spawn_damage
-JSR play_happy_sound
-RTL
-
+  LDA #$0031
+  JSL $8090CB
+  JSL spore_spawn_damage
+  JSR play_happy_sound
+  RTL
 }
 
 play_sad_sound:
