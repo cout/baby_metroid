@@ -32,7 +32,7 @@ handle_projectile_damage_beam:
   AND #$0004
   BNE .handle_beam_shot
 
-  ; If the projectile type is hyper bean, handle the beam shot normally
+  ; If the projectile type is hyper beam, handle the beam shot normally
   PHX
   LDA $18A6
   TAX
