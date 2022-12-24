@@ -47,7 +47,7 @@ org !FREESPACE_A9
 
 baby_init_ai:
 {
-  LDX $0E54            
+  LDX $0E54
   LDA $0F86,x : ORA #$3000 : STA $0F86,x  ; process instructions and block plasma
   LDA #$CFA2 : STA $0F92,x                ; instruction pointer
   LDA #$0001 : STA $0F94,x                ; instruction timer
@@ -61,7 +61,7 @@ baby_init_ai:
   LDA #$F683 : STA $7E781E,x              ; Enemy palette function = $F683 (normal)
 
   ; Set initial state function
-  LDA.w #baby_state_follow_samus
+  LDA.w #baby_state_follow_samus_hyper
   STA $0FA8,x
 
   ; Set palette colors and return
@@ -87,7 +87,64 @@ baby_main_ai:
   RTL
 }
 
+baby_state_follow_samus_hyper:
+{
+  ; Give Samus hyper beam (TODO - this should not be necessary; I'm just
+  ; doing it as an experiment to see if that's why the baby can't shoot
+  ; hyper)
+  LDA #$0003
+  JSL $91E4AD
+
+LDX #$0000
+
+.loop:
+  ; If enemy id is 0, skip it
+  LDA $0F78,x
+  BEQ .next
+
+  ; If this is the baby, skip it
+  CMP !baby
+  BEQ .next
+
+  ; If enemy is deleted, skip it
+  LDA $0F86,x
+  BIT #$0200
+  BNE .next
+
+  JSL baby_fire_hyper_beam
+
+  LDA #$0100
+  STA $0FB2
+  LDA.w #baby_state_follow_samus
+  STA $0FA8,x
+
+  BRA .follow_samus_and_return
+
+.next:
+  TXA
+  CLC
+  ADC #$0040
+  CMP #$0800
+  TAX
+  BPL .loop
+
+.follow_samus_and_return:
+  JMP follow_samus
+}
+
 baby_state_follow_samus:
+{
+  DEC $0FB2,x
+  BNE .follow_samus_and_return
+
+  LDA.w #baby_state_follow_samus_hyper
+  STA $0FA8,x
+
+.follow_samus_and_return:
+  JMP follow_samus
+}
+
+follow_samus:
 {
   LDA $0AF6              ;\
   STA $12                ;} $12 = [Samus X position]
@@ -102,6 +159,72 @@ baby_state_follow_samus:
   JMP $F451              ; Gradually accelerate towards point ([$12], [$14])
 }
 
-
 end_baby_freespace_a9:
 !FREESPACE_A9 = end_baby_freespace_a9
+
+org !FREESPACE_90
+
+baby_fire_hyper_beam:
+{
+  PHX
+
+  TXA : TAY
+
+  LDA $0CCE
+  CMP #$0005
+  BPL .return
+
+  INC
+  STA $0CCE
+
+  ; Find an empty projectile slot
+  LDX #$0000
+.next_slot:
+  LDA $0C2C,x
+  BEQ .fire_hyper_beam
+  INX
+  INX
+  CPX #$000A
+  BMI .next_slot
+  BRA .return
+
+.fire_hyper_beam:
+  ; TODO:
+  ; 1. Set direction correctly (0..9 for one of 8 possible directions,
+  ;    up and down are duplicated)
+  ; 2. Compute vector from baby to target then set X/Y speed accordingly
+  ; 3. Are the baby's shots being blocked by the shutters or by the
+  ;    baby?
+  ; 4. The shutters definitely do not respond to hyper beam currently.
+  ;    To test if this is because of the baby: remove baby from the
+  ;    room, give Samus hyper beam, and see if she can get out.
+  LDA #$0007  : STA $0C04,x ; direction
+  LDA $0F7A,y : STA $0B64,x ; X pos
+  LDA $0F7E,y : STA $0B78,x ; Y pos
+  LDA #$9018  : STA $0C18,x ; projectile type
+  LDA #$000A  : STA $18AC   ; projectile invincibility timer
+
+  LDA #$001F
+  JSL $809021 ; queue sound from library 1, max=15
+
+  JSL $938000 ; initialize projectile
+  STZ $0BDC,x ; projectile X speed = 1
+  STZ $0BF0,x ; projectile Y speed = 0
+
+  STX $0DDE ; set current projectile index
+  JSR $BDB2 ; beam collision detection
+  LDX $0DDE ; X = current projectile index
+
+  LDA $9383BF : STA $0C2C,x ; projectile damage = hyper beam damage value
+  LDA #$B159  : STA $0C68,x ; Projectile pre-instruction = B159h
+
+  STX $14
+  JSL $90B197 ; set initial speed for projectile (including boost from Samus)
+
+.return:
+  PLX ; TODO - does this affect the carry flag?
+  RTL
+}
+
+end_baby_freespace_90:
+!FREESPACE_90 = end_baby_freespace_90

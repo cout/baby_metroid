@@ -40,7 +40,7 @@ tourian_escape_1_enemy_population:
 ; Room $DE4D state $DE5A: Enemy population
 ; org $A1E3AA
 ;  enemy  x      y      init   props  extra  param1 param2
-dw !baby, $01D2, $008B, $0000, $2800, $0000, $0000, $0000 ; baby
+dw !baby, $01D2, $008B, $0000, $2C00, $0000, $0000, $0000 ; baby
 dw $D5BF, $01B8, $0040, $0108, $A800, $FF00, $2000, $0010 ; destructible shutter2
 dw $D5BF, $01B8, $00C0, $0008, $A800, $00FF, $2000, $0010 ; destructible shutter2
 dw $D5BF, $0168, $0040, $0108, $A800, $FF00, $2000, $0010 ; destructible shutter2
