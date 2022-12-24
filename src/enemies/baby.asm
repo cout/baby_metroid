@@ -78,20 +78,21 @@ baby_main_ai:
   JSR ($0FA8,x)          ; Execute [enemy function]
   JSL $A9C3EF            ; Move enemy according to enemy velocity
   JSR $C79C              ; Handle flashing
-  LDX $0E54            
-  LDA $7E781E,x          ;\
-  STA $12                ;|
-  PEA $C79A              ;} Execute [enemy palette function]
-  JMP ($0012)            ;/
+
+  ; Execute enemy palette function
+  LDX $0E54
+  LDA $7E781E,x
+  STA $12
+  PEA $C79A
+  JMP ($0012)
 
   RTL
 }
 
 baby_state_follow_samus_hyper:
 {
-  ; Give Samus hyper beam (TODO - this should not be necessary; I'm just
-  ; doing it as an experiment to see if that's why the baby can't shoot
-  ; hyper)
+  ; Give Samus hyper beam (TODO - if we don't do this, then beam
+  ; graphics are glitched)
   LDA #$0003
   JSL $91E4AD
 
@@ -146,17 +147,21 @@ baby_state_follow_samus:
 
 follow_samus:
 {
-  LDA $0AF6              ;\
-  STA $12                ;} $12 = [Samus X position]
+  ; $12 = Samus X position
+  LDA $0AF6
+  STA $12
 
-  LDA $0AFA              ;\
-  SEC                    ;|
-  SBC #$0014             ;} $14 = [Samus Y position] - 20
-  STA $14                ;/
+  ; $14 = Samus Y position - 20
+  LDA $0AFA
+  SEC
+  SBC #$0014
+  STA $14
 
-  LDY #$0000             ; Y = 0 (slowest acceleration)
+  ; Y = 0 (slowest acceleration)
+  LDY #$0000
 
-  JMP $F451              ; Gradually accelerate towards point ([$12], [$14])
+  ; Gradually accelerate towards point ([$12], [$14])
+  JMP $F451
 }
 
 end_baby_freespace_a9:
