@@ -144,21 +144,42 @@ spore_spawn_projectile_check:
 
 .missiles_or_supers:
   LDX $0E54
-  LDA $0F8C,x : PHA      ; Push [enemy HP]
+
+  ; Push current enemy HP to the stack
+  LDA $0F8C,x : PHA
+
   JSL spore_spawn_damage
-  PLA : STA $12          ; $12 = [previous enemy HP]
+
+  ; $12 = previous enemy HP
+  PLA : STA $12
+
+  ; $12 = [previous enemy HP] - [enemy HP]
   LDX $0E54
   SEC
   SBC $0F8C,x
-  STA $12                ; $12 = [enemy HP] - [previous enemy HP]
-  LDA $0F8C,x            ; A = [enemy HP]
-  ADC $12                ; A += [change in enemy HP]
-  ADC $12                ; A += [change in enemy HP]
+  STA $12
+
+  ; Add enemy HP back to undo the damage
+  LDA $0F8C,x
+  CLC
+  ADC $12
+
+  ; Don't allow "undamage" too far beyond beyond original HP
+  ; TODO - I shouldn't hard-code this
+  CMP #$03C0
+  BPL .store_new_hp
+
+  ; Add enemy HP back to "undamage"
+  CLC
+  ADC $12
+
+.store_new_hp:
   STA $0F8C,x            ; [enemy HP] = A
+
   JSR play_sad_sound
+
   ; TODO - change color to black if too much damage?
   ; TODO - (maybe even explode)
-  ; TODO - prevent overflow?
   ; TODO - allow an exit out of the room
   RTL
 
