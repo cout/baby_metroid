@@ -29,6 +29,7 @@ incsrc plm/blue_suit_block.asm
 incsrc rooms/climb.asm
 incsrc rooms/pit_room.asm
 incsrc rooms/early_supers.asm
+incsrc rooms/spore_spawn.asm
 incsrc rooms/noob_bridge.asm
 incsrc rooms/bat_room.asm
 incsrc rooms/below_spazer.asm
