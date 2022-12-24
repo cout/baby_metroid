@@ -24,6 +24,19 @@ class RoomEventStateFunction(object):
     self.state_header_addr = HexValue(state_header_addr)
 
 @dataclass
+class RoomBossStateFunction(object):
+  type: str
+  func: HexValue
+  state_header_addr: HexValue
+  boss: HexValue
+
+  def __init__(self, type, func, boss, state_header_addr):
+    self.type = type
+    self.func = HexValue(func)
+    self.boss = HexValue(boss)
+    self.state_header_addr = HexValue(state_header_addr)
+
+@dataclass
 class RoomStateFunction(object):
   type: str
   func: HexValue
@@ -40,7 +53,7 @@ class RoomStateFunction(object):
     if func == 0xE5E6: return RoomStateFunction('default', None, rom.tell() & 0xFFFF)
     elif func == 0xE5FF: return cls('main_area_boss', func, *struct.unpack('<H', rom.read(2)))
     elif func == 0xE612: return RoomEventStateFunction('event', func, *struct.unpack('<BH', rom.read(3)))
-    elif func == 0xE629: return RoomEventStateFunction('boss', func, *struct.unpack('<BH', rom.read(3)))
+    elif func == 0xE629: return RoomBossStateFunction('boss', func, *struct.unpack('<BH', rom.read(3)))
     elif func == 0xE562: return cls('zebes_awake', func, *struct.unpack('<H', rom.read(2)))
     elif func == 0xE669: return cls('pbs', func, *struct.unpack('<H', rom.read(2)))
     else: raise RuntimeError("Unknown event state function %04Xh" % func)

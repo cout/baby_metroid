@@ -35,7 +35,7 @@ db ${room.h                         :02X} ; Height (in screens)
 db ${room.up_scroller               :02X} ; Up scroller
 db ${room.down_scroller             :02X} ; Down scroller
 db ${room.special_gfx               :02X} ; Special graphics bits
-dw ${room.doorout                   :04X} ; Special graphics bits
+dw ${room.doorout                   :04X} ; Door out
 '''.strip())
 
 def format_room_state_function(room_id, func):
@@ -47,11 +47,17 @@ dw ${0xE5E6                               :04X} ; State ${state_id:04X} function
   elif func.type == 'event':
     return align_comments(f'''
 dw ${func.func                            :04X} ; State ${state_id:04X} function ({func.type})
+db ${func.event                           :02X} ; Event
 dw ${func.state_header_addr               :04X} ; State header address
-dw ${func.event                           :04X} ; Event
+'''.lstrip())
+  elif func.type == 'boss':
+    return align_comments(f'''
+dw ${func.func                            :04X} ; State ${state_id:04X} function ({func.type})
+db ${func.boss                            :02X} ; Boss
+dw ${func.state_header_addr               :04X} ; State header address
 '''.lstrip())
   else:
-    s = align_comments(f'''
+    return align_comments(f'''
 dw ${func.func                            :04X} ; State ${state_id:04X} function ({func.type})
 dw ${func.state_header_addr               :04X} ; State header address
 '''.strip())
