@@ -112,6 +112,13 @@ LDX #$0000
   BIT #$0200
   BNE .next
 
+  ; TODO - this is getting triggered even when there are no more enemies
+  ; left in the room.
+  ;
+  ; To debug, I need to figure out which enemy is targeted.  Since we
+  ; don't want it to look like Samus is firing the beam, the baby needs
+  ; to move away from Samus, so I think we need a "target lock acquired"
+  ; state.
   JSL baby_fire_hyper_beam
 
   LDA #$0100
