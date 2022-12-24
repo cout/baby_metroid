@@ -132,9 +132,7 @@ org $A5ED62
 
 BRL spore_spawn_projectile_check
 
-org $A5ED6D
-
-spore_spawn_damage:
+spore_spawn_damage = $A5ED6D
 
 org !FREESPACE_A5
 
@@ -208,3 +206,6 @@ play_happy_sound:
 ; * (but - if only charge shots damage spore spawn then it's possible to
 ;   softlock!)
 ; * Spore spawn color change during fight is too subtle
+
+end_spore_spawn_freespace_a5:
+!FREESPACE_A5 := end_spore_spawn_freespace_a5
