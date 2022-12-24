@@ -27,6 +27,7 @@ incsrc enemies/baby.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
 incsrc rooms/climb.asm
+incsrc rooms/bomb_torizo.asm
 incsrc rooms/pit_room.asm
 incsrc rooms/early_supers.asm
 incsrc rooms/spore_spawn.asm
