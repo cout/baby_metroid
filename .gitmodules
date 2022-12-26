@@ -1,0 +1,4 @@
+[submodule "tools/asar"]
+	path = tools/asar
+	url = https://github.com/thedopefish/asar.git
+	ignore = untracked

@@ -1,10 +1,13 @@
 SHELL = bash -o pipefail
 
-ASAR = ../sm_practice_hack/tools/asar -w1013
+ASAR_DIR = tools/asar
+ASAR = $(ASAR_DIR)/build/asar/bin/asar
 FLIPS = ../Flips/flips
 HEX2BIN = tools/hex2bin.py
 COMPRESS = tools/compress.py
 GENERATE_DEPS = tools/generate_deps.py
+
+ASAR_FLAGS = -w1013 --no-title-check
 
 SOURCES = \
 src/main.asm
@@ -73,16 +76,16 @@ build/ff.sfc: build/.stamp
 build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.ips
 	$(FLIPS) --apply build/baby_metroid.ips resources/sm_orig.sfc build/baby_metroid.sfc
 
-build/baby_metroid.00.sfc: build/.stamp build/00.sfc src/main.asm $(SOURCES) ${ROOMS}
+build/baby_metroid.00.sfc: build/.stamp build/00.sfc src/main.asm $(SOURCES) $(ROOMS) $(ASAR)
 	echo "build/baby_metroid.00.sfc: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.00.sfc.d
 	cp build/00.sfc build/.baby_metroid.00.sfc
-	$(ASAR) --no-title-check "$$@" src/main.asm build/.baby_metroid.00.sfc
+	$(ASAR) $(ASAR_FLAGS) "$$@" src/main.asm build/.baby_metroid.00.sfc
 	mv build/.baby_metroid.00.sfc build/baby_metroid.00.sfc
 
-build/baby_metroid.ff.sfc: build/.stamp build/ff.sfc src/main.asm $(SOURCES) ${ROOMS}
+build/baby_metroid.ff.sfc: build/.stamp build/ff.sfc src/main.asm $(SOURCES) $(ROOMS) $(ASAR)
 	echo "build/baby_metroid.ff.sfc: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.ff.sfc.d
 	cp build/ff.sfc build/.baby_metroid.ff.sfc
-	$(ASAR) --no-title-check "$$@" src/main.asm build/.baby_metroid.ff.sfc
+	$(ASAR) $(ASAR_FLAGS) "$$@" src/main.asm build/.baby_metroid.ff.sfc
 	mv build/.baby_metroid.ff.sfc build/baby_metroid.ff.sfc
 
 build/baby_metroid.ips: build/.stamp build/baby_metroid.00.sfc build/baby_metroid.ff.sfc
@@ -90,5 +93,8 @@ build/baby_metroid.ips: build/.stamp build/baby_metroid.00.sfc build/baby_metroi
 
 src/rooms/%.bin: src/rooms/%.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
+
+$(ASAR):
+	mkdir -p $(ASAR_DIR)/build && cd $(ASAR_DIR)/build && cmake ../src && make
 
 -include $(DEPENDENCY_FILES)
