@@ -13,13 +13,10 @@ SOURCES = \
 src/main.asm
 
 DEPENDENCY_FILES = \
-	build/baby_metroid.00.sfc.d \
-	build/baby_metroid.ff.sfc.d \
+	build/baby_metroid.ips.d \
 
 TARGETS = \
 	build/baby_metroid.sfc \
-	build/baby_metroid.00.sfc \
-	build/baby_metroid.ff.sfc \
 	build/baby_metroid.ips \
 
 ROOMS = \
@@ -68,28 +65,12 @@ build/.stamp:
 	mkdir -p build
 	touch build/.stamp
 
-build/00.sfc: build/ff.sfc
-
-build/ff.sfc: build/.stamp
-	./resources/create_dummies.py ../build/00.sfc ../build/ff.sfc
-
 build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.ips
 	$(FLIPS) --apply build/baby_metroid.ips resources/sm_orig.sfc build/baby_metroid.sfc
 
-build/baby_metroid.00.sfc: build/.stamp build/00.sfc src/main.asm $(SOURCES) $(ROOMS) $(ASAR)
-	echo "build/baby_metroid.00.sfc: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.00.sfc.d
-	cp build/00.sfc build/.baby_metroid.00.sfc
-	$(ASAR) $(ASAR_FLAGS) "$$@" src/main.asm build/.baby_metroid.00.sfc
-	mv build/.baby_metroid.00.sfc build/baby_metroid.00.sfc
-
-build/baby_metroid.ff.sfc: build/.stamp build/ff.sfc src/main.asm $(SOURCES) $(ROOMS) $(ASAR)
-	echo "build/baby_metroid.ff.sfc: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.ff.sfc.d
-	cp build/ff.sfc build/.baby_metroid.ff.sfc
-	$(ASAR) $(ASAR_FLAGS) "$$@" src/main.asm build/.baby_metroid.ff.sfc
-	mv build/.baby_metroid.ff.sfc build/baby_metroid.ff.sfc
-
-build/baby_metroid.ips: build/.stamp build/baby_metroid.00.sfc build/baby_metroid.ff.sfc
-	./resources/create_ips.py ../build/baby_metroid.00.sfc ../build/baby_metroid.ff.sfc ../build/baby_metroid.ips
+build/baby_metroid.ips: $(ASAR) $(SOURCES) $(ROOMS)
+	echo "build/baby_metroid.ips: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.ips.d
+	$(ASAR) $(ASAR_FLAGS) --ips build/baby_metroid.ips "$$@" src/main.asm
 
 src/rooms/%.bin: src/rooms/%.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
