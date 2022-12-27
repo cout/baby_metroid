@@ -1,3 +1,7 @@
+org $C6D620
+incbin "kraid.bin"
+warnpc $C6DE20
+
 ; Room $A59F: Header
 org $8FA59F
 db $2F       ; Index
