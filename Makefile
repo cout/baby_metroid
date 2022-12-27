@@ -22,6 +22,7 @@ TARGETS = \
 ROOMS = \
 	src/rooms/climb.bin \
 	src/rooms/bomb_torizo.bin \
+	src/rooms/green_brinstar_firefleas.bin \
 	src/rooms/noob_bridge.bin \
 	src/rooms/early_supers.bin \
 	src/rooms/speed_hallway.bin \
