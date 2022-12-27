@@ -73,3 +73,27 @@ JMP $C0AE ; release camera (horizontal only) and return
 org $A7AF9F
 
 JMP $AF88
+
+;;
+; Make Kraid sink slower
+;
+
+org $A7C540
+
+JSR kraid_sink
+
+org $A7BCB5
+
+kraid_sink:
+{
+  LDA $0F80
+  CLC
+  ADC #$8000
+  STA $0F80
+  LDA $0F7E
+  ADC #$0000
+  STA $0F7E
+  RTS
+}
+
+warnpc $A7BCCF
