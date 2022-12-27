@@ -23,6 +23,10 @@ class RoomEventStateFunction(object):
     self.event = HexValue(event)
     self.state_header_addr = HexValue(state_header_addr)
 
+  @property
+  def description(self):
+    return '%s bit %02xh' % (self.type, self.event)
+
 @dataclass
 class RoomBossStateFunction(object):
   type: str
@@ -36,6 +40,10 @@ class RoomBossStateFunction(object):
     self.boss = HexValue(boss)
     self.state_header_addr = HexValue(state_header_addr)
 
+  @property
+  def description(self):
+    return '%s bit %02xh' % (self.type, self.boss)
+
 @dataclass
 class RoomStateFunction(object):
   type: str
@@ -46,6 +54,10 @@ class RoomStateFunction(object):
     self.type = type
     self.func = HexValue(func) if func is not None else None
     self.state_header_addr = HexValue(state_header_addr)
+
+  @property
+  def description(self):
+    return self.type
 
   @classmethod
   def read_from(cls, rom):

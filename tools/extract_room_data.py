@@ -65,7 +65,7 @@ dw ${func.state_header_addr               :04X} ; State header address
 def format_room_state_header(room_id, func, state_header):
   return align_comments(f'''
 ; Room ${room_id:04X} state ${state_header.state_id:04X}: Header
-; ({func.type})
+; ({func.description})
 org $8F{state_header.state_id:04X}
 dl ${state_header.level_data_addr         :06X} ; Level data address
 db ${state_header.tileset                 :02X} ; Tileset
