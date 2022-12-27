@@ -71,5 +71,6 @@ Tools
 -----
 
 * Script to generate room list in asm format
-* Extract room script should write out room header(s) as a comment
 * Write out size as a word instead of as bytes
+* Extract room data script should not include duplicate FX/graphics
+    sets/population (see kraid room as example)
