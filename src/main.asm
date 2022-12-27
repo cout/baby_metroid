@@ -37,6 +37,7 @@ incsrc rooms/noob_bridge.asm
 incsrc rooms/bat_room.asm
 incsrc rooms/below_spazer.asm
 incsrc rooms/hi_jump_boots.asm
+incsrc rooms/kraid_eye_door.asm
 incsrc rooms/kraid.asm
 incsrc rooms/warehouse_entrance.asm
 incsrc rooms/kraid_kihunters.asm
