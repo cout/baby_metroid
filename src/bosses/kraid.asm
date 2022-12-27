@@ -49,3 +49,11 @@ JSR $C171
 org $A7AF95
 
 LDA #$0060
+
+;;
+; Disable Kraid standup
+;
+
+org $A7C00C
+
+RTS
