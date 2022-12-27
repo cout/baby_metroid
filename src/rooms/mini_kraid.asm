@@ -21,7 +21,7 @@ org $8FA533
 dl $C6CDB9   ; Level data address
 db $07       ; Tileset
 db $27       ; Music data index
-db $06       ; Music track index
+db $03       ; Music track index
 dw $83E2     ; FX address (bank $83)
 dw $A0BA     ; Enemy population offset (bank $A1)
 dw $8651     ; Enemy graphics set offset (bank $B4)
