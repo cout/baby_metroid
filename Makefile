@@ -26,6 +26,7 @@ ROOMS = \
 	src/rooms/spore_spawn.bin \
 	src/rooms/noob_bridge.bin \
 	src/rooms/early_supers.bin \
+	src/rooms/hi_jump_boots.bin \
 	src/rooms/speed_hallway.bin \
 	src/rooms/red_tower.bin \
 	src/rooms/hellway.bin \
