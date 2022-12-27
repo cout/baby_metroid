@@ -1,50 +1,9 @@
 TODO
 ====
 
-Top priority:
-* Spore spawn music needs to work again
-* Figure out what to do for Kraid
-* Speed hallway - it is too easy to get stuck under the crumbles
+Bugs
+----
 
-Later:
-* Bubble mountain - will E ride the wavers or find the tunnel?
-* The spikes in double chamber are difficult
-* That should be how Samus gets up red tower (replace blocks at the top
-    with speed blocks)
-* Ice beam is broken (it no longer freezes enemies)
-* Ice beam gate room is hard without knowing how to use the run button
-* Need to make it easier to get unstuck from spikes in bat room
-* Stop gadora from shooting
-* Keep gadora eyes open?
-* Make gadora vulnerable to charge?
-
-Ideas:
-* Replace space pirates with etecoons
-* Replace climb pirates with dachora (ride the dachora up!) - decided to
-    add an elevator instead
-* Croc really does take a bath
-* Get rid of "nothing" drops
-* E does not like the mosquitoes - replace them with something else?
-* apple sporespawn - https://metroidconstruction.com/resource.php?id=2
-* easier wall jumps - https://metroidconstruction.com/resource.php?id=545
-* climb room elevator - https://metroidconstruction.com/resource.php?id=445
-* flying ship - https://metroidconstruction.com/resource.php?id=73
-* older flying ship - https://metroidconstruction.com/resource.php?id=39
-* for kraid, perhaps put mini-kraid into his room instead (and require
-  some trick to get out of the room)
-* is there a more intuitive way through green pirates room?
-* Perhaps power bombs (w/ ice beam) should freeze enemies (so they
-  become "freeze bombs").  If so then Ridley could be defeated with a
-  single power bomb (which would cause him to spit ice or snow balls
-  instead of fireballs).
-* Keep blue suit in lava?
-
-Tooling ideas:
-* Script to generate room list in asm format
-* Extract room script should write out room header(s) as a comment
-* Write out size as a word instead of as bytes
-
-Bugs:
 * Ice beam cannot freeze enemies that take more than one shot
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
@@ -52,3 +11,55 @@ Bugs:
 * Enemies that can move through walls can pull Samus through the floor
     (this is particularly bad with rinkas in MB room)
 * Screw attack does not work
+* Speed hallway - it is too easy to get stuck under the crumbles
+* Blue suit is lost in lava, which can make some rooms difficult
+* E managed to trigger a crash from climb to pit room before getting
+    morph, but I don't know how he did it (I cannot reproduce it - E
+    came down left side, may have walked over elevator, but that
+    shouldn't matter, and I don't think it's there before morph)
+* door at top of climb before getting morph has peculiar scroll
+
+Incomplete
+----------
+
+* Kraid fight is still mostly vanilla
+* Phantoon is OHKO but should be a passive fight
+* Croc is still vanilla (should "take a bath")
+* Pit room is empty of enemies
+* The spikes in double chamber are difficult
+* Ice beam gate room is hard without knowing how to use the run button
+* Stop gadora from shooting
+* Keep gadora eyes open?
+* Make gadora vulnerable to charge?
+* Bat room - remove spikes
+
+Feedback from E
+---------------
+
+* hard to get out of construction zone
+* hard to hit chozo orb (can I make power beam hitbox bigger?)
+* dead people in ceres (wife noticed)
+* hard to get up parlor
+* parlor bats are scary
+* dachora room bats are scary
+* alcatraz is intimidating
+* geemers push samus off the ledge in parlor
+* green pirates are a challenge
+* fun to dance with big pink hoppers but they get in the way
+* cacs are scary - remove them (E thinks they are spiders)
+* it is hard to get on top of crabs in noob bridge
+* confusing to see samus statue in red tower before the clue is usable
+* ditto warehouse entrance statue
+* which block to bomb in red tower is hard
+* there should be a gate in noob bridge otherwise it's a long trip back
+    if you return to green hill zone
+* frozen creatures were confusing (why were they there? will I get
+    frozen?) - I did this before I was comfortable with level editing
+* E did not know how to get on rippers in bat room
+
+Tools
+-----
+
+* Script to generate room list in asm format
+* Extract room script should write out room header(s) as a comment
+* Write out size as a word instead of as bytes
