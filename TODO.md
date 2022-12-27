@@ -25,6 +25,12 @@ Incomplete
 * Kraid fight is still mostly vanilla
 * Phantoon is OHKO but should be a passive fight
 * Croc is still vanilla (should "take a bath")
+    * plan: croc is vulnerable to uncharged beam and has a larger
+        hitbox.  disable flashing when hit and don't require mouth to be
+        open.  change acid to water.  fight ends when croc is in the
+        water taking a bath.  no spikes on the walls.  croc cannot move
+        forward past the door.  give some hint that croc needs a bath,
+        otherwise croc just looks scary.
 * Pit room is empty of enemies
 * The spikes in double chamber are difficult
 * Ice beam gate room is hard without knowing how to use the run button
@@ -56,6 +62,10 @@ Feedback from E
 * frozen creatures were confusing (why were they there? will I get
     frozen?) - I did this before I was comfortable with level editing
 * E did not know how to get on rippers in bat room
+* E thinks he can "push" enemies but it's really just a collision --
+    maybe I can make enemies get a little push?
+* (related idea - maybe grapple beam can "pull" enemies instead of just
+    killing them - but only when samus is walking)
 
 Tools
 -----
