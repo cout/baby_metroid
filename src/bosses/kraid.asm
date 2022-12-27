@@ -1,3 +1,9 @@
+; TODO: Chewing sound during death?
+; TODO: Remove hitbox for kraid arm
+; TODO: Fix hitbox for kraid mouth/body (make it smaller)
+; TODO: Sound effect for "eating" missiles
+; TODO: Shorter earthquake during rise/sink
+
 ;;
 ; Disable Kraid spitting rocks
 ;
