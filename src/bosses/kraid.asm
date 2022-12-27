@@ -57,3 +57,11 @@ LDA #$0060
 org $A7C00C
 
 RTS
+
+;;
+; Fix camera after kqk
+;
+
+org $A7C456
+
+JMP $C0AE ; release camera (horizontal only) and return
