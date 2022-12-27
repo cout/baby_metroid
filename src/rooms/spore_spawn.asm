@@ -1,3 +1,7 @@
+org $C5CE34
+incbin "spore_spawn.bin"
+warnpc $C5D734
+
 ; Room $9DC7: Header
 org $8F9DC7
 db $0B       ; Index
