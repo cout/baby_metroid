@@ -65,3 +65,11 @@ RTS
 org $A7C456
 
 JMP $C0AE ; release camera (horizontal only) and return
+
+;;
+; Turn off death cry
+;
+
+org $A7AF9F
+
+JMP $AF88
