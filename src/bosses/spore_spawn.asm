@@ -136,7 +136,7 @@ RTL
 ;;
 ; Spore spawn hit with projectile
 
-org $A5ED62
+org $A5ED5A
 
 BRL spore_spawn_projectile_check
 
@@ -146,11 +146,6 @@ org !FREESPACE_A5
 
 spore_spawn_projectile_check:
 {
-  BIT #$0700
-  BNE .missiles_or_supers
-  BRA .beam
-
-.missiles_or_supers:
   LDX $0E54
 
   ; Push current enemy HP to the stack
@@ -167,6 +162,19 @@ spore_spawn_projectile_check:
   SBC $0F8C,x
   STA $12
 
+  ; A = projectile type
+  LDA $18A6
+  ASL A
+  TAX
+  LDA $0C18,x
+
+  BIT #$0700
+  BNE .missiles_or_supers
+  BRA .beam
+
+.missiles_or_supers:
+  JSR play_sad_sound
+
   ; Add enemy HP back to undo the damage
   LDA $0F8C,x
   CLC
@@ -175,27 +183,33 @@ spore_spawn_projectile_check:
   ; Don't allow "undamage" too far beyond beyond original HP
   ; TODO - I shouldn't hard-code this
   CMP #$03C0
-  BPL .store_new_hp
+  BPL .store_new_hp_and_return
 
   ; Add enemy HP back to "undamage"
   CLC
   ADC $12
 
-.store_new_hp:
-  STA $0F8C,x            ; [enemy HP] = A
+  BRA .store_new_hp_and_return
 
-  JSR play_sad_sound
+.beam:
+  JSR play_happy_sound
+
+  ; Subtract enemy HP to increase damage (4X)
+  ; (but we will always need one more shot to finish)
+  LDA $0F8C,x
+  SEC : SBC $12
+  SEC : SBC $12
+  SEC : SBC $12
+  BPL .store_new_hp_and_return
+
+  LDA #$0000
+
+.store_new_hp_and_return:
+  STA $0F8C,x            ; [enemy HP] = A
 
   ; TODO - change color to black if too much damage?
   ; TODO - (maybe even explode)
   ; TODO - allow an exit out of the room
-  RTL
-
-.beam:
-  LDA #$0031
-  JSL $8090CB
-  JSL spore_spawn_damage
-  JSR play_happy_sound
   RTL
 }
 
