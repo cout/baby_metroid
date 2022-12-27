@@ -97,3 +97,36 @@ kraid_sink:
 }
 
 warnpc $A7BCCF
+
+;;
+; Chew during death sequence
+;
+
+org $A7C398
+
+LDA.w #kraid_death_sequence
+STA $0FAA
+LDA kraid_death_timer
+STA $0FAC
+
+org $A7B269
+
+kraid_death_timer:
+dw $0012, $97C8, $9788, $FFFF ; 0
+
+kraid_death_sequence:
+;                vuln.  invul.
+;  timer tilemap hitbox hitbox
+dw $0012, $9AC8, $9790, $97B0 ; 1
+dw $0012, $9DC8, $9798, $97B8 ; 2
+dw $0012, $9AC8, $9790, $97B0 ; 1
+dw $0012, $97C8, $9788, $FFFF ; 0
+dw $0001, $9AC8, $9790, $97B0 ; 1
+dw $0012, $9DC8, $9798, $97B8 ; 2
+dw $0012, $A0C8, $97A0, $97C0 ; 3
+dw $0012, $9DC8, $9798, $97B8 ; 2
+dw $0012, $9AC8, $9790, $97B0 ; 1
+dw $0012, $9DC8, $9798, $97B8 ; 2
+dw $0012, $9AC8, $9790, $97B0 ; 1
+dw $0012, $97C8, $9788, $FFFF ; 0
+dw $FFFF
