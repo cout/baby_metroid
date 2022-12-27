@@ -31,6 +31,7 @@ incsrc rooms/climb.asm
 incsrc rooms/bomb_torizo.asm
 incsrc rooms/early_supers.asm
 incsrc rooms/green_brinstar_firefleas.asm
+incsrc rooms/spore_spawn_kihunters.asm
 incsrc rooms/spore_spawn.asm
 incsrc rooms/noob_bridge.asm
 incsrc rooms/bat_room.asm
