@@ -53,13 +53,16 @@
 ; AFAICT Samus cannot get hurt by moving into a solid enemy, but she can be
 ; hurt by a solid enemy that is moving toward her.
 ;
+
+; hook into where the game engine does frozen checks
 org $A0A9DC
-; BRA treat_enemy_as_solid
 JMP check_solid_enemy_detection
 
+; this is the branch that is taken if the enemy is frozen or solid
 org $A0A9EC
 treat_enemy_as_solid:
 
+; this is the branch that is taken if the enemy is not frozen or solid
 org $A0AABF
 treat_enemy_as_ethereal:
 
@@ -68,11 +71,25 @@ org !FREESPACE_A0
 check_solid_enemy_detection:
 {
   ; If shine sparking then we want to do the normal checks
+  ; TODO - I don't think this check is right?  It looks backward to me,
+  ; but maybe I don't know what I meant when I wrote "do the normal
+  ; checks".  Is the normal check ethereal or solid?
   LDA $0A1F
   AND #$00FF
   CMP #$001B
-  BNE .treat_enemy_as_solid
+  BEQ .do_normal_solid_checks
 
+  ; TODO - I am unsure whether we want to allow Samus to pass through
+  ; enemeies with blue suit (because if we do she cannot stand on them
+  ; with blue suit).  Maybe allow if blue suit and running at full
+  ; speed?
+  ; LDA $0B3E ; blue suit flag
+  ; BNE .do_normal_solid_checks
+
+.treat_enemy_as_solid:
+  JMP treat_enemy_as_solid
+
+.do_normal_solid_checks:
   ; If the enemy frozen timer is nonzero, the enemy is solid
   LDA $0F9E,x
   BNE .treat_enemy_as_solid
@@ -83,9 +100,6 @@ check_solid_enemy_detection:
   BNE .treat_enemy_as_solid
 
   JMP treat_enemy_as_ethereal
-
-.treat_enemy_as_solid:
-  JMP treat_enemy_as_solid
 }
 
 end_freeze_enemies_freespace_a0:
