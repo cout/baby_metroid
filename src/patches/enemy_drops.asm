@@ -33,13 +33,15 @@ handle_projectile_damage_beam:
   BNE .handle_beam_shot
 
   ; If the projectile type is hyper beam, handle the beam shot normally
+  ; Hyper beam is detected by checking the projectile damage amount; if
+  ; it is 1000 or more we assume this is hyper beam.
   PHX
   LDA $18A6
   TAX
-  LDA $0C18,x
+  LDA $0C2C,x
   PLX
-  AND #$1000
-  BNE .handle_beam_shot
+  CMP #$03E8
+  BCS .handle_beam_shot
 
 .spawn_drops:
   LDA $0F7A,x : STA $12 ; $12 = enemy x pos
