@@ -15,6 +15,7 @@ incsrc bosses/torizos.asm
 incsrc bosses/spore_spawn.asm
 incsrc bosses/ceres.asm
 incsrc bosses/kraid.asm
+incsrc bosses/crocomire.asm
 incsrc bosses/phantoon.asm
 incsrc bosses/botwoon.asm
 incsrc bosses/draygon.asm
