@@ -26,7 +26,7 @@ org $A491D4
   ; Clear invisible wall and unlock camera
   JSR $90B7
 
-  ; ; Next state is 3Eh
+  ; Next state is 3Eh
   LDA #$003E
   STA $0FA8,x
 
@@ -36,6 +36,26 @@ org $A491D4
 warnpc $A491E9
 
 sink_crocomire = $A491E9
+
+;;
+; Keep Croc's tongue alive
+;
+
+; Keep tongue visible
+org $A48EBC
+JMP $8ED1
+
+; Prevent tongue from being deleted
+org $A490CA
+JMP $90D0
+
+org $A48
+
+; TODO - I don't know if this does anything (it prevents tongue
+; properties from being changed and prevents the instruction list from
+; changing)
+org $A49365
+JMP $937D
 
 ;;
 ; Change Crocomire death sequence
@@ -169,11 +189,6 @@ org $A49A38 ; state 46h
   LDA #$0025
   JSL $8090CB
 
-  ; Set enemy 1 palette index to the same as enemy 0
-  ; TODO - I'm not sure we want to do this
-  LDA $0F96
-  STA $0FD6
-
   ; Restore croc palette
   LDA #$0E00
   STA $0F96
@@ -237,8 +252,6 @@ org $A49099 ; state 3Ch (now unused)
 
 crocomire_bath:
 {
-  ; TODO - Croc's tongue is gone
-
   ; TODO - there is a slight delay in adjusting croc after Samus moves
 
   ; Create smoke from acid bath
@@ -247,6 +260,14 @@ crocomire_bath:
   ; Keep the body positioned
   LDX $0E54
   JSL $A48B5B
+
+  ; Keep croc's tongue aligned with croc?
+  LDA $0F7A
+  CLC
+  ADC $0FA8+$40
+  STA $0F7A+$40
+  LDA $0F7E
+  STA $0F7E+$40
 
   RTS
 }
