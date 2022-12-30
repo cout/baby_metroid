@@ -38,7 +38,7 @@ warnpc $A491E9
 sink_crocomire = $A491E9
 
 ;;
-; Keep Croc positioned correctly after bath
+; Change Crocomire death sequence
 ;
 
 org $A497D3 ; state 3Eh
@@ -55,14 +55,16 @@ crocomire_state_wait_for_samus_to_visit_spike_wall:
   BRA .next_state
 
 .next_state:
-  LDA $0F86              ;\
-  AND #$7FFF             ;} Set Crocomire to have non-solid hitbox and
-  ORA #$0400             ;} set Crocomire as intangible
-  STA $0F86              ;/
+  ; Set Crocomire to have non-solid hitbox and intangible
+  LDA $0F86
+  AND #$7FFF
+  ORA #$0400
+  STA $0F86
 
-  ; LDA $0FC6              ;\
-  ; ORA #$0500             ;} Set Crocomire (legs? tongue?) as intangible and invisible - TODO
-  ; STA $0FC6              ;/
+  ; Stet Crocomire (legs? tongue?) as intangible and invisible
+  ; LDA $0FC6
+  ; ORA #$0500
+  ; STA $0FC6
 
   ; Prevent croc from stomping backward out of the bath
   LDA #$0004
@@ -75,7 +77,8 @@ crocomire_state_wait_for_samus_to_visit_spike_wall:
   STZ $0FAA
   LDA #$0038
 
-  STA $0F84              ;} Set Crocomire collision height to 56
+  ; Set Crocomire collision height to 56
+  STA $0F84
 
   LDA #$0042
   STA $0FA8
@@ -84,44 +87,51 @@ crocomire_state_wait_for_samus_to_visit_spike_wall:
   RTS
 }
 
-;;; $990A: Crocomire state function 42h - Start spike wall falling ;;;
-
 org $A4990A ; state 42h
 
 crocomire_state_start_spike_wall_falling:
 {
+  ; Initialize counters for wall falling state
   STZ $0FB0            
   STZ $0FB2            
 
-  JSL $8483D7            ;\
-  dw $0320, $B753          ;} Spawn PLM - clear Crocomire invisible wall
+  ; Clear invisible wall
+  JSL $8483D7
+  dw $0320, $B753
 
-  LDA #$0029             ;\
-  JSL $8090CB            ;} Queue sound 29h, sound library 2, max queued sounds allowed = 6 (Crocomire's wall explodes)
-  LDA #$0000             ;\
-  STA $0F96              ;} Crocomire palette = 0
+  ; Play wall exploding sound
+  LDA #$0029
+  JSL $8090CB
 
+  ; Set Crocomire palette to 0 - this is used by the falling wall effect
+  LDA #$0000
+  STA $0F96
+
+  ; Copy falling wall palette to enemy palette 0
   LDX #$001E
 .loop:
-  LDA $B8FD,x            ;\
-  STA $7EC120,x          ;|
-  DEX                    ;} Copy $B8FD to enemy palette 0
-  DEX                    ;|
-  BPL .loop              ;/
+  LDA $B8FD,x
+  STA $7EC120,x
+  DEX
+  DEX
+  BPL .loop
 
-  JSL $868016            ; Clear enemy projectiles
+  ; Clear enemy projectiles
+  JSL $868016
 
+  ; Spawn projectiles for spike wall pieces
   LDA #$0008
   STA $12              
 .loop2:
   LDX $0E54            
-  LDY #$90C1             ;\
-  JSL $868027            ;} Spawn Crocomire spike wall pieces enemy projectile
+  LDY #$90C1
+  JSL $868027
   DEC $12              
   BNE .loop2
 
-  LDA #$0030             ;\
-  JSL $8090CB            ;} Queue sound 30h, sound library 2, max queued sounds allowed = 6 (Crocomire destroys wall)
+  ; Play wall destroyed sound
+  LDA #$0030
+  JSL $8090CB
 
   ; Clear scroll lock
   LDA #$0101
@@ -155,11 +165,14 @@ org $A49A38 ; state 46h
 .label1:
   STA $0FB2
 
-  LDA #$0025             ;\
-  JSL $8090CB            ;} Queue sound 25h, sound library 2, max queued sounds allowed = 6 (big explosion)
+  ; Play explosion sound
+  LDA #$0025
+  JSL $8090CB
 
-  LDA $0F96              ;\
-  STA $0FD6              ;} Enemy 1 palette index = [Crocomire palette index]
+  ; Set enemy 1 palette index to the same as enemy 0
+  ; TODO - I'm not sure we want to do this
+  LDA $0F96
+  STA $0FD6
 
   ; Restore croc palette
   LDA #$0E00
@@ -181,22 +194,28 @@ org $A49B06 ; state 48h
 {
   JSR crocomire_bath
 
-  JSL $A0B9D8            ; Spawn drops
+  ; Spawn drops
+  JSL $A0B9D8
 
-  STZ $0941              ; Camera distance index = 0 (normal)
+  ; Restore camera distance index to normal
+  STZ $0941
 
-  LDX $079F              ;\
-  LDA $7ED828,x          ;} Set Crocomire as dead
-  ORA #$0002             ;|
-  STA $7ED828,x          ;/
+  ; Set Crocomire as dead
+  LDX $079F
+  LDA $7ED828,x
+  ORA #$0002
+  STA $7ED828,x
 
+  ; Spawn dust cloud/explosion
   LDA #$FFF0
   JSL $A49ADA
   LDA #$0010
   JSL $A49ADA
 
+  ; Advance to final state
   LDA #$0050
   STA $0FA8
+
   RTS
 }
 warnpc $A49B65
