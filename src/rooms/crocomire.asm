@@ -71,4 +71,4 @@ dw $FFFF     ; end of list
 ; Room $A98D state $A9B9: FX
 org $8384D0
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
-dw $0000, $00C6, $FFFF, $0000 : db $00, $04, $02, $1E, $81, $00, $01, $02
+dw $0000, $00C6, $FFFF, $0000 : db $00, $06, $02, $1E, $81, $00, $01, $48
