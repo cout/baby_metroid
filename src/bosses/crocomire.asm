@@ -50,19 +50,18 @@ crocomire_state_wait_for_samus_to_visit_spike_wall:
   ; ORA #$0500             ;} Set Crocomire (legs? tongue?) as intangible and invisible - TODO
   ; STA $0FC6              ;/
 
-  ; LDA #$0004             ;\
-  ; STA $0FAE              ;} Enemy 0 $0FAE = 4
-  ; STZ $0FEE              ;} Enemy 1 $0FAE = 0
+  ; Prevent croc from stomping backward out of the bath
+  LDA #$0004
+  STA $0FAE
+  STZ $0FEE
+  LDA #$000A
+  STA $102E
+  LDA #$0001
+  STA $106E
+  STZ $0FAA
+  LDA #$0038
 
-  ; LDA #$000A             ;\
-  ; STA $102E              ;} Enemy 2 $0FAE = Ah
-  ; LDA #$0001             ;\
-
-  ; STA $106E              ;} Enemy 3 $0FAE = 1
-  ; STZ $0FAA              ;} Enemy 0 $0FAA = 0
-  ; LDA #$0038             ;\
-
-  ; STA $0F84              ;} Set Crocomire collision height to 56
+  STA $0F84              ;} Set Crocomire collision height to 56
 
   LDA #$0042
   STA $0FA8
