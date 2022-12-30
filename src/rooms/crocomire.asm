@@ -1,3 +1,7 @@
+org $C79D71
+incbin "crocomire.bin"
+warnpc $C7B571
+
 ; Room $A98D: Header
 org $8FA98D
 db $0A       ; Index
