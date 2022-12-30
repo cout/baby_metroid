@@ -6,6 +6,13 @@ org $A48797
 JMP $87A5
 
 ;;
+; Disable room shaking from croc stomping
+;
+
+org $A48FC7
+RTL
+
+;;
 ; Keep croc on screen after falling into water/acid
 ;
 
