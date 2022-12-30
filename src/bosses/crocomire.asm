@@ -170,18 +170,12 @@ org $A49B06 ; state 48h
 
   JSL $A0B9D8            ; Spawn drops
 
-  LDA #$0006             ;\
-  JSL $808FC1            ;} Queue song 1 music track
-
   STZ $0941              ; Camera distance index = 0 (normal)
 
   LDX $079F              ;\
   LDA $7ED828,x          ;} Set Crocomire as dead
   ORA #$0002             ;|
   STA $7ED828,x          ;/
-
-  LDA #$0006             ;\
-  JSL $808FC1            ;} Queue song 1 music track
 
   LDA #$FFF0
   JSL $A49ADA
