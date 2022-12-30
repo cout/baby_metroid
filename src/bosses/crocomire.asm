@@ -1,4 +1,11 @@
 ;;
+; Disable croc fireball
+;
+
+org $A48797
+JMP $87A5
+
+;;
 ; Keep croc on screen after falling into water/acid
 ;
 
