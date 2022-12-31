@@ -83,11 +83,6 @@ crocomire_state_wait_for_samus_to_visit_spike_wall:
   ORA #$0400
   STA $0F86
 
-  ; Stet Crocomire (legs? tongue?) as intangible and invisible
-  ; LDA $0FC6
-  ; ORA #$0500
-  ; STA $0FC6
-
   ; Prevent croc from stomping backward out of the bath
   LDA #$0004
   STA $0FAE
@@ -277,16 +272,6 @@ crocomire_bath:
 ;;
 ; Add the ability to push croc
 ;
-
-; org $A48CBE
-; {
-;   LDA $0F7A
-;   CLC
-;   ADC #$0002
-;   STA $0F7A
-;   RTS
-; }
-; warnpc $A48CCB
 
 org $A48C95
 
