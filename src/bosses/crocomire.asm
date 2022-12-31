@@ -1,4 +1,11 @@
 ; TODO - if croc pushes samus during the fight, the screen does not scroll properly
+; TODO - change initial palette to brown as if croc is dirty
+; TODO - disable shot ai
+; TODO - croc should move arms in the bath (he does, but not initially)
+; TODO - put croc to sleep after the bath is over?
+; TODO - unlock door when fight starts
+; TODO - croc hitbox should prevent samus from falling off the edge, but
+; hitbox is getting deleted/shrunk/something
 
 ;;
 ; Disable croc fireball
