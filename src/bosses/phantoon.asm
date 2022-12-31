@@ -230,3 +230,10 @@ phantoon_shot_ai:
   STA $0FB2
   RTL
 }
+
+;;
+; Update BG2 X/Y scroll when the screen scrolls
+;
+
+org $A7CECD
+JMP $CED2
