@@ -20,6 +20,10 @@ Bugs
 * door at top of climb before getting morph has peculiar scroll
 * when clearing the blue suit flag, the flag that causes echoes should
     also be cleared
+* easy blue suit is cleared if touching a block horizontally while the
+    run button is pressed
+* Spore spawn is brown if Samus leaves and comes back
+* Caterpillar room statue is missing
 
 Incomplete
 ----------
@@ -40,6 +44,13 @@ Incomplete
 * Keep gadora eyes open?
 * Make gadora vulnerable to charge?
 * Bat room - remove spikes
+* Potential softlock at Kraid (all boss fights should start with the
+    door unlocked)
+* Potential softlock in speed hallway (though this is less likely)
+* Moat room bridge is not aligned on the right side
+* Dragons in rising tide should be intangible
+* It is not obvious how to get down WS shaft
+* Red tower speed blocks should be 4-wide
 
 Feedback from E
 ---------------
@@ -68,6 +79,7 @@ Feedback from E
     maybe I can make enemies get a little push?
 * (related idea - maybe grapple beam can "pull" enemies instead of just
     killing them - but only when samus is walking)
+* norfair spiky room is too hard
 
 Tools
 -----
