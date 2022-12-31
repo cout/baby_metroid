@@ -1,3 +1,5 @@
+; TODO - if croc pushes samus during the fight, the screen does not scroll properly
+
 ;;
 ; Disable croc fireball
 ;
@@ -112,8 +114,8 @@ org $A4990A ; state 42h
 crocomire_state_start_spike_wall_falling:
 {
   ; Initialize counters for wall falling state
-  STZ $0FB0            
-  STZ $0FB2            
+  STZ $0FB0
+  STZ $0FB2
 
   ; Clear invisible wall
   JSL $8483D7
@@ -141,12 +143,12 @@ crocomire_state_start_spike_wall_falling:
 
   ; Spawn projectiles for spike wall pieces
   LDA #$0008
-  STA $12              
+  STA $12
 .loop2:
-  LDX $0E54            
+  LDX $0E54
   LDY #$90C1
   JSL $868027
-  DEC $12              
+  DEC $12
   BNE .loop2
 
   ; Play wall destroyed sound
@@ -271,3 +273,53 @@ crocomire_bath:
 
   RTS
 }
+
+;;
+; Add the ability to push croc
+;
+
+; org $A48CBE
+; {
+;   LDA $0F7A
+;   CLC
+;   ADC #$0002
+;   STA $0F7A
+;   RTS
+; }
+; warnpc $A48CCB
+
+org $A48C95
+
+crocomire_check_for_collision_with_samus:
+{
+  ; Skip collision checking during death sequence
+  LDA $0FA8
+  BNE .return
+
+  ; Check for collsion with croc.  The CLC here is intentional.
+  LDA $0F7A
+  SEC
+  SBC $0F82
+  SBC $0AFE
+  SBC $0AF6
+  SBC #$0003
+  BPL .return
+
+  ; Execute normal enemy touch AI
+  JSL $A0A477
+
+  ; Move croc back 1 pixel if there is a collision
+  ; TODO - this is not as smooth as I would like
+  LDA $0F7A
+  CLC
+  ADC #$0001
+  STA $0F7A
+
+.return:
+  RTS
+}
+
+warnpc $A48CCB
+
+; org $A0DDBF+$08
+; dw $0040
