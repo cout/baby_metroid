@@ -52,6 +52,7 @@ incsrc rooms/hellway.asm
 incsrc rooms/alpha_power_bombs.asm
 incsrc rooms/moat.asm
 incsrc rooms/west_ocean.asm
+incsrc rooms/phantoon.asm
 incsrc rooms/bowling.asm
 incsrc rooms/spiky_room.asm
 incsrc rooms/wrecked_ship_etank.asm
