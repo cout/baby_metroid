@@ -60,7 +60,7 @@ dw $91F6     ; Room setup routine (bank $8F)
 org $A1BB0E
 ;  enemy  x      y      init   props  extra  param1 param2
 dw $DDBF, $0480, $0078, $BD2A, $A800, $0004, $0000, $0000 ; crocomire
-dw $DDFF, $0480, $0078, $BD2A, $A800, $0004, $0000, $0000 ; crocomire
+dw $DDFF, $0480, $0078, $BD2A, $A800, $0004, $0000, $0000 ; croc's tongue
 dw $FFFF     ; end of list
 db $00       ; death quota
 

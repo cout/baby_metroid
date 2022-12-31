@@ -320,6 +320,3 @@ crocomire_check_for_collision_with_samus:
 }
 
 warnpc $A48CCB
-
-; org $A0DDBF+$08
-; dw $0040
