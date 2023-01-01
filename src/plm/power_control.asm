@@ -104,7 +104,6 @@ toggle_boss_bit:
   AND #$FFFE
   STA $7ED828,x
   RTS
-
 }
 
 power_control_left_instruction_list:

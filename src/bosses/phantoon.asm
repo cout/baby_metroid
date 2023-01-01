@@ -230,3 +230,16 @@ phantoon_shot_ai:
 
 org $A7CECD
 JMP $CED2
+
+;;
+; Print phantoon states during assembly
+;
+
+print "Phantoon states:"
+print "  initial - ", hex(phantoon_state_initial&$FFFF)
+print "  start eye open - ", hex(phantoon_state_start_eye_open&$FFFF)
+print "  sleep - ", hex(phantoon_state_sleep&$FFFF)
+print "  track samus - ", hex(phantoon_state_track_samus&$FFFF)
+print "  start fade out - ", hex(phantoon_state_start_fade_out&$FFFF)
+print "  fade out - ", hex(phantoon_state_fade_out&$FFFF)
+print "  fade back in - ", hex(phantoon_state_fade_back_in&$FFFF)
