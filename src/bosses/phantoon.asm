@@ -148,12 +148,15 @@ org $A7D114
 
 phantoon_state_fade_out:
 {
+  ; Fade out
   LDA #$000C
-  JSR $D464 ; fade-out
+  JSR $D464
 
+  ; If not done fading out, return
   LDA $0FF2
   BEQ .return
 
+  ; After fading out, wait for the timer to elapse before fading in
   DEC $0FB0,x
   BEQ .next_state
   BPL .return
