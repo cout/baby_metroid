@@ -65,13 +65,7 @@ power_control_activate_instruction: ; $8CAF
   PHX
   PHY
 
-  ; TODO - decrement Y for 10 frames at least
-
   JSR toggle_power
-
-  ; Display message box (TODO: remove)
-  LDA #$0015
-  JSL $858080
 
   ; unlock samus
   LDA #$0001
