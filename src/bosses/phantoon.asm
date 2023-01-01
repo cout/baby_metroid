@@ -120,6 +120,7 @@ phantoon_state_sleep:
 
 phantoon_state_track_samus:
 {
+  ; Update Phantoon's eye sprite
   JSR $D3FA
 
   RTS
