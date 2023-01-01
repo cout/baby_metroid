@@ -8,7 +8,7 @@ db $0A       ; Index
 db $03       ; Area
 db $13       ; X position on map
 db $13       ; Y position on map
-db $01       ; Width (in screens)
+db $02       ; Width (in screens)
 db $01       ; Height (in screens)
 db $70       ; Up scroller
 db $A0       ; Down scroller
@@ -30,10 +30,12 @@ dw $9C44     ; FX address (bank $83)
 dw $CCD4     ; Enemy population offset (bank $A1)
 dw $8D1D     ; Enemy graphics set offset (bank $B4)
 dw $0101     ; Layer 2 scroll
-dw $CD5B     ; Room scroll data (bank $8F)
+; dw $CD5B     ; Room scroll data (bank $8F)
+dw phantoon_room_scroll ; Room scroll data (bank $8F)
 dw $0000     ; Room var
 dw $0000     ; Room main routine (bank $8F)
-dw $C2B3     ; Room PLM list address (bank $8F)
+; dw $C2B3     ; Room PLM list address (bank $8F)
+dw phantoon_room_plm_list ; Room PLM list address (bank $8F)
 dw $E0FD     ; Library background (bank $8F)
 dw $C8D0     ; Room setup routine (bank $8F)
 
@@ -48,10 +50,12 @@ dw $9B62     ; FX address (bank $83)
 dw $C1E4     ; Enemy population offset (bank $A1)
 dw $8C1D     ; Enemy graphics set offset (bank $B4)
 dw $0101     ; Layer 2 scroll
-dw $CD5B     ; Room scroll data (bank $8F)
+; dw $CD5B     ; Room scroll data (bank $8F)
+dw phantoon_room_scroll ; Room scroll data (bank $8F)
 dw $0000     ; Room var
 dw $0000     ; Room main routine (bank $8F)
-dw $C2B3     ; Room PLM list address (bank $8F)
+; dw $C2B3     ; Room PLM list address (bank $8F)
+dw phantoon_room_plm_list ; Room PLM list address (bank $8F)
 dw $E113     ; Library background (bank $8F)
 dw $C8D0     ; Room setup routine (bank $8F)
 
@@ -93,3 +97,22 @@ org $839B62
 dw $FFFF, $0000, $00A8, $FFFF : db $00, $00, $00, $06, $02, $18, $03, $00
 dw $4800, $0000, $FFFF, $FFFF : db $00, $00, $00, $00, $02, $02, $00, $01
 dw $0000, $0000, $FFFF, $FFFF : db $00, $00, $00, $00, $02, $02, $00, $01
+
+; new scroll data
+
+org !FREESPACE_8F
+
+phantoon_room_plm_list:
+{
+  dw $C848, $0601, $0086 ; grey door PLM
+  dw $B703, $0C10, phantoon_room_plm_scroll_1 ; scroll PLM
+  dw $B703, $0C0F, phantoon_room_plm_scroll_2 ; scroll PLM
+  dw $0000
+}
+
+phantoon_room_plm_scroll_1: db $01, $01, $80
+phantoon_room_plm_scroll_2: db $01, $00, $80
+phantoon_room_scroll: db $01, $00
+
+end_phantoon_room_freespace_8f:
+!FREESPACE_8F := end_phantoon_room_freespace_8f
