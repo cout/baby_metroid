@@ -54,9 +54,9 @@ dw $D8FF, $0030, $0490, $0000, $2000, $0000, $0000, $0000 ; mochtroid
 dw $D8FF, $00D0, $0440, $0000, $2000, $0000, $0000, $0000 ; mochtroid
 dw $D8FF, $0030, $02B0, $0000, $2000, $0000, $0000, $0000 ; mochtroid
 dw $D8FF, $00D0, $02E0, $0000, $2000, $0000, $0000, $0000 ; mochtroid
-dw $D8FF, $0080, $0170, $0000, $2000, $0000, $0000, $0000 ; mochtroid
 dw $FFFF     ; end of list
 db $0B       ; death quota
+warnpc $A1A8E1
 
 ; Room $B4AD state $B4BA: Enemy graphics set
 org $B487F5
@@ -67,3 +67,4 @@ org $B487F5
 dw $E9BF, $0001 ; seahorse
 dw $D8FF, $0002 ; mochtroid
 dw $FFFF     ; end of list
+warnpc $B48804

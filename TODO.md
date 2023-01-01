@@ -25,7 +25,6 @@ Bugs
     run button is pressed
 * Spore spawn is brown if Samus leaves and comes back
 * Caterpillar room statue is missing
-* Entering Double Chamber crashes the game
 * Below Spazer room crashes on bsnes
 
 Incomplete
@@ -96,3 +95,4 @@ Tools
 * Write out size as a word instead of as bytes
 * Extract room data script should not include duplicate FX/graphics
     sets/population (see kraid room as example)
+* Write out warnpc for room headers and enemy population/set
