@@ -24,16 +24,21 @@ power_control_plm_instruction_list:
 .top:
   dw I_link, .linked ; Link instruction
 
-  ; TODO - ideally this should not be animated
+  ; Indicator light depending on whether power is on
 .start:
+  dw I_branch_if_power_on, .power_is_on
+.power_is_off:
   dw I_animate(6), $9F6D   ; Change block to 80C4 (dark)
-  dw I_animate(6), $9F79   ; Change block to 80C5 (med)
+  dw I_goto, .start        ; Goto start
+.power_is_on:
   dw I_animate(6), $9F85   ; Change block to 80C6 (bright)
+  dw I_goto, .start        ; Goto start
   dw I_goto, .start        ; Goto start
 
 .linked:
-  dw I_set_timer : db $10  ; Timer = 10h
+  dw I_set_timer : db $06
 
+  ; While the station is activated, make it blink
 .loop:
   dw I_animate(2), $9F6D   ; Change block to 80C4 (dark)
   dw I_animate(2), $9F79   ; Change block to 80C5 (med)
@@ -42,6 +47,28 @@ power_control_plm_instruction_list:
 
 .end:
   dw I_goto, .top
+}
+
+I_branch_if_power_on:
+{
+  ; Check the boss flag
+  PHX
+  LDX $079F
+  LDA $7ED828,x
+  PLX
+  AND #$0001
+  BNE .power_is_on
+
+.power_is_off:
+  INY
+  INY
+  RTS
+
+.power_is_on:
+  LDA $0000,y
+  TAY
+  RTS
+
 }
 
 power_control_plm_setup:
