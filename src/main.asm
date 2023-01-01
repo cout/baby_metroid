@@ -27,6 +27,7 @@ incsrc enemies/zebetite.asm
 incsrc enemies/baby.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
+incsrc plm/power_control.asm
 incsrc rooms/pit_room.asm
 incsrc rooms/climb.asm
 incsrc rooms/bomb_torizo.asm
