@@ -67,7 +67,7 @@ power_control_activate_instruction: ; $8CAF
 
   ; TODO - decrement Y for 10 frames at least
 
-  JSR toggle_boss_bit
+  JSR toggle_power
 
   ; Display message box (TODO: remove)
   LDA #$0015
@@ -82,27 +82,55 @@ power_control_activate_instruction: ; $8CAF
   RTS
 }
 
-toggle_boss_bit:
+toggle_power:
 {
+  ; Check the boss bit
   LDX $079F
   LDA $7ED828,x
   AND #$0001
-  BNE .clear_boss_bit
+  BNE .turn_power_off
 
-.set_boss_bit:
-  ; TODO - set a bit to hide phantoon
-  ; TODO - reload the room tiles?
+.turn_power_on:
+  ; Set the boss bit
   LDA $7ED828,x
   ORA #$0001
   STA $7ED828,x
+
+  LDA #$C2C2
+  STA $07C7
+  LDA #$B0E7
+  STA $07C6
+  JSR reload_palette
+
   RTS
 
-.clear_boss_bit:
-  ; TODO - set a bit to unhide phantoon
-  ; TODO - reload the room tiles?
+.turn_power_off:
+  ; Clear the boss bit
   LDA $7ED828,x
   AND #$FFFE
   STA $7ED828,x
+
+  LDA #$C2C2
+  STA $07C7
+  LDA #$B1A6
+  STA $07C6
+  JSR reload_palette
+
+  RTS
+}
+
+reload_palette:
+{
+  ; Decompress new room palette and write to actual palette
+  ; TODO - I suppose it would be better to write to the target palette at
+  ; 7E:C200 then copy from there to C000, but this works just fine.
+  LDA $07C7
+  STA $48
+  LDA $07C6
+  STA $47
+  JSL $80B0FF
+  dl $7EC000
+
   RTS
 }
 
