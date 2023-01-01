@@ -26,6 +26,7 @@ Bugs
 * Spore spawn is brown if Samus leaves and comes back
 * Caterpillar room statue is missing
 * Entering Double Chamber crashes the game
+* Below Spazer room crashes on bsnes
 
 Incomplete
 ----------
