@@ -85,6 +85,8 @@ begin_tracking_samus_with_eye:
   RTS
 }
 
+warnpc $A7D0F1
+
 phantoon_state_initial:
 {
   ; Make the door blue
@@ -98,7 +100,7 @@ phantoon_state_initial:
   RTS
 }
 
-org $A7D596
+org $A7D596 ; pick pattern for phantoon round one
 
 phantoon_state_begin_eye_open:
 {
@@ -139,6 +141,10 @@ phantoon_begin_fade_out:
 
   RTS
 }
+
+warnpc $A7D5E7
+
+org $A7D114
 
 phantoon_state_fade_out:
 {
@@ -198,6 +204,8 @@ phantoon_state_fade_back_in:
 .return
   RTS
 }
+
+warnpc $A7D193
 
 ;;
 ; Make phantoon ethereal
