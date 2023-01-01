@@ -8,6 +8,7 @@ power_control_plm_instruction_list:
 .top:
 	dw $8A24, .linked ; Link instruction
 
+	; TODO - ideally this should not be animated
 .start:
 	dw $0006, $9F6D   ; Change block to 80C4 (dark)
 	dw $0006, $9F79   ; Change block to 80C5 (med)
@@ -66,7 +67,7 @@ power_control_activate_instruction: ; $8CAF
 
 	; TODO - decrement Y for 10 frames at least
 
-	; TODO - toggle the lights here
+	JSR toggle_boss_bit
 
 	; Display message box (TODO: remove)
 	LDA #$0015
@@ -79,6 +80,31 @@ power_control_activate_instruction: ; $8CAF
 	PLY
 	PLX
 	RTS
+}
+
+toggle_boss_bit:
+{
+	LDX $079F
+	LDA $7ED828,x
+	AND #$0001
+	BNE .clear_boss_bit
+
+.set_boss_bit:
+	; TODO - set a bit to hide phantoon
+	; TODO - reload the room tiles?
+	LDA $7ED828,x
+	ORA #$0001
+	STA $7ED828,x
+	RTS
+
+.clear_boss_bit:
+	; TODO - set a bit to unhide phantoon
+	; TODO - reload the room tiles?
+	LDA $7ED828,x
+	AND #$FFFE
+	STA $7ED828,x
+	RTS
+
 }
 
 power_control_left_instruction_list:

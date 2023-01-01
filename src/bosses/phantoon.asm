@@ -87,13 +87,6 @@ start_tracking_samus_with_eye:
 
 phantoon_state_initial:
 {
-  ; Mark the boss as defeated
-  ; TODO - I am not sure if E will like it if he leaves and comes back
-  ; and Phantoon is just gone, but it makes sense because Phantoon is a
-  ; ghost
-  LDA #$0001
-  JSL $8081A6
-
   ; Make the door blue
   JSL $8483D7
   db $00, $06
