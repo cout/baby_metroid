@@ -3,29 +3,45 @@
 
 org !FREESPACE_84
 
+; TODO - Move these instructions to another file so they can be used in other
+; PLMs
+
+I_goto = $848724
+I_set_timer = $84874E
+I_dec_timer = $84873F
+I_link = $848A24
+I_queue_sound_2 = $848C10
+I_delete = $8486BC
+
+function I_animate(x) = x
+
+dark_block = $8F9F6D
+med_block = $8F9F79
+bright_block = $8F9F85
+
 power_control_plm_instruction_list:
 {
 .top:
-  dw $8A24, .linked ; Link instruction
+  dw I_link, .linked ; Link instruction
 
   ; TODO - ideally this should not be animated
 .start:
-  dw $0006, $9F6D   ; Change block to 80C4 (dark)
-  dw $0006, $9F79   ; Change block to 80C5 (med)
-  dw $0006, $9F85   ; Change block to 80C6 (bright)
-  dw $8724, .start  ; Goto start
+  dw I_animate(6), $9F6D   ; Change block to 80C4 (dark)
+  dw I_animate(6), $9F79   ; Change block to 80C5 (med)
+  dw I_animate(6), $9F85   ; Change block to 80C6 (bright)
+  dw I_goto, .start        ; Goto start
 
 .linked:
-  dw $874E : db $10     ; Timer = 10h
+  dw I_set_timer : db $10  ; Timer = 10h
 
 .loop:
-  dw $0002, $9F6D   ; Change block to 80C4 (dark)
-  dw $0002, $9F79   ; Change block to 80C5 (med)
-  dw $0002, $9F85   ; Change block to 80C6 (bright)
-  dw $873F, .loop   ; Decrement timer and go to $ADDD if non-zero
+  dw I_animate(2), $9F6D   ; Change block to 80C4 (dark)
+  dw I_animate(2), $9F79   ; Change block to 80C5 (med)
+  dw I_animate(2), $9F85   ; Change block to 80C6 (bright)
+  dw I_dec_timer, .loop    ; Decrement timer and go to $ADDD if non-zero
 
 .end:
-  dw $8724, .top    ; Go to $ADC2
+  dw I_goto, .top
 }
 
 power_control_plm_setup:
@@ -60,7 +76,7 @@ power_control_plm:
   dw power_control_plm_instruction_list
 }
 
-power_control_activate_instruction: ; $8CAF
+I_activate_power_control: ; $8CAF
 {
   PHX
   PHY
@@ -130,15 +146,15 @@ reload_palette:
 
 power_control_left_instruction_list:
 {
-  dw $8C10 : db $37  ; Play station engaged sound
-  dw $0006, $9FC1    ; Change block to B0C3 (special, inactive)
-  dw $0060, $9FC7    ; Change block to 80C1 (solid, active)
-  dw power_control_activate_instruction
-  dw $0006, $9FC7    ; Change block to 80C1 (solid, active)
-  dw $8C10 : db $38  ; Play station disengaged sound
-  dw $0006, $9FC7    ; Change block to 80C1 (solid, active)
-  dw $0006, $9FC1    ; Change block to B0C3 (special, inactive)
-  dw $86BC           ; Delete
+  dw I_queue_sound_2 : db $37  ; Play station engaged sound
+  dw I_animate(6), $9FC1       ; Change block to B0C3 (special, inactive)
+  dw I_animate(60), $9FC7      ; Change block to 80C1 (solid, active)
+  dw I_activate_power_control
+  dw I_animate(6), $9FC7       ; Change block to 80C1 (solid, active)
+  dw I_queue_sound_2 : db $38  ; Play station disengaged sound
+  dw I_animate(6), $9FC7       ; Change block to 80C1 (solid, active)
+  dw I_animate(6), $9FC1       ; Change block to B0C3 (special, inactive)
+  dw I_delete                  ; Delete
 }
 
 power_control_left_setup:
@@ -181,15 +197,15 @@ power_control_left_plm:
 
 power_control_right_instruction_list:
 {
-  dw $8C10 : db $37  ; Play station engaged sound
-  dw $0006, $9FB5    ; Change block to B4C3 (special, inactive)
-  dw $0060, $9FBB    ; Change block to 84C1 (solid, active)
-  dw power_control_activate_instruction
-  dw $0006, $9FBB    ; Change block to 84C1 (solid, active)
-  dw $8C10 : db $38  ; Play station disengaged sound
-  dw $0006, $9FBB    ; Change block to 84C1 (solid, active)
-  dw $0006, $9FB5    ; Change block to B4C3 (special, inactive)
-  dw $86BC           ; Delete
+  dw I_queue_sound_2 : db $37  ; Play station engaged sound
+  dw I_animate(6), $9FB5       ; Change block to B4C3 (special, inactive)
+  dw I_animate(60), $9FBB      ; Change block to 84C1 (solid, active)
+  dw I_activate_power_control
+  dw I_animate(6), $9FBB       ; Change block to 84C1 (solid, active)
+  dw I_queue_sound_2 : db $38  ; Play station disengaged sound
+  dw I_animate(6), $9FBB       ; Change block to 84C1 (solid, active)
+  dw I_animate(6), $9FB5       ; Change block to B4C3 (special, inactive)
+  dw I_delete                  ; Delete
 }
 
 power_control_right_setup:
@@ -214,7 +230,7 @@ power_control_right_setup:
   DEC A
   DEC A
   JMP activate_station
-  
+
 .delete:
   ; Delete PLM
   LDA #$0000
