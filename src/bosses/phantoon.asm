@@ -158,7 +158,15 @@ phantoon_state_fade_out:
   BEQ .next_state
   BPL .return
 
-.next_state
+.next_state:
+  JSR phantoon_begin_fade_back_in
+
+.return:
+  RTS
+}
+
+phantoon_begin_fade_back_in:
+{
   STZ $0FF2
   STZ $0FB6 ; clear phantoon invisibility flag?
   STZ $1070
@@ -166,8 +174,6 @@ phantoon_state_fade_out:
   STA $0FB2,x
   LDA #$0040
   STA $0FB0,x
-
-.return:
   RTS
 }
 
