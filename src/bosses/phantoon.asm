@@ -125,8 +125,37 @@ phantoon_state_track_samus:
   ; Update Phantoon's eye sprite
   JSR $D3FA
 
+  ; Check boss flag
+  PHX
+  LDX $079F
+  LDA $7ED828,x
+  PLX
+  AND #$0001
+  BEQ .return
+
+  JSR phantoon_begin_fade_out
+
+.return:
   RTS
 }
+
+phantoon_state_wait_for_lights_out:
+{
+  ; Check boss flag
+  PHX
+  LDX $079F
+  LDA $7ED828,x
+  PLX
+  AND #$0001
+  BNE .return
+
+  ; TODO - when fading back in, phantoon shows up initially as black rather
+  ; than fading in gradually
+  JSR phantoon_begin_fade_back_in
+
+.return:
+   RTS
+ }
 
 phantoon_state_fade_in = $A7D54A
 
@@ -158,10 +187,23 @@ phantoon_state_fade_out:
 
   ; After fading out, wait for the timer to elapse before fading in
   DEC $0FB0,x
-  BEQ .next_state
   BPL .return
 
 .next_state:
+  ; Check the boss flag
+  PHX
+  LDX $079F
+  LDA $7ED828,x
+  PLX
+  AND #$0001
+  BEQ .fade_back_in
+
+.stay_hidden:
+  LDA.w #phantoon_state_wait_for_lights_out
+  STA $0FB2,x
+  RTS
+
+.fade_back_in:
   JSR phantoon_begin_fade_back_in
 
 .return:
@@ -258,6 +300,7 @@ print "  initial - ", hex(phantoon_state_initial&$FFFF)
 print "  begin eye open - ", hex(phantoon_state_begin_eye_open&$FFFF)
 print "  sleep - ", hex(phantoon_state_sleep&$FFFF)
 print "  track samus - ", hex(phantoon_state_track_samus&$FFFF)
+print "  wait for lights out - ", hex(phantoon_state_wait_for_lights_out&$FFFF)
 print "  fade out - ", hex(phantoon_state_fade_out&$FFFF)
 print "  fade in - ", hex(phantoon_state_fade_in&$FFFF)
 print "  fade back in - ", hex(phantoon_state_fade_back_in&$FFFF)
