@@ -106,7 +106,7 @@ phantoon_room_plm_list:
 {
   dw $C848, $0601, $0086 ; grey door PLM
   dw $B703, $0C10, phantoon_room_plm_scroll_1 ; scroll PLM
-  dw $B703, $0C0F, phantoon_room_plm_scroll_2 ; scroll PLM
+  dw $B703, $0C0D, phantoon_room_plm_scroll_2 ; scroll PLM
   dw power_control_plm, $0B17, $0045 ; power control
   dw $0000
 }
