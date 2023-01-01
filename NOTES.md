@@ -1599,17 +1599,20 @@ Subroutine $84:84E7 spawns PLMs.  The address of the PLM is passed in
 register A.  First, it finds an empty PLM slot and assigns its index to
 register X.  It then stores the following into memory:
 
-| Address    | Description                   |
-| ---------- | ----------------------------- |
-| $7E:1C27+x | 0                             |
-| $7E:1C37+x | PLM ID                        |
-| $7E:1C87+x | PLM block index (n*2)         |
-| $7E:1CD7+x | PLM pre-instruction           |
-| $7E:1D27+x | PLM instruction list pointer  |
-| $7E:1D77+x | 0                             |
-| $7E:DE1C+x | PLM instruction timer = 1     |
-| $7E:DE6C+x | PLM instruction timer = $8DA0 |
-| $7E:DF0C+x | 0                             |
+| Address    | Description                       |
+| ---------- | --------------------------------- |
+| $7E:1C27+x | 0                                 |
+| $7E:1C37+x | PLM ID                            |
+| $7E:1C87+x | PLM block index (n*2)             |
+| $7E:1CD7+x | PLM pre-instruction               |
+| $7E:1D27+x | PLM instruction list pointer      |
+| $7E:1D77+x | PLM loop timer                    |
+| $7E:1DC7+x |                                   |
+| $7E:1E17+x |                                   |
+| $7E:1E67   | Dynamic PLM draw instruction list |
+| $7E:DE1C+x | PLM instruction timer             |
+| $7E:DE6C+x | PLM draw timer                    |
+| $7E:DF0C+x | 0                                 |
 
 At the end of the function it executes the first instruction in the PLM,
 which is always a pointer to a subroutine, usually to play a sound.
@@ -1631,9 +1634,12 @@ of tiles to change.  The draw instruction is followed by the new level
 data values.
 
 TODO: Some draw instructions (e.g. A219) have "FF 00" and "FF 01"
-following an nistruction; I don't yet know what this means.
+following an instruction; I don't yet know what this means.
 
 The draw instruction list is always terminated by $0000.
+
+Also important: the draw timer is assigned to the instruction timer when
+a draw instruction is reached.
 
 Room PLMs
 ---------
