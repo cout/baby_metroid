@@ -15,6 +15,6 @@ phantoon_boss_exit_fix:
 boss_exit_fix_end_freespace_8f:
 !FREESPACE_8F := boss_exit_fix_end_freespace_8f
 
-org $83A2C4
-skip 10
+org $83A2C4 ; door header for phantoon to basement
+skip 10     ; custom door asm
 dw phantoon_boss_exit_fix
