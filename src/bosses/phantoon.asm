@@ -128,7 +128,7 @@ phantoon_state_track_samus:
 
 phantoon_state_fade_in = $A7D54A
 
-phantoon_state_start_fade_out:
+phantoon_start_fade_out:
 {
   STZ $0FF2 ; clear fade out flag
 
@@ -220,8 +220,8 @@ org $A7DD9B
 
 phantoon_shot_ai:
 {
-  LDA.w #phantoon_state_start_fade_out
-  STA $0FB2
+  LDX $0E54
+  JSR phantoon_start_fade_out
   RTL
 }
 
@@ -241,7 +241,6 @@ print "  initial - ", hex(phantoon_state_initial&$FFFF)
 print "  start eye open - ", hex(phantoon_state_start_eye_open&$FFFF)
 print "  sleep - ", hex(phantoon_state_sleep&$FFFF)
 print "  track samus - ", hex(phantoon_state_track_samus&$FFFF)
-print "  start fade out - ", hex(phantoon_state_start_fade_out&$FFFF)
 print "  fade out - ", hex(phantoon_state_fade_out&$FFFF)
 print "  fade in - ", hex(phantoon_state_fade_in&$FFFF)
 print "  fade back in - ", hex(phantoon_state_fade_back_in&$FFFF)
