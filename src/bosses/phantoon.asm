@@ -40,7 +40,7 @@ phantoon_instruction_list_open_eye:
 {
   dw $000A, phantoon_eye_spritemap_eye_opening1
   dw $000A, phantoon_eye_spritemap_eye_opening2
-  dw $808A, start_tracking_samus_with_eye
+  dw $808A, begin_tracking_samus_with_eye
   dw $812F ; sleep
 }
 
@@ -53,7 +53,7 @@ phantoon_eye_instruction_list_open_eye:
 
 org $A7D03F
 
-start_tracking_samus_with_eye:
+begin_tracking_samus_with_eye:
 {
   ; Clear swooping flag (unneeded, but just in case)
   STZ $1028
@@ -100,7 +100,7 @@ phantoon_state_initial:
 
 org $A7D596
 
-phantoon_state_start_eye_open:
+phantoon_state_begin_eye_open:
 {
   LDA #$0001
   STA $0FD4
@@ -128,7 +128,7 @@ phantoon_state_track_samus:
 
 phantoon_state_fade_in = $A7D54A
 
-phantoon_start_fade_out:
+phantoon_begin_fade_out:
 {
   STZ $0FF2 ; clear fade out flag
 
@@ -188,7 +188,7 @@ phantoon_state_fade_back_in:
   LDA $0FF2
   BEQ .return
 
-  LDA.w #phantoon_state_start_eye_open
+  LDA.w #phantoon_state_begin_eye_open
   STA $0FB2,x
   LDA #$0001
   STA $1074
@@ -221,7 +221,7 @@ org $A7DD9B
 phantoon_shot_ai:
 {
   LDX $0E54
-  JSR phantoon_start_fade_out
+  JSR phantoon_begin_fade_out
   RTL
 }
 
@@ -238,7 +238,7 @@ JMP $CED2
 
 print "Phantoon states:"
 print "  initial - ", hex(phantoon_state_initial&$FFFF)
-print "  start eye open - ", hex(phantoon_state_start_eye_open&$FFFF)
+print "  begin eye open - ", hex(phantoon_state_begin_eye_open&$FFFF)
 print "  sleep - ", hex(phantoon_state_sleep&$FFFF)
 print "  track samus - ", hex(phantoon_state_track_samus&$FFFF)
 print "  fade out - ", hex(phantoon_state_fade_out&$FFFF)
