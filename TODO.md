@@ -31,7 +31,6 @@ Incomplete
 ----------
 
 * Kraid fight is still mostly vanilla
-* Need to remove spikes from Croc spike wall
 * Pit room is empty of enemies
 * The spikes in double chamber are difficult
 * Ice beam gate room is hard without knowing how to use the run button
