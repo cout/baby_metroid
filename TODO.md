@@ -35,8 +35,6 @@ Incomplete
 * Pit room is empty of enemies
 * The spikes in double chamber are difficult
 * Ice beam gate room is hard without knowing how to use the run button
-* Stop gadora from shooting
-* Keep gadora eyes open?
 * Make gadora vulnerable to charge?
 * Bat room - remove spikes
 * Potential softlock at Kraid (all boss fights should start with the
