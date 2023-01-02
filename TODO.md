@@ -49,10 +49,12 @@ Cosmetic
 --------
 
 * Moat room bridge is not aligned on the right side
+* Easy blue suit should not produce echoes
 
 Feedback from E
 ---------------
 
+* business center is hard
 * hard to get out of construction zone
 * hard to hit chozo orb (can I make power beam hitbox bigger?)
 * dead people in ceres (wife noticed)
@@ -78,6 +80,9 @@ Feedback from E
 * (related idea - maybe grapple beam can "pull" enemies instead of just
     killing them - but only when samus is walking)
 * norfair spiky room is too hard
+* hard to get across acid in LN main hall
+* hard to get out of acid in acid statue room
+* Please shorten volcano room earthquake
 
 Tools
 -----
