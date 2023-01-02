@@ -34,7 +34,6 @@ Incomplete
 * Pit room is empty of enemies
 * Ice beam gate room is hard without knowing how to use the run button
 * Gadora staring contest
-* Bat room - remove spikes
 * Potential softlock at Kraid (all boss fights should start with the
     door unlocked)
 * Potential softlock in speed hallway (though this is less likely)
