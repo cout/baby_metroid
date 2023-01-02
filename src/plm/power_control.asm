@@ -11,6 +11,7 @@ org !FREESPACE_84
 ; TODO - Move these instructions to another file so they can be used in other
 ; PLMs
 
+I_sleep = $8486B4
 I_goto = $848724
 I_set_timer = $84874E
 I_dec_timer = $84873F
@@ -91,15 +92,7 @@ power_control_plm_instruction_list:
 .top:
   dw I_link, .linked ; Link instruction
 
-  ; Indicator light depending on whether power is on
-.start:
-  dw I_branch_if_power_on, .power_is_on
-.power_is_off:
-  dw I_animate(6), D_inactive
-  dw I_goto, .start
-.power_is_on:
-  dw I_animate(6), D_inactive
-  dw I_goto, .start
+  dw I_sleep
 
 .linked:
   dw I_set_timer : db $06
