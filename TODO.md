@@ -58,6 +58,7 @@ Incomplete
 * Remove spikes from pre-xray room
 * Tunnel in phantoon's room should be a bombable block
 * Change color of power control (or make it use WS tiles instead of CRE)
+* Use horizontal extension for bombable blocks in phantoon room
 
 Feedback from E
 ---------------
