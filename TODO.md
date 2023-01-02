@@ -34,7 +34,7 @@ Incomplete
 * Pit room is empty of enemies
 * The spikes in double chamber are difficult
 * Ice beam gate room is hard without knowing how to use the run button
-* Make gadora vulnerable to charge?
+* Gadora staring contest
 * Bat room - remove spikes
 * Potential softlock at Kraid (all boss fights should start with the
     door unlocked)
@@ -46,6 +46,8 @@ Incomplete
 * Remove spikes from pre-xray room
 * WS attic enemies make it challenging after power is on (maybe remove
   kihunters?)
+* Escape sequence is incomplete
+* Croc - limit how far croc will come forward
 
 Cosmetic
 --------
