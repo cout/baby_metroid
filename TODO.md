@@ -56,9 +56,6 @@ Incomplete
 * It is not possible to go down red tower (need to add a crumble block)
 * Decrease spike damage
 * Remove spikes from pre-xray room
-* Tunnel in phantoon's room should be a bombable block
-* Change color of power control (or make it use WS tiles instead of CRE)
-* Use horizontal extension for bombable blocks in phantoon room
 
 Feedback from E
 ---------------
