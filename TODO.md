@@ -72,7 +72,7 @@ Feedback from E
     if you return to green hill zone
 * frozen creatures were confusing (why were they there? will I get
     frozen?) - I did this before I was comfortable with level editing
-* E did not know how to get on rippers in bat room
+* E did not know how to get on rippers in bat room - fixed?
 * E thinks he can "push" enemies but it's really just a collision --
     maybe I can make enemies get a little push?
 * (related idea - maybe grapple beam can "pull" enemies instead of just
