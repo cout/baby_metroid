@@ -25,6 +25,7 @@ ROOMS = \
 	src/rooms/green_brinstar_firefleas.bin \
 	src/rooms/spore_spawn.bin \
 	src/rooms/noob_bridge.bin \
+	src/rooms/bat_room.bin \
 	src/rooms/early_supers.bin \
 	src/rooms/hi_jump_boots.bin \
 	src/rooms/kraid_eye_door.bin \

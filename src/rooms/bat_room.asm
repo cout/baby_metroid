@@ -1,3 +1,7 @@
+org $C6B739
+incbin "bat_room.bin"
+warnpc $C6BB39
+
 ;;
 ; Replace bats with rippers (to ride across)
 ;
