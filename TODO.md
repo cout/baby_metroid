@@ -32,7 +32,6 @@ Incomplete
 
 * Kraid fight is still mostly vanilla
 * Pit room is empty of enemies
-* The spikes in double chamber are difficult
 * Ice beam gate room is hard without knowing how to use the run button
 * Gadora staring contest
 * Bat room - remove spikes
