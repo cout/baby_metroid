@@ -59,6 +59,7 @@ def main():
     main_routine=room_state_header.room_main_func,
   ).lstrip())
   print(room2hex(level_data, room_header.w * 16, room_header.h * 16))
+  print('; vim', ':ft=roomhex', sep='')
 
 if __name__ == '__main__':
   main()
