@@ -31,14 +31,7 @@ Incomplete
 ----------
 
 * Kraid fight is still mostly vanilla
-* Phantoon is OHKO but should be a passive fight
-* Croc is still vanilla (should "take a bath")
-    * plan: croc is vulnerable to uncharged beam and has a larger
-        hitbox.  disable flashing when hit and don't require mouth to be
-        open.  change acid to water.  fight ends when croc is in the
-        water taking a bath.  no spikes on the walls.  croc cannot move
-        forward past the door.  give some hint that croc needs a bath,
-        otherwise croc just looks scary.
+* Need to remove spikes from Croc spike wall
 * Pit room is empty of enemies
 * The spikes in double chamber are difficult
 * Ice beam gate room is hard without knowing how to use the run button
@@ -49,13 +42,19 @@ Incomplete
 * Potential softlock at Kraid (all boss fights should start with the
     door unlocked)
 * Potential softlock in speed hallway (though this is less likely)
-* Moat room bridge is not aligned on the right side
 * Dragons in rising tide should be intangible
 * It is not obvious how to get down WS shaft
 * Red tower speed blocks should be 4-wide
 * It is not possible to go down red tower (need to add a crumble block)
 * Decrease spike damage
 * Remove spikes from pre-xray room
+* WS attic enemies make it challenging after power is on (maybe remove
+  kihunters?)
+
+Cosmetic
+--------
+
+* Moat room bridge is not aligned on the right side
 
 Feedback from E
 ---------------
