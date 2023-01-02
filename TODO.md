@@ -41,7 +41,6 @@ Incomplete
 * Dragons in rising tide should be intangible
 * It is not obvious how to get down WS shaft
 * Red tower speed blocks should be 4-wide
-* It is not possible to go down red tower (need to add a crumble block)
 * Remove spikes from pre-xray room
 * WS attic enemies make it challenging after power is on (maybe remove
   kihunters?)
