@@ -279,6 +279,9 @@ Block types (and their respective reaction handlers in bank $94) are:
 |   Eh | Grapple block   | 8F49 | 8F82 | =    | +    | +    | +    | +    | A7D1 | +    | 82BE | 82DA  |
 |   Fh | Bombable block  | 932D | 934C | =    | 9FF4 | 9FF4 | 9FF4 | +    | 9FF4 | +    | 82BE | 82DA  |
 
+TODO - other types than listed here have BTS values (e.g.) slopes; I am
+not sure how to represent that here.
+
 Legend:
 * *: BTS ("Behind The Scenes"; customizable via PLM tables)
 * h: horizontal shot, collision, or post-grapple collision
@@ -462,12 +465,15 @@ PLMs can be spawned:
 * For other events, by invoking $84:83D7 or $84:84E7 to spawn a PLM
   programmatically.
 
-### Special Block Reaction Tables
+### Block Reaction Tables
 
-The following special block reaction tables tables are defined:
+The following block reaction tables tables are defined:
 
 | Address  | Types   | Description                | R? | Type |
 | -------- | ------  | -------------------------- | -- | ---- |
+| $94:8FF6 | 2h      | Samus block collision (v)  |    | Jump |
+| $94:902B | Ah      | Samus block collision      |    | Jump |
+| $94:98AC | 2h      | Inside block               |    | Jump |
 | $94:9139 | 3h, Bh  | Samus block collision      |    | PLM  |
 | $94:91D9 | 3h, Bh  | Samus block collision      | *  | PLM  |
 | $94:936B | 7h, Fh  | Samus block collision      |    | PLM  |
@@ -478,7 +484,7 @@ The following special block reaction tables tables are defined:
 | $94:9EA6 | 4h, Ch  | Block shot/bombed/grappled |    | PLM  |
 | $94:9F46 | 4h, Ch  | Block shot/bombed/grappled | *  | PLM  |
 | $94:A012 | Fh      | Block shot/bombed/grappled |    | PLM  |
-| $94:936B | Fh      | Collisoin                  |    | PLM  |
+| $94:936B | Fh      | Collision                  |    | PLM  |
 
 (R indicates the table is region-dependent)
 
