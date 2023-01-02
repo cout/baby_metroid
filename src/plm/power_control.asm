@@ -44,21 +44,45 @@ D_active_right:
   dw $0000
 }
 
-D_dark:
+D_inactive:
 {
   dw $0001, $815B
   dw $0000
 }
 
-D_med:
+D_active_0:
 {
   dw $0001, $815B
+  db $00, $FF
+  dw $0001, $81CA
+  db $01, $FF
+  dw $0001, $81CB
+  db $00, $01
+  dw $0001, $817C
+  db $01, $01
+  dw $0001, $817D
+  db $00, $02
+  dw $0001, $815C
+  db $01, $02
+  dw $0001, $815D
   dw $0000
 }
 
-D_bright:
+D_active_1:
 {
   dw $0001, $815B
+  db $00, $FF
+  dw $0001, $85CB
+  db $01, $FF
+  dw $0001, $85CA
+  db $00, $01
+  dw $0001, $815C
+  db $01, $01
+  dw $0001, $815D
+  db $00, $02
+  dw $0001, $817C
+  db $01, $02
+  dw $0001, $817D
   dw $0000
 }
 
@@ -71,22 +95,20 @@ power_control_plm_instruction_list:
 .start:
   dw I_branch_if_power_on, .power_is_on
 .power_is_off:
-  dw I_animate(6), D_dark   ; Change block to dark
-  dw I_goto, .start         ; Goto start
+  dw I_animate(6), D_inactive
+  dw I_goto, .start
 .power_is_on:
-  dw I_animate(6), D_bright ; Change block to bright
-  dw I_goto, .start         ; Goto start
-  dw I_goto, .start         ; Goto start
+  dw I_animate(6), D_inactive
+  dw I_goto, .start
 
 .linked:
   dw I_set_timer : db $06
 
   ; While the station is activated, make it blink
 .loop:
-  dw I_animate(2), D_dark   ; Change block to dark
-  dw I_animate(2), D_med    ; Change block to 80C5 (med)
-  dw I_animate(2), D_bright ; Change block to 80C6 (bright)
-  dw I_dec_timer, .loop     ; Decrement timer and go to $ADDD if non-zero
+  dw I_animate(2), D_active_1
+  dw I_animate(2), D_active_0
+  dw I_dec_timer, .loop
 
 .end:
   dw I_goto, .top
