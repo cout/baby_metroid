@@ -466,17 +466,19 @@ PLMs can be spawned:
 
 The following special block reaction tables tables are defined:
 
-| Address  | Types  | Bank | Description                | R? | Type |
-| -------- | ------ | ---- | -------------------------- | -- | ---- |
-| $94:9139 | 3h, Bh | $94  | Samus block collision      |    | PLM  |
-| $94:91D9 | 3h, Bh | $94  | Samus block collision      | *  | PLM  |
-| $94:936B | 7h, Fh | $94  | Samus block collision      |    | PLM  |
-| $94:9966 | 3h     | $84  | Inside block               |    | Jump |
-| $94:9A06 | 3h     | $84  | Inside block               | *  | PLM  |
-| $94:9DA4 | Bh     | $94  | Block bombed               |    | PLM  |
-| $94:9DC4 | Bh     | $94  | Block bombed               | *  | PLM  |
-| $94:9EA6 | 4h, Ch | $94  | Block shot/bombed/grappled |    | PLM  |
-| $94:9F46 | 4h, Ch | $94  | Block shot/bombed/grappled | *  | PLM  |
+| Address  | Types   | Description                | R? | Type |
+| -------- | ------  | -------------------------- | -- | ---- |
+| $94:9139 | 3h, Bh  | Samus block collision      |    | PLM  |
+| $94:91D9 | 3h, Bh  | Samus block collision      | *  | PLM  |
+| $94:936B | 7h, Fh  | Samus block collision      |    | PLM  |
+| $94:9966 | 3h      | Inside block               |    | Jump |
+| $94:9A06 | 3h      | Inside block               | *  | PLM  |
+| $94:9DA4 | Bh      | Block bombed               |    | PLM  |
+| $94:9DC4 | Bh      | Block bombed               | *  | PLM  |
+| $94:9EA6 | 4h, Ch  | Block shot/bombed/grappled |    | PLM  |
+| $94:9F46 | 4h, Ch  | Block shot/bombed/grappled | *  | PLM  |
+| $94:A012 | Fh      | Block shot/bombed/grappled |    | PLM  |
+| $94:936B | Fh      | Collisoin                  |    | PLM  |
 
 (R indicates the table is region-dependent)
 
@@ -492,42 +494,43 @@ in bank $94.
 
 The following block reaction PLMs are defined in the vanilla ROM:
 
-| BTS | Block Type 3h/Bh  | Col. | Ins. | Bomb | Block Type 4h/Ch   | Shot |
-| --- | ----------------- | ---- | ---- | ---- | ------------------ | ---- |
-| 00h | 1x1 crumble (r)   | D044 |      | CFFC | 1x1 shot (r)       | D064 |
-| 01h | 2x1 crumble (r)   | D048 |      | D000 | 2x1 shot (r)       | D068 |
-| 02h | 1x2 crumble (r)   | D04C |      | D004 | 1x2 shot (r)       | D06C |
-| 03h | 2x2 crumble (r)   | D050 |      | D008 | 2x2 shot (r)       | D070 |
-| 04h | 1x1 crumble       | D054 |      | CFFC | 1x1 shot           | D074 |
-| 05h | 1x2 crumble       | D058 |      | D000 | 1x2 shot           | D078 |
-| 06h | 2x1 crumble       | D05C |      | D004 | 2x1 shot           | D07C |
-| 07h | 2x2 crumble       | D060 |      | D008 | 2x2 shot           | D080 |
-| 08h | WS treadmill R    |      | 98EA |      | power bomb (r)     | D084 |
-| 09h | WS treadmill L    |      | 9910 |      | power bomb         | D088 |
-| 0Ah | treadmill R       |      | 9936 |      | super missile (r)  | D08C |
-| 0Bh | treadmill L       |      | 9946 |      | super missile      | D090 |
-| 0Ch |                   |      |      |      |                    |      |
-| 0Dh |                   |      |      |      |                    |      |
-| 0Eh | speed boost (r)   | D038 |      | D024 |                    |      |
-| 0Fh | speed boost       | D040 |      | D024 |                    |      |
-| 10h |                   |      |      |      | shot/bomb/grapple  | B974 |
-| ... |                   |      |      |      |                    |      |
-| 40h |                   |      |      |      | blue door facing L | C8A2 |
-| 41h |                   |      |      |      | blue door facing R | C8A8 |
-| 42h |                   |      |      |      | blue door facing U | C8AE |
-| 43h |                   |      |      |      | blue door facing D | C8B4 |
-| 44h | generic shot PLM  | C83E |      |      | generic shot PLM   | C83E |
-| 45h | item              | EED3 |      |      | item               | EED3 |
-| 46h | scroll            | B6FF | 9956 |      | blue gate L        | C816 |
-| 47h | map station R     | B6D7 |      |      | blue gate R        | C81A |
-| 48h | map station L     | B6DB |      |      | red gate R         | C80E |
-| 49h | energy station R  | B6E3 |      |      | red gate R         | C812 |
-| 4Ah | energy station L  | B6E7 |      |      | green gate L       | C806 |
-| 4Bh | missile station R | B6EF |      |      | green gate R       | C80A |
-| 4Ch | missile station L | B6F3 |      |      | yellow gate L      | C81E |
-| 4Dh | save station      | B76B |      |      |                    |      |
-| 4Eh |                   |      |      |      |                    |      |
-| 4Fh | animals escape    |      |      |      | animals escape     | B9C1 |
+|     |                   |      |      |      |                    |      |               |      | Bomb/ |
+| BTS | Block Type 3h/Bh  | Col. | Ins. | Bomb | Block Type 4h/Ch   | Shot | Block Type Fh | Col. | Grap. |
+| --- | ----------------- | ---- | ---- | ---- | ------------------ | ---- | ------------- | ---- | ----- |
+| 00h | 1x1 crumble (r)   | D044 |      | CFFC | 1x1 shot (r)       | D064 | 1x1 bomb (r)  | D098 | D0B8  |
+| 01h | 2x1 crumble (r)   | D048 |      | D000 | 2x1 shot (r)       | D068 | 2x1 bomb (r)  | D09C | D0BC  |
+| 02h | 1x2 crumble (r)   | D04C |      | D004 | 1x2 shot (r)       | D06C | 1x2 bomb (r)  | D0A0 | D0C0  |
+| 03h | 2x2 crumble (r)   | D050 |      | D008 | 2x2 shot (r)       | D070 | 2x2 bomb (r)  | D0A4 | D0C4  |
+| 04h | 1x1 crumble       | D054 |      | CFFC | 1x1 shot           | D074 | 1x1 bomb      | D0A8 | D0C8  |
+| 05h | 1x2 crumble       | D058 |      | D000 | 2x1 shot           | D078 | 2x1 bomb      | D0AC | D0CC  |
+| 06h | 2x1 crumble       | D05C |      | D004 | 1x2 shot           | D07C | 1x2 bomb      | D0B0 | D0D0  |
+| 07h | 2x2 crumble       | D060 |      | D008 | 2x2 shot           | D080 | 2x2 bomb      | D0B4 | D0D4  |
+| 08h | WS treadmill R    |      | 98EA |      | power bomb (r)     | D084 |               |      |       |
+| 09h | WS treadmill L    |      | 9910 |      | power bomb         | D088 |               |      |       |
+| 0Ah | treadmill R       |      | 9936 |      | super missile (r)  | D08C |               |      |       |
+| 0Bh | treadmill L       |      | 9946 |      | super missile      | D090 |               |      |       |
+| 0Ch |                   |      |      |      |                    |      |               |      |       |
+| 0Dh |                   |      |      |      |                    |      |               |      |       |
+| 0Eh | speed boost (r)   | D038 |      | D024 |                    |      |               |      |       |
+| 0Fh | speed boost       | D040 |      | D024 |                    |      |               |      |       |
+| 10h |                   |      |      |      | shot/bomb/grapple  | B974 |               |      |       |
+| ... |                   |      |      |      |                    |      |               |      |       |
+| 40h |                   |      |      |      | blue door facing L | C8A2 |               |      |       |
+| 41h |                   |      |      |      | blue door facing R | C8A8 |               |      |       |
+| 42h |                   |      |      |      | blue door facing U | C8AE |               |      |       |
+| 43h |                   |      |      |      | blue door facing D | C8B4 |               |      |       |
+| 44h | generic shot PLM  | C83E |      |      | generic shot PLM   | C83E |               |      |       |
+| 45h | item              | EED3 |      |      | item               | EED3 |               |      |       |
+| 46h | scroll            | B6FF | 9956 |      | blue gate L        | C816 |               |      |       |
+| 47h | map station R     | B6D7 |      |      | blue gate R        | C81A |               |      |       |
+| 48h | map station L     | B6DB |      |      | red gate R         | C80E |               |      |       |
+| 49h | energy station R  | B6E3 |      |      | red gate R         | C812 |               |      |       |
+| 4Ah | energy station L  | B6E7 |      |      | green gate L       | C806 |               |      |       |
+| 4Bh | missile station R | B6EF |      |      | green gate R       | C80A |               |      |       |
+| 4Ch | missile station L | B6F3 |      |      | yellow gate L      | C81E |               |      |       |
+| 4Dh | save station      | B76B |      |      |                    |      |               |      |       |
+| 4Eh |                   |      |      |      |                    |      |               |      |       |
+| 4Fh | animals escape    |      |      |      | animals escape     | B9C1 |               |      |       |
 
 Legend:
 * L/R/U/D: left/right/up/down
