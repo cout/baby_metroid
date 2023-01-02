@@ -1,6 +1,11 @@
 !POWER_CONTROL_LEFT_BLOCK_BTS = $13
 !POWER_CONTROL_RIGHT_BLOCK_BTS = $14
 
+!POWER_CONTROL_INACTIVE_LEFT_BLOCK = $1AB
+!POWER_CONTROL_INACTIVE_RIGHT_BLOCK = $1AA
+!POWER_CONTROL_ACTIVE_LEFT_BLOCK = $18F
+!POWER_CONTROL_ACTIVE_RIGHT_BLOCK = $18C
+
 org !FREESPACE_84
 
 ; TODO - Move these instructions to another file so they can be used in other
@@ -15,9 +20,47 @@ I_delete = $8486BC
 
 function I_animate(x) = x
 
-dark_block = $8F9F6D
-med_block = $8F9F79
-bright_block = $8F9F85
+D_inactive_left:
+{
+  dw $0001, $B000|!POWER_CONTROL_INACTIVE_LEFT_BLOCK
+  dw $0000
+}
+
+D_inactive_right:
+{
+  dw $0001, $B000|!POWER_CONTROL_INACTIVE_RIGHT_BLOCK
+  dw $0000
+}
+
+D_active_left:
+{
+  dw $0001, $8000|!POWER_CONTROL_ACTIVE_LEFT_BLOCK
+  dw $0000
+}
+
+D_active_right:
+{
+  dw $0001, $8000|!POWER_CONTROL_ACTIVE_RIGHT_BLOCK
+  dw $0000
+}
+
+D_dark:
+{
+  dw $0001, $815B
+  dw $0000
+}
+
+D_med:
+{
+  dw $0001, $815B
+  dw $0000
+}
+
+D_bright:
+{
+  dw $0001, $815B
+  dw $0000
+}
 
 power_control_plm_instruction_list:
 {
@@ -28,22 +71,22 @@ power_control_plm_instruction_list:
 .start:
   dw I_branch_if_power_on, .power_is_on
 .power_is_off:
-  dw I_animate(6), $9F6D   ; Change block to 80C4 (dark)
-  dw I_goto, .start        ; Goto start
+  dw I_animate(6), D_dark   ; Change block to dark
+  dw I_goto, .start         ; Goto start
 .power_is_on:
-  dw I_animate(6), $9F85   ; Change block to 80C6 (bright)
-  dw I_goto, .start        ; Goto start
-  dw I_goto, .start        ; Goto start
+  dw I_animate(6), D_bright ; Change block to bright
+  dw I_goto, .start         ; Goto start
+  dw I_goto, .start         ; Goto start
 
 .linked:
   dw I_set_timer : db $06
 
   ; While the station is activated, make it blink
 .loop:
-  dw I_animate(2), $9F6D   ; Change block to 80C4 (dark)
-  dw I_animate(2), $9F79   ; Change block to 80C5 (med)
-  dw I_animate(2), $9F85   ; Change block to 80C6 (bright)
-  dw I_dec_timer, .loop    ; Decrement timer and go to $ADDD if non-zero
+  dw I_animate(2), D_dark   ; Change block to dark
+  dw I_animate(2), D_med    ; Change block to 80C5 (med)
+  dw I_animate(2), D_bright ; Change block to 80C6 (bright)
+  dw I_dec_timer, .loop     ; Decrement timer and go to $ADDD if non-zero
 
 .end:
   dw I_goto, .top
@@ -80,14 +123,16 @@ power_control_plm_setup:
   ORA #$8000
   STA $7F0002,x
 
-  ; Make the block to the left a power control right access
+  ; Make the block two blocks to the right a power control left access
   LDX $1C87,y
+  INX
+  INX
   INX
   INX
   LDA.w #$B000|!POWER_CONTROL_RIGHT_BLOCK_BTS
   JSR $82B4 ; write level data block type and BTS
 
-  ; Make the block to the left a power control left access
+  ; Make the block to the left a power control right access
   LDX $1C87,y
   DEX
   DEX
@@ -173,15 +218,15 @@ reload_palette:
 
 power_control_left_instruction_list:
 {
-  dw I_queue_sound_2 : db $37  ; Play station engaged sound
-  dw I_animate(6), $9FC1       ; Change block to B0C3 (special, inactive)
-  dw I_animate(60), $9FC7      ; Change block to 80C1 (solid, active)
+  dw I_queue_sound_2 : db $37      ; Play station engaged sound
+  dw I_animate(6), D_inactive_left ; Change block to special/inactivate
+  dw I_animate(60), D_active_left  ; Change block to solid/active
   dw I_activate_power_control
-  dw I_animate(6), $9FC7       ; Change block to 80C1 (solid, active)
-  dw I_queue_sound_2 : db $38  ; Play station disengaged sound
-  dw I_animate(6), $9FC7       ; Change block to 80C1 (solid, active)
-  dw I_animate(6), $9FC1       ; Change block to B0C3 (special, inactive)
-  dw I_delete                  ; Delete
+  dw I_animate(6), D_active_left   ; Change block to solid/active
+  dw I_queue_sound_2 : db $38      ; Play station disengaged sound
+  dw I_animate(6), D_active_left   ; Change block to solid/active
+  dw I_animate(6), D_inactive_left ; Change block to special/inactive
+  dw I_delete                      ; Delete
 }
 
 power_control_left_setup:
@@ -224,15 +269,15 @@ power_control_left_plm:
 
 power_control_right_instruction_list:
 {
-  dw I_queue_sound_2 : db $37  ; Play station engaged sound
-  dw I_animate(6), $9FB5       ; Change block to B4C3 (special, inactive)
-  dw I_animate(60), $9FBB      ; Change block to 84C1 (solid, active)
+  dw I_queue_sound_2 : db $37       ; Play station engaged sound
+  dw I_animate(6), D_inactive_right ; Change block to special/inactive
+  dw I_animate(60), D_active_right  ; Change block to solid/active
   dw I_activate_power_control
-  dw I_animate(6), $9FBB       ; Change block to 84C1 (solid, active)
-  dw I_queue_sound_2 : db $38  ; Play station disengaged sound
-  dw I_animate(6), $9FBB       ; Change block to 84C1 (solid, active)
-  dw I_animate(6), $9FB5       ; Change block to B4C3 (special, inactive)
-  dw I_delete                  ; Delete
+  dw I_animate(6), D_active_right   ; Change block to solid/active
+  dw I_queue_sound_2 : db $38       ; Play station disengaged sound
+  dw I_animate(6), D_active_right   ; Change block to solid/active
+  dw I_animate(6), D_inactive_right ; Change block to special/inactive
+  dw I_delete                       ; Delete
 }
 
 power_control_right_setup:
@@ -252,8 +297,10 @@ power_control_right_setup:
   AND #$0004
   BEQ .delete
 
-  ; Activate station to the left
+  ; Activate station two blocks to the left
   LDA $1C87,y
+  DEC A
+  DEC A
   DEC A
   DEC A
   JMP activate_station
