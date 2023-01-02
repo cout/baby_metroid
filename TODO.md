@@ -91,3 +91,5 @@ Tools
 * Extract room data script should not include duplicate FX/graphics
     sets/population (see kraid room as example)
 * Write out warnpc for room headers and enemy population/set
+* Room extract writes out incorrect tilemap end for rooms with layer 2
+    tilemap (double chamber)
