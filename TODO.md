@@ -83,6 +83,7 @@ Feedback from E
 * hard to get across acid in LN main hall
 * hard to get out of acid in acid statue room
 * Please shorten volcano room earthquake
+* Hard to get back up in room next to frog speedway
 
 Tools
 -----
