@@ -137,3 +137,32 @@ RTL
 
 org $91DF71 ; instruction within deal damage subroutine that decrements Samus's health
 RTL
+
+;;
+; Do block collision detection when standing on solid/frozen enemies
+;
+; This fixes what appears to be a bug in the original code: a solid
+; enemy can pull Samus through the floor, because block collision
+; detection is skipped when there is enemy collision.
+;
+
+org $909450
+TAX
+BEQ move_samus_down_no_enemy_collision
+JMP move_samus_down_enemy_collision
+warnpc $90945B
+
+move_samus_down_no_enemy_collision = $90945B
+
+org !FREESPACE_90
+
+move_samus_down_enemy_collision:
+{
+  JSR $E61B
+  JSL $949763
+  PLP
+  RTS
+}
+
+end_freeze_enemies_freespace_90:
+!FREESPACE_90 := end_freeze_enemies_freespace_90
