@@ -59,12 +59,10 @@ org $A0A9DC
 JMP check_solid_enemy_detection
 
 ; this is the branch that is taken if the enemy is frozen or solid
-org $A0A9EC
-treat_enemy_as_solid:
+treat_enemy_as_solid = $A0A9EC
 
 ; this is the branch that is taken if the enemy is not frozen or solid
-org $A0AABF
-treat_enemy_as_ethereal:
+treat_enemy_as_ethereal = $A0AABF
 
 org !FREESPACE_A0
 
