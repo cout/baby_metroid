@@ -1,18 +1,15 @@
 ;;;;;
 ;
 ; Easy blue suit - lets players get blue suit by holding the run button
-; while standing.
+; while on the ground.
 ;
 ; Bugs/Limitations:
-; * Since this code is only executed when Samus is in the standing
-;   position, it is possible for Samus to lose blue suit while not in
-;   the standing position and then quickly reacquire blue suit by
-;   pressing and holding the run button prior to standing.
+; * It is not possible to acquire nor cancel blue suit while crouching
+; * It is not possible to cancel blue suit in the air (it is
+;   intentionally not possible to acquire blue suit in the air)
 ; * Samus can acquire blue suit slightly faster the first time easy blue
 ;   suit is used if the memory used by this patch gets initialized to a
 ;   a value between 400h and 4FFh.
-; * Samus loses blue suit if holding B and running into a wall (this can
-;   be a problem e.g. in frog speedway)
 ;
 ;;;;;
 
@@ -51,12 +48,28 @@ easy_blue_suit_end_freemem_7f:
 !FREEMEM_7F := easy_blue_suit_end_freemem_7f
 
 ;;
-; "Cancel speed boosting" hook for Samus standing position
+; Easy blue suit hooks for various Samus positions
+;
+; These hooks are placed at the call to $91:DE53 (cancel speed boosting)
 ;
 
-org $90A3D0
+org $90A3D0 : JSL do_easy_blue_suit_check ; standing
+org $90A551 : JSL do_easy_blue_suit_check ; morphed ball - on ground
+; org $90A5D9 : JSL do_easy_blue_suit_check ; morphed ball - falling
+org $90A685 : JSL do_easy_blue_suit_check ; turning around - on ground
+org $90A6CF : JSL do_easy_blue_suit_check ; spring ball - on ground
+; org $90A712 : JSL do_easy_blue_suit_check ; spring ball - falling
+org $90A768 : JSL do_easy_blue_suit_check ; ran into a wall
+; org $90A79E : JSL do_easy_blue_suit_check ; turning around - jumping
+; org $90A7BB : JSL do_easy_blue_suit_check ; turning around - falling
 
-JSL do_easy_blue_suit_check
+; TODO - it would be nice to also hook $90:A573 (crouching), but there
+; is no call to $90:A3D0 there, so hooking that routine requires some
+; refactoring.
+
+;;
+; Routine to give easy blue suit
+;
 
 org !FREESPACE_90
 

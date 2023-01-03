@@ -12,17 +12,12 @@ Bugs
     (this is particularly bad with rinkas in MB room)
 * Screw attack does not work
 * Speed hallway - it is too easy to get stuck under the crumbles
-* Blue suit is lost in lava, which can make some rooms difficult
 * E managed to trigger a crash from climb to pit room before getting
     morph, but I don't know how he did it (I cannot reproduce it - E
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
 * Sometimes the top door in Climb is unlocked (it should be locked)
 * door at top of climb before getting morph has peculiar scroll
-* when clearing the blue suit flag, the flag that causes echoes should
-    also be cleared
-* easy blue suit is cleared if touching a block horizontally while the
-    run button is pressed
 * Spore spawn is brown if Samus leaves and comes back
 * Caterpillar room statue is missing
 * Below Spazer room crashes on bsnes
@@ -50,6 +45,7 @@ Cosmetic
 
 * Moat room bridge is not aligned on the right side
 * Easy blue suit should not produce echoes
+* Blue suit animation is not visible in lava
 
 Feedback from E
 ---------------
