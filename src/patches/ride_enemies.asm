@@ -19,6 +19,8 @@
 ;
 ;;;;;
 
+check_samus_touching_from_above = $A0AC29
+
 
 ;;
 ; Hook routine to move enemies horizontally to move Samus with them
@@ -64,7 +66,7 @@ move_samus_horiz_with_enemy:
   BNE .not_touching
 
   ; if not touching then we just move the enemy and not Samus
-  JSL $A0AC29
+  JSL check_samus_touching_from_above
   BNE .touching
 
 .not_touching:
@@ -130,7 +132,7 @@ move_samus_vert_with_enemy:
   BNE .not_touching
 
   ; if not touching then we just move the enemy and not Samus
-  JSL $A0AC29
+  JSL check_samus_touching_from_above
   BNE .touching
 
 .not_touching:
