@@ -39,6 +39,13 @@ Incomplete
   kihunters?)
 * Escape sequence is incomplete
 * Croc - limit how far croc will come forward
+* Eye doors sometimes still close
+* Ridley needs to somehow drain Samus's health to 1 to encourage player
+    to pick up the e-tank (or maybe just have the door locked)
+* ammo refill should refill all ammo
+* doors exiting baby should be left unlocked
+* baby should ignore samus's shots otherwise it's too hard to shoot the
+    seaweed
 
 Cosmetic
 --------
