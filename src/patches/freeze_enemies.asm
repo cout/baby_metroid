@@ -71,25 +71,27 @@ org !FREESPACE_A0
 check_solid_enemy_detection:
 {
   ; If shine sparking then we want to do the normal checks
-  ; TODO - I don't think this check is right?  It looks backward to me,
-  ; but maybe I don't know what I meant when I wrote "do the normal
-  ; checks".  Is the normal check ethereal or solid?
   LDA $0A1F
   AND #$00FF
   CMP #$001B
   BEQ .do_normal_solid_checks
 
   ; TODO - I am unsure whether we want to allow Samus to pass through
-  ; enemeies with blue suit (because if we do she cannot stand on them
+  ; enemies with blue suit (because if we do she cannot stand on them
   ; with blue suit).  Maybe allow if blue suit and running at full
   ; speed?
   ; LDA $0B3E ; blue suit flag
   ; BNE .do_normal_solid_checks
 
 .treat_enemy_as_solid:
+  ; Always treat the enemy as solid:
+
   JMP treat_enemy_as_solid
 
 .do_normal_solid_checks:
+  ; Treat the enemy as solid only if it is frozen or has the solid flag
+  ; set, otherwise treat it as ethereal:
+
   ; If the enemy frozen timer is nonzero, the enemy is solid
   LDA $0F9E,x
   BNE .treat_enemy_as_solid
