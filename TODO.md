@@ -7,9 +7,9 @@ Bugs
 * Ice beam cannot freeze enemies that take more than one shot
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
-* Cannot run through pirates in croc speedway with speed
-* Enemies that can move through walls can pull Samus through the floor
-    (this is particularly bad with rinkas in MB room)
+* Cannot run through pirates in croc speedway with speed (I am not sure
+    whether this can be fixed in a general way and keep the enemies as
+    solid)
 * Screw attack does not work
 * Speed hallway - it is too easy to get stuck under the crumbles
 * E managed to trigger a crash from climb to pit room before getting
@@ -20,7 +20,8 @@ Bugs
 * door at top of climb before getting morph has peculiar scroll
 * Spore spawn is brown if Samus leaves and comes back
 * Caterpillar room statue is missing
-* Below Spazer room crashes on bsnes
+* Samus can fall off an enemy if riding it up/down a slope (e.g. in
+    Terminator)
 
 Incomplete
 ----------
@@ -87,6 +88,8 @@ Feedback from E
 * hard to get out of acid in acid statue room
 * Please shorten volcano room earthquake
 * Hard to get back up in room next to frog speedway
+* It's really hard to get through rooms when the enemies push Samus
+    (e.g. business center or green brinstar shaft)
 
 Tools
 -----
