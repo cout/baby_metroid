@@ -109,6 +109,7 @@ end_freeze_enemies_freespace_a0:
 ; Disable Samus/enemy collsion handling.  This causes enemies to be
 ; treated as frozen (so they do not hurt Samus) but does not make them
 ; solid (you cannot stand on them without the above change).
+;
 
 org $A09A5A
 RTS
@@ -118,12 +119,14 @@ RTS
 
 ;;
 ; Disable touch AI - disables knockback and damage.
+;
 
 org $A0A4A1 ; common touch AI subroutine
 RTS
 
 ;;
 ; Disable projectile knockback and damage
+;
 
 org $A0994B
 STZ $18AA
@@ -131,6 +134,7 @@ RTS
 
 ;;
 ; Disable damage to Samus
+;
 
 org $91DF51 ; subroutine called by touch AI and projectile collsion handler to deal damage
 RTL
