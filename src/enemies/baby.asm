@@ -278,3 +278,7 @@ baby_fire_hyper_beam:
 
 end_baby_freespace_90:
 !FREESPACE_90 = end_baby_freespace_90
+
+print "Baby states:"
+print "  follow samus hyper - ", hex(baby_state_follow_samus_hyper&$FFFF)
+print "  follow samus - ", hex(baby_state_follow_samus&$FFFF)
