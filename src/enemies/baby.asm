@@ -10,6 +10,10 @@ baby_targeted_enemy_id:
 print "Variable baby_targeted_enemy_id: $", pc
 skip 2
 
+baby_targeted_enemy_flags:
+print "Variable baby_targeted_enemy_flags: $", pc
+skip 2
+
 end_baby_freemem_7f:
 !FREEMEM_7F := end_baby_freemem_7f
 
@@ -54,6 +58,8 @@ dw $F12E                  ; vulnerabilities
 dw $0000                  ; enemy name
 
 !baby = baby
+
+print "Baby enemy id: ", hex(baby&$FFFF)
 
 end_baby_freespace_a0:
 !FREESPACE_A0 := end_baby_freespace_a0
@@ -112,14 +118,18 @@ baby_state_follow_samus_hyper:
   JSL $91E4AD
 
   JSR baby_pick_target
-  BCC .follow_samus_and_return
+  ; BCC .follow_samus_and_return
+  BCC .no_enemy
 
   STA baby_targeted_enemy
 
-  TAX
+  TAY
 
-  LDA $0F78,x
+  LDA $0F78,y
   STA baby_targeted_enemy_id
+
+  LDA $0F86,y
+  STA baby_targeted_enemy_flags
 
   ; TODO - this is getting triggered even when there are no more enemies
   ; left in the room.
@@ -134,8 +144,17 @@ baby_state_follow_samus_hyper:
   STA $0FB2
   LDA.w #baby_state_follow_samus
   STA $0FA8,x
-
   BRA .follow_samus_and_return
+
+.no_enemy:
+  LDA #$0000
+  STA baby_targeted_enemy
+
+  LDA #$0000
+  STA baby_targeted_enemy_id
+
+  LDA #$0000
+  STA baby_targeted_enemy_flags
 
 .follow_samus_and_return:
   JMP follow_samus
@@ -152,7 +171,7 @@ baby_pick_target:
   BEQ .next
 
   ; If this is the baby, skip it
-  CMP !baby
+  CMP.w #baby
   BEQ .next
 
   ; If enemy is deleted, skip it
@@ -168,9 +187,10 @@ baby_pick_target:
   TXA
   CLC
   ADC #$0040
-  CMP #$0800
   TAX
-  BPL .loop
+  CMP #$0800
+  BPL .not_found
+  BRA .loop
 
 .not_found:
   CLC
@@ -217,9 +237,14 @@ end_baby_freespace_a9:
 org !FREESPACE_90
 
 baby_fire_hyper_beam:
+; Parameters:
+;   X = baby enemy index
+;   Y = target enemy index (TODO)
 {
   PHX
 
+  ; Y = baby enemy index
+  ; (it is more convenient to use X for the projectile index)
   TXA : TAY
 
   LDA $0CCE
