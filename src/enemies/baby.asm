@@ -288,10 +288,31 @@ baby_compute_target_position:
 {
   LDA baby_targeted_enemy : TAY
 
+  LDA baby_start_position_x
+  SEC
+  SBC $0F7A,y
+  BPL .baby_is_right_of_enemy
+
+.baby_is_left_of_enemy
+  EOR #$FFFF
+  INC A
+  CMP #$0040
+  BPL .use_middle
+  ADC $0F7A,y
+  SEC
+  SBC #$0040
+  BRA .store_x
+
+.baby_is_right_of_enemy:
+  CMP #$0040
+  BPL .use_middle
+  LDA $0F7A,y
+  CLC
+  ADC #$0040
+  BRA .store_x
+
+.use_middle:
   ; Target X position is halfway between baby and target enemy X
-  ; TODO - need to remember where baby started, otherwise the target
-  ; position changes as baby moves
-  ; LDA $0F7A,x
   LDA baby_start_position_x
   SEC
   ROR
@@ -301,19 +322,21 @@ baby_compute_target_position:
   ROR
   CLC
   ADC $12
+
+.store_x:
   STA $12
   STA baby_target_position_x
 
+.compute_y:
   ; Target Y position is a 45 degree angle up
   ; TODO - it should randomly (or alternatingly) be up or down
-  LDA $0F7A,y
+  LDA $12
   SEC
-  SBC $12
-  BPL .positive
+  SBC $0F7A,y
+  BMI +
   EOR #$FFFF
   INC A
-.positive:
-  ADC $0F7E,y
++ ADC $0F7E,y
   STA $14
   STA baby_target_position_y
 
