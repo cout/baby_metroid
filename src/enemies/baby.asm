@@ -1,5 +1,18 @@
 !BABY_HYPER_FIRING_RATE = #$0030
 
+org !FREEMEM_7F
+
+baby_targeted_enemy:
+print "Variable baby_targeted_enemy: $", pc
+skip 2
+
+baby_targeted_enemy_id:
+print "Variable baby_targeted_enemy_id: $", pc
+skip 2
+
+end_baby_freemem_7f:
+!FREEMEM_7F := end_baby_freemem_7f
+
 org !FREESPACE_A0
 
 baby:
@@ -101,7 +114,12 @@ baby_state_follow_samus_hyper:
   JSR baby_pick_target
   BCC .follow_samus_and_return
 
+  STA baby_targeted_enemy
+
   TAX
+
+  LDA $0F78,x
+  STA baby_targeted_enemy_id
 
   ; TODO - this is getting triggered even when there are no more enemies
   ; left in the room.
