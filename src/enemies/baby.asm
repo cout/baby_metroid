@@ -53,6 +53,10 @@ baby_targeted_enemy_position_y:
 print "Variable baby_targeted_enemy_position_y: $", pc
 skip 2
 
+baby_unable_to_fire:
+print "Variable baby_unable_to_fire: $", pc
+skip 2
+
 end_baby_freemem_7f:
 !FREEMEM_7F := end_baby_freemem_7f
 
@@ -448,7 +452,7 @@ baby_fire_hyper_beam:
 
   LDA $0CCE
   CMP #$0005
-  BPL .return
+  BPL .unable_to_fire
 
   INC
   STA $0CCE
@@ -462,9 +466,17 @@ baby_fire_hyper_beam:
   INX
   CPX #$000A
   BMI .next_slot
+
+  ; Could not find an empty slot; decrement the projectile count
+  DEC $0CCE
+
+.unable_to_fire:
+  LDA #$0001 : STA baby_unable_to_fire
   BRA .return
 
 .fire_hyper_beam:
+  LDA #$0000 : STA baby_unable_to_fire
+
   ; TODO:
   ; 1. Set direction correctly (0..9 for one of 8 possible directions,
   ;    up and down are duplicated)
