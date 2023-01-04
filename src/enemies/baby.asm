@@ -21,12 +21,20 @@ baby_targeted_enemy:
 print "Variable baby_targeted_enemy: $", pc
 skip 2
 
-baby_targeted_enemy_id:
-print "Variable baby_targeted_enemy_id: $", pc
+baby_start_position_x:
+print "Variable baby_start_position_x: $", pc
 skip 2
 
-baby_targeted_enemy_flags:
-print "Variable baby_targeted_enemy_flags: $", pc
+baby_start_position_y:
+print "Variable baby_start_position_y: $", pc
+skip 2
+
+baby_target_position_x:
+print "Variable baby_target_position_x: $", pc
+skip 2
+
+baby_target_position_y:
+print "Variable baby_target_position_y: $", pc
 skip 2
 
 end_baby_freemem_7f:
@@ -140,11 +148,11 @@ baby_state_pick_target:
 
   TAY
 
-  LDA $0F78,y
-  STA baby_targeted_enemy_id
+  LDA $0F7A,x
+  STA baby_start_position_x
 
-  LDA $0F86,y
-  STA baby_targeted_enemy_flags
+  LDA $0F7E,x
+  STA baby_start_position_y
 
   LDA.w #baby_state_move_to_target_position
   STA $0FA8,x
@@ -153,12 +161,6 @@ baby_state_pick_target:
 .no_enemy:
   LDA #$0000
   STA baby_targeted_enemy
-
-  LDA #$0000
-  STA baby_targeted_enemy_id
-
-  LDA #$0000
-  STA baby_targeted_enemy_flags
 
 .follow_samus_and_return:
   JMP follow_samus
@@ -208,12 +210,15 @@ baby_state_move_to_target_position:
 {
   LDA baby_targeted_enemy : TAY
 
+  LDA $0F78,y
+  BEQ .enemy_has_been_eliminated
+
   LDA $0F86,y
   BIT #$0200
   BNE .enemy_has_been_eliminated
 
-  ; TODO: start firing once we have reached the destination
-  ; (for now we assume we are there)
+  JSR baby_move_to_target_position
+  BCC .return
 
 .ready_to_fire:
   LDA.w #baby_state_fire_at_target
@@ -225,34 +230,95 @@ baby_state_move_to_target_position:
 .enemy_has_been_eliminated:
   LDA.w #baby_state_pick_target
   STA $0FA8,x
+
+.return:
   RTS
 }
 
+; TODO TODO TODO -
+;
+; Baby fails to leave state baby_state_move_to_target_position when
+; samus shots the shutter
+;
+; Baby never tries to shoot
+;
+; If the top of a shutter is shot, Baby moves into the floor (did the
+; shutter's coordinates suddenly change to 0?)
+;
+; I probably want a delay before firing for players that are not
+; familiar with the rooms so they have just enough time to spot the
+; pirates before they get shot
+;
+; I think I want the big boy movement function not the mb cutscene
+; movement function, because I want the baby to move around samus not
+; just sit there
+
 baby_move_to_target_position:
 {
-  ; TODO: compute the target position (for now we use Samus's position)
-  ;
+  LDA baby_targeted_enemy : TAY
 
-  ; $12 = Samus X position
-  LDA $0AF6
-  STA $12
-
-  ; $14 = Samus Y position - 20
-  LDA $0AFA
+  ; Target X position is halfway between baby and target enemy X
+  ; TODO - need to remember where baby started, otherwise the target
+  ; position changes as baby moves
+  ; LDA $0F7A,x
+  LDA baby_start_position_x
   SEC
-  SBC #$0014
+  ROR
+  STA $12
+  LDA $0F7A,y
+  SEC
+  ROR
+  CLC
+  ADC $12
+  STA $12
+  STA baby_target_position_x
+
+  ; Target Y position is a 45 degree angle up
+  ; TODO - it should randomly (or alternatingly) be up or down
+  LDA $0F7A,y
+  SEC
+  SBC $12
+  BPL .positive
+  EOR #$FFFF
+  INC A
+.positive:
+  ADC $0F7E,y
   STA $14
+  STA baby_target_position_y
 
   ; Y = 0 (slowest acceleration) - TODO: we probably want faster
   LDY #$0000
 
   ; Gradually accelerate towards point ([$12], [$14])
-  JMP $F451
+  JSR $F451
+
+  LDA $0F7A,x
+  SEC
+  SBC $12
+  CMP #$0010
+  BPL .not_there_yet
+
+  LDA $0F7E,x
+  SEC
+  SBC $1E
+  CMP #$0010
+  BPL .not_there_yet
+
+.reached_target:
+  SEC
+  RTS
+
+.not_there_yet:
+  CLC
+  RTS
 }
 
 baby_state_fire_at_target:
 {
   LDA baby_targeted_enemy : TAY
+
+  LDA $0F78,y
+  BEQ .enemy_has_been_eliminated
 
   LDA $0F86,y
   BIT #$0200
