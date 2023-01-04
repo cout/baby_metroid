@@ -17,7 +17,7 @@
 
 org !FREEMEM_7F
 
-; TODO - ideally these should use the current enenmy index but this is
+; TODO - ideally these should use the current enemy index but this is
 ; fine since there will only ever be one baby
 
 baby_targeted_enemy:
@@ -258,23 +258,9 @@ baby_state_move_to_target_position:
   RTS
 }
 
-; TODO TODO TODO -
-;
-; Baby fails to leave state baby_state_move_to_target_position when
-; samus shots the shutter
-;
-; Baby never tries to shoot
-;
-; If the top of a shutter is shot, Baby moves into the floor (did the
-; shutter's coordinates suddenly change to 0?)
-;
-; I probably want a delay before firing for players that are not
-; familiar with the rooms so they have just enough time to spot the
-; pirates before they get shot
-;
-; I think I want the big boy movement function not the mb cutscene
-; movement function, because I want the baby to move around samus not
-; just sit there
+; TODO - I think I want the big boy movement function not the mb
+; cutscene movement function, because I want the baby to move around
+; samus not just sit there
 
 baby_move_to_target_position:
 {
@@ -443,7 +429,7 @@ org !FREESPACE_90
 baby_fire_hyper_beam:
 ; Parameters:
 ;   X = baby enemy index
-;   Y = target enemy index (TODO)
+;   Y = target enemy index
 {
   PHX
 
@@ -478,10 +464,6 @@ baby_fire_hyper_beam:
 .fire_hyper_beam:
   LDA #$0000 : STA baby_unable_to_fire
 
-  ; TODO:
-  ; 1. Set direction correctly (0..9 for one of 8 possible directions,
-  ;    up and down are duplicated)
-  ; 2. Compute vector from baby to target then set X/Y speed accordingly
   JSR baby_choose_firing_direction : STA $0C04,x ; direction
   LDA $0F7A,y : STA $0B64,x ; X pos
   LDA $0F7E,y : STA $0B78,x ; Y pos
@@ -509,7 +491,7 @@ baby_fire_hyper_beam:
   ; fires?
 
 .return:
-  PLX ; TODO - does this affect the carry flag?
+  PLX
   RTL
 }
 
