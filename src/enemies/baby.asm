@@ -539,11 +539,11 @@ baby_choose_firing_direction:
   ; needs to be converted to a firing direction:
   ;
   ;       0                 8 9  0 1
-  ;     E | 2                \ || /
+  ;    E  |  2               \ || /
   ;      \|/                  \||/
-  ;   C -- -- 4      ==>  7 ---++-- 2
+  ;   C --+-- 4      ==>  7 ---++--- 2
   ;      /|\                  /||\
-  ;    A  | 6                / || \
+  ;    A  |  6               / || \
   ;       8                 6 5  4 3
   ;
   ; Note this is not perfect; it does not account for "facing left and
