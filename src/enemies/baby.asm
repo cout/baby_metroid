@@ -266,13 +266,19 @@ baby_move_to_target_position:
   LDA $0F7A,x
   SEC
   SBC $12
-  CMP #$0010
+  BPL +
+  EOR #$FFFF
+  INC
++ CMP #$0010
   BPL .not_there_yet
 
   LDA $0F7E,x
   SEC
-  SBC $1E
-  CMP #$0010
+  SBC $14
+  BPL +
+  EOR #$FFFF
+  INC
++ CMP #$0010
   BPL .not_there_yet
 
 .reached_target:
