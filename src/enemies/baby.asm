@@ -531,7 +531,7 @@ baby_choose_firing_direction:
   JSL $A0C096
   STA baby_last_firing_angle
 
-  ; Divide by 8
+  ; Divide by 16
   LSR : LSR : LSR : LSR
 
   ; We now have an angle between 0h and Fh, with 0h directly up; it
@@ -549,10 +549,10 @@ baby_choose_firing_direction:
   ; firing up/down" vs "facing right and firing up/down".
   ADC #$0001
   LSR
-  CMP #$0008
+  CMP #$0004
   BCC +
   INC
-  +
++
   STA baby_last_firing_direction
 
   PLY
