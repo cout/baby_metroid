@@ -447,7 +447,7 @@ baby_fire_hyper_beam:
   ; 1. Set direction correctly (0..9 for one of 8 possible directions,
   ;    up and down are duplicated)
   ; 2. Compute vector from baby to target then set X/Y speed accordingly
-  LDA #$0007  : STA $0C04,x ; direction
+  JSR baby_choose_firing_direction : STA $0C04,x ; direction
   LDA $0F7A,y : STA $0B64,x ; X pos
   LDA $0F7E,y : STA $0B78,x ; Y pos
   LDA #$9018  : STA $0C18,x ; projectile type
@@ -457,7 +457,7 @@ baby_fire_hyper_beam:
   JSL $809021 ; queue sound from library 1, max=15
 
   JSL $938000 ; initialize projectile
-  STZ $0BDC,x ; projectile X speed = 1
+  STZ $0BDC,x ; projectile X speed = 0
   STZ $0BF0,x ; projectile Y speed = 0
 
   STX $0DDE ; set current projectile index
@@ -476,6 +476,43 @@ baby_fire_hyper_beam:
 .return:
   PLX ; TODO - does this affect the carry flag?
   RTL
+}
+
+baby_choose_firing_direction:
+; Parameters:
+;   X = baby enemy index
+;   Y = target enemy index (TODO)
+{
+  ; Compute angle of enemy X from enemy Y
+  ; (i.e. from baby to enemy)
+  ;
+  ; This gives us an angle between 00h and F0h, with 00h directly up.
+  JSL $A0C096
+
+  ; Divide by 8
+  LSR : LSR : LSR : LSR
+
+  ; We now have an angle between 0h and Fh, with 0h directly up; it
+  ; needs to be converted to a firing direction:
+  ;
+  ;       0                 8 9  0 1
+  ;     E | 2                \ || /
+  ;      \|/                  \||/
+  ;   C -- -- 4      ==>  7 ---++-- 2
+  ;      /|\                  /||\
+  ;    A  | 6                / || \
+  ;       8                 6 5  4 3
+  ;
+  ; Note this is not perfect; it does not account for "facing left and
+  ; firing up/down" vs "facing right and firing up/down".
+  ADC #$0001
+  LSR
+  CMP #$0008
+  BCC +
+  INC
+  +
+
+  RTS
 }
 
 end_baby_freespace_90:
