@@ -98,21 +98,10 @@ baby_state_follow_samus_hyper:
   LDA #$0003
   JSL $91E4AD
 
-LDX #$0000
+  JSR baby_pick_target
+  BCC .follow_samus_and_return
 
-.loop:
-  ; If enemy id is 0, skip it
-  LDA $0F78,x
-  BEQ .next
-
-  ; If this is the baby, skip it
-  CMP !baby
-  BEQ .next
-
-  ; If enemy is deleted, skip it
-  LDA $0F86,x
-  BIT #$0200
-  BNE .next
+  TAX
 
   ; TODO - this is getting triggered even when there are no more enemies
   ; left in the room.
@@ -130,6 +119,33 @@ LDX #$0000
 
   BRA .follow_samus_and_return
 
+.follow_samus_and_return:
+  JMP follow_samus
+}
+
+baby_pick_target:
+{
+  PHX
+  LDX #$0000
+
+.loop:
+  ; If enemy id is 0, skip it
+  LDA $0F78,x
+  BEQ .next
+
+  ; If this is the baby, skip it
+  CMP !baby
+  BEQ .next
+
+  ; If enemy is deleted, skip it
+  LDA $0F86,x
+  BIT #$0200
+  BNE .next
+
+  TXA
+  SEC
+  BRA .return
+
 .next:
   TXA
   CLC
@@ -138,8 +154,12 @@ LDX #$0000
   TAX
   BPL .loop
 
-.follow_samus_and_return:
-  JMP follow_samus
+.not_found:
+  CLC
+
+.return:
+  PLX
+  RTS
 }
 
 baby_state_follow_samus:
