@@ -27,11 +27,11 @@ dw $C1C1     ; Layer 2 scroll
 dw $DE78     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
 ; dw $E5A0     ; Room main routine (bank $8F)
-dw $E5A3     ; Room main routine (bank $8F)
+dw tourian_escape_1_main ; Room main routine (bank $8F)
 dw $C87B     ; Room PLM list address (bank $8F)
 dw $E439     ; Library background (bank $8F)
 ; dw $C91F     ; Room setup routine (bank $8F)
-dw $C932     ; Room setup routine (bank $8F)
+dw tourian_escape_1_setup ; Room setup routine (bank $8F)
 
 org !FREESPACE_A1
 
@@ -75,3 +75,37 @@ end_tourian_escape_1_freespace_b4:
 org $83A104
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $78, $00, $00
+
+org !FREEMEM_7F
+
+tourian_escape_1_samus_cooldown:
+print "Variable tourian_escape_1_samus_cooldown: $", pc
+skip 2
+
+!FREEMEM_7F := pc
+
+org !FREESPACE_8F
+
+tourian_escape_1_setup:
+{
+  ; Prevent Samus from firing until baby can fire
+  LDA #$00C0
+  STA tourian_escape_1_samus_cooldown
+
+  RTS
+}
+
+tourian_escape_1_main:
+{
+  LDA tourian_escape_1_samus_cooldown
+  BEQ .return
+  DEC
+  STA tourian_escape_1_samus_cooldown
+  STA $0CCC
+
+.return:
+  RTS
+}
+
+end_tourian_escape_1_freespace_8f:
+!FREESPACE_8F := end_tourian_escape_1_freespace_8f
