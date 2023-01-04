@@ -97,7 +97,7 @@ baby_init_ai:
   LDA #$F683 : STA $7E781E,x              ; Enemy palette function = $F683 (normal)
 
   ; Set initial state function
-  LDA.w #baby_state_follow_samus_hyper
+  LDA.w #baby_state_pick_target
   STA $0FA8,x
 
   ; Set palette colors and return
@@ -125,7 +125,7 @@ baby_main_ai:
   RTL
 }
 
-baby_state_follow_samus_hyper:
+baby_state_pick_target:
 {
   ; Give Samus hyper beam (TODO - if we don't do this, then beam
   ; graphics are glitched)
@@ -146,20 +146,9 @@ baby_state_follow_samus_hyper:
   LDA $0F86,y
   STA baby_targeted_enemy_flags
 
-  ; TODO - this is getting triggered even when there are no more enemies
-  ; left in the room.
-  ;
-  ; To debug, I need to figure out which enemy is targeted.  Since we
-  ; don't want it to look like Samus is firing the beam, the baby needs
-  ; to move away from Samus, so I think we need a "target lock acquired"
-  ; state.
-  JSL baby_fire_hyper_beam
-
-  LDA !BABY_HYPER_FIRING_RATE
-  STA $0FB2,x
-  LDA.w #baby_state_follow_samus
+  LDA.w #baby_state_move_to_target_position
   STA $0FA8,x
-  BRA .follow_samus_and_return
+  RTS
 
 .no_enemy:
   LDA #$0000
@@ -215,12 +204,89 @@ baby_pick_target:
   RTS
 }
 
+baby_state_move_to_target_position:
+{
+  LDA baby_targeted_enemy : TAY
+
+  LDA $0F86,y
+  BIT #$0200
+  BNE .enemy_has_been_eliminated
+
+  ; TODO: start firing once we have reached the destination
+  ; (for now we assume we are there)
+
+.ready_to_fire:
+  LDA.w #baby_state_fire_at_target
+  STA $0FA8,x
+  LDA #$0001
+  STA $0FB2,x
+  RTS
+
+.enemy_has_been_eliminated:
+  LDA.w #baby_state_pick_target
+  STA $0FA8,x
+  RTS
+}
+
+baby_move_to_target_position:
+{
+  ; TODO: compute the target position (for now we use Samus's position)
+  ;
+
+  ; $12 = Samus X position
+  LDA $0AF6
+  STA $12
+
+  ; $14 = Samus Y position - 20
+  LDA $0AFA
+  SEC
+  SBC #$0014
+  STA $14
+
+  ; Y = 0 (slowest acceleration) - TODO: we probably want faster
+  LDY #$0000
+
+  ; Gradually accelerate towards point ([$12], [$14])
+  JMP $F451
+}
+
+baby_state_fire_at_target:
+{
+  LDA baby_targeted_enemy : TAY
+
+  LDA $0F86,y
+  BIT #$0200
+  BNE .enemy_has_been_eliminated
+
+.move_around_target_position:
+  JSR baby_move_to_target_position
+
+.wait_for_shot_timer:
+  DEC $0FB2,x
+  BNE .return
+
+.fire_at_will:
+  JSL baby_fire_hyper_beam
+
+  LDA !BABY_HYPER_FIRING_RATE
+  STA $0FB2,x
+
+  RTS
+
+.enemy_has_been_eliminated:
+  LDA.w #baby_state_pick_target
+  STA $0FA8,x
+
+.return:
+  RTS
+}
+
 baby_state_follow_samus:
 {
   DEC $0FB2,x
   BNE .follow_samus_and_return
 
-  LDA.w #baby_state_follow_samus_hyper
+  LDA.w #baby_state_pick_target
   STA $0FA8,x
 
 .follow_samus_and_return:
@@ -320,5 +386,7 @@ end_baby_freespace_90:
 !FREESPACE_90 = end_baby_freespace_90
 
 print "Baby states:"
-print "  follow samus hyper - ", hex(baby_state_follow_samus_hyper&$FFFF)
+print "  pick target - ", hex(baby_state_pick_target&$FFFF)
+print "  move to target position - ", hex(baby_state_move_to_target_position&$FFFF)
+print "  fire at target - ", hex(baby_state_fire_at_target&$FFFF)
 print "  follow samus - ", hex(baby_state_follow_samus&$FFFF)
