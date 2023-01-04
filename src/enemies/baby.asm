@@ -255,6 +255,37 @@ baby_state_move_to_target_position:
 
 baby_move_to_target_position:
 {
+  JSR baby_compute_target_position
+
+  ; Y = 0 (slowest acceleration) - TODO: we probably want faster
+  LDY #$0000
+
+  ; Gradually accelerate towards point ([$12], [$14])
+  JSR $F451
+
+  LDA $0F7A,x
+  SEC
+  SBC $12
+  CMP #$0010
+  BPL .not_there_yet
+
+  LDA $0F7E,x
+  SEC
+  SBC $1E
+  CMP #$0010
+  BPL .not_there_yet
+
+.reached_target:
+  SEC
+  RTS
+
+.not_there_yet:
+  CLC
+  RTS
+}
+
+baby_compute_target_position:
+{
   LDA baby_targeted_enemy : TAY
 
   ; Target X position is halfway between baby and target enemy X
@@ -286,30 +317,6 @@ baby_move_to_target_position:
   STA $14
   STA baby_target_position_y
 
-  ; Y = 0 (slowest acceleration) - TODO: we probably want faster
-  LDY #$0000
-
-  ; Gradually accelerate towards point ([$12], [$14])
-  JSR $F451
-
-  LDA $0F7A,x
-  SEC
-  SBC $12
-  CMP #$0010
-  BPL .not_there_yet
-
-  LDA $0F7E,x
-  SEC
-  SBC $1E
-  CMP #$0010
-  BPL .not_there_yet
-
-.reached_target:
-  SEC
-  RTS
-
-.not_there_yet:
-  CLC
   RTS
 }
 
