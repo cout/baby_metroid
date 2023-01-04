@@ -37,6 +37,22 @@ baby_target_position_y:
 print "Variable baby_target_position_y: $", pc
 skip 2
 
+baby_last_firing_angle:
+print "Variable baby_last_firing_angle: $", pc
+skip 2
+
+baby_last_firing_direction:
+print "Variable baby_last_firing_direction: $", pc
+skip 2
+
+baby_targeted_enemy_position_x:
+print "Variable baby_targeted_enemy_position_x: $", pc
+skip 2
+
+baby_targeted_enemy_position_y:
+print "Variable baby_targeted_enemy_position_y: $", pc
+skip 2
+
 end_baby_freemem_7f:
 !FREEMEM_7F := end_baby_freemem_7f
 
@@ -486,14 +502,22 @@ baby_fire_hyper_beam:
 
 baby_choose_firing_direction:
 ; Parameters:
-;   X = baby enemy index
-;   Y = target enemy index (TODO)
+;   Y = baby enemy index
 {
+  PHX
+  PHY
+
+  LDA baby_targeted_enemy : TAX
+
+  LDA $0F7A,y : STA baby_targeted_enemy_position_x
+  LDA $0F7E,y : STA baby_targeted_enemy_position_y
+
   ; Compute angle of enemy X from enemy Y
   ; (i.e. from baby to enemy)
   ;
   ; This gives us an angle between 00h and F0h, with 00h directly up.
   JSL $A0C096
+  STA baby_last_firing_angle
 
   ; Divide by 8
   LSR : LSR : LSR : LSR
@@ -517,6 +541,10 @@ baby_choose_firing_direction:
   BCC +
   INC
   +
+  STA baby_last_firing_direction
+
+  PLY
+  PLX
 
   RTS
 }
