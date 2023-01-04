@@ -1,4 +1,7 @@
 !BABY_HYPER_FIRING_RATE = #$0030
+!BABY_ACCELERATION_TO_TARGET_POSITION = #$0002
+!BABY_ACCELERATION_TO_SAMUS = #$0000
+!BABY_ALTITUDE_ABOVE_SAMUS = #$0014
 
 !BABY_STATE = $0FA8,x
 !BABY_X_VELOCITY = $0FAA,x
@@ -277,8 +280,7 @@ baby_move_to_target_position:
 {
   JSR baby_compute_target_position
 
-  ; Y = 0 (slowest acceleration) - TODO: we probably want faster
-  LDY #$0000
+  LDY !BABY_ACCELERATION_TO_TARGET_POSITION
 
   ; Gradually accelerate towards point ([$12], [$14])
   JSR $F451
@@ -424,11 +426,10 @@ follow_samus:
   ; $14 = Samus Y position - 20
   LDA $0AFA
   SEC
-  SBC #$0014
+  SBC !BABY_ALTITUDE_ABOVE_SAMUS
   STA $14
 
-  ; Y = 0 (slowest acceleration)
-  LDY #$0000
+  LDY !BABY_ACCELERATION_TO_SAMUS
 
   ; Gradually accelerate towards point ([$12], [$14])
   JMP $F451
