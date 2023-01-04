@@ -1,6 +1,21 @@
 !BABY_HYPER_FIRING_RATE = #$0030
 
+!BABY_STATE = $0FA8,x
+!BABY_X_VELOCITY = $0FAA,x
+!BABY_Y_VELOCITY = $0FAC,x
+!BABY_PALETTE_FRAME_TIMER = $0FAE,x
+!BABY_PALETTE_DELAY = $0FB0,x
+!BABY_FUNCTION_TIMER = $0FB2,x
+!BABY_PROBABLY_UNUSED = $0FB4,x
+!BABY_UNKNOWN = $0FB6,x
+
+!BABY_FLASH_TIMER = $7E780C,x
+!BABY_PALETTE_FUNCTION = $7E781E,x
+
 org !FREEMEM_7F
+
+; TODO - ideally these should use the current enenmy index but this is
+; fine since there will only ever be one baby
 
 baby_targeted_enemy:
 print "Variable baby_targeted_enemy: $", pc
@@ -141,7 +156,7 @@ baby_state_follow_samus_hyper:
   JSL baby_fire_hyper_beam
 
   LDA !BABY_HYPER_FIRING_RATE
-  STA $0FB2
+  STA $0FB2,x
   LDA.w #baby_state_follow_samus
   STA $0FA8,x
   BRA .follow_samus_and_return
