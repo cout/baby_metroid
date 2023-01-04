@@ -2,25 +2,11 @@
 ;
 ; Allow Samus to "ride" enemies as if they are trippers/kamers.
 ;
-; TODO:
+; Bugs/Limitations:
 ; * Samus cannot ride enemies up a slope without oscillating (e.g. in
 ;   Terminator)
-; * It is possible to change the touching function from A0AC29 (check
-;   for touching Samus from below) to A0ABE7 (check for touching Samus
-;   anywhere).  This does not fix riding up the wall, but it has another
-;   interesting effect: Reos push Samus a lot farther when they make
-;   contact.
-; * Another interesting change is to not push the processor bits.  Since
-;   wall collision is communicated in the carry bit, this has the effect
-;   of causing rippers to stop at a wall when Samus is riding and
-;   causing zeelas to fall off edges when Samus stands on them.  But I
-;   don't know what other effects this might have so I need to play both
-;   ways and see which way I like best.
 ;
 ;;;;;
-
-check_samus_touching_from_above = $A0AC29
-
 
 ;;
 ; Hook routine to move enemies horizontally to move Samus with them
@@ -63,16 +49,16 @@ move_samus_horiz_with_enemy:
   ; if enemy is intangible then do not move Samus
   LDA $0F86,x
   AND #$8000
-  BNE .not_touching
+  BNE .not_standing_on_enemy
 
-  ; if not touching then we just move the enemy and not Samus
-  JSL check_samus_touching_from_above
-  BNE .touching
+  ; if not standing on enemy then we just move the enemy and not Samus
+  JSL check_samus_is_standing_on_enemy
+  BNE .standing_on_enemy
 
-.not_touching:
+.not_standing_on_enemy
   BRL do_move_enemy_horiz
 
-.touching:
+.standing_on_enemy
 
   LDA $0F7C,x : PHA  ; Push [enemy X pos]
   LDA $0F7A,x : PHA  ; Push [enemy X pos]
@@ -129,16 +115,16 @@ move_samus_vert_with_enemy:
   ; if enemy is intangible then do not move Samus
   LDA $0F86,x
   AND #$8000
-  BNE .not_touching
+  BNE .not_standing_on_enemy
 
-  ; if not touching then we just move the enemy and not Samus
-  JSL check_samus_touching_from_above
-  BNE .touching
+  ; if not standing on enemy then we just move the enemy and not Samus
+  JSL check_samus_is_standing_on_enemy
+  BNE .standing_on_enemy
 
-.not_touching:
+.not_standing_on_enemy
   BRL do_move_enemy_vert
 
-.touching:
+.standing_on_enemy
 
   LDA $0F80,x : PHA ; Push [enemy Y sub-pixel pos]
   LDA $0F7E,x : PHA ; Push [enemy Y pos]
@@ -179,6 +165,52 @@ move_samus_vert_with_enemy:
 .return:
 
   PLP
+  RTL
+}
+
+check_samus_is_standing_on_enemy:
+{
+  ; A = |[Samus X position] - [Enemy X position]|
+  LDA $0AF6
+  SEC
+  SBC $0F7A,x
+  BPL .label1
+  EOR #$FFFF
+  INC A
+
+.label1:
+  ; If A - [Samus X radius] - [Enemy X position] >= 0: return 0
+  SEC
+  SBC $0AFE
+  BCC $09
+  CMP $0F82,x
+  BCC .label2
+  LDA #$0000
+  RTL
+
+.label2:
+  ; If [Samus Y position] + [Samus Y radius] > [Enemy Y position]: return 0
+  LDA $0AFA
+  CLC
+  ADC $0B00
+  SEC
+  SBC $0F7E,x
+  BMI .label3
+  BRA .not_standing_on_enemy
+
+.label3
+  ; If [Samus Y position] + [Samus Y radius] + 1 >= [Enemy Y position] + [Enemy Y radius]: return FFFFh
+  INC
+  CLC
+  ADC $0F84,x
+  BPL .standing_on_enemy
+
+.not_standing_on_enemy:
+  LDA #$0000
+  RTL
+
+.standing_on_enemy:
+  LDA #$FFFF
   RTL
 }
 

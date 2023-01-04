@@ -5,8 +5,6 @@ Bugs
 ----
 
 * Ice beam cannot freeze enemies that take more than one shot
-* Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
-    in acid snake room after getting ice)
 * Cannot run through pirates in croc speedway with speed (I am not sure
     whether this can be fixed in a general way and keep the enemies as
     solid)
@@ -20,8 +18,12 @@ Bugs
 * door at top of climb before getting morph has peculiar scroll
 * Spore spawn is brown if Samus leaves and comes back
 * Caterpillar room statue is missing
-* Samus can fall off an enemy if riding it up/down a slope (e.g. in
-    Terminator)
+* Samus oscillates between riding/falling when atop an enemy going up a
+    slope (e.g. in Terminator)
+* Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
+    in acid snake room after getting ice) - note this bug no longer gets
+    triggered because the novas cannot pull Samus along, but that may
+    change in the future
 
 Incomplete
 ----------
@@ -47,6 +49,13 @@ Incomplete
 * doors exiting baby should be left unlocked
 * baby should ignore samus's shots otherwise it's too hard to shoot the
     seaweed
+* it is no longer as easy to get on top of wavers as I would like
+* it used to be that the mochtroids in halfie climb room would "pick up"
+    samus as she is standing, but that was changed in order to prevent
+    Samus from getting pushed; I would still like them to be able to
+    pick her up, because that was fun
+* I would like Samus to be able to "stick" herself to enemies while in
+    morph ball form so she can ride on ceilings
 
 Cosmetic
 --------
