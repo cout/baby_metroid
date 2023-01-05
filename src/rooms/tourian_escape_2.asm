@@ -38,19 +38,10 @@ org !FREESPACE_A1
 
 tourian_escape_2_enemy_population:
 
-; TODO
-; 1. baby graphics are messed up in this room
-; 2. baby should find samus quickly initially (or maybe always) but the
-;    slow follow should be later, or perhaps slow follow if close to
-;    samus and fast otherwise
-; 3. baby should find enemies to shoot faster
-; 4. put baby in correct position coming through the door
-; 5. baby should follow samus out the previous door
-
 ; Room $DE7A state $DE87: Enemy population
 ; org $A1E59C
 ;  enemy  x      y      init   props  extra  param1 param2
-dw !baby, $01D2, $008B, $0000, $2C00, $0000, $0000, $0000 ; baby
+dw !baby, $007E, $0010, $0000, $2C00, $0000, $0000, $0000 ; baby
 dw $F493, $002B, $00D8, $0000, $2000, $0004, $0000, $00A0 ; batta1Tu (tourian silver wall pirate)
 dw $F493, $00D0, $0128, $0000, $2000, $0004, $0001, $00A0 ; batta1Tu (tourian silver wall pirate)
 dw $FFFF     ; end of list
