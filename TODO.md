@@ -31,7 +31,6 @@ Incomplete
 * Kraid fight is still mostly vanilla
 * Pit room is empty of enemies
 * Ice beam gate room is hard without knowing how to use the run button
-* Gadora staring contest
 * Potential softlock at Kraid (all boss fights should start with the
     door unlocked)
 * Potential softlock in speed hallway (though this is less likely)
@@ -41,11 +40,9 @@ Incomplete
 * WS attic enemies make it challenging after power is on (maybe remove
   kihunters?)
 * Escape sequence is incomplete
-* Croc - limit how far croc will come forward
 * Eye doors sometimes still close
 * Ridley needs to somehow drain Samus's health to 1 to encourage player
     to pick up the e-tank (or maybe just have the door locked)
-* ammo refill should refill all ammo
 * doors exiting baby should be left unlocked
 * baby should ignore samus's shots otherwise it's too hard to shoot the
     seaweed
@@ -62,6 +59,9 @@ Cosmetic
 
 * Easy blue suit should not produce echoes
 * Blue suit animation is not visible in lava
+* Pirate hitbox is noticeably tall
+* Can I make the selected item in the HUD be the color of the door it
+    opens?
 
 Feedback from E
 ---------------
