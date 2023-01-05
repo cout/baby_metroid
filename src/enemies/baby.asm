@@ -1,3 +1,11 @@
+; TODO
+; 1. baby should find samus quickly initially (or maybe always) but the
+;    slow follow should be later, or perhaps slow follow if close to
+;    samus and fast otherwise
+; 2. baby should find enemies to shoot faster than it does
+; 3. put baby in correct position coming through the door
+; 4. baby should follow samus out the previous door
+
 !BABY_HYPER_FIRING_RATE = #$0030
 !BABY_ACCELERATION_TO_TARGET_POSITION = #$0002
 !BABY_ACCELERATION_TO_SAMUS = #$0000
@@ -67,7 +75,13 @@ org !FREESPACE_A0
 
 baby:
 
-dw $0C00                  ; tile data size
+; TODO: I'm pretty sure I'm doing something wrong by changing this.  The
+; original value is $0C00 for the Big Boy Room metroid and I would be
+; surprised if it were wrong.  OTOH the MB cutscene metroid uses $0000
+; so something is a little abnormal.
+;dw $0C00                  ; tile data size
+dw $0800                  ; tile data size
+
 dw #$F8E6                 ; palette
 dw #$0C80                 ; health
 dw #$0028                 ; damage
@@ -112,20 +126,30 @@ end_baby_freespace_a0:
 
 org !FREESPACE_A9
 
+baby_instruction_list:
+{
+.top:
+  dw $0010, $F9A8 ; claws in - metroid bottom
+  dw $0010, $FA40 ; claws down - metroid top
+  dw $0010, $FAD8 ; claws out - OK
+  dw $0010, $FA40 ; claws down
+  dw $80ED, .top
+}
+
 baby_init_ai:
 {
   LDX $0E54
-  LDA $0F86,x : ORA #$3000 : STA $0F86,x  ; process instructions and block plasma
-  LDA #$CFA2 : STA $0F92,x                ; instruction pointer
-  LDA #$0001 : STA $0F94,x                ; instruction timer
-  STA $7E7808,x                           ; Enable cry sound effect
-  STZ $0F90,x                             ; Enemy timer = 0
-  LDA #$000A : STA $0FB0,x                ; Enemy palette handler delay = Ah
-  LDA #$00A0 : STA $0F98,x                ; Enemy VRAM tiles index = A0h
-  STZ $0FAA,x                             ; Enemy X velocity = 0
-  STZ $0FAC,x                             ; Enemy Y velocity = 0
-  LDA #$00F8 : STA $0FB2,x                ; Enemy function timer = F8h
-  LDA #$F683 : STA $7E781E,x              ; Enemy palette function = $F683 (normal)
+  LDA $0F86,x : ORA #$3000 : STA $0F86,x   ; process instructions and block plasma
+  LDA #baby_instruction_list : STA $0F92,x ; instruction pointer
+  LDA #$0001 : STA $0F94,x                 ; instruction timer
+  STA $7E7808,x                            ; Enable cry sound effect
+  STZ $0F90,x                              ; Enemy timer = 0
+  LDA #$000A : STA $0FB0,x                 ; Enemy palette handler delay = Ah
+  LDA #$00A0 : STA $0F98,x                 ; Enemy VRAM tiles index = A0h
+  STZ $0FAA,x                              ; Enemy X velocity = 0
+  STZ $0FAC,x                              ; Enemy Y velocity = 0
+  LDA #$00F8 : STA $0FB2,x                 ; Enemy function timer = F8h
+  LDA #$F683 : STA $7E781E,x               ; Enemy palette function = $F683 (normal)
 
   ; Set initial state function
   LDA.w #baby_state_pick_target
