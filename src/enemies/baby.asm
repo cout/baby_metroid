@@ -75,13 +75,7 @@ org !FREESPACE_A0
 
 baby:
 
-; TODO: I'm pretty sure I'm doing something wrong by changing this.  The
-; original value is $0C00 for the Big Boy Room metroid and I would be
-; surprised if it were wrong.  OTOH the MB cutscene metroid uses $0000
-; so something is a little abnormal.
-;dw $0C00                  ; tile data size
-dw $0400                  ; tile data size
-
+dw $0C00                  ; tile data size
 dw #$F8E6                 ; palette
 dw #$0C80                 ; health
 dw #$0028                 ; damage
@@ -145,7 +139,6 @@ baby_init_ai:
   STA $7E7808,x                              ; Enable cry sound effect
   STZ $0F90,x                                ; Enemy timer = 0
   LDA #$000A : STA $0FB0,x                   ; Enemy palette handler delay = Ah
-  LDA #$00A0 : STA $0F98,x                   ; Enemy VRAM tiles index = A0h
   STZ $0FAA,x                                ; Enemy X velocity = 0
   STZ $0FAC,x                                ; Enemy Y velocity = 0
   LDA #$00F8 : STA $0FB2,x                   ; Enemy function timer = F8h
