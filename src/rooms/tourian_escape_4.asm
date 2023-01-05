@@ -28,11 +28,32 @@ dw $C1C1     ; Layer 2 scroll
 dw $DF09     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
 ; dw $E5A4     ; Room main routine (bank $8F)
-dw $E5D1     ; Room main routine (bank $8F)
+; dw $E5D1     ; Room main routine (bank $8F)
+dw tourian_escape_4_room_main
 dw $C8A5     ; Room PLM list address (bank $8F)
 dw $E46F     ; Library background (bank $8F)
 ; dw $C953     ; Room setup routine (bank $8F)
 dw $C96D     ; Room setup routine (bank $8F)
+
+org !FREESPACE_8F
+
+tourian_escape_4_room_main:
+{
+  ; Manually set the palette for these enemies, since it is not set
+  LDA #$0200
+  STA $0F96+($040*7)
+  STA $0F96+($040*8)
+  STA $0F96+($040*9)
+  STA $0F96+($040*10)
+  STA $0F96+($040*11)
+  STA $0F96+($040*12)
+  STA $0F96+($040*13)
+
+  RTS
+}
+
+end_tourian_escape_4_freespace_8f:
+!FREESPACE_8F := end_tourian_escape_4_freespace_8f
 
 org !FREESPACE_A1
 
@@ -69,8 +90,9 @@ tourian_escape_4_enemy_graphics_set:
 ; org $B490B0
 ;  enemy  palette
 dw $F493, $0001 ; batta1Tu (tourian silver wall pirate)
-dw $F793, $0002 ; batta3Tu (tourian silver walking pirate)
+; dw $F793, $0001 ; batta3Tu (tourian silver walking pirate) ; intentionally omitted to trick the game into using vram tiles index 0
 dw !baby, $0007 ; baby
+
 dw $FFFF     ; end of list
 
 end_tourian_escape_4_freespace_b4:
