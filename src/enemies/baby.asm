@@ -139,17 +139,17 @@ baby_instruction_list:
 baby_init_ai:
 {
   LDX $0E54
-  LDA $0F86,x : ORA #$3000 : STA $0F86,x   ; process instructions and block plasma
-  LDA #baby_instruction_list : STA $0F92,x ; instruction pointer
-  LDA #$0001 : STA $0F94,x                 ; instruction timer
-  STA $7E7808,x                            ; Enable cry sound effect
-  STZ $0F90,x                              ; Enemy timer = 0
-  LDA #$000A : STA $0FB0,x                 ; Enemy palette handler delay = Ah
-  LDA #$00A0 : STA $0F98,x                 ; Enemy VRAM tiles index = A0h
-  STZ $0FAA,x                              ; Enemy X velocity = 0
-  STZ $0FAC,x                              ; Enemy Y velocity = 0
-  LDA #$00F8 : STA $0FB2,x                 ; Enemy function timer = F8h
-  LDA #$F683 : STA $7E781E,x               ; Enemy palette function = $F683 (normal)
+  LDA $0F86,x : ORA #$3000 : STA $0F86,x     ; process instructions and block plasma
+  LDA.w #baby_instruction_list : STA $0F92,x ; instruction pointer
+  LDA #$0001 : STA $0F94,x                   ; instruction timer
+  STA $7E7808,x                              ; Enable cry sound effect
+  STZ $0F90,x                                ; Enemy timer = 0
+  LDA #$000A : STA $0FB0,x                   ; Enemy palette handler delay = Ah
+  LDA #$00A0 : STA $0F98,x                   ; Enemy VRAM tiles index = A0h
+  STZ $0FAA,x                                ; Enemy X velocity = 0
+  STZ $0FAC,x                                ; Enemy Y velocity = 0
+  LDA #$00F8 : STA $0FB2,x                   ; Enemy function timer = F8h
+  LDA #$F683 : STA $7E781E,x                 ; Enemy palette function = $F683 (normal)
 
   ; Set initial state function
   LDA.w #baby_state_pick_target
@@ -164,7 +164,7 @@ baby_init_ai:
 
 baby_main_ai:
 {
-  LDX $0E54            
+  LDX $0E54
   STZ $0FA2,x            ; Enemy shake timer = 0
   JSR ($0FA8,x)          ; Execute [enemy function]
   JSL $A9C3EF            ; Move enemy according to enemy velocity
@@ -215,32 +215,22 @@ baby_state_pick_target:
 
 baby_pick_target:
 {
-  PHX
-  LDX #$0000
+  PHY
+  LDY #$0000
 
 .loop:
-  ; If enemy id is 0, skip it
-  LDA $0F78,x
+  JSR baby_can_fire_at_enemy
   BEQ .next
 
-  ; If this is the baby, skip it
-  CMP.w #baby
-  BEQ .next
-
-  ; If enemy is deleted, skip it
-  LDA $0F86,x
-  BIT #$0200
-  BNE .next
-
-  TXA
+  TYA
   SEC
   BRA .return
 
 .next:
-  TXA
+  TYA
   CLC
   ADC #$0040
-  TAX
+  TAY
   CMP #$0800
   BPL .not_found
   BRA .loop
@@ -249,7 +239,84 @@ baby_pick_target:
   CLC
 
 .return:
-  PLX
+  PLY
+  RTS
+}
+
+baby_can_fire_at_enemy:
+; Parameters:
+;   Y = target enemy index
+;
+{
+  ; If enemy id is 0, skip it
+  LDA $0F78,y
+  BEQ .no
+
+  ; If this is the baby, skip it
+  CMP.w #baby
+  BEQ .no
+
+  ; If enemy is deleted, skip it
+  LDA $0F86,y
+  BIT #$0200
+  BNE .no
+
+  ; If enemy is off screen, skip it
+  JSR baby_check_enemy_is_on_screen
+  BEQ .no
+
+.yes:
+  LDA #$0001
+  RTS
+
+.no:
+  LDA #$0000
+  RTS
+}
+
+baby_check_enemy_is_on_screen:
+; Parameters:
+;   Y = target enemy index
+;
+; Based on $A0:ADE7, but that function expects the enemy index to be in
+; $0E54.
+{
+  ; Check left side
+  LDA $0F7A,y
+  CLC
+  ADC $0F82,y
+  CMP $0911
+  BMI .off_screen
+
+  ; Check right side
+  LDA $0911
+  CLC
+  ADC #$0100
+  CLC
+  ADC $0F82,y
+  CMP $0F7A,y
+  BMI .off_screen
+
+  ; Check top side
+  LDA $0F7E,y
+  CLC
+  ADC #$0008
+  CMP $0915
+  BMI .off_screen
+
+  ; Check bottom side
+  LDA $0915
+  CLC
+  ADC #$00F8
+  CMP $0F7E,y
+  BMI .off_screen
+
+.on_screen:
+  LDA #$0001
+  RTS
+
+.off_screen:
+  LDA #$0000
   RTS
 }
 
@@ -257,12 +324,8 @@ baby_state_move_to_target_position:
 {
   LDA baby_targeted_enemy : TAY
 
-  LDA $0F78,y
+  JSR baby_can_fire_at_enemy
   BEQ .enemy_has_been_eliminated
-
-  LDA $0F86,y
-  BIT #$0200
-  BNE .enemy_has_been_eliminated
 
   JSR baby_move_to_target_position
   BCC .return
@@ -385,12 +448,8 @@ baby_state_fire_at_target:
 {
   LDA baby_targeted_enemy : TAY
 
-  LDA $0F78,y
+  JSR baby_can_fire_at_enemy
   BEQ .enemy_has_been_eliminated
-
-  LDA $0F86,y
-  BIT #$0200
-  BNE .enemy_has_been_eliminated
 
 .move_around_target_position:
   JSR baby_move_to_target_position
