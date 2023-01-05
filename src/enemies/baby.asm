@@ -107,7 +107,7 @@ dw #$F842                 ; shot routine
 dw $0000                  ; unknown
 dl #$B18400               ; tile data
 db $02                    ; layer
-dw $F3F2                  ; drop chances (shared w/ samus status for now)
+dw $F3F2                  ; drop chances
 dw $F12E                  ; vulnerabilities
 dw $0000                  ; enemy name
 
