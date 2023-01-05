@@ -80,7 +80,7 @@ baby:
 ; surprised if it were wrong.  OTOH the MB cutscene metroid uses $0000
 ; so something is a little abnormal.
 ;dw $0C00                  ; tile data size
-dw $0800                  ; tile data size
+dw $0400                  ; tile data size
 
 dw #$F8E6                 ; palette
 dw #$0C80                 ; health

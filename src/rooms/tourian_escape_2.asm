@@ -47,8 +47,8 @@ dw $F493, $00D0, $0128, $0000, $2000, $0004, $0001, $00A0 ; batta1Tu (tourian si
 dw $FFFF     ; end of list
 db $02       ; death quota
 
-end_tourian_escape_freespace_a1:
-!FREESPACE_A1 := end_tourian_escape_freespace_a1
+end_tourian_escape_2_freespace_a1:
+!FREESPACE_A1 := end_tourian_escape_2_freespace_a1
 
 org !FREESPACE_B4
 
@@ -61,8 +61,8 @@ dw $F493, $0001 ; batta1Tu (tourian silver wall pirate)
 dw !baby, $0007 ; baby
 dw $FFFF     ; end of list
 
-end_tourian_escape_freespace_b4:
-!FREESPACE_B4 := end_tourian_escape_freespace_b4
+end_tourian_escape_2_freespace_b4:
+!FREESPACE_B4 := end_tourian_escape_2_freespace_b4
 
 ; Room $DE7A state $DE87: FX
 org $83A114

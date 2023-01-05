@@ -90,3 +90,4 @@ incsrc rooms/firefleas.asm
 incsrc rooms/spring_ball_maze.asm
 incsrc rooms/tourian_escape_1.asm
 incsrc rooms/tourian_escape_2.asm
+incsrc rooms/tourian_escape_3.asm
