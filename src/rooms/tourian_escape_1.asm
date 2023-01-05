@@ -82,7 +82,8 @@ tourian_escape_1_samus_cooldown:
 print "Variable tourian_escape_1_samus_cooldown: $", pc
 skip 2
 
-!FREEMEM_7F := pc
+end_tourian_escape_1_freemem_7f:
+!FREEMEM_7F := end_tourian_escape_1_freemem_7f
 
 org !FREESPACE_8F
 
