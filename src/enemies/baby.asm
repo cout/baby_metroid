@@ -130,6 +130,8 @@ baby_instruction_list:
   dw $80ED, .top
 }
 
+; TODO: we shouldn't manually change $0F86; it should be set in the
+; enemy population like other enemies
 baby_init_ai:
 {
   LDX $0E54

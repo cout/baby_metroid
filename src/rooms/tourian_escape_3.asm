@@ -53,7 +53,7 @@ dw $FFFF     ; end of list
 db $07       ; death quota
 
 end_tourian_escape_3_freespace_a1:
-!FREESPACE_A1 := end_tourian_escape_freespace_a1
+!FREESPACE_A1 := end_tourian_escape_3_freespace_a1
 
 org !FREESPACE_B4
 
@@ -68,7 +68,7 @@ dw !baby, $0007 ; baby
 dw $FFFF     ; end of list
 
 end_tourian_escape_3_freespace_b4:
-!FREESPACE_B4 := end_tourian_escape_freespace_b4
+!FREESPACE_B4 := end_tourian_escape_3_freespace_b4
 
 ; Room $DEA7 state $DEB4: FX
 org $83A124
