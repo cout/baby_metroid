@@ -62,6 +62,7 @@ Cosmetic
 * Pirate hitbox is noticeably tall
 * Can I make the selected item in the HUD be the color of the door it
     opens?
+* Lights in the tourian escape rooms blink too fast
 
 Feedback from E
 ---------------
