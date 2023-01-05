@@ -62,14 +62,12 @@ tourian_escape_1_enemy_graphics_set:
 ; Room $DE4D state $DE5A: Enemy graphics set
 ; org $B49130
 ;  enemy  palette
-; TODO - I think maybe both baby and shutters expect to use the first
-; palette?
 dw $D5BF, $0001 ; destructible shutter2
 dw !baby, $0007 ; baby
 dw $FFFF     ; end of list
 
 end_tourian_escape_1_freespace_b4:
-!FREESPACE_B4 = end_tourian_escape_1_freespace_b4
+!FREESPACE_B4 := end_tourian_escape_1_freespace_b4
 
 ; Room $DE4D state $DE5A: FX
 org $83A104
