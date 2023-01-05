@@ -60,7 +60,6 @@ Incomplete
 Cosmetic
 --------
 
-* Moat room bridge is not aligned on the right side
 * Easy blue suit should not produce echoes
 * Blue suit animation is not visible in lava
 
