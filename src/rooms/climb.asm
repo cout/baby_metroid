@@ -183,7 +183,8 @@ org !FREESPACE_8F
 
 climb_doors:
 {
-  ; dw $8B3E, $8B4A, $8B56, $8B62, $8B6E, $0000
+  ; TODO - I do not remember why I needed to add $88FC to the door list
+  ; dw $8B3E, $8B4A, $8B56, $8B62, $8B6E
   dw $8B3E, $8B4A, $8B56, $8B62, $8B6E, $88FC
 }
 
