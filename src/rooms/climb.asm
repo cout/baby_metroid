@@ -1,6 +1,10 @@
-org $C3C998
+org !FREESPACE_B8
+
+climb_with_elevator_level_data:
 incbin "climb.bin"
-warnpc $C3D9F7
+
+end_climb_freespace_b8:
+!FREESPACE_B8 := end_climb_freespace_b8
 
 ; Room $96BA: Header
 org $8F96BA
@@ -44,7 +48,8 @@ dw $91D4     ; Room setup routine (bank $8F)
 ; Room $96BA state $96EB: Header
 ; (event bit 00h)
 org $8F96EB
-dl $C3C998   ; Level data address
+; dl $C3C998   ; Level data address
+dl climb_with_elevator_level_data
 db $02       ; Tileset
 db $09       ; Music data index
 db $05       ; Music track index
