@@ -110,3 +110,5 @@ Tools
 * Write out warnpc for room headers and enemy population/set
 * Room extract writes out incorrect tilemap end for rooms with layer 2
     tilemap (double chamber)
+* add warnpc for all enemy populations and graphics sets
+* add doors
