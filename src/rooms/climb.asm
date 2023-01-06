@@ -1,3 +1,5 @@
+!TOP_DOOR_INDEX = $D0
+
 org !FREESPACE_B8
 
 climb_with_elevator_level_data:
@@ -80,7 +82,8 @@ dw $C1C1     ; Layer 2 scroll
 dw $9729     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
 dw $C124     ; Room main routine (bank $8F)
-dw $830C     ; Room PLM list address (bank $8F)
+; dw $830C     ; Room PLM list address (bank $8F)
+dw climb_escape_room_plm
 dw $B905     ; Library background (bank $8F)
 dw $91A9     ; Room setup routine (bank $8F)
 
@@ -231,6 +234,45 @@ top_door_sub:
 
   in_door_transition:
   JMP $B981
+}
+
+; Room $96BA, state $9705: PLM
+climb_escape_room_plm:
+{
+  ; existing:
+  dw $B703,$051D,$9747 ; scroll plm
+  dw $B703,$0520,$9744 ; scroll plm
+  dw $B703,$761D,$974D ; scroll plm
+  dw $B703,$7620,$974A ; scroll plm
+  dw $B63F,$8512,$8000 ; rightward extension
+  dw $B63F,$8513,$8000 ; rightward extension
+  dw $B647,$8514,$8000 ; downward extension
+  dw $B647,$8614,$8000 ; downward extension
+  dw $B647,$8714,$8000 ; downward extension
+  dw $B647,$8814,$8000 ; downward extension
+  dw $B703,$8914,$9753 ; scroll plm
+  dw $B647,$860F,$8000 ; downward extension
+  dw $B647,$870F,$8000 ; downward extension
+  dw $B647,$880F,$8000 ; downward extension
+  dw $B703,$890F,$9750 ; scroll plm
+  dw $B647,$860D,$8000 ; downward extension
+  dw $B647,$870D,$8000 ; downward extension
+  dw $B647,$880D,$8000 ; downward extension
+  dw $B703,$890D,$9756 ; scroll plm
+  dw $B647,$8608,$8000 ; downward extension
+  dw $B647,$8708,$8000 ; downward extension
+  dw $B647,$8808,$8000 ; downward extension
+  dw $B703,$8908,$9759 ; scroll plm
+  dw $DB44,$0808,$000C ; set metroids cleared state?
+  dw $C842,$062E,$9014 ; grey door facing left
+  dw $C842,$762E,$9015 ; grey door facing left
+  dw $C842,$861E,$9016 ; grey door facing left
+  dw $C848,$8601,$9017 ; grey door facing right
+
+  ; new:
+  dw $C854,$0216,($9000|!TOP_DOOR_INDEX)
+
+  dw $0000 ; end of list
 }
 
 end_climb_freespace_8f:
