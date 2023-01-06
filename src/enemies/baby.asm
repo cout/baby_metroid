@@ -4,11 +4,13 @@
 ;    samus and fast otherwise
 ; 2. baby should find enemies to shoot faster than it does
 ; 3. put baby in correct position coming through the door
-; 4. baby should follow samus out the previous door
+; 4. baby should follow samus out the previous door (i.e. accelerate
+;    toward the door when the transition starts)
 
 !BABY_HYPER_FIRING_RATE = #$0030
 !BABY_ACCELERATION_TO_TARGET_POSITION = #$0002
 !BABY_ACCELERATION_TO_SAMUS = #$0000
+!BABY_ACCELERATION_ESCAPE = #$0020
 !BABY_ALTITUDE_ABOVE_SAMUS = #$0014
 
 !BABY_STATE = $0FA8,x
@@ -203,6 +205,19 @@ baby_state_pick_target:
 .no_enemy:
   LDA #$0000
   STA baby_targeted_enemy
+
+  ; If this is the climb room the baby has a special task
+  LDA $079B
+  CMP #$96BA
+  BNE .follow_samus_and_return
+
+  ; But all the enemies in the room must be dead, not just off screen
+  LDA $0E50
+  CMP $0E52
+  BCC .follow_samus_and_return
+
+  LDA.w #baby_state_rush_to_save_samus
+  STA $0FA8,x
 
 .follow_samus_and_return:
   JMP follow_samus
@@ -481,6 +496,106 @@ baby_state_follow_samus:
   JMP follow_samus
 }
 
+baby_state_rush_to_save_samus:
+{
+  LDA $0AF6
+  SEC
+  SBC $0F7A,x
+  BPL +
+  EOR #$FFFF
+  INC A
++ CMP #$0010
+  BPL .move_to_samus
+
+  LDA $0AFA
+  SEC
+  SBC $0F7E,x
+  BPL +
+  EOR #$FFFF
+  INC A
++ CMP #$0010
+  BPL .move_to_samus
+
+  LDA.w #baby_state_move_samus_to_center
+  STA $0FA8,x
+
+.move_to_samus:
+  ; $12 = Samus X position
+  LDA $0AF6
+  STA $12
+
+  ; $14 = Samus Y position
+  LDA $0AFA
+  SEC
+  SBC !BABY_ALTITUDE_ABOVE_SAMUS
+  STA $14
+
+  LDY !BABY_ACCELERATION_ESCAPE
+
+  JMP $F451
+}
+
+baby_state_move_samus_to_center:
+{
+  LDA $0F7A,x
+  SEC
+  SBC #$0180
+  BPL +
+  EOR #$FFFF
+  INC A
+  STA $7FFC00
++ CMP #$0010
+  BPL .move_to_center
+
+  LDA.w #baby_state_climb_climb_climb
+  STA $0FA8,x
+
+.move_to_center
+  LDA #$0180
+  STA $12
+
+  ; TODO - store the target Y position, because depending on samus's
+  ; position is probably not a good idea
+  LDA $AFA
+  STA $14
+
+  ; TODO - this is a slower movement than I intended, but I think it
+  ; works
+  LDY !BABY_ACCELERATION_ESCAPE
+  JSR $F451
+
+  LDA $0F7A,x
+  STA $0AF6
+
+  ; TODO - this is too low - I can barely see Samus's legs.  But if I
+  ; move Samus down then the baby will move down too and they will both
+  ; end up out of bounds.
+  LDA $0F7E,x
+  STA $0AFA
+
+  RTS
+}
+
+baby_state_climb_climb_climb:
+{
+  LDA #$0180
+  STA $12
+
+  LDA $0000
+  STA $14
+
+  LDY !BABY_ACCELERATION_ESCAPE
+  JSR $F451
+
+  LDA $0F7A,x
+  STA $0AF6
+
+  LDA $0F7E,x
+  STA $0AFA
+
+  RTS
+}
+
 follow_samus:
 {
   ; $12 = Samus X position
@@ -630,3 +745,6 @@ print "  pick target - ", hex(baby_state_pick_target&$FFFF)
 print "  move to target position - ", hex(baby_state_move_to_target_position&$FFFF)
 print "  fire at target - ", hex(baby_state_fire_at_target&$FFFF)
 print "  follow samus - ", hex(baby_state_follow_samus&$FFFF)
+print "  rush to save samus - ", hex(baby_state_rush_to_save_samus&$FFFF)
+print "  move samus to center - ", hex(baby_state_move_samus_to_center&$FFFF)
+print "  climb climb climb - ", hex(baby_state_climb_climb_climb&$FFFF)
