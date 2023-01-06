@@ -41,7 +41,7 @@ tourian_escape_3_enemy_population:
 ; Room $DEA7 state $DEB4: Enemy population
 ; org $A1E695
 ;  enemy  x      y      init   props  extra  param1 param2
-dw !baby, $0027, $018B, $0000, $2C00, $0000, $0000, $0000 ; baby
+dw !baby, $0000, $018B, $0000, $2C00, $0000, $0000, $0000 ; baby
 dw $F793, $00C0, $0160, $0000, $2000, $0004, $0000, $0010 ; batta3Tu (tourian silver walking pirate)
 dw $F793, $0538, $0160, $0000, $2000, $0004, $0000, $0010 ; batta3Tu (tourian silver walking pirate)
 dw $F793, $0488, $0160, $0000, $2000, $0004, $0000, $0010 ; batta3Tu (tourian silver walking pirate)

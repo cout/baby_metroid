@@ -67,8 +67,10 @@ db $02       ; Tileset
 db $24       ; Music data index
 db $07       ; Music track index
 dw $8020     ; FX address (bank $83)
-dw $85B2     ; Enemy population offset (bank $A1)
-dw $8111     ; Enemy graphics set offset (bank $B4)
+; dw $85B2     ; Enemy population offset (bank $A1)
+; dw $8111     ; Enemy graphics set offset (bank $B4)
+dw climb_escape_enemy_population
+dw climb_escape_enemy_graphics_set
 dw $C1C1     ; Layer 2 scroll
 dw $9729     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
@@ -115,13 +117,23 @@ dw $FFFF
 db $00
 db $0B       ; death quota
 
+org !FREESPACE_A1
+
+climb_escape_enemy_population:
+
 ; Room $96BA state $9705: Enemy population
-org $A185B2
+; org $A185B2
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $F613, $0080, $0880, $0000, $2800, $0004, $0000, $0000 ; batta2Tu (tourian silver pirate)
-dw $F613, $00C0, $0880, $0000, $2800, $0004, $0000, $0000 ; batta2Tu (tourian silver pirate)
+dw !baby, $0000, $088B, $0000, $2C00, $0000, $0000, $0000 ; baby
+; dw $F613, $0080, $0880, $0000, $2800, $0004, $0000, $0000 ; batta2Tu (tourian silver pirate)
+; dw $F613, $00C0, $0880, $0000, $2800, $0004, $0000, $0000 ; batta2Tu (tourian silver pirate)
+dw $F793, $0080, $0880, $0000, $2800, $0004, $0000, $0000 ; batta3Tu (tourian silver pirate)
+dw $F793, $00C0, $0880, $0000, $2800, $0004, $0000, $0000 ; batta3Tu (tourian silver pirate)
 dw $FFFF     ; end of list
 db $02       ; death quota
+
+end_climb_freespace_a1:
+!FREESPACE_A1 := end_climb_freespace_a1
 
 ; Room $96BA state $96D1: Enemy graphics set
 org $B4814F
@@ -140,12 +152,21 @@ dw $FFFF     ; end of list
 db $00
 warnpc $B481DA
 
+org !FREESPACE_B4
+
+climb_escape_enemy_graphics_set:
+
 ; Room $96BA state $9705: Enemy graphics set
-org $B48111
+;org $B48111
 ;  enemy  palette
-dw $F613, $0002 ; batta2Tu (tourian silver pirate)
+; dw $F613, $0002 ; batta2Tu (tourian silver pirate)
+dw $F793, $0002 ; batta2Tu (tourian silver pirate)
+dw !baby, $0007 ; baby
 dw $FFFF     ; end of list
-warnpc $B48118
+;warnpc $B48118
+
+end_climb_freespace_b4:
+!FREESPACE_B4 := end_climb_freespace_b4
 
 ; Room $96BA state $96D1: FX
 org $83818E
