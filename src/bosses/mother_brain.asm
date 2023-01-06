@@ -66,6 +66,10 @@ mother_brain_state_final_death_sequence:
   ; Clear Mother Brain extra properties
   STZ $0FC8
 
+  ; Mark event 0E
+  LDA #$000E
+  JSL $8081FA
+
   ; Next state is $B211 (wait for timer)
   LDA #$B211
   STA $0FA8
