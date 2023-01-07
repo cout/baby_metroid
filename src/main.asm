@@ -94,3 +94,4 @@ incsrc rooms/tourian_escape_3.asm
 incsrc rooms/tourian_escape_4.asm
 incsrc rooms/parlor.asm
 incsrc rooms/landing_site.asm
+incsrc rooms/flyway.asm
