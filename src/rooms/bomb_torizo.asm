@@ -178,7 +178,8 @@ bomb_torizo_animals_escape_door:
 {
   ; 91F8,00,04,01,46,00,04,8000,0000
 
-  dw $91F8        ; room id - TODO: just landing site for now
+  ; dw $91F8        ; room id - TODO: just landing site for now
+  dw below_landing_site_header
   db $40          ; bitflags (40h=reload map)
   db $00          ; direction
   db $01          ; door cap x
