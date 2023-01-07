@@ -196,6 +196,10 @@ org !FREESPACE_8F
 
 parlor_escape_setup:
 {
+  LDA $7ED830
+  AND #$0001
+  BNE .return
+
   ; ?
   JSL $8483D7
   dw  $0B3D, $BB30
@@ -208,6 +212,7 @@ parlor_escape_setup:
   LDA #$0018
   STA $183E
 
+.return:
   RTS
 }
 
@@ -232,6 +237,12 @@ parlor_escape_main:
 
   LDA.w #parlor_escape_main_quiet
   STA $07DF
+
+  ; TODO - This should not be a magic number (it's where I'm keeping the
+  ; event bit for quiet parlor)
+  LDA $7ED830
+  ORA #$0001
+  STA $7ED830
 
 .earthquake0:
   ; No explosions
