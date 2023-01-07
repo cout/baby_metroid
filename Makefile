@@ -60,6 +60,7 @@ ROOMS = \
 	src/rooms/wasteland.bin \
 	src/rooms/firefleas.bin \
 	src/rooms/spring_ball_maze.bin \
+	src/rooms/escape_parlor.bin \
 
 all: build/baby_metroid.sfc
 

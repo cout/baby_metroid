@@ -1,3 +1,11 @@
+org !FREESPACE_B8
+
+escape_parlor_level_data:
+incbin "escape_parlor.bin"
+
+end_parlor_freespace_b8:
+!FREESPACE_B8 := end_parlor_freespace_b8
+
 ; Room $92FD: Header
 org $8F92FD
 db $02       ; Index
@@ -57,7 +65,8 @@ dw $91BC     ; Room setup routine (bank $8F)
 ; Room $92FD state $9348: Header
 ; (event bit 0eh)
 org $8F9348
-dl $C2DBC4   ; Level data address
+; dl $C2DBC4   ; Level data address
+dl escape_parlor_level_data
 db $00       ; Tileset
 db $00       ; Music data index
 db $00       ; Music track index
