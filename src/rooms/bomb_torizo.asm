@@ -15,7 +15,8 @@ db $01       ; Height (in screens)
 db $70       ; Up scroller
 db $A0       ; Down scroller
 db $00       ; Special graphics bits
-dw $9869     ; Door out
+; dw $9869     ; Door out
+dw bomb_torizo_door_list
 dw $E612     ; State $984F function (event)
 db $0E       ; Event
 dw $984F     ; State header address
@@ -159,3 +160,35 @@ dw $DB44, $0808, $000E
 dw $C848, $0601, ($9000|!ENTRY_DOOR_INDEX)
 dw $0000
 warnpc $8F8420
+
+org !FREESPACE_8F
+
+bomb_torizo_door_list:
+{
+  dw $8BAA
+  dw bomb_torizo_animals_escape_door
+}
+
+end_bomb_torizo_freespace_8f:
+!FREESPACE_8F := end_bomb_torizo_freespace_8f
+
+org !FREESPACE_83
+
+bomb_torizo_animals_escape_door:
+{
+  ; 91F8,00,04,01,46,00,04,8000,0000
+
+  dw $91F8        ; room id - TODO: just landing site for now
+  db $40          ; bitflags (40h=reload map)
+  db $00          ; direction
+  db $01          ; door cap x
+  db $46          ; door cap y
+  db $00          ; screen x
+  db $04          ; screen y
+  dw $8000        ; distance to spawn
+  dw $B9A2        ; door subroutine (B9A2=set scroll to green? not sure
+                  ; if needed but flyway to alcatraz door does this)
+}
+
+end_bomb_torizo_freespace_83:
+!FREESPACE_83 := end_bomb_torizo_freespace_83
