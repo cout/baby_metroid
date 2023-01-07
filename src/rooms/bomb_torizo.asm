@@ -1,3 +1,5 @@
+!ENTRY_DOOR_INDEX = $D1
+
 org $C3E0D0
 incbin "bomb_torizo.bin"
 warnpc $C3E16E
@@ -149,3 +151,11 @@ dw $0000, $FFFF, $FFFF, $0000 : db $00, $08, $02, $0A, $00, $00, $00, $00
 org $838030
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $00F0, $00B8, $FFF0 : db $30, $04, $02, $1E, $00, $00, $00, $00
+
+; Room $9804, state $984F: PLM
+org $8F8412
+dw $DB44, $0808, $000E
+; dw $C848, $0601, $181C
+dw $C848, $0601, ($9000|!ENTRY_DOOR_INDEX)
+dw $0000
+warnpc $8F8420
