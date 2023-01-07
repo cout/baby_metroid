@@ -67,10 +67,12 @@ dw $8295     ; Enemy graphics set offset (bank $B4)
 dw $C1C1     ; Layer 2 scroll
 dw $9370     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
-dw $C124     ; Room main routine (bank $8F)
+; dw $C124     ; Room main routine (bank $8F)
+dw parlor_escape_main
 dw $8104     ; Room PLM list address (bank $8F)
 dw $B8B4     ; Library background (bank $8F)
-dw $9194     ; Room setup routine (bank $8F)
+; dw $9194     ; Room setup routine (bank $8F)
+dw parlor_escape_setup
 
 ; Room $92FD state $9314: Enemy population
 org $A186FA
@@ -180,3 +182,76 @@ org $838010
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 ; dw $0000, $04E8, $0010, $FF98 : db $00, $00, $02, $02, $00, $42, $00, $00
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $00, $00, $00
+
+org !FREESPACE_8F
+
+parlor_escape_setup:
+{
+  ; ?
+  JSL $8483D7
+  dw  $0B3D, $BB30
+
+  ; Time remaining for quake
+  LDA #$0180
+  STA $1840
+
+  ; 3px horiz displacement full quake
+  LDA #$0018
+  STA $183E
+
+  RTS
+}
+
+parlor_escape_main:
+{
+  LDA $1840
+  CMP #$0100
+  BPL .explosions
+
+  CMP #$0080
+  BPL .earthquake2
+
+  CMP #$0040
+  BPL .earthquake1
+
+  CMP #$0001
+  BPL .earthquake0
+
+  ; Queue elevator music
+  LDA #$0003
+  JSL $808FC1
+
+  LDA.w #parlor_escape_main_quiet
+  STA $07DF
+
+.earthquake0:
+  ; No explosions
+  BRA .return
+
+.earthquake1:
+  ; 1px horiz displacement full quake
+  LDA #$0012
+  STA $183E
+
+  BRA .explosions
+
+.earthquake2:
+  ; 2px horiz displacement full quake
+  LDA #$0015
+  STA $183E
+
+.explosions:
+  ; Generate explosions
+  JSR $C131
+
+.return:
+  RTS
+}
+
+parlor_escape_main_quiet:
+{
+  RTS
+}
+
+end_parlor_freespace_8F:
+!FREESPACE_8F := end_parlor_freespace_8F
