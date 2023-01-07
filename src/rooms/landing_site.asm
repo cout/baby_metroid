@@ -131,9 +131,9 @@ db $00       ; death quota
 ; Room $91F8 state $9261: Enemy population
 org $A18C0D
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $D07F, $0480, $0478, $0000, $2400, $0000, $0000, $0000 ; gunship top
-dw $D0BF, $0480, $0478, $0000, $2400, $0000, $0000, $0000 ; gunship bottom
-dw $D0BF, $0480, $0478, $0000, $2400, $0000, $0000, $0001 ; gunship bottom
+; dw $D07F, $0480, $0478, $0000, $2400, $0000, $0000, $0000 ; gunship top
+; dw $D0BF, $0480, $0478, $0000, $2400, $0000, $0000, $0000 ; gunship bottom
+; dw $D0BF, $0480, $0478, $0000, $2400, $0000, $0000, $0001 ; gunship bottom
 dw $E1FF, $0051, $04AA, $0000, $2000, $0000, $0000, $0000 ; ceres steam
 dw $E1FF, $0080, $04BC, $0000, $2000, $0000, $0000, $0000 ; ceres steam
 dw $E1FF, $00A1, $04D0, $0000, $2000, $0000, $0000, $0000 ; ceres steam
@@ -183,8 +183,8 @@ dw $FFFF     ; end of list
 ; Room $91F8 state $9261: Enemy graphics set
 org $B48283
 ;  enemy  palette
-dw $D07F, $0002 ; gunship top
-dw $D0BF, $0007 ; gunship bottom
+; dw $D07F, $0002 ; gunship top
+; dw $D0BF, $0007 ; gunship bottom
 dw $FFFF     ; end of list
 
 ; Room $91F8 state $9213: FX
