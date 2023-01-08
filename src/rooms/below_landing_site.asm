@@ -33,12 +33,13 @@ db $05                                   ; Music track index - TODO
 dw below_landing_site_fx                 ; FX address (bank $83)
 dw below_landing_site_enemy_population   ; Enemy population offset (bank $A1)
 dw below_landing_site_enemy_graphics_set ; Enemy graphics set offset (bank $B4)
-dw $0181                                 ; Layer 2 scroll - TODO
+dw $0000                                 ; Layer 2 scroll - TODO
 dw below_landing_site_room_scroll_data   ; Room scroll data (bank $8F)
 dw $0000                                 ; Room var
 dw below_landing_site_main               ; Room main routine (bank $8F)
 dw below_landing_site_room_plms          ; Room PLM list address (bank $8F)
-dw below_spazer_library_background       ; Library background (bank $8F) - TODO
+; dw below_spazer_library_background       ; Library background (bank $8F) - TODO
+dw $0000
 dw below_landing_site_setup              ; Room setup routine (bank $8F)
 
 below_landing_site_room_scroll_data:
