@@ -43,9 +43,9 @@ dw below_landing_site_setup              ; Room setup routine (bank $8F)
 
 below_landing_site_room_scroll_data:
 {
-  db 00, 00, 00, 02, 02
-  db 00, 00, 00, 02, 02
-  db 00, 00, 00, 02, 02
+  db 00, 00, 00, 01, 01
+  db 00, 00, 00, 01, 01
+  db 00, 00, 00, 01, 01
   db 01, 01, 01, 01, 01
   db 01, 01, 01, 01, 01
   db 01, 01, 01, 01, 01
