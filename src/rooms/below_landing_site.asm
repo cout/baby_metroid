@@ -15,25 +15,25 @@ below_landing_site_header:
 ; Room $91F8: Header
 db $00                                   ; Index
 db $00                                   ; Area
-db $17                                   ; X position on map - TODO
-db $00                                   ; Y position on map - TODO
+db $1A                                   ; X position on map
+db $02                                   ; Y position on map
 db $05                                   ; Width (in screens)
 db $06                                   ; Height (in screens)
 db $70                                   ; Up scroller
 db $A0                                   ; Down scroller
 db $00                                   ; Special graphics bits
-dw $927B                                 ; Door out - TODO
+dw below_landing_site_doors              ; Door out
 dw $E5E6                                 ; State $9213 function (default)
 
 below_landing_site_state_header:
 dl below_landing_site_level_data         ; Level data address
 db $00                                   ; Tileset
-db $06                                   ; Music data index
-db $05                                   ; Music track index
+db $06                                   ; Music data index - TODO
+db $05                                   ; Music track index - TODO
 dw below_landing_site_fx                 ; FX address (bank $83)
 dw below_landing_site_enemy_population   ; Enemy population offset (bank $A1)
 dw below_landing_site_enemy_graphics_set ; Enemy graphics set offset (bank $B4)
-dw $0181                                 ; Layer 2 scroll
+dw $0181                                 ; Layer 2 scroll - TODO
 dw below_landing_site_room_scroll_data   ; Room scroll data (bank $8F) - TODO
 dw $0000                                 ; Room var
 dw below_landing_site_main               ; Room main routine (bank $8F)
@@ -59,6 +59,10 @@ below_landing_site_setup:
 below_landing_site_main:
 {
   RTS
+}
+
+below_landing_site_doors:
+{
 }
 
 }
