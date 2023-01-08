@@ -34,10 +34,10 @@ dw below_landing_site_fx                 ; FX address (bank $83)
 dw below_landing_site_enemy_population   ; Enemy population offset (bank $A1)
 dw below_landing_site_enemy_graphics_set ; Enemy graphics set offset (bank $B4)
 dw $0181                                 ; Layer 2 scroll - TODO
-dw below_landing_site_room_scroll_data   ; Room scroll data (bank $8F) - TODO
+dw below_landing_site_room_scroll_data   ; Room scroll data (bank $8F)
 dw $0000                                 ; Room var
 dw below_landing_site_main               ; Room main routine (bank $8F)
-dw $8000                                 ; Room PLM list address (bank $8F)
+dw below_landing_site_room_plms          ; Room PLM list address (bank $8F)
 dw $B76A                                 ; Library background (bank $8F) - TODO
 dw below_landing_site_setup              ; Room setup routine (bank $8F)
 
@@ -63,6 +63,17 @@ below_landing_site_main:
 
 below_landing_site_doors:
 {
+}
+
+below_landing_site_room_plms:
+{
+  dw $B703,$281E,$92B0 ; scroll
+  dw $B647,$271E,$8000 ; downward extension
+  dw $B647,$261E,$8000 ; downward extension
+  dw $B647,$251E,$8000 ; downward extension
+  ; dw $C872,$468E,$0000 ; green door facing left
+  ; dw $C85A,$168E,$0001 ; yellow door facing left
+  dw $0000
 }
 
 }
