@@ -185,7 +185,7 @@ bomb_torizo_animals_escape_door:
   db $01          ; door cap x
   db $46          ; door cap y
   db $00          ; screen x
-  db $04          ; screen y
+  db $05          ; screen y
   dw $8000        ; distance to spawn
   dw $B9A2        ; door subroutine (B9A2=set scroll to green? not sure
                   ; if needed but flyway to alcatraz door does this)

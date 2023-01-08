@@ -18,7 +18,7 @@ db $00                                   ; Area
 db $1A                                   ; X position on map
 db $02                                   ; Y position on map
 db $05                                   ; Width (in screens)
-db $06                                   ; Height (in screens)
+db $07                                   ; Height (in screens)
 db $70                                   ; Up scroller
 db $A0                                   ; Down scroller
 db $00                                   ; Special graphics bits
@@ -43,6 +43,7 @@ dw below_landing_site_setup              ; Room setup routine (bank $8F)
 
 below_landing_site_room_scroll_data:
 {
+  db 00, 00, 00, 01, 01
   db 00, 00, 00, 01, 01
   db 00, 00, 00, 01, 01
   db 00, 00, 00, 01, 01
