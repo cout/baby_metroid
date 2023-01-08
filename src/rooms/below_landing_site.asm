@@ -13,36 +13,43 @@ below_landing_site_header:
 {
 
 ; Room $91F8: Header
-db $00       ; Index
-db $00       ; Area
-db $17       ; X position on map - TODO
-db $00       ; Y position on map - TODO
-db $05       ; Width (in screens)
-db $06       ; Height (in screens)
-db $70       ; Up scroller
-db $A0       ; Down scroller
-db $00       ; Special graphics bits
-dw $927B     ; Door out - TODO
-dw $E5E6     ; State $9213 function (default)
+db $00                                   ; Index
+db $00                                   ; Area
+db $17                                   ; X position on map - TODO
+db $00                                   ; Y position on map - TODO
+db $05                                   ; Width (in screens)
+db $06                                   ; Height (in screens)
+db $70                                   ; Up scroller
+db $A0                                   ; Down scroller
+db $00                                   ; Special graphics bits
+dw $927B                                 ; Door out - TODO
+dw $E5E6                                 ; State $9213 function (default)
 
 below_landing_site_state_header:
-dl below_landing_site_level_data ; Level data address
-db $00       ; Tileset
-db $06       ; Music data index
-db $05       ; Music track index
-; dw $80C0     ; FX address (bank $83)
-; dw $883D     ; Enemy population offset (bank $A1)
-; dw $8193     ; Enemy graphics set offset (bank $B4)
-dw below_landing_site_fx ; FX address (bank $83)
-dw below_landing_site_enemy_population ; Enemy population offset (bank $A1)
+dl below_landing_site_level_data         ; Level data address
+db $00                                   ; Tileset
+db $06                                   ; Music data index
+db $05                                   ; Music track index
+dw below_landing_site_fx                 ; FX address (bank $83)
+dw below_landing_site_enemy_population   ; Enemy population offset (bank $A1)
 dw below_landing_site_enemy_graphics_set ; Enemy graphics set offset (bank $B4)
-dw $0181     ; Layer 2 scroll
-dw $9283     ; Room scroll data (bank $8F) - TODO
-dw $0000     ; Room var
-dw $C116     ; Room main routine (bank $8F) - TODO
-dw $8000     ; Room PLM list address (bank $8F)
-dw $B76A     ; Library background (bank $8F) - TODO
-dw $91C9     ; Room setup routine (bank $8F) - TODO
+dw $0181                                 ; Layer 2 scroll
+dw below_landing_site_room_scroll_data   ; Room scroll data (bank $8F) - TODO
+dw $0000                                 ; Room var
+dw $C116                                 ; Room main routine (bank $8F) - TODO
+dw $8000                                 ; Room PLM list address (bank $8F)
+dw $B76A                                 ; Library background (bank $8F) - TODO
+dw $91C9                                 ; Room setup routine (bank $8F) - TODO
+
+below_landing_site_room_scroll_data:
+{
+  db 00, 00, 00, 02, 02
+  db 00, 00, 00, 02, 02
+  db 00, 00, 00, 02, 02
+  db 01, 01, 01, 01, 01
+  db 01, 01, 01, 01, 01
+  db 01, 01, 01, 01, 01
+}
 
 }
 
