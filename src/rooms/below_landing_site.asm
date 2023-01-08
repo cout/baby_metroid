@@ -28,7 +28,7 @@ dw $E5E6                                 ; State $9213 function (default)
 below_landing_site_state_header:
 dl below_landing_site_level_data         ; Level data address
 db $00                                   ; Tileset
-db $06                                   ; Music data index - TODO
+db $0C                                   ; Music data index - TODO
 db $05                                   ; Music track index - TODO
 dw below_landing_site_fx                 ; FX address (bank $83)
 dw below_landing_site_enemy_population   ; Enemy population offset (bank $A1)
