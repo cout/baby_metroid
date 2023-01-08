@@ -36,10 +36,10 @@ dw below_landing_site_enemy_graphics_set ; Enemy graphics set offset (bank $B4)
 dw $0181                                 ; Layer 2 scroll
 dw below_landing_site_room_scroll_data   ; Room scroll data (bank $8F) - TODO
 dw $0000                                 ; Room var
-dw $C116                                 ; Room main routine (bank $8F) - TODO
+dw below_landing_site_main               ; Room main routine (bank $8F)
 dw $8000                                 ; Room PLM list address (bank $8F)
 dw $B76A                                 ; Library background (bank $8F) - TODO
-dw $91C9                                 ; Room setup routine (bank $8F) - TODO
+dw below_landing_site_setup              ; Room setup routine (bank $8F)
 
 below_landing_site_room_scroll_data:
 {
@@ -49,6 +49,16 @@ below_landing_site_room_scroll_data:
   db 01, 01, 01, 01, 01
   db 01, 01, 01, 01, 01
   db 01, 01, 01, 01, 01
+}
+
+below_landing_site_setup:
+{
+  RTS
+}
+
+below_landing_site_main:
+{
+  RTS
 }
 
 }
