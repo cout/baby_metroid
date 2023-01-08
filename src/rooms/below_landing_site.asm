@@ -38,7 +38,7 @@ dw below_landing_site_room_scroll_data   ; Room scroll data (bank $8F)
 dw $0000                                 ; Room var
 dw below_landing_site_main               ; Room main routine (bank $8F)
 dw below_landing_site_room_plms          ; Room PLM list address (bank $8F)
-dw $B76A                                 ; Library background (bank $8F) - TODO
+dw below_spazer_library_background       ; Library background (bank $8F) - TODO
 dw below_landing_site_setup              ; Room setup routine (bank $8F)
 
 below_landing_site_room_scroll_data:
@@ -49,6 +49,25 @@ below_landing_site_room_scroll_data:
   db 01, 01, 01, 01, 01
   db 01, 01, 01, 01, 01
   db 01, 01, 01, 01, 01
+}
+
+below_spazer_library_background:
+{
+  ; original:
+  ;  cmd    door       source       dest   size
+  ; dw $000E, $8946 : dl $8AC180 : dw $4800, $0800 ; from gauntlet
+  ; dw $000E, $896A : dl $8AD180 : dw $4800, $0800 ; from parlor
+  ; dw $000E, $89B2 : dl $8AB980 : dw $4C00, $0800 ; from crateria pbs
+  ; dw $000E, $8AC6 : dl $8AD180 : dw $4800, $0800 ; from crateria tube
+  ; dw $000E, $88FE : dl $8AB180 : dw $4800, $0800 ; from ceres
+  ; dw $000E, $890A : dl $8AC180 : dw $4800, $0800 ; demo
+
+  ; This almost works, but it's off by one screen
+  ; dw $000E, bomb_torizo_animals_escape_door : dl $8AD180 : dw $4800, $0800 ; from parlor
+
+  dw $000A ; clear layer 2
+
+  dw $0000
 }
 
 below_landing_site_setup:
