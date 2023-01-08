@@ -140,7 +140,7 @@ below_landing_site_fx:
 
 ; Room $91F8 state $9213: FX
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
-dw $0000, $FFFF, $FFFF, $0000 : db $00, $0A, $02, $0E, $00, $01, $00, $22
+dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $00, $00, $00
 
 }
 
