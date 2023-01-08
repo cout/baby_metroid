@@ -17,7 +17,7 @@ db $00       ; Index
 db $00       ; Area
 db $17       ; X position on map - TODO
 db $00       ; Y position on map - TODO
-db $09       ; Width (in screens)
+db $05       ; Width (in screens)
 db $05       ; Height (in screens)
 db $70       ; Up scroller
 db $A0       ; Down scroller
