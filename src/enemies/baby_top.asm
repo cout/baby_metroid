@@ -62,6 +62,7 @@ baby_top_init:
 baby_top_main:
 {
   JSR baby_top_change_palette
+  JSR baby_move_with_ship
 
   RTL
 }
@@ -112,6 +113,22 @@ baby_top_change_palette:
   LDX $12
   LDA #$0004
   JSL $A9D2E4
+
+  RTS
+}
+
+baby_move_with_ship:
+{
+  LDA $0E54
+  TAX
+
+  LDA $0EBA,x
+  STA $0F7A,x
+
+  LDA $0EBE,x
+  ; SEC
+  ; SBC #$0018
+  STA $0F7E,x
 
   RTS
 }
