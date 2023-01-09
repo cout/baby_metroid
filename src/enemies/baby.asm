@@ -147,8 +147,14 @@ baby_init_ai:
   STZ $0FAC,x                                ; Enemy Y velocity = 0
   LDA #$00F8 : STA $0FB2,x                   ; Enemy function timer = F8h
   LDA #$F683 : STA $7E781E,x                 ; Enemy palette function = $F683 (normal)
+  ; LDA.w #baby_null_palette_function
+  ; STA $7E781E,x
 
   ; Set initial state function
+  LDA $0FB6,x
+  BNE .baby_is_immobile
+
+.baby_is_mobile:
   LDA.w #baby_state_pick_target
   STA $0FA8,x
 
@@ -157,7 +163,16 @@ baby_init_ai:
   LDA $0F96,x : TAX
   LDA #$000F
   JMP $D2E4
+
+.baby_is_immobile:
+  LDA.w #baby_state_stay
+  STA $0FA8,x
+
+  RTL
 }
+
+baby_null_palette_function:
+RTS
 
 baby_main_ai:
 {
@@ -221,6 +236,11 @@ baby_state_pick_target:
 
 .follow_samus_and_return:
   JMP follow_samus
+}
+
+baby_state_stay:
+{
+  RTS
 }
 
 baby_pick_target:
@@ -738,7 +758,7 @@ baby_choose_firing_direction:
 }
 
 end_baby_freespace_90:
-!FREESPACE_90 = end_baby_freespace_90
+!FREESPACE_90 := end_baby_freespace_90
 
 print "Baby states:"
 print "  pick target - ", hex(baby_state_pick_target&$FFFF)

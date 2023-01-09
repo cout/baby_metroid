@@ -109,9 +109,10 @@ below_landing_site_enemy_population:
 
 ; Room $91F8 state $9213: Enemy population
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $D07F, $0180, $0578, $0000, $2400, $0000, $0000, $0000 ; gunship top
-dw $D0BF, $0180, $0578, $0000, $2400, $0000, $0000, $0000 ; gunship bottom
-dw $D0BF, $0180, $0578, $0000, $2400, $0000, $0000, $0001 ; gunship bottom
+dw $D07F, $0180, $0678, $0000, $2400, $0000, $0000, $0000 ; gunship top
+dw $D0BF, $0180, $0678, $0000, $2400, $0000, $0000, $0000 ; gunship bottom
+dw $D0BF, $0180, $0678, $0000, $2400, $0000, $0000, $0001 ; gunship bottom
+dw !baby_top, $0180, $0660, $0000, $2C00, $0000, $0000, $0001 ; baby
 dw $FFFF     ; end of list
 db $00       ; death quota
 
@@ -127,6 +128,7 @@ below_landing_site_enemy_graphics_set:
 
 ; Room $91F8 state $9213: Enemy graphics set
 ;  enemy  palette
+dw !baby_top, $0001 ; baby
 dw $D07F, $0002 ; gunship top
 dw $D0BF, $0007 ; gunship bottom
 dw $FFFF     ; end of list
