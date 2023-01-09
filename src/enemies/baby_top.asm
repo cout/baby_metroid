@@ -55,58 +55,63 @@ baby_top_init:
   STZ $0FAA,x                                    ; Enemy X velocity = 0
   STZ $0FAC,x                                    ; Enemy Y velocity = 0
   LDA #$00F8 : STA $0FB2,x                       ; Enemy function timer = F8h
-  LDA #$F683 : STA $7E781E,x                     ; Enemy palette function = $F683 (normal)
-  ; LDA.w #baby_null_palette_function
-  ; STA $7E781E,x
 
   RTL
 }
 
 baby_top_main:
 {
-  LDX $0E54
-
-  ; TODO - palette change routine needs to use correct palette instead
-  ; of assuming 7
-  ; JSR baby_top_change_palette
+  JSR baby_top_change_palette
 
   RTL
 }
 
 baby_top_change_palette:
 {
-  LDA #$01EA             ;\
-  STA $12                ;} $12 = 1EAh (sprite palette 7 colour 5)
-  LDA #$F6D1             ;\
-  STA $16                ;} $16 = $F6D1
+  LDX $0E54
 
-  LDX $0E54            
+  ; TODO - I'm prety sure this is not the right way to convert to an
+  ; offset from palette index to offset from 7EC000:
+  LDA $0F96,x
+  CLC
+  ADC #$010A
+  STA $12
+
+  ; Base palette (normal baby colors)
+  LDA #$F6D1
+  STA $16
+
+  ; Decrement timer and return if nonzero
   SEP #$20
-  LDA $0FAF,x            ;\
-  BEQ .f6aa              ;} If [enemy palette handler timer] != 0:
-  DEC A                  ;\
-  STA $0FAF,x            ;} Decrement enemy palette handler timer
+  LDA $0FAF,x
+  BEQ .f6aa
+  DEC A
+  STA $0FAF,x
   REP #$20
-  RTS                    ; Return
+  RTS
 
 .f6aa:
-  LDA $0FB0,x            ;\
-  STA $0FAF,x            ;} Enemy palette handler timer = [enemy palette handler delay]
-  LDA $0FAE,x            ;\
-  INC A                  ;|
-  AND #$07               ;} Enemy palette frame timer = ([enemy palette frame timer] + 1) % 8
-  STA $0FAE,x            ;/
+  ; Reset timer
+  LDA $0FB0,x
+  STA $0FAF,x
+  LDA $0FAE,x
+  INC A
+  AND #$07
+  STA $0FAE,x
   REP #$20
   AND #$00FF
-  JSR $F751              ; Handle Shitroid cry sound effect
-  ASL A                  ;\
-  ASL A                  ;|
-  ASL A                  ;|
-  ADC $16                ;|
-  TAY                    ;} Write 4 colours from [$16] + [enemy palette frame timer] * 8 to colour index [$12]
-  LDX $12                ;|
-  LDA #$0004             ;|
-  JSL $A9D2E4            ;/
+
+  ; Play cry sound
+  JSR $F751
+
+  ASL A
+  ASL A
+  ASL A
+  ADC $16
+  TAY
+  LDX $12
+  LDA #$0004
+  JSL $A9D2E4
 
   RTS
 }
