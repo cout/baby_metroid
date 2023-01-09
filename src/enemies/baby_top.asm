@@ -148,21 +148,21 @@ baby_top_spritemap:
 .top:
   dw ((.bottom-.top)/5)
 
-  ;  s xxx       yy       pfnn
-  dw $0018 : db $E0 : dw $610F ; left
-  dw $C218 : db $E8 : dw $6106 ; bot 0
-  dw $C208 : db $E8 : dw $6108 ; bot 1
-  dw $C208 : db $D8 : dw $6100 ; top 0
+  ;   size       xxx        yy       pfnn
+  dw $0000|($1FF&+24) : db -32 : dw $610F ; right
+  dw $C200|($1FF&+24) : db -24 : dw $6106 ; bot 5
+  dw $C200|($1FF&++8) : db -24 : dw $6108 ; bot 4
+  dw $C200|($1FF&++8) : db -40 : dw $6100 ; top 3
 
-  dw $C200 : db $D8 : dw $6101 ; top 1
-  dw $C200 : db $E8 : dw $6109 ; bot 2
-  dw $C3F0 : db $E8 : dw $2109 ; bot 3
-  dw $C3F0 : db $D8 : dw $2101 ; top 2
+  dw $C200|($1FF&++0) : db -40 : dw $6101 ; top 2
+  dw $C200|($1FF&++0) : db -24 : dw $6109 ; bot 3
+  dw $C200|($1FF&-16) : db -24 : dw $2109 ; bot 2
+  dw $C200|($1FF&-16) : db -40 : dw $2101 ; top 1
 
-  dw $01E0 : db $E0 : dw $210F ; right
-  dw $C3D8 : db $E8 : dw $2106 ; bot 5
-  dw $C3E8 : db $E8 : dw $2108 ; bot 4
-  dw $C3E8 : db $D8 : dw $2100 ; top 3
+  dw $0000|($1FF&-32) : db -32 : dw $210F ; left
+  dw $C200|($1FF&-40) : db -24 : dw $2106 ; bot 0
+  dw $C200|($1FF&-24) : db -24 : dw $2108 ; bot 1
+  dw $C200|($1FF&-24) : db -40 : dw $2100 ; top 0
 
 .bottom:
 }
