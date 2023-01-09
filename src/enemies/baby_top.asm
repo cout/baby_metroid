@@ -120,10 +120,6 @@ baby_top_instruction_list:
 {
 .top:
   dw $0010, baby_top_spritemap
-  ; dw $0010, $F9A8 ; claws in - metroid bottom
-  ; dw $0010, $FA40 ; claws down - metroid top
-  ; dw $0010, $FAD8 ; claws out - OK
-  ; dw $0010, $FA40 ; claws down
   dw $80ED, .top
 }
 
