@@ -2,6 +2,16 @@ org !FREESPACE_A0
 
 baby_top:
 
+; TODO TODO TODO -
+; Wherever the baby is getting loaded, the "second" gunship seems to use that memory.
+;
+; In theory the baby top needs only 400h, but even this messes up the gunship during escape.
+;
+; Also, the top of the baby seems to be stored at the bottom of the tiles, so really the baby needs to be loaded in
+; first then have the gunship overwrite part of the baby that we don't need.
+;
+; In theory the gunship needs 1600h so this is perfect; it's just a matter of getting everything lodaded in the right
+; spot.
 dw $0C00                  ; tile data size
 dw #$F8E6                 ; palette
 dw #$0C80                 ; health
