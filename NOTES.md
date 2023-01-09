@@ -812,10 +812,10 @@ There is also a corresponding enemy graphics set in bank $B4; it must
 also be updated for the enemies to have the correct graphics.  The
 format for each entry is:
 
-| Offset | Bytes | Description      |
-| ------ | ----- | ---------------- |
-| 0h     | 2     | Enemy pointer    |
-| 2h     | 2     | Palette?         |
+| Offset | Bytes | Description         |
+| ------ | ----- | ------------------- |
+| 0h     | 2     | Enemy pointer       |
+| 2h     | 2     | Palette slot number |
 
 The list is terminated with $FFFF.
 
@@ -829,7 +829,7 @@ The format of the enemy header is:
 | Offset | Bytes | Description               |
 | ------ | ----- | ------------------------- |
 | 0h     | 2     | Tile data size            |
-| 2h     | 2     | Palette                   |
+| 2h     | 2     | Palette address           |
 | 4h     | 2     | Health                    |
 | 6h     | 2     | Damage                    |
 | 8h     | 2     | X Radius                  |
