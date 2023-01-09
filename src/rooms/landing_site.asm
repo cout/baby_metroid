@@ -227,7 +227,15 @@ dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $00, $00, $00
 ; Room $91F8 state $9261: FX
 org $838000
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
-dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $06, $00, $00
+; dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $06, $00, $00
+dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $04, $00, $00
+;                                                            |
+;                                                            +-- lightning only, no red flashing
+;
+;
+; TODO:
+; 1. is it possible to slow down the lightning?
+; 2. can I add some light rain/thunder?
 
 org !FREESPACE_8F
 
