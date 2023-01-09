@@ -155,10 +155,15 @@ dw $0000, $00F0, $00B8, $FFF0 : db $30, $04, $02, $1E, $00, $00, $00, $00
 
 ; Room $9804, state $984F: PLM
 org $8F8412
-dw $DB44, $0808, $000E
-; dw $C848, $0601, $181C
-dw $C848, $0601, ($9000|!ENTRY_DOOR_INDEX)
-dw $0000
+{
+  dw $DB44, $0808, $000E
+if not(!USE_BELOW_LANDING_SITE)
+  dw $C848, $0601, $181C
+else
+  dw $C848, $0601, ($9000|!ENTRY_DOOR_INDEX)
+endif
+  dw $0000
+}
 warnpc $8F8420
 
 org !FREESPACE_8F

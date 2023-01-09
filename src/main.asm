@@ -1,4 +1,4 @@
-!debug_flag = $7E0DE0
+!USE_BELOW_LANDING_SITE = 0
 
 lorom
 

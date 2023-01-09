@@ -1,3 +1,5 @@
+if !USE_BELOW_LANDING_SITE
+
 org !FREESPACE_B8
 
 escape_landing_site_level_data:
@@ -5,6 +7,13 @@ incbin "escape_landing_site.bin"
 
 end_landing_site_freespace_b8:
 !FREESPACE_B8 := end_landing_site_freespace_b8
+
+else
+
+escape_landing_site_level_data = $C2C2BB
+
+endif
+
 
 ; Room $91F8: Header
 org $8F91F8
@@ -86,7 +95,7 @@ dw $91C9     ; Room setup routine (bank $8F)
 ; (event bit 0eh)
 org $8F9261
 ; dl $C2C2BB   ; Level data address
-dl escape_landing_site_level_data   ; Level data address
+dl escape_landing_site_level_data ; Level data address
 db $00       ; Tileset
 db $00       ; Music data index
 db $00       ; Music track index
@@ -130,34 +139,40 @@ db $00       ; death quota
 
 ; Room $91F8 state $9261: Enemy population
 org $A18C0D
-;  enemy  x      y      init   props  extra  param1 param2
-; dw $D07F, $0480, $0478, $0000, $2400, $0000, $0000, $0000 ; gunship top
-; dw $D0BF, $0480, $0478, $0000, $2400, $0000, $0000, $0000 ; gunship bottom
-; dw $D0BF, $0480, $0478, $0000, $2400, $0000, $0000, $0001 ; gunship bottom
-dw $E1FF, $0051, $04AA, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $0080, $04BC, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $00A1, $04D0, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $00E5, $04D7, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $015B, $04D7, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $019D, $04D5, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $01C0, $04C9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $0222, $04C8, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $0243, $04C4, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $027C, $04CE, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $0317, $04D7, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $033F, $04C9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $036C, $04B6, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $0390, $04A9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $03D9, $04B7, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $041A, $04D9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $049C, $04D8, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $04F9, $04CA, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $0525, $04BB, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $0557, $04C9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $05C6, $04D4, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $E1FF, $0624, $04D4, $0000, $2000, $0000, $0000, $0000 ; ceres steam
-dw $FFFF     ; end of list
-db $00       ; death quota
+{
+  ;  enemy  x      y      init   props  extra  param1 param2
+if not(!USE_BELOW_LANDING_SITE)
+  dw $D07F, $0480, $0478, $0000, $2400, $0000, $0000, $0000 ; gunship top
+  dw $D0BF, $0480, $0478, $0000, $2400, $0000, $0000, $0000 ; gunship bottom
+  dw $D0BF, $0480, $0478, $0000, $2400, $0000, $0000, $0001 ; gunship bottom
+  dw !baby_top, $0480, $0460, $0000, $2C00, $0000, $0000, $0000 ; baby
+else
+  dw $E1FF, $0051, $04AA, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $0080, $04BC, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $00A1, $04D0, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $00E5, $04D7, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $015B, $04D7, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $019D, $04D5, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $01C0, $04C9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $0222, $04C8, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $0243, $04C4, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $027C, $04CE, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $0317, $04D7, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $033F, $04C9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $036C, $04B6, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $0390, $04A9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $03D9, $04B7, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $041A, $04D9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $049C, $04D8, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $04F9, $04CA, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $0525, $04BB, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $0557, $04C9, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $05C6, $04D4, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+  dw $E1FF, $0624, $04D4, $0000, $2000, $0000, $0000, $0000 ; ceres steam
+endif
+  dw $FFFF     ; end of list
+  db $00       ; death quota
+}
 
 ; Room $91F8 state $9213: Enemy graphics set
 org $B48193
@@ -182,10 +197,15 @@ dw $FFFF     ; end of list
 
 ; Room $91F8 state $9261: Enemy graphics set
 org $B48283
-;  enemy  palette
-; dw $D07F, $0002 ; gunship top
-; dw $D0BF, $0007 ; gunship bottom
-dw $FFFF     ; end of list
+{
+  ;  enemy  palette
+if not(!USE_BELOW_LANDING_SITE)
+  dw !baby_top, $0000 ; baby
+  dw $D07F, $0002 ; gunship top
+  dw $D0BF, $0007 ; gunship bottom
+endif
+  dw $FFFF     ; end of list
+}
 
 ; Room $91F8 state $9213: FX
 org $8380C0

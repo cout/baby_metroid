@@ -1,3 +1,5 @@
+if !USE_BELOW_LANDING_SITE
+
 org $84B9C1
 
 animals_escape_block_shot_plm_entry:
@@ -58,3 +60,5 @@ I_set_animals_escape_door_bts:
 
 end_animals_escape_freespace_84:
 !FREESPACE_84 = end_animals_escape_freespace_84
+
+endif
