@@ -886,9 +886,9 @@ enemy, $080 for the third enemy, etc.):
 | 2     | Active AI bitmask   | $7E:0F8A+y | 0000                 |
 | 2     | Health              | $7E:0F8C+y | [enemy header + 04h] |
 | 2     | Spritemap pointer   | $7E:0F8E+y | ?                    |
-| 2     | Instruction timer   | $7E:0F90+y | 0                    |
+| 2     | Enemy timer         | $7E:0F90+y | 0                    |
 | 2     | Instruction pointer | $7E:0F92+y | ?                    |
-| 2     | Action delay?       | $7E:0F94+y | 1                    |
+| 2     | Instruction timer   | $7E:0F94+y | 1                    |
 | 2     | Palette index       | $7E:0F96+y | ($7E:7006+x) & $0E00 |
 | 2     | VRAM tiles index    | $7E:0F98+y | ($7E:7006+x) & $01FF |
 | 2     | Layer               | $7E:0F9A+y | [enemy header + 39h] |
