@@ -72,7 +72,7 @@ dw $0000     ; Room var
 dw $0000
 dw $8428     ; Room PLM list address (bank $8F)
 dw $B8EA     ; Library background (bank $8F)
-dw $91BB     ; Room setup routine (bank $8F)
+; dw $91BB     ; Room setup routine (bank $8F)
 dw $91D4
 
 ; Room $9879 state $9890: Enemy population
