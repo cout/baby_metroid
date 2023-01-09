@@ -233,6 +233,7 @@ org !FREESPACE_8F
 
 landing_site_escape_main:
 {
+  JSL $88AF8D
   RTS
 }
 
