@@ -105,10 +105,12 @@ dw $8283     ; Enemy graphics set offset (bank $B4)
 dw $0181     ; Layer 2 scroll
 dw $9283     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
-dw $C120     ; Room main routine (bank $8F)
+;dw $C120     ; Room main routine (bank $8F)
+dw landing_site_escape_main
 dw $8026     ; Room PLM list address (bank $8F)
 dw $B76A     ; Library background (bank $8F)
-dw $91BD     ; Room setup routine (bank $8F)
+; dw $91BD     ; Room setup routine (bank $8F)
+dw $91C9
 
 ; Room $91F8 state $9213: Enemy population
 org $A1883D
@@ -226,3 +228,13 @@ dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $00, $00, $00
 org $838000
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $06, $00, $00
+
+org !FREESPACE_8F
+
+landing_site_escape_main:
+{
+  RTS
+}
+
+end_landing_site_freespace_8f:
+!FREESPACE_8F := end_landing_site_freespace_8f
