@@ -28,6 +28,7 @@ incsrc enemies/fune.asm
 incsrc enemies/zebetite.asm
 incsrc enemies/baby.asm
 incsrc enemies/baby_top.asm
+incsrc enemies/gunship.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
 incsrc plm/power_control.asm

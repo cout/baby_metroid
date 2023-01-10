@@ -202,9 +202,15 @@ org $B48283
 {
   ;  enemy  palette
 if not(!USE_BELOW_LANDING_SITE)
+  ; The gunship bottom is intentionally omitted so the top and bottom
+  ; will share tiles.  As far as I can tell, this has no noticeable
+  ; consequences graphically.
+  ;
+  ; The gunship top uses palette slot 7, otherwise the bottom of the
+  ; ship is black.
+  dw $D07F, $0007 ; gunship top
+  ; dw $D0BF, $0007 ; gunship bottom
   dw !baby_top, $0000 ; baby
-  dw $D07F, $0002 ; gunship top
-  dw $D0BF, $0007 ; gunship bottom
 endif
   dw $FFFF     ; end of list
 }
