@@ -1023,7 +1023,7 @@ a structure for each projectile):
 | $7E:1B23+y | 2     | ?                               | 0000h                |
 | $7E:1B47+y | 2     | Instruction list pointer        | [X + 4]              |
 | $7E:1B6B+y | 2     | Spritemap pointer               | 8000h                |
-| $7E:1B8F+y | 2     | Instruction delay               | uninitialized        |
+| $7E:1B8F+y | 2     | Instruction timer (delay)       | uninitialized        |
 | $7E:1BB3+y | 2     | X / Y radius                    | [X + 6]              |
 | $7E:1BD7+y | 2     | Properties                      | [X + 8]              |
 | $7E:1BFB+y | 2     | ?                               | 0000h                |
