@@ -6,7 +6,7 @@
 !FREESPACE_86 = $86F4A6
 !FREESPACE_8B = $8BF760
 !FREESPACE_90 = $90F63A
-!FREESPACE_94 = $94DC00 ; use warnpc $94E000
+!FREESPACE_94 = $94DC00
 !FREESPACE_A0 = $A0F7D3
 !FREESPACE_A1 = $A1EBD1
 !FREESPACE_8F = $8FE99B
@@ -16,6 +16,8 @@
 !FREESPACE_B5 = $B5F000
 !FREESPACE_B6 = $B6F200
 !FREESPACE_B8 = $B88000
+
+!END_FREESPACE_94 = $94E000
 
 ; Enemy banks:
 !FREESPACE_A2 = $A0F498 ; 2935 bytes
@@ -31,3 +33,9 @@
 ; TODO TODO TODO - above values are unaligned addresses; could this be
 ; the cause of mysterious crashes when I try to put an enemy (samus
 ; statue) in banks A2, A4, or AA?
+
+macro VALIDATE_FREESPACE()
+  pushpc
+  org !FREESPACE_94 : warnpc !END_FREESPACE_94
+  pullpc
+endmacro

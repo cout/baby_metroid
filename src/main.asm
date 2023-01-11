@@ -100,3 +100,5 @@ incsrc rooms/landing_site.asm
 incsrc rooms/flyway.asm
 incsrc rooms/below_landing_site.asm
 incsrc outro/escape.asm
+
+%VALIDATE_FREESPACE()
