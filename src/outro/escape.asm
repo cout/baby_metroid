@@ -37,7 +37,7 @@ warnpc $8BD9A5
 org $8BEB0F
 cinematic_sprite_object_EE9D:
 {
-  dw $94D6, $0002 ; Set timer
+  dw $94D6, $0008 ; Set timer
 .top:
   dw $000D, $A396 ; Zebes frame 1
   dw $000D, $A3AC ; Zebes frame 2
@@ -99,3 +99,21 @@ org $8BDBE1
   JMP $DBED
 }
 warnpc $8BDBED
+
+; Increase number of frames of big planet fade-out before we force a transition
+; (the actual transition is handled by cinematic sprite object $EE9D)
+org $8BD9F5
+; LDA #$003F
+LDA #$007F
+
+; Make big planet zoom out more slowly
+org $8BDA1E
+; ADC #$0004
+ADC #$0004
+
+; Fade out every 4 frames instead of every frame
+org $8BDA27
+; BIT #$0001
+; BNE $1E
+BIT #$0003
+BNE $1E
