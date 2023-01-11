@@ -136,3 +136,22 @@ org $8BDA27
 ; BNE $1E
 BIT #$0003
 BNE $1E
+
+org $8BD57C
+LDA #$B800
+STA $48
+LDA.w #gunship_with_baby_tiles
+STA $47
+
+org !FREESPACE_B8
+
+; TODO:
+; 1. The colors for the baby are wrong, but fixing them requires
+;    figuring out which palette slots I can use
+; 2. The tiles use more space than actually needed, because they include
+;    ceres station
+gunship_with_baby_tiles:
+incbin "gunship_with_baby.bin"
+
+end_escape_freespace_99:
+!FREESPACE_B8 := end_escape_freespace_99
