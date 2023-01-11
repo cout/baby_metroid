@@ -30,10 +30,6 @@
 !FREESPACE_A9 = $A9FB70 ; 1168 bytes
 !FREESPACE_AA = $AAF7D3 ; 2093 bytes
 
-; TODO TODO TODO - above values are unaligned addresses; could this be
-; the cause of mysterious crashes when I try to put an enemy (samus
-; statue) in banks A2, A4, or AA?
-
 macro VALIDATE_FREESPACE()
   pushpc
   org !FREESPACE_94 : warnpc !END_FREESPACE_94
