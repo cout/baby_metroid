@@ -37,7 +37,7 @@ warnpc $8BD9A5
 org $8BEB0F
 cinematic_sprite_object_EE9D:
 {
-  dw $94D6, $0008 ; Set timer
+  dw $94D6, $0004 ; Set timer
 .top:
   dw $000D, $A396 ; Zebes frame 1
   dw $000D, $A3AC ; Zebes frame 2
@@ -79,9 +79,6 @@ warnpc $8BDB5C
 org $8BF32B
 {
   PHY
-  ; SEP #$20
-
-  ; REP #$20
 
   LDA #$DB9E   ;\
   STA $1F51    ;} Cinematic function = $DB9E
@@ -91,6 +88,28 @@ org $8BF32B
   RTS
 }
 warnpc $8BF35A
+
+org $8BDBBD
+JMP play_stardrive_sound_and_transition_to_dbc4
+
+org !FREESPACE_8B
+
+play_stardrive_sound_and_transition_to_dbc4:
+{
+  LDA #$DBC4
+  STA $1F51
+
+  ; Play power bomb explosion sound for stardrive engaged
+  ; (this is the same sound that is played when Samus's ship leaves
+  ; Ceres station)
+  LDA #$0001
+  JSL $809021
+
+  RTS
+}
+
+end_escape_freespace_8b:
+!FREESPACE_8B := end_escape_freespace_8b
 
 ; Cinematic function $DB4C
 ; Skip setting math subscreen backdrop color so we don't cut to white
