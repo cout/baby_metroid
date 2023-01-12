@@ -104,12 +104,16 @@ draygon_state_draygon_arrives:
 draygon_state_player_control:
 {
   ; Copy controller 1 input to controller 2 input
-  ; TODO - Filter out the angle buttons
-  ; TODO - Follow Draygon with the camera
-  LDA $008B : STA $008D
-  LDA $008F : STA $0091
+  ; We filter out L/R/Start, because these buttons trigger debug
+  ; features that we don't want.
+  LDA $008B : AND #$EFCF : STA $008D
+  LDA $008F : AND #$EFCF : STA $0091
 
   JSL $A59367
+
+  ; TODO - enable access to the pause menu
+
+  ; TODO - Follow Draygon with the camera
 
   ; TODO - Check to see if Draygon "rescued" Samus
 
