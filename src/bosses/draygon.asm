@@ -55,18 +55,17 @@ draygon_state_initial:
 
 draygon_state_samus_struggles:
 {
-	JSR draygon_hold_samus
+  JSR draygon_hold_samus
 
   LDA $0FAA,x
   DEC
   STA $0FAA,x
   BPL .return
 
-	; Disable Samus movement
+  ; Disable Samus movement
   ; TODO - force Samus into a standing position
-  ; TODO - turn off blue suit
   ; TODO - force Samus to face left
-	LDA #$0000
+  LDA #$0000
   JSL $90F084
 
   LDA.w #draygon_state_scroll_screen_left
@@ -78,10 +77,10 @@ draygon_state_samus_struggles:
 
 draygon_state_scroll_screen_left:
 {
-	JSR draygon_hold_samus
+  JSR draygon_hold_samus
 
-	DEC $0911
-	BNE .return
+  DEC $0911
+  BNE .return
 
   LDA.w #draygon_state_draygon_arrives
   STA $0FA8,x
@@ -134,7 +133,7 @@ draygon_state_draygon_arrives:
   STA $0FA8,x
 
 .return:
-	RTS
+  RTS
 }
 
 draygon_state_player_control:
@@ -205,10 +204,15 @@ draygon_scroll_screen:
 
 draygon_hold_samus:
 {
-  ; TODO - turn off blue suit
+  PHX
+
   LDA !SAMUS_HOLD_X : STA $0AF6 ; samus x
   LDA !SAMUS_HOLD_Y : STA $0AFA ; samus y
-	RTS
+
+  JSL cancel_blue_suit
+
+  PLX
+  RTS
 }
 
 end_draygon_freespace_a5:

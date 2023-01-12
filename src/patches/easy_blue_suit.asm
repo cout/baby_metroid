@@ -175,6 +175,16 @@ do_easy_blue_suit_check:
   BEQ .return
 
 .cancel_blue_suit:
+  BRA cancel_blue_suit
+
+.call_cancel_blue_suit_routine:
+  BRA call_cancel_blue_suit_routine
+
+.return:
+  RTL
+}
+
+cancel_blue_suit:
   ; Clear the easy blue suit counter
   LDA #$0000
   STA easy_blue_suit_counter
@@ -183,7 +193,10 @@ do_easy_blue_suit_check:
   LDA #$0001
   STA $0B3C
 
-.call_cancel_blue_suit_routine:
+  BRA call_cancel_blue_suit_routine
+}
+
+call_cancel_blue_suit_routine:
   ; Cancel blue suit if the run button is not pressed and we didn't
   ; acquire blue suit via a "standing run".
   ; (TODO - it's OK to call this routine even if we have blue suit, as
@@ -193,7 +206,6 @@ do_easy_blue_suit_check:
   LDA $079B
   STA easy_blue_suit_room
 
-.return:
   RTL
 }
 
