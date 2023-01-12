@@ -62,9 +62,20 @@ draygon_state_samus_struggles:
   STA $0FAA,x
   BPL .return
 
+  ; Force falling position, facing left
+  LDA #$002A : STA $0A1C ; pose
+  LDA #$0001 : STA $0A96 ; animation frame
+
+  ; Set Samus radius by invoking the normal movement handler for the
+  ; last time (it will not be called again due to disabling Samus
+  ; movement)
+  ; TODO - for a better effect, we should still see Samus struggling
+  ; after taking control away from the player
+  PHX
+  JSL $90E695
+  PLX
+
   ; Disable Samus movement
-  ; TODO - force Samus into a standing position
-  ; TODO - force Samus to face left
   LDA #$0000
   JSL $90F084
 
