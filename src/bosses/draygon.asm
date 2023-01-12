@@ -159,8 +159,6 @@ draygon_state_player_control:
 
   JSR draygon_scroll_screen
 
-  ; TODO - disable drawing Samus if she is off screen
-
   ; TODO - enable access to the pause menu
 
   ; TODO - Check to see if Draygon "rescued" Samus
@@ -170,6 +168,8 @@ draygon_state_player_control:
   ; TODO - Draygon's eye ends up on its back if it crouches while firing
   ; (and facing right -- though it might be possible to trigger this
   ; while facing left too)
+
+  JSR draygon_set_samus_drawing_handler
 
   RTS
 }
@@ -217,12 +217,46 @@ draygon_hold_samus:
 {
   PHX
 
+  JSL cancel_blue_suit
+
   LDA !SAMUS_HOLD_X : STA $0AF6 ; samus x
   LDA !SAMUS_HOLD_Y : STA $0AFA ; samus y
 
-  JSL cancel_blue_suit
+  JSR draygon_set_samus_drawing_handler
 
   PLX
+  RTS
+}
+
+
+draygon_set_samus_drawing_handler:
+{
+  LDA $0AFA
+
+  SEC
+  SBC $0915
+  STA $7FFC02
+  BMI .samus_off_screen
+
+  CMP #$0100
+  BPL .samus_off_screen
+
+.samus_on_screen:
+  ; use default drawing handler
+  LDA #$EB52
+  STA $7FFC00
+  BRA .store_drawing_handler
+
+.samus_off_screen:
+  ; use null drawing handler
+  LDA #$EBF2
+  STA $7FFC00
+
+.store_drawing_handler:
+  STA $0A5C
+
+.return:
+  STA $0A5C
   RTS
 }
 
