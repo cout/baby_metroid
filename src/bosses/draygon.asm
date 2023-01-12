@@ -155,11 +155,11 @@ draygon_state_player_control:
   LDA $008B : AND #$EFCF : STA $008D
   LDA $008F : AND #$EFCF : STA $0091
 
-  JSL $A59367
+  JSL draygon_debug_handler
 
   JSR draygon_scroll_screen
 
-  ; TODO - enable access to the pause menu
+  JSL draygon_pause_check
 
   ; TODO - Check to see if Draygon "rescued" Samus
 
@@ -173,6 +173,8 @@ draygon_state_player_control:
 
   RTS
 }
+
+draygon_debug_handler = $A59367
 
 draygon_scroll_screen:
 {
@@ -262,3 +264,14 @@ draygon_set_samus_drawing_handler:
 
 end_draygon_freespace_a5:
 !FREESPACE_A5 = end_draygon_freespace_a5
+
+org !FREESPACE_90
+
+draygon_pause_check:
+{
+  JSR $EA45
+  RTL
+}
+
+end_draygon_freespace_90:
+!FREESPACE_90 := end_draygon_freespace_90
