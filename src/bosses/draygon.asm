@@ -208,6 +208,11 @@ draygon_state_wait_for_samus_to_fall:
   LDA #$0001
   JSL $8081A6
 
+  ; Set Draygon as intangible
+  LDA $0F86,x
+  ORA #$0400
+  STA $0F86,x
+
   ; Drop items
   JSL $A0BB3D
 
