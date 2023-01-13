@@ -295,11 +295,19 @@ draygon_big_hug:
 
 .holding_samus:
   ; Enable Samus movement
+  ; TODO - Samus should fall more slowly
   LDA #$0001
   JSL $90F084
 
   LDA.w #draygon_state_wait_for_samus_to_fall
   STA $0FA8,x
+
+  ; Set boss bit
+  LDA #$0001
+  JSL $8081A6
+
+  ; Drop items
+  JSL $A0BB3D
 
 .not_holding_samus:
   LDA $0F7A
