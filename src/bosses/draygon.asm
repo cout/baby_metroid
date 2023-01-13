@@ -1,5 +1,5 @@
-!SAMUS_HOLD_X = #$01C9
-!SAMUS_HOLD_Y = #$016D
+!SAMUS_STUCK_X = #$01C9
+!SAMUS_STUCK_Y = #$016D
 
 org !FREEMEM_7F
 
@@ -22,10 +22,16 @@ draygon_previous_y_sub_position:
 print "Variable draygon_previous_y_sub_position: $", pc
 skip 2
 
+draygon_holding_samus:
+print "Variable draygon_holding_samus: $", pc
+skip 2
+
 end_draygon_freemem_7f:
 !FREEMEM_7F := end_draygon_freemem_7f
 
 org $A586DD : LDA.w #draygon_state_initial
+
+org $A593BD : JMP draygon_big_hug
 
 org !FREESPACE_A5
 
@@ -33,7 +39,10 @@ draygon_state_initial:
 {
   ; TODO - spawn gunk at Samus's position
 
-  LDA !SAMUS_HOLD_X
+  LDA #$0000
+  STA draygon_holding_samus
+
+  LDA !SAMUS_STUCK_X
   STA $0AF6
 
   LDA $0AFA
@@ -55,7 +64,7 @@ draygon_state_initial:
 
 draygon_state_samus_struggles:
 {
-  JSR draygon_hold_samus
+  JSR draygon_keep_samus_stuck
 
   LDA $0FAA,x
   DEC
@@ -88,7 +97,7 @@ draygon_state_samus_struggles:
 
 draygon_state_scroll_screen_left:
 {
-  JSR draygon_hold_samus
+  JSR draygon_keep_samus_stuck
 
   DEC $0911
   BNE .return
@@ -161,7 +170,8 @@ draygon_state_player_control:
 
   JSL draygon_pause_check
 
-  ; TODO - Check to see if Draygon "rescued" Samus
+  ; TODO - if draygon moves and is holding samus, the arm instruction
+  ; list pointer should not change
 
   ; TODO - there is a graphical glitch with Draygon's eye after blinking
 
@@ -171,10 +181,17 @@ draygon_state_player_control:
 
   JSR draygon_set_samus_drawing_handler
 
+  LDA draygon_holding_samus
+  BEQ .return
+  JSR draygon_move_samus
+  ; TODO - set samus pose
+
+.return:
   RTS
 }
 
 draygon_debug_handler = $A59367
+draygon_move_samus = $A594A9
 
 draygon_scroll_screen:
 {
@@ -215,14 +232,14 @@ draygon_scroll_screen:
   RTS
 }
 
-draygon_hold_samus:
+draygon_keep_samus_stuck:
 {
   PHX
 
   JSL cancel_blue_suit
 
-  LDA !SAMUS_HOLD_X : STA $0AF6 ; samus x
-  LDA !SAMUS_HOLD_Y : STA $0AFA ; samus y
+  LDA !SAMUS_STUCK_X : STA $0AF6 ; samus x
+  LDA !SAMUS_STUCK_Y : STA $0AFA ; samus y
 
   JSR draygon_set_samus_drawing_handler
 
@@ -260,6 +277,62 @@ draygon_set_samus_drawing_handler:
 .return:
   STA $0A5C
   RTS
+}
+
+draygon_big_hug:
+{
+  ; TODO - if we attempt a hug while holding Samus, then draygon should
+  ; put Samus down
+
+  LDA $0F7A
+  SEC
+  SBC $0AF6
+  JSL $A0B067
+  CMP #$0020
+  BPL .no_collision
+  LDA $0F7E
+  SEC
+  SBC $0AFA
+  JSL $A0B067
+  CMP #$0020
+  BPL .no_collision
+  BRA .collision
+
+.no_collision:
+
+  ; Choose instruction list for arms based on which direction Draygon is
+  ; facing
+  LDY #$9825
+  LDA $7E8000,x
+  BEQ +
+  LDY #$9C18
++ STY $1052
+
+  ; Set instruction timer for arms
+  LDA #$0001
+  STA $1054
+
+  BRA .return
+
+.collision:
+
+  ; Choose instruction list for arms based on which direction Draygon is
+  ; facing
+  LDY #$9845
+  LDA $7E8000,x
+  BEQ +
+  LDY #$9C38
++ STY $1052
+
+  ; Set instruction timer for arms
+  LDA #$0001
+  STA $1054
+
+  LDA #$0001
+  STA draygon_holding_samus
+
+.return:
+  RTL
 }
 
 end_draygon_freespace_a5:
