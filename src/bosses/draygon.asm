@@ -52,6 +52,11 @@ draygon_state_initial:
   CMP #$016D
   BMI .return
 
+  ; Spawn gunk projectile
+  LDY.w #permagunk
+  LDA #$0002
+  JSL $868027
+
   LDA.w #draygon_state_samus_struggles
   STA $0FA8,x
 
@@ -439,3 +444,74 @@ draygon_pause_check:
 
 end_draygon_freespace_90:
 !FREESPACE_90 := end_draygon_freespace_90
+
+org !FREESPACE_86
+
+permagunk:
+; dw $8D04 ; init ai
+dw permagunk_init
+; dw $8E0F ; pre-instruction
+; dw $8D99 ; pre-instruction
+dw permagunk_pre_instruction
+dw $8C3A ; instruction list
+db $08   ; x radius
+db $08   ; y radius
+dw $D000 ; properties
+dw $8C38 ; hit instruction list
+dw $8C58 ; shot instruction list
+
+permagunk_init:
+{
+  ; gunk init
+  JSR $8D04
+
+  ; gunk stuck pre-instruction
+  TYX
+  JSR $8D99
+
+  ; force our pre-instruction
+  LDA.w #permagunk_pre_instruction
+  STA $1A03,x
+
+  RTS
+}
+
+permagunk_pre_instruction:
+{
+  JSR $8D5C ; Dunno?
+
+  ; LDA $0A6E
+  ; BNE $1E
+
+  ; Projectile X = [Samus X]
+  LDA $0AF6
+  STA $1A4B,x
+
+  ; Projectile Y = [Samus Y] + [stick offset]*4 + 12
+  LDA $1B23,x
+  ASL A
+  ASL A
+  CLC
+  ADC $0AFA
+  SEC
+  SBC #$000C
+  STA $1A93,x
+
+  ; Delete if boss bit is set
+  LDA #$0001
+  JSL $8081DC
+  BCC .return
+
+.delete:
+  STZ $1997,x
+  DEC $0A66
+  LDA $0A66
+  BPL $03
+  STZ $0A66
+
+.return:
+  RTS
+}
+
+end_draygon_freespace_86:
+!FREESPACE_86 := end_draygon_freespace_86
