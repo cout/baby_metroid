@@ -39,7 +39,6 @@ Incomplete
 * Remove spikes from pre-xray room
 * WS attic enemies make it challenging after power is on (maybe remove
   kihunters?)
-* Escape sequence is incomplete
 * Eye doors sometimes still close
 * Ridley needs to somehow drain Samus's health to 1 to encourage player
     to pick up the e-tank (or maybe just have the door locked)
@@ -63,6 +62,7 @@ Cosmetic
 * Can I make the selected item in the HUD be the color of the door it
     opens?
 * Lights in the tourian escape rooms blink too fast
+* Samus should wiggle during draygon "fight"
 
 Feedback from E
 ---------------
