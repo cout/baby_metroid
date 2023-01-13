@@ -185,7 +185,10 @@ draygon_state_player_control:
 
   LDA draygon_holding_samus
   BEQ .return
+
   JSR draygon_move_samus
+  JSR draygon_force_hug_pose
+
   ; TODO - set samus pose
 
 .return:
@@ -194,6 +197,47 @@ draygon_state_player_control:
 
 draygon_debug_handler = $A59367
 draygon_move_samus = $A594A9
+
+draygon_force_hug_pose:
+{
+  LDA $7E8000,x
+  BNE .facing_right
+
+.facing_left:
+  LDA $1052
+  CMP #$9845
+  BMI .force_hug_left
+  CMP #$9867
+  BPL .force_hug_left
+  BRA .return
+
+.force_hug_left:
+  LDA #$9861
+  STA $1052
+
+  LDA #$0001
+  STA $1054
+
+  BRA .return
+
+.facing_right:
+  LDA $1052
+  CMP #$9C38
+  BMI .force_hug_right
+  CMP #$9C5A
+  BPL .force_hug_right
+  BRA .return
+
+.force_hug_right:
+  LDA #$9C54
+  STA $1052
+
+  LDA #$0001
+  STA $1054
+
+.return:
+  RTS
+}
 
 draygon_state_wait_for_samus_to_fall:
 {
@@ -349,10 +393,10 @@ draygon_big_hug:
 
   ; Choose instruction list for arms based on which direction Draygon is
   ; facing
-  LDY #$9825
+  LDY #$9825    ; hug, facing left, automatically return to normal pose
   LDA $7E8000,x
   BEQ +
-  LDY #$9C18
+  LDY #$9C18    ; hug, facing right, automatically return to normal pose
 + STY $1052
 
   ; Set instruction timer for arms
@@ -365,10 +409,10 @@ draygon_big_hug:
 
   ; Choose instruction list for arms based on which direction Draygon is
   ; facing
-  LDY #$9845
+  LDY #$9845    ; hug, facing left, stay in hug pose
   LDA $7E8000,x
   BEQ +
-  LDY #$9C38
+  LDY #$9C38    ; hug, facing right, stay in hug pose
 + STY $1052
 
   ; Set instruction timer for arms
