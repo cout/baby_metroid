@@ -99,6 +99,7 @@ incsrc rooms/parlor.asm
 incsrc rooms/landing_site.asm
 incsrc rooms/flyway.asm
 incsrc rooms/below_landing_site.asm
+incsrc rooms/red_brinstar_fireflea.asm
 incsrc outro/escape.asm
 
 %VALIDATE_FREESPACE()
