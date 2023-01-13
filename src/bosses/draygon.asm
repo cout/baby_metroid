@@ -197,6 +197,26 @@ draygon_move_samus = $A594A9
 
 draygon_state_wait_for_samus_to_fall:
 {
+  LDA $0AFA
+  CMP #$01B0
+  BMI .return
+
+  LDA.w #draygon_state_chill
+  STA $0FA8,x
+
+  ; Set boss bit
+  LDA #$0001
+  JSL $8081A6
+
+  ; Drop items
+  JSL $A0BB3D
+
+.return:
+  RTS
+}
+
+draygon_state_chill:
+{
   RTS
 }
 
@@ -294,20 +314,13 @@ draygon_big_hug:
   ; put Samus down
 
 .holding_samus:
-  ; Enable Samus movement
-  LDA #$0001
-  JSL $90F084
-
   ; Zero-out Samus's fall speed
   STZ $0B2C
   STZ $0B2E
 
-  ; Set boss bit
+  ; Enable Samus movement
   LDA #$0001
-  JSL $8081A6
-
-  ; Drop items
-  JSL $A0BB3D
+  JSL $90F084
 
   LDA.w #draygon_state_wait_for_samus_to_fall
   STA $0FA8,x
