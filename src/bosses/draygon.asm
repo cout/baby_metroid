@@ -179,6 +179,8 @@ draygon_state_player_control:
   ; (and facing right -- though it might be possible to trigger this
   ; while facing left too)
 
+  ; TODO - prevent Draygon from straying off screen
+
   JSR draygon_set_samus_drawing_handler
 
   LDA draygon_holding_samus
@@ -192,6 +194,11 @@ draygon_state_player_control:
 
 draygon_debug_handler = $A59367
 draygon_move_samus = $A594A9
+
+draygon_state_wait_for_samus_to_fall:
+{
+  RTS
+}
 
 draygon_scroll_screen:
 {
@@ -281,9 +288,20 @@ draygon_set_samus_drawing_handler:
 
 draygon_big_hug:
 {
+  LDA draygon_holding_samus
+  BEQ .not_holding_samus
   ; TODO - if we attempt a hug while holding Samus, then draygon should
   ; put Samus down
 
+.holding_samus:
+  ; Enable Samus movement
+  LDA #$0001
+  JSL $90F084
+
+  LDA.w #draygon_state_wait_for_samus_to_fall
+  STA $0FA8,x
+
+.not_holding_samus:
   LDA $0F7A
   SEC
   SBC $0AF6
