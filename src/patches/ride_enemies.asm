@@ -247,11 +247,11 @@ check_samus_is_inside_enemy:
   INC A
 
   ; If A - [Samus Y radius] - [Enemy Y radius] >= 0: return 0
-  ; TODO: no collision is detected when riding on top of an enemy
   ; TODO: somehow prevent samus from falling in this case
 + SEC
   SBC $0B00
   BCC .collision
+  DEC
   CMP $0F84,x
   BCC .collision
 
