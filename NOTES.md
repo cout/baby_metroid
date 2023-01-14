@@ -1108,23 +1108,23 @@ Palette memory:
 The palettes are allocated as follows:
 
 | Actual   | Target   | FX   | OAM  | Colors | Type   | Index | Notes                        |
-| -------- | -------- | -----|----- | ------ | ------ | ----- | ---------------------------- |
-| $7E:C000 | $7E:C200 |      |      | 16     | BG1/2  | 0     | CRE, grey doors              |
-| $7E:C020 | $7E:C220 |      |      | 16     | BG1/2  | 1     | CRE, green doors             |
-| $7E:C000 | $7E:C210 |      |      | 4?     | BG3    | 0     |                              |
-| $7E:C008 | $7E:C210 |      |      | 4?     | BG3    | 1     |                              |
-| $7E:C010 | $7E:C210 |      |      | 4?     | BG3    | 2     |                              |
-| $7E:C018 | $7E:C218 |      |      | 4?     | BG3    | 3     |                              |
-| $7E:C020 | $7E:C220 |      |      | 4?     | BG3    | 4     |                              |
-| $7E:C028 | $7E:C228 |      |      | 4?     | BG3    | 5     |                              |
-| $7E:C030 | $7E:C230 |      |      | 4?     | BG3    | 6     |                              |
-| $7E:C038 | $7E:C238 |      |      | 4?     | BG3    | 7     |                              |
-| $7E:C040 | $7E:C240 | 040h |      | 16?    | BG1/2? | 2?    | Red doors                    |
-| $7E:C060 | $7E:C260 | 060h |      | 16     | BG1/2  | 3     | Blue doors                   |
-| $7E:C080 | $7E:C280 | 080h |      | 16     | BG1/2  | 4     |                              |
-| $7E:C0A0 | $7E:C2A0 | 0A0h |      | 16     | BG1/2  | 5     |                              |
-| $7E:C0C0 | $7E:C2C0 | 0C0h |      | 16     |        | 6?    |                              |
-| $7E:C0E0 | $7E:C2E0 | 0E0h |      | 16     |        | 7?    |                              |
+| -------- | -------- | ---- |----- | ------ | ------ | ----- | ---------------------------- |
+| $7E:C000 | $7E:C200 |      |      | 16     | BG1/2  | 0     | SCE/CRE (grey doors)         |
+| $7E:C020 | $7E:C220 |      |      | 16     | BG1/2  | 1     | SCE/CRE (green doors)        |
+| $7E:C000 | $7E:C210 |      |      | 4?     | BG3    | 0     | Acid                         |
+| $7E:C008 | $7E:C210 |      |      | 4?     | BG3    | 1     | Mini-map                     |
+| $7E:C010 | $7E:C210 |      |      | 4?     | BG3    | 2     | Mini-map                     |
+| $7E:C018 | $7E:C218 |      |      | 4?     | BG3    | 3     | Mini-map                     |
+| $7E:C020 | $7E:C220 |      |      | 4?     | BG3    | 4     | HUD                          |
+| $7E:C028 | $7E:C228 |      |      | 4?     | BG3    | 5     | HUD                          |
+| $7E:C030 | $7E:C230 |      |      | 4?     | BG3    | 6     | FX                           |
+| $7E:C038 | $7E:C238 |      |      | 4?     | BG3    | 7     | Mini-map                     |
+| $7E:C040 | $7E:C240 | 040h |      | 16?    | BG1/2? | 2?    | SCE/CRE (red doors)          |
+| $7E:C060 | $7E:C260 | 060h |      | 16     | BG1/2  | 3     | SCE/CRE (blue doors)         |
+| $7E:C080 | $7E:C280 | 080h |      | 16     | BG1/2  | 4     | SCE/CRE                      |
+| $7E:C0A0 | $7E:C2A0 | 0A0h |      | 16     | BG1/2  | 5     | SCE/CRE                      |
+| $7E:C0C0 | $7E:C2C0 | 0C0h |      | 16     |        | 6?    | SCE/CRE                      |
+| $7E:C0E0 | $7E:C2E0 | 0E0h |      | 16     |        | 7?    | SCE/CRE                      |
 | $7E:C100 | $7E:C300 | 100h | 000h | 15?    | Sprite | 0     | Enemy hurt palette?          |
 | $7E:C120 | $7E:C320 | 120h | 200h | 15?    | Sprite | 1     | Enemies                      |
 | $7E:C140 | $7E:C340 | 140h | 400h | 15?    | Sprite | 2?    | Enemies                      |
