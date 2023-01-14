@@ -36,7 +36,6 @@ Incomplete
 * Potential softlock in speed hallway (though this is less likely)
 * Dragons in rising tide should be intangible
 * It is not obvious how to get down WS shaft
-* Remove spikes from pre-xray room
 * WS attic enemies make it challenging after power is on (maybe remove
   kihunters?)
 * Eye doors sometimes still close
