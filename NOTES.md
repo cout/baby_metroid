@@ -393,6 +393,53 @@ The following FX types are available:
 |  2Ah | Ceres elevator |         | 88:D928    |      | 2h          |      |
 |  2Ch | Haze           |         | 88:DDC7    |      |             |      |
 
+#### Default layer blending configurations
+
+I think these values apply to FX A and FX B, depending on the FX type?
+
+|       |          |             |  $60   |  $61   |  $62    |  $69  |  $6B  |  $6C  |  $6D  |  $6E   |   $71   | $74/75/76 |  Y  |
+|       | Handler  |             | $2123  | $2124  |  $2125  | $212C | $212D | $212E | $212F | $2130  |  $2131  |   $2132   |     |
+| $1985 | Address  | Description | W12SEL | W34SEL | WOBJSEL |  TM   |  TS   |  TMW  |  TSW  | CGWSEL | CGADSUB |  COLDATA  |     |
+| ----- | -------- | ----------- | -------| -------| ------- | ------| ------| ------| ------| -------| ------- | --------- | --- |
+| xxxx  | $88:8075 | default     |  00h   |  00h   |  00h    |       | 04h   |  04h  |  04h  |  02h   |  33h    |           | 00h |
+| xx00  | $88:8074 | normal      |        |        |         |       |       |       |       |        |         |           |     |
+| xx02  | $88:8074 | normal      |        |        |         |       |       |       |       |        |         |           |     |
+| xx04  | $88:8090 | phan intro  |        |        |         | 11h   | 04h   |       |       |        |         |           |     |
+| xx06  | $88:8099 | _unused_    |        |        |         |       | 14h   |       |       |        |  27h    |           |     |
+| xx08  | $88:80A2 | WS          |        |        |         |       | 14h   |       |       |        |  22h    |           |     |
+| xx0A  | $88:80AB | spores      |        |        |         |       |       |       |       |        |  32h    |           |     |
+| xx0C  | $88:80B0 | firefleas   |        |        |         |       |       |       |       |  00h   |  A2h    |           |     |
+| xx0E  | $88:80B7 | rain        |        |        |         |       |       |       |       |        |         |           |     |
+| xx10  | $88:80B8 | eye         |        |  02h   |  20h    |       |       |       |  04h  |        |         |           |     |
+| xx12  | $88:80B8 | varia/grav  |        |  02h   |  20h    |       |       |       |  04h  |        |         |           |     |
+| xx14  | $88:80C5 | water       |        |        |         |       |       |       |       |        |  B3h    |           |     |
+| xx16  | $88:80CA | water       |        |        |         | 11h   | 06h   |       |       |        |  B1h    |           |     |
+| xx18  | $88:80F5 | g4          |        |        |         | 04h*  | 13h*  |       |       |        |  24h*   |           | 02h |
+| xx1A  | $88:80D9 | phantoon    |        |        |         | 15h   | 02h   |       |       |        |  35h    |           |     |
+| xx1C  | $88:80E8 | _unused_    |        |        |         | 15h   | 02h   |       |       |        |  55h    |           |     |
+| xx1E  | $88:80F5 | lava/acid   |        |        |         | 04h*  | 13h*  |       |       |        |  24h*   |           | 02h |
+| xx20  | $88:810C | ?           |        |        |         |       |       |       |       |        |         |           |     |
+| xx22  | $88:80C5 | water       |        |  02h   |  20h    |       |       |       |  04h  |        |         |           |     |
+| xx24  | $88:8156 | MB          |  00h   |  02h   |  20h    | 13h   | 04h   |  13h  |  04h  |  10h   |  33h    |           |     |
+| xx26  | $88:810D | _unused_    |        |        |         |       |       |       |       |        |  77h    |           |     |
+| xx28  | $88:8112 | misc        |        |        |         |       |       |       |       |  00h   |  B3h    | 25/40/80h+|     |
+| xx2A  | $88:812A | ?           |        |        |         |       |       |       |       |        |  B3h    | 26/42/80h+|     |
+| xx2C  | $88:8142 | ?           |        |        |         |       |       |       |       |  00h   |         |           |     |
+| xx2E  | $88:8145 | _unused_    |        |        |         |       |       |       |       |        |  B3h    |           |     |
+| xx30  | $88:80F5 | fog         |        |        |         | 04h*  | 13h*  |       |       |        |  24h*   |           | 02h |
+| xx32  | $88:814A | _unused_    |        |        |         |       | 44h   |       |       |        |  B2h    |           |     |
+| xx34  | $88:8153 | MB2         |        |        |         |       |       |       |       |        |         |           | 06h |
+| 8xxx  | $88:8219 | PB (Y=0)    |  00h   |  08h   |  80h    | 13h   | 04h   |  00h  |  04h  |  02h   |  37h    |           |     |
+| 8xxx  | $88:8219 | PB (Y=2)    |  00h   |  08h   |  80h    | 13h   | 04h   |  00h  |  04h  |  02h   |  37h    |           |     |
+| 8xxx  | $88:823E | PB (Y=4)    |  80h   |  08h   |  02h    | 06h   |       |  06h  |  11h  |  37h   |  00h    |           |     |
+| 8xxx  | $88:8263 | PB (Y=6)    |  00h   |  08h   |  80h    | 13h   | 04h   |  00h  |  04h  |  02h   |  31h    |           |     |
+| 4xxx  | $88:817B | xray        |  C8h   |  08h   |  80h    | 13h   | 04h   |  03h  |  04h  |  22h   | OR 73h  |           |     |
+| 2xxx  | $88:81A4 | xray        |  00h   |  08h   |  80h    | 13h   | 04h   |  03h  |  04h  |  22h   | OR 61h  |           |     |
+| 1xxx  | $88:81DB | xray (flea) |  00h   |  08h   |  80h    | 13h   | 04h   |  03h  |  04h  |  20h   |  B3h    |           |     |
+
+* - if IRQ mode == v-count/h-count
++ - if [$1987] & 80h == 0
+
 #### Palette Blends
 
 Palette blends are defined in the table at $89:AA02:
@@ -412,23 +459,22 @@ Palette blends are defined in the table at $89:AA02:
 
 FX1 state for the current room is:
 
-| Address  | Bytes | Description              |
-| -------- | ----- | ------------------------ |
-| $7E:1964 | 2     | FX tilemap pointer       |
-| $7E:1966 | 2     | Current FX entry pointer |
-| $7E:1968 | 2     | Current FX entry offset  |
-| $7E:196A | 2     | Palette bitset           |
-| $7E:196E | 2     | FX type                  |
-| $7E:1978 | 2     | Base Y position          |
-| $7E:197A | 2     | Target Y position        |
-| $7E:197C | 2     | Y velocity               |
-| $7E:197E | 2     | Liquid options           |
-| $7E:1980 | 2     | Timer                    |
-| $7E:1982 | 2     | Default layer blend      |
-| $7E:1984 | 2     | Layer 3 blend            |
-| $7E:C232 | 6     | Palette (3 colors)       |
-
-TODO: Is there a difference between FX1/2/3 and FX A/B/C?
+| Address  | Bytes | Description                  |
+| -------- | ----- | ---------------------------- |
+| $7E:1964 | 2     | FX tilemap pointer           |
+| $7E:1966 | 2     | Current FX entry pointer     |
+| $7E:1968 | 2     | Current FX entry offset      |
+| $7E:196A | 2     | Palette bitset               |
+| $7E:196E | 2     | FX type                      |
+| $7E:1978 | 2     | Base Y position              |
+| $7E:197A | 2     | Target Y position            |
+| $7E:197C | 2     | Y velocity                   |
+| $7E:197E | 2     | Liquid options               |
+| $7E:1980 | 2     | Timer                        |
+| $7E:1982 | 2     | Default layer blend          |
+| $7E:1984 | 2     | Layer 3 blend                |
+| $7E:1986 | 2     | Layer blending configuration |
+| $7E:C232 | 6     | Palette (3 colors)           |
 
 PLMs
 ----
