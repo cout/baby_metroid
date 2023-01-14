@@ -24,6 +24,7 @@ Bugs
     in acid snake room after getting ice) - note this bug no longer gets
     triggered because the novas cannot pull Samus along, but that may
     change in the future
+* It is no longer possible to traverse backward through botwoon's room
 
 Incomplete
 ----------
