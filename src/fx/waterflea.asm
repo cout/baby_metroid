@@ -159,6 +159,7 @@ waterflea_adjust_palette:
 
 .loop:
   LDA $7EC200,x
+  TAY
   AND #$001F
   SEC
   SBC $12
@@ -166,7 +167,7 @@ waterflea_adjust_palette:
   LDA #$0000
 + STA $20
 
-  LDA $7EC200,x
+  TYA
   AND #$03E0
   SEC
   SBC $14
@@ -175,7 +176,7 @@ waterflea_adjust_palette:
 + ORA $20
   STA $20
 
-  LDA $7EC200,x
+  TYA
   AND #$7C00
   SEC
   SBC $16
