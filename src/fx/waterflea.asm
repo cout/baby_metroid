@@ -96,6 +96,8 @@ waterflea_init_fireflea_lighting:
 
 waterflea_do_fireflea_lighting:
 {
+  REP #$30
+
   ; If X-ray is active: return
   LDA $0A78
   BNE .return
@@ -123,12 +125,23 @@ waterflea_do_fireflea_lighting:
   ; swap B and A
   XBA
 
+  STA waterflea_color_factor
+
   ; TODO - color changes are handled by modifying the base palette, i.e.
   ; the palette that was in effect when the room was loaded.  I think it
   ; should be possible to instead do the color changes with HDMA, and it
   ; would be a neat effect (so we get darkness above the water but under
   ; the water is lit up)
+
+  ; SCE palette
+  LDX #$0080 ; palette start
+  LDY #$00A0 ; palette end
   JSR waterflea_adjust_palette
+
+  ; FX palette (TODO - this technique does not work with the FX palette)
+  ; LDX #$0030 ; palette start
+  ; LDY #$0038 ; palette end
+  ; JSR waterflea_adjust_palette
 
 .return:
   RTS
@@ -136,19 +149,16 @@ waterflea_do_fireflea_lighting:
 
 waterflea_adjust_palette:
 {
-  STA waterflea_color_factor
-
   STA $12
   ASL : ASL : ASL : ASL : ASL
   STA $14
   ASL : ASL : ASL : ASL : ASL
-  STA $16
+  STA $15
 
-  LDA #$0018
+  STY $18
+
 .loop:
-  TAX
-
-  LDA $7EC280,x
+  LDA $7EC200,x
   AND #$001F
   SEC
   SBC $12
@@ -156,7 +166,7 @@ waterflea_adjust_palette:
   LDA #$0000
 + STA $20
 
-  LDA $7EC280,x
+  LDA $7EC200,x
   AND #$03E0
   SEC
   SBC $14
@@ -165,7 +175,7 @@ waterflea_adjust_palette:
 + ORA $20
   STA $20
 
-  LDA $7EC280,x
+  LDA $7EC200,x
   AND #$7C00
   SEC
   SBC $16
@@ -173,12 +183,13 @@ waterflea_adjust_palette:
   LDA #$0000
 + ORA $20
 
-  STA $7EC080,x
+  STA $7EC000,x
 
+  INX
+  INX
   TXA
-  DEC
-  DEC
-  BPL .loop
+  CMP $18
+  BMI .loop
 
   RTS
 }
