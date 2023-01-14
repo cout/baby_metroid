@@ -162,6 +162,13 @@ move_samus_vert_with_enemy:
   ADC $18
   STA $0B5C
 
+  ; Zero-out Samus's fall speed
+  ; TODO: what do do with fractional part ($0B2E)?
+  LDA $0B2C
+  BPL +
+  STZ $0B2C
++ STZ $0B2E
+
 .return:
 
   PLP
@@ -247,7 +254,6 @@ check_samus_is_inside_enemy:
   INC A
 
   ; If A - [Samus Y radius] - [Enemy Y radius] >= 0: return 0
-  ; TODO: somehow prevent samus from falling in this case
 + SEC
   SBC $0B00
   BCC .collision

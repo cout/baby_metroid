@@ -55,8 +55,8 @@ Incomplete
     samus as she is standing, but that was changed in order to prevent
     Samus from getting pushed; I would still like them to be able to
     pick her up, because that was fun
-* I would like Samus to be able to "stick" herself to enemies while in
-    morph ball form so she can ride on ceilings
+* Sometimes Samus still falls when "glued" to an enemy in morph
+* There is some debug code still left in Draygon's room
 
 Cosmetic
 --------
@@ -68,6 +68,7 @@ Cosmetic
     opens?
 * Lights in the tourian escape rooms blink too fast
 * Samus should wiggle during draygon "fight"
+* Rename morph ball to spider ball?
 
 Feedback from E
 ---------------
