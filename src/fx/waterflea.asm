@@ -153,7 +153,7 @@ waterflea_adjust_palette:
   ASL : ASL : ASL : ASL : ASL
   STA $14
   ASL : ASL : ASL : ASL : ASL
-  STA $15
+  STA $16
 
   STY $18
 
