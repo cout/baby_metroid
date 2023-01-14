@@ -188,8 +188,7 @@ waterflea_adjust_palette:
 
   INX
   INX
-  TXA
-  CMP $18
+  CPX $18
   BMI .loop
 
   RTS
