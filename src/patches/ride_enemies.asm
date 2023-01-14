@@ -49,16 +49,16 @@ move_samus_horiz_with_enemy:
   ; if enemy is intangible then do not move Samus
   LDA $0F86,x
   AND #$8000
-  BNE .not_standing_on_enemy
+  BNE .no_collision
 
   ; if not standing on enemy then we just move the enemy and not Samus
-  JSL check_samus_is_standing_on_enemy
-  BNE .standing_on_enemy
+  JSL ride_enemies_check_collision
+  BNE .collision
 
-.not_standing_on_enemy
+.no_collision
   BRL do_move_enemy_horiz
 
-.standing_on_enemy
+.collision
 
   LDA $0F7C,x : PHA  ; Push [enemy X pos]
   LDA $0F7A,x : PHA  ; Push [enemy X pos]
@@ -115,16 +115,16 @@ move_samus_vert_with_enemy:
   ; if enemy is intangible then do not move Samus
   LDA $0F86,x
   AND #$8000
-  BNE .not_standing_on_enemy
+  BNE .no_collision
 
   ; if not standing on enemy then we just move the enemy and not Samus
-  JSL check_samus_is_standing_on_enemy
-  BNE .standing_on_enemy
+  JSL ride_enemies_check_collision
+  BNE .collision
 
-.not_standing_on_enemy
+.no_collision:
   BRL do_move_enemy_vert
 
-.standing_on_enemy
+.collision:
 
   LDA $0F80,x : PHA ; Push [enemy Y sub-pixel pos]
   LDA $0F7E,x : PHA ; Push [enemy Y pos]
@@ -168,6 +168,104 @@ move_samus_vert_with_enemy:
   RTL
 }
 
+ride_enemies_check_collision:
+{
+  PHX
+  LDA $0A1F
+  AND #$00FF
+  TAX
+  LDA.l pose_can_carry_samus,x
+  PLX
+  AND #$00FF
+
+  BEQ .standing_collision_test
+
+.full_collision_test:
+  JMP check_samus_is_inside_enemy
+
+.standing_collision_test:
+  JMP check_samus_is_standing_on_enemy
+}
+
+pose_can_carry_samus:
+print "pose_can_carry_samus: ", pc
+{
+  db $00 ; 0: Standing
+  db $00 ; 1: Running
+  db $00 ; 2: Normal jumping
+  db $00 ; 3: Spin jumping
+  db $01 ; 4: Morph ball - on ground
+  db $00 ; 5: Crouching
+  db $00 ; 6: Falling
+  db $00 ; 7: Unused
+  db $01 ; 8: Morph ball - falling
+  db $00 ; 9: Unused
+  db $00 ; Ah: Knockback / crystal flash ending
+  db $00 ; Bh: Unused
+  db $00 ; Ch: Unused
+  db $00 ; Dh: Unused
+  db $00 ; Eh: Turning around - on ground
+  db $00 ; Fh: Crouching/standing/morphing/unmorphing transition
+  db $00 ; 10h: Moonwalking
+  db $01 ; 11h: Spring ball - on ground
+  db $01 ; 12h: Spring ball - in air
+  db $01 ; 13h: Spring ball - falling
+  db $00 ; 14h: Wall jumping
+  db $00 ; 15h: Ran into a wall
+  db $00 ; 16h: Grappling
+  db $00 ; 17h: Turning around - jumping
+  db $00 ; 18h: Turning around - falling
+  db $00 ; 19h: Damage boost
+  db $00 ; 1Ah: Grabbed by Draygon
+  db $00 ; 1Bh: Shinespark / crystal flash / drained by metroid / damaged by MB's attacks
+}
+
+check_samus_is_inside_enemy:
+{
+  ; A = |[Samus X position] - [Enemy X position]|
+  LDA $0AF6
+  SEC
+  SBC $0F7A,x
+  BPL +
+  EOR #$FFFF
+  INC A
+
+  ; If A - [Samus X radius] - [Enemy X radius] >= 0: return 0
++ SEC
+  SBC $0AFE
+  BCC +
+  CMP $0F82,x
+  BCC +
+  BRA .no_collision
+
+  ; A = |[Samus Y position] - [Enemy Y position]|
++ LDA $0AFA
+  SEC
+  SBC $0F7E,x
+  BPL +
+  EOR #$FFFF
+  INC A
+
+  ; If A - [Samus Y radius] - [Enemy Y radius] >= 0: return 0
+  ; TODO: no collision is detected when riding on top of an enemy
+  ; TODO: somehow prevent samus from falling in this case
++ SEC
+  SBC $0B00
+  BCC .collision
+  CMP $0F84,x
+  BCC .collision
+
+.no_collision
+  LDA #$0000
+  STA $7FFC02
+  RTL
+
+.collision:
+  LDA #$FFFF
+  STA $7FFC02
+  RTL
+}
+
 check_samus_is_standing_on_enemy:
 {
   ; A = |[Samus X position] - [Enemy X position]|
@@ -179,10 +277,10 @@ check_samus_is_standing_on_enemy:
   INC A
 
 .label1:
-  ; If A - [Samus X radius] - [Enemy X position] >= 0: return 0
+  ; If A - [Samus X radius] - [Enemy X radius] >= 0: return 0
   SEC
   SBC $0AFE
-  BCC $09
+  BCC .label2
   CMP $0F82,x
   BCC .label2
   LDA #$0000

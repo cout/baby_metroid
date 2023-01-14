@@ -21,9 +21,11 @@ Bugs
 * Samus oscillates between riding/falling when atop an enemy going up a
     slope (e.g. in Terminator)
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
-    in acid snake room after getting ice) - note this bug no longer gets
-    triggered because the novas cannot pull Samus along, but that may
-    change in the future
+    in acid snake room after getting ice)
+    - ~~note this bug no longer gets triggered because the novas cannot
+      pull Samus along, but that may change in the future~~
+    - it is the future now, and this has changed, but I can no longer
+      trigger the bug
 * It is no longer possible to traverse backward through botwoon's room
 
 Incomplete
