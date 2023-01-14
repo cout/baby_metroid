@@ -6,14 +6,6 @@ waterflea_color_factor:
 print "Variable waterflea_color_factor: $", pc
 skip 2
 
-waterflea_color_offset:
-print "Variable waterflea_color_offset: $", pc
-skip 2
-
-waterflea_saved_palette:
-print "Variable waterflea_saved_palette: $", pc
-skip $20
-
 end_waterflea_freemem_7f:
 !FREEMEM_7F := end_waterflea_freemem_7f
 
@@ -51,8 +43,6 @@ waterflea_fx_init:
 
 .spawn_bg3_scroll:
   JSL $88D865            ; Spawn BG3 scroll HDMA object
-
-  JSR waterflea_save_palette
 
   JSR waterflea_init_fireflea_lighting
 
@@ -144,23 +134,6 @@ waterflea_do_fireflea_lighting:
   RTS
 }
 
-waterflea_save_palette:
-{
-  LDA #$0018
-.loop:
-  TAX
-
-  LDA $7EC280,x
-  STA waterflea_saved_palette,x
-
-  TXA
-  DEC
-  DEC
-  BPL .loop
-
-  RTS
-}
-
 waterflea_adjust_palette:
 {
   STA waterflea_color_factor
@@ -175,7 +148,7 @@ waterflea_adjust_palette:
 .loop:
   TAX
 
-  LDA waterflea_saved_palette,x
+  LDA $7EC280,x
   AND #$001F
   SEC
   SBC $12
@@ -183,7 +156,7 @@ waterflea_adjust_palette:
   LDA #$0000
 + STA $20
 
-  LDA waterflea_saved_palette,x
+  LDA $7EC280,x
   AND #$03E0
   SEC
   SBC $14
@@ -192,7 +165,7 @@ waterflea_adjust_palette:
 + ORA $20
   STA $20
 
-  LDA waterflea_saved_palette,x
+  LDA $7EC280,x
   AND #$7C00
   SEC
   SBC $16
