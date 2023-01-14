@@ -62,4 +62,6 @@ dw $FFFF     ; end of list
 ; Room $A293 state $A2A0: FX
 org $83835E
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
-dw $0000, $FFFF, $FFFF, $0000 : db $00, $24, $02, $02, $00, $00, $02, $00
+; dw $0000, $FFFF, $FFFF, $0000 : db $00, $16, $02, $02, $00, $00, $02, $00
+; dw $0000, $00B0, $FFFF, $0000 : db $00, !WATERFLEA_FX_INDEX, $02, $02, $00, $00, $02, $00
+dw $0000, $00B0, $FFFF, $0000 : db $00, !WATERFLEA_FX_INDEX, $02, $18, $00, $00, $01, $48

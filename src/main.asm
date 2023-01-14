@@ -34,6 +34,7 @@ incsrc plm/blue_suit_block.asm
 incsrc plm/power_control.asm
 incsrc plm/eye_door.asm
 incsrc plm/animals_escape.asm
+incsrc src/fx/waterflea.asm
 incsrc rooms/pit_room.asm
 incsrc rooms/climb.asm
 incsrc rooms/bomb_torizo.asm
