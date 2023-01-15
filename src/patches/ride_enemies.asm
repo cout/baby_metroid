@@ -199,10 +199,8 @@ ride_enemies_check_collision:
   AND #$00FF
 
   ASL
-  STA $7FFC04
   TAX
   LDA.l pose_collision_routine_table,x
-  STA $7FFC06
 
   PLX
 
