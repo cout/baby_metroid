@@ -35,6 +35,8 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* On noob bridge, Samus gets stuck in the crumble, then falls once the
+    zeela has moved past Samus
 
 Incomplete
 ----------
