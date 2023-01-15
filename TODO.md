@@ -4,7 +4,10 @@ TODO
 Bugs
 ----
 
-* Ice beam cannot freeze enemies that take more than one shot
+* Ice beam cannot freeze enemies that take more than one shot (because
+    they do not take damage)
+* It is not possible to farm with ice beam, and unfreezing an enemy with
+    ice beam kills it
 * Cannot run through pirates in croc speedway with speed (I am not sure
     whether this can be fixed in a general way and keep the enemies as
     solid)
@@ -32,8 +35,6 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* It is not possible to farm with ice beam, and unfreezing an enemy with
-    ice beam kills it
 
 Incomplete
 ----------
@@ -55,11 +56,11 @@ Incomplete
 * baby should ignore samus's shots otherwise it's too hard to shoot the
     seaweed
 * it is no longer as easy to get on top of wavers as I would like
+    (workaround: use morph ball)
 * it used to be that the mochtroids in halfie climb room would "pick up"
     samus as she is standing, but that was changed in order to prevent
     Samus from getting pushed; I would still like them to be able to
     pick her up, because that was fun
-* Sometimes Samus still falls when "glued" to an enemy in morph
 * There is some debug code still left in Draygon's room
 * Samus can still sometimes fall when stuck to a crawling creature (e.g.
     trying to ride zeelas on the ceiling in noob bridge)
@@ -92,15 +93,15 @@ Feedback from E
 * hard to get out of construction zone
 * hard to hit chozo orb (can I make power beam hitbox bigger?)
 * dead people in ceres (wife noticed)
-* hard to get up parlor
+* hard to get up parlor - fixed?
 * parlor bats are scary
 * dachora room bats are scary
 * alcatraz is intimidating
-* geemers push samus off the ledge in parlor
+* geemers push samus off the ledge in parlor - fixed
 * green pirates are a challenge
-* fun to dance with big pink hoppers but they get in the way
+* fun to dance with big pink hoppers but they get in the way - fixed
 * cacs are scary - remove them (E thinks they are spiders)
-* it is hard to get on top of crabs in noob bridge
+* it is hard to get on top of crabs in noob bridge - fixed?
 * confusing to see samus statue in red tower before the clue is usable
 * ditto warehouse entrance statue
 * which block to bomb in red tower is hard

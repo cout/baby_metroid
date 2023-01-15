@@ -5,9 +5,10 @@
 ; Bugs/Limitations:
 ; * Samus cannot jump above a geemer going up a slope if her feet are
 ;   touching the geemer
-; * Samus can ride a geemer down the Terminator ceiling, but she falls
-;   if she tries to ride a zeela across the noob bridge ceiling (after
-;   initially sticking)
+; * If Samus is touching an enemy while in morph, she can fall slightly
+;   behind the enemy at slope changes
+; * If Samus falls onto a geemer, she sometimes fails to change to a
+;   standing pose
 ;
 ;;;;;
 
@@ -172,11 +173,14 @@ move_samus_vert_with_enemy:
   STA $0B5C
 
   ; Zero-out Samus's fall speed
-  ; TODO: what do do with fractional part ($0B2E)?
   LDA $0B2C
-  BPL +
+  BMI +
   STZ $0B2C
-+ STZ $0B2E
++
+  LDA $02BE
+  BMI +
+  STZ $0B2E
++
 
 .return:
 
@@ -375,11 +379,14 @@ move_samus_with_geemer_main_ai:
   STA $0B5C
 
   ; Zero-out Samus's fall speed
-  ; TODO: what do do with fractional part ($0B2E)?
   LDA $0B2C
-  BPL +
+  BMI +
   STZ $0B2C
-+ STZ $0B2E
++
+  LDA $02BE
+  BMI +
+  STZ $0B2E
++
 
   RTL
 }
