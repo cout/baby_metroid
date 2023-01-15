@@ -276,12 +276,10 @@ check_samus_is_inside_enemy:
 
 .no_collision
   LDA #$0000
-  STA $7FFC02
   RTL
 
 .collision:
   LDA #$FFFF
-  STA $7FFC02
   RTL
 }
 
