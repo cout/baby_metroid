@@ -190,33 +190,41 @@ move_samus_vert_with_enemy:
 
 ride_enemies_check_collision:
 {
+  JSR do_ride_enemies_check_collision
+  RTL
+}
+
+do_ride_enemies_check_collision:
+{
   PHX
   LDA $0A1F
   AND #$00FF
   TAX
   LDA.l pose_collision_type_table,x
-  PLX
   AND #$00FF
 
-  BEQ .standing_collision_test
+  ASL
+  STA $7FFC04
+  TAX
+  LDA.l pose_collision_routine_table,x
+  STA $7FFC06
+  PLX
 
-.full_collision_test:
-  JSR check_samus_is_inside_enemy
-  RTL
-
-.standing_collision_test:
-  JSR check_samus_is_standing_on_enemy
-  RTL
+  STA $2E
+  JSR .trampoline
+  RTS
+.trampoline:
+  JMP ($002E)
 }
 
 pose_collision_type_table:
 {
-  db $00 ; 0: Standing
-  db $00 ; 1: Running
+  db $02 ; 0: Standing
+  db $02 ; 1: Running
   db $00 ; 2: Normal jumping
   db $00 ; 3: Spin jumping
   db $01 ; 4: Morph ball - on ground
-  db $00 ; 5: Crouching
+  db $02 ; 5: Crouching
   db $00 ; 6: Falling
   db $00 ; 7: Unused
   db $01 ; 8: Morph ball - falling
@@ -225,20 +233,33 @@ pose_collision_type_table:
   db $00 ; Bh: Unused
   db $00 ; Ch: Unused
   db $00 ; Dh: Unused
-  db $00 ; Eh: Turning around - on ground
-  db $00 ; Fh: Crouching/standing/morphing/unmorphing transition
+  db $02 ; Eh: Turning around - on ground
+  db $02 ; Fh: Crouching/standing/morphing/unmorphing transition
   db $00 ; 10h: Moonwalking
   db $01 ; 11h: Spring ball - on ground
   db $01 ; 12h: Spring ball - in air
   db $01 ; 13h: Spring ball - falling
   db $00 ; 14h: Wall jumping
-  db $00 ; 15h: Ran into a wall
+  db $02 ; 15h: Ran into a wall
   db $00 ; 16h: Grappling
   db $00 ; 17h: Turning around - jumping
   db $00 ; 18h: Turning around - falling
   db $00 ; 19h: Damage boost
   db $00 ; 1Ah: Grabbed by Draygon
   db $00 ; 1Bh: Shinespark / crystal flash / drained by metroid / damaged by MB's attacks
+}
+
+pose_collision_routine_table:
+{
+  dw check_samus_always_no_collision
+  dw check_samus_is_inside_enemy
+  dw check_samus_is_standing_on_enemy
+}
+
+check_samus_always_no_collision:
+{
+  LDA #$0000
+  RTS
 }
 
 check_samus_is_inside_enemy:

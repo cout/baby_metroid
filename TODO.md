@@ -37,6 +37,8 @@ Bugs
     on top.
 * On noob bridge, Samus gets stuck in the crumble, then falls once the
     zeela has moved past Samus
+* It is possible to spin jump up through a flying creature, but it is
+    not possible jump straight up through one.
 
 Incomplete
 ----------
