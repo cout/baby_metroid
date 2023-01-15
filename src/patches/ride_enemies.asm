@@ -190,13 +190,8 @@ move_samus_vert_with_enemy:
 
 ride_enemies_check_collision:
 {
-  JSR do_ride_enemies_check_collision
-  RTL
-}
-
-do_ride_enemies_check_collision:
-{
   PHX
+
   LDA $0A1F
   AND #$00FF
   TAX
@@ -208,11 +203,12 @@ do_ride_enemies_check_collision:
   TAX
   LDA.l pose_collision_routine_table,x
   STA $7FFC06
+
   PLX
 
   STA $2E
   JSR .trampoline
-  RTS
+  RTL
 .trampoline:
   JMP ($002E)
 }
