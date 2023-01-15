@@ -18,8 +18,6 @@ Bugs
 * door at top of climb before getting morph has peculiar scroll
 * Spore spawn is brown if Samus leaves and comes back
 * Caterpillar room statue is missing
-* Samus oscillates between riding/falling when atop an enemy going up a
-    slope (e.g. in Terminator)
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
@@ -30,6 +28,12 @@ Bugs
 * Geemers (and possibly other enemies) can pull Samus partially up into
     a block when she is morphed (though it is possible this can be
     triggered when she is not morphed)
+* When riding a geemer up a slope, Samus loses just a little bit of X
+    position relative to the geemer every now and then; this effect is
+    amplified if Samus is morphed inside the geemer rather than riding
+    on top.
+* It is not possible to farm with ice beam, and unfreezing an enemy with
+    ice beam kills it
 
 Incomplete
 ----------
@@ -57,6 +61,14 @@ Incomplete
     pick her up, because that was fun
 * Sometimes Samus still falls when "glued" to an enemy in morph
 * There is some debug code still left in Draygon's room
+* Samus can still sometimes fall when stuck to a crawling creature (e.g.
+    trying to ride zeelas on the ceiling in noob bridge)
+* There is no visual indicator where to bomb to get to ice beam, and
+    riding the novas is frustrating because it is still inconsistent
+* Now that Samus can ride crawling creatures up a wall/ceiling, there
+    should be crawling creatures on the floors of tall-ish shafts (e.g.
+    business center)
+* Grapple beam is probably tricky for a child to use
 
 Cosmetic
 --------

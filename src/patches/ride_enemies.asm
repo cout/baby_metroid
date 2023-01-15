@@ -3,8 +3,11 @@
 ; Allow Samus to "ride" enemies as if they are trippers/kamers.
 ;
 ; Bugs/Limitations:
-; * Samus cannot ride enemies up a slope without oscillating (e.g. in
-;   Terminator)
+; * Samus cannot jump above a geemer going up a slope if her feet are
+;   touching the geemer
+; * Samus can ride a geemer down the Terminator ceiling, but she falls
+;   if she tries to ride a zeela across the noob bridge ceiling (after
+;   initially sticking)
 ;
 ;;;;;
 
@@ -33,6 +36,12 @@ move_enemy_vert:
 
 do_move_enemy_vert = $A0C790
 
+;;
+; Hook Geemer Main AI
+;
+
+org $A3E6C2
+BRL move_samus_with_geemer_main_ai
 
 org !FREESPACE_A0
 
@@ -60,7 +69,7 @@ move_samus_horiz_with_enemy:
 
 .collision
 
-  LDA $0F7C,x : PHA  ; Push [enemy X pos]
+  LDA $0F7C,x : PHA  ; Push [enemy X sub-pixel pos]
   LDA $0F7A,x : PHA  ; Push [enemy X pos]
   LDA $0B58   : PHA  ; Push [Samus X displacement]
 
@@ -320,3 +329,65 @@ check_samus_is_standing_on_enemy:
 
 end_ride_enemies_freespace_a0:
 !FREESPACE_A0 := end_ride_enemies_freespace_a0
+
+org !FREESPACE_A3
+
+move_samus_with_geemer_main_ai:
+{
+  LDX $0E54
+
+  ; if not standing on enemy then we just move the enemy and not Samus
+  JSL ride_enemies_check_collision
+  BNE .collision
+
+.no_collision:
+  JMP ($0FB2,x)
+
+.collision:
+  LDA $0F80,x : PHA ; Push [enemy Y sub-pixel pos]
+  LDA $0F7E,x : PHA ; Push [enemy Y pos]
+  LDA $0F7C,x : PHA ; Push [enemy X sub-pixel pos]
+  LDA $0F7A,x : PHA ; Push [enemy X pos]
+
+  JSL geemer_function_trampoline
+
+  PLA : STA $12     ; $12 = [previous enemy X pos]
+  PLA : STA $14     ; $14 = [previous enemy X sub-pixel pos]
+  PLA : STA $16     ; $16 = [previous Samus Y displacement]
+  PLA : STA $18     ; $18 = [previous enemy Y pos]
+
+  ; Extra Samus X displacement = change in enemy X pos/sub-pixel pos
+  LDA $0F7C,x
+  SEC
+  SBC $14
+  STA $0B56
+  LDA $0F7A,x
+  SBC $12
+  STA $0B58
+
+  ; Extra Samus Y displacement = change in enemy Y pos/sub-pixel pos
+  LDA $0F80,x
+  SEC
+  SBC $18
+  STA $0B5A
+  LDA $0F7E,x
+  SBC $16
+  STA $0B5C
+
+  ; Zero-out Samus's fall speed
+  ; TODO: what do do with fractional part ($0B2E)?
+  LDA $0B2C
+  BPL +
+  STZ $0B2C
++ STZ $0B2E
+
+  RTL
+}
+
+geemer_function_trampoline:
+{
+  JMP ($0FB2,x)
+}
+
+end_ride_enemies_freespace_a3:
+!FREESPACE_A3 := end_ride_enemies_freespace_a3
