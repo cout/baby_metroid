@@ -201,10 +201,12 @@ ride_enemies_check_collision:
   BEQ .standing_collision_test
 
 .full_collision_test:
-  JMP check_samus_is_inside_enemy
+  JSR check_samus_is_inside_enemy
+  RTL
 
 .standing_collision_test:
-  JMP check_samus_is_standing_on_enemy
+  JSR check_samus_is_standing_on_enemy
+  RTL
 }
 
 pose_can_carry_samus:
@@ -276,11 +278,11 @@ check_samus_is_inside_enemy:
 
 .no_collision
   LDA #$0000
-  RTL
+  RTS
 
 .collision:
   LDA #$FFFF
-  RTL
+  RTS
 }
 
 check_samus_is_standing_on_enemy:
@@ -301,7 +303,7 @@ check_samus_is_standing_on_enemy:
   CMP $0F82,x
   BCC .label2
   LDA #$0000
-  RTL
+  RTS
 
 .label2:
   ; If [Samus Y position] + [Samus Y radius] > [Enemy Y position]: return 0
@@ -322,11 +324,11 @@ check_samus_is_standing_on_enemy:
 
 .not_standing_on_enemy:
   LDA #$0000
-  RTL
+  RTS
 
 .standing_on_enemy:
   LDA #$FFFF
-  RTL
+  RTS
 }
 
 end_ride_enemies_freespace_a0:
