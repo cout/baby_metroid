@@ -81,6 +81,9 @@ Cosmetic
 * Lights in the tourian escape rooms blink too fast
 * Samus should wiggle during draygon "fight"
 * Rename morph ball to spider ball?
+* Broken tube in BT's room is not obvious it was holding a metroid (to
+    fix this, I need to create a baby baby metroid enemy that runs away
+    when Samus enter's BT's room)
 
 Feedback from E
 ---------------
