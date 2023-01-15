@@ -194,7 +194,7 @@ ride_enemies_check_collision:
   LDA $0A1F
   AND #$00FF
   TAX
-  LDA.l pose_can_carry_samus,x
+  LDA.l pose_collision_type_table,x
   PLX
   AND #$00FF
 
@@ -209,8 +209,7 @@ ride_enemies_check_collision:
   RTL
 }
 
-pose_can_carry_samus:
-print "pose_can_carry_samus: ", pc
+pose_collision_type_table:
 {
   db $00 ; 0: Standing
   db $00 ; 1: Running
