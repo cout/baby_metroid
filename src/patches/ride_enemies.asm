@@ -207,9 +207,6 @@ ride_enemies_check_collision:
   PLX
 
   STA $2E
-  JSR .trampoline
-  RTL
-.trampoline:
   JMP ($002E)
 }
 
@@ -255,7 +252,7 @@ pose_collision_routine_table:
 check_samus_always_no_collision:
 {
   LDA #$0000
-  RTS
+  RTL
 }
 
 check_samus_is_inside_enemy:
@@ -294,11 +291,11 @@ check_samus_is_inside_enemy:
 
 .no_collision
   LDA #$0000
-  RTS
+  RTL
 
 .collision:
   LDA #$FFFF
-  RTS
+  RTL
 }
 
 check_samus_is_standing_on_enemy:
@@ -319,7 +316,7 @@ check_samus_is_standing_on_enemy:
   CMP $0F82,x
   BCC .label2
   LDA #$0000
-  RTS
+  RTL
 
 .label2:
   ; If [Samus Y position] + [Samus Y radius] > [Enemy Y position]: return 0
@@ -340,11 +337,11 @@ check_samus_is_standing_on_enemy:
 
 .not_standing_on_enemy:
   LDA #$0000
-  RTS
+  RTL
 
 .standing_on_enemy:
   LDA #$FFFF
-  RTS
+  RTL
 }
 
 end_ride_enemies_freespace_a0:
