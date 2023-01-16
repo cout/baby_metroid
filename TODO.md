@@ -44,8 +44,6 @@ Incomplete
 * Potential softlock at Kraid (all boss fights should start with the
     door unlocked)
 * Potential softlock in speed hallway (though this is less likely)
-* WS attic enemies make it challenging after power is on (maybe remove
-  kihunters?)
 * Eye doors sometimes still close
 * baby should ignore samus's shots otherwise it's too hard to shoot the
     seaweed
@@ -74,6 +72,8 @@ Probably Won't Fix
 * Samus can move through enemies going the opposite direction as she is,
     but she cannot move through enemies going the same direction
     (workaround: use bombs)
+* WS attic enemies make it challenging after power is on (E. was able to
+    do this room just fine)
 
 Cosmetic
 --------
