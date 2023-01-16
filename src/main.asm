@@ -101,6 +101,7 @@ incsrc rooms/landing_site.asm
 incsrc rooms/flyway.asm
 incsrc rooms/below_landing_site.asm
 incsrc rooms/red_brinstar_fireflea.asm
+incsrc rooms/volcano_room.asm
 incsrc outro/escape.asm
 
 %VALIDATE_FREESPACE()

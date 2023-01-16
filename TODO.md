@@ -125,7 +125,7 @@ Feedback from E
 * norfair spiky room is too hard
 * hard to get across acid in LN main hall
 * hard to get out of acid in acid statue room
-* Please shorten volcano room earthquake
+* Please shorten volcano room earthquake - fixed
 * Hard to get back up in room next to frog speedway
 * It's really hard to get through rooms when the enemies push Samus
     (e.g. business center or green brinstar shaft)
