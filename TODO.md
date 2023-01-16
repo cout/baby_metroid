@@ -42,7 +42,6 @@ Incomplete
 ----------
 
 * Kraid fight is still mostly vanilla
-* Pit room is empty of enemies
 * Ice beam gate room is hard without knowing how to use the run button
 * Potential softlock at Kraid (all boss fights should start with the
     door unlocked)

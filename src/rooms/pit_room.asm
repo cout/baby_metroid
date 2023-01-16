@@ -69,11 +69,16 @@ db $00       ; death quota
 ; Room $975C state $9787: Enemy population
 org $A18427
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $F653, $0268, $0070, $0000, $2000, $0004, $8001, $0010 ; batta3 (crateria grey walking pirate)
-dw $F353, $02CD, $003F, $0000, $2000, $0004, $0001, $0020 ; batta1 (crateria grey wall pirate)
-dw $F653, $01F9, $0070, $0000, $2000, $0004, $8000, $0010 ; batta3 (crateria grey walking pirate)
-dw $F653, $0178, $0070, $0000, $2000, $0004, $8001, $0010 ; batta3 (crateria grey walking pirate)
-dw $F653, $0068, $0080, $0000, $2000, $0004, $8001, $0020 ; batta3 (crateria grey walking pirate)
+; dw $F653, $0268, $0070, $0000, $2000, $0004, $8001, $0010 ; batta3 (crateria grey walking pirate)
+; dw $F353, $02CD, $003F, $0000, $2000, $0004, $0001, $0020 ; batta1 (crateria grey wall pirate)
+; dw $F653, $01F9, $0070, $0000, $2000, $0004, $8000, $0010 ; batta3 (crateria grey walking pirate)
+; dw $F653, $0178, $0070, $0000, $2000, $0004, $8001, $0010 ; batta3 (crateria grey walking pirate)
+; dw $F653, $0068, $0080, $0000, $2000, $0004, $8001, $0020 ; batta3 (crateria grey walking pirate)
+dw $E5BF, $0268, $0088, $0000, $2800, $0000, $0000, $0000 ; etecoon
+dw $E5BF, $02AD, $00C8, $0000, $2800, $0000, $0000, $0000 ; etecoon
+dw $E5BF, $01F9, $0088, $0000, $2800, $0000, $0000, $0000 ; etecoon
+dw $E5BF, $0178, $0088, $0000, $2800, $0000, $0000, $0000 ; etecoon
+dw $E5BF, $0068, $0088, $0000, $2800, $0000, $0000, $0000 ; etecoon
 dw $FFFF     ; end of list
 db $05       ; death quota
 
@@ -87,8 +92,9 @@ dw $FFFF     ; end of list
 ; Room $975C state $9787: Enemy graphics set
 org $B4808F
 ;  enemy  palette
-dw $F653, $0001 ; batta3 (crateria grey walking pirate)
-dw $F353, $0002 ; batta1 (crateria grey wall pirate)
+; dw $F653, $0001 ; batta3 (crateria grey walking pirate)
+; dw $F353, $0002 ; batta1 (crateria grey wall pirate)
+dw $E5BF, $0001 ; etecoon
 dw $FFFF     ; end of list
 
 ; Room $975C state $976D: FX
