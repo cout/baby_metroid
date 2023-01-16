@@ -41,32 +41,40 @@ Bugs
 Incomplete
 ----------
 
-* Kraid fight is still mostly vanilla
-* Ice beam gate room is hard without knowing how to use the run button
 * Potential softlock at Kraid (all boss fights should start with the
     door unlocked)
 * Potential softlock in speed hallway (though this is less likely)
-* Dragons in rising tide should be intangible
 * WS attic enemies make it challenging after power is on (maybe remove
   kihunters?)
 * Eye doors sometimes still close
 * doors exiting baby should be left unlocked
 * baby should ignore samus's shots otherwise it's too hard to shoot the
     seaweed
-* it is no longer as easy to get on top of wavers as I would like
-    (workaround: use morph ball)
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)
 * Grapple beam is probably tricky for a child to use
-* Samus can move through enemies going the opposite direction as she is,
-    but she cannot move through enemies going the same direction
 
 Ideas
 -----
 * Ridley could somehow drain Samus's health to 1 to encourage player
     to pick up the e-tank (or maybe just have the door locked)
 * Easier wall jumping? (or just wall-hanging ala spiderman?)
+
+Probably Won't Fix
+------------------
+
+* Kraid fight is still mostly vanilla (I think it's fine)
+* Ice beam gate room is hard without knowing how to use the run button
+    (E. finally knows how to do this, and it's not required for beating
+    the game)
+* Dragons in rising tide should be intangible (E. takes the top
+    route)
+* it is no longer as easy to get on top of wavers as I would like
+    (workaround: use morph ball)
+* Samus can move through enemies going the opposite direction as she is,
+    but she cannot move through enemies going the same direction
+    (workaround: use bombs)
 
 Cosmetic
 --------
