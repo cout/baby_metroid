@@ -92,6 +92,9 @@ Cosmetic
 * Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
     effect to pick her up by a few more pixels (three pixels less than
     the top of the enemy works well but needs more testing)
+* Sometimes when using blue suit (I've seen this in Below Landing Site
+    and Acid Snakes Room) Samus turns completely black for a moment like
+    you just see her shadow
 
 Feedback from E
 ---------------
