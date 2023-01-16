@@ -67,6 +67,8 @@ Incomplete
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)
 * Grapple beam is probably tricky for a child to use
+* Samus can move through enemies going the opposite direction as she is,
+    but she cannot move through enemies going the same direction
 
 Ideas
 -----
