@@ -54,7 +54,8 @@ dw $C91E     ; Room setup routine (bank $8F)
 ; Room $DCB1 state $DCC3: Enemy population
 org $A1E26E
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $EEBF, $0180, $0040, $0000, $2800, $0000, $0000, $0000 ; big boy
+; dw $EEBF, $0180, $0040, $0000, $2800, $0000, $0000, $0000 ; big boy
+dw $EEBF, $0180, $0040, $0000, $2C00, $0000, $0000, $0000 ; big boy
 dw $ED7F, $0228, $00A0, $0000, $A000, $0000, $0000, $0000 ; dead sidehopper
 dw $ED7F, $00A0, $0040, $0000, $A000, $0000, $0002, $0000 ; dead sidehopper
 dw $EDFF, $00F0, $0040, $0000, $A000, $0000, $0000, $0000 ; dead zoomer
@@ -71,7 +72,8 @@ db $00       ; death quota
 ; Room $DCB1 state $DCDD: Enemy population
 org $A1E26E
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $EEBF, $0180, $0040, $0000, $2800, $0000, $0000, $0000 ; big boy
+; dw $EEBF, $0180, $0040, $0000, $2800, $0000, $0000, $0000 ; big boy
+dw $EEBF, $0180, $0040, $0000, $2C00, $0000, $0000, $0000 ; big boy
 dw $ED7F, $0228, $00A0, $0000, $A000, $0000, $0000, $0000 ; dead sidehopper
 dw $ED7F, $00A0, $0040, $0000, $A000, $0000, $0002, $0000 ; dead sidehopper
 dw $EDFF, $00F0, $0040, $0000, $A000, $0000, $0000, $0000 ; dead zoomer

@@ -45,8 +45,6 @@ Incomplete
     door unlocked)
 * Potential softlock in speed hallway (though this is less likely)
 * Eye doors sometimes still close
-* baby should ignore samus's shots otherwise it's too hard to shoot the
-    seaweed
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)
