@@ -47,7 +47,6 @@ Incomplete
 * WS attic enemies make it challenging after power is on (maybe remove
   kihunters?)
 * Eye doors sometimes still close
-* doors exiting baby should be left unlocked
 * baby should ignore samus's shots otherwise it's too hard to shoot the
     seaweed
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
