@@ -93,6 +93,7 @@ incsrc rooms/wasteland.asm
 incsrc rooms/ridley_etank.asm
 incsrc rooms/firefleas.asm
 incsrc rooms/spring_ball_maze.asm
+incsrc rooms/dust_torizo.asm
 incsrc rooms/big_boy.asm
 incsrc rooms/tourian_escape_1.asm
 incsrc rooms/tourian_escape_2.asm
