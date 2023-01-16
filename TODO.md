@@ -56,10 +56,6 @@ Incomplete
     seaweed
 * it is no longer as easy to get on top of wavers as I would like
     (workaround: use morph ball)
-* it used to be that the mochtroids in halfie climb room would "pick up"
-    samus as she is standing, but that was changed in order to prevent
-    Samus from getting pushed; I would still like them to be able to
-    pick her up, because that was fun
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)

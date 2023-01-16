@@ -106,9 +106,20 @@ move_samus_horiz_with_enemy:
   ADC $18
   STA $0B58
 
-  ; If Samus is below the enemy (which can only happen when morphed),
-  ; then move her up one pixel to lift her off the ground.  This lets
-  ; Samus ride the zeelas across the crumble blocks in noob bridge.
+  ; If Samus is not morphed, we are done
+  PHX
+  LDA $0A1F
+  AND #$00FF
+  TAX
+  LDA.l pose_collision_type_table,x
+  PLX
+  AND #$00FF
+  CMP #$0001
+  BNE .return
+
+  ; If Samus is morphed and below the enemy, then move her up one pixel
+  ; to lift her off the ground.  This lets Samus ride the zeelas across
+  ; the crumble blocks in noob bridge.
   ; TODO - if we lift samus to just below the top of the enemy, then it
   ; looks as if the enemy has "picked up" samus
   LDA $0AFA
@@ -194,9 +205,20 @@ move_samus_vert_with_enemy:
   STZ $0B2E
 +
 
-  ; If Samus is below the enemy (which can only happen when morphed),
-  ; then move her up one pixel to lift her off the ground.  This lets
-  ; Samus ride the zeelas across the crumble blocks in noob bridge.
+  ; If Samus is not morphed, we are done
+  PHX
+  LDA $0A1F
+  AND #$00FF
+  TAX
+  LDA.l pose_collision_type_table,x
+  PLX
+  AND #$00FF
+  CMP #$0001
+  BNE .return
+
+  ; If Samus is morphed and below the enemy, then move her up one pixel
+  ; to lift her off the ground.  This lets Samus ride the zeelas across
+  ; the crumble blocks in noob bridge.
   ; TODO - if we lift samus to just below the top of the enemy, then it
   ; looks as if the enemy has "picked up" samus
   LDA $0AFA
@@ -216,12 +238,23 @@ ride_enemies_check_collision:
 {
   PHX
 
+.select_collision_type_from_enemy_type:
+  ; Mochtroids can pick Samus up
+  LDA $0F78,x
+  CMP #$D8FF
+  BNE +
+  LDA #$0001
+  BRA .select_collision_routine
++
+
+.select_collision_type_from_pose:
   LDA $0A1F
   AND #$00FF
   TAX
   LDA.l pose_collision_type_table,x
   AND #$00FF
 
+.select_collision_routine:
   ASL
   TAX
   LDA.l pose_collision_routine_table,x
