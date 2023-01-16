@@ -109,6 +109,8 @@ move_samus_horiz_with_enemy:
   ; If Samus is below the enemy (which can only happen when morphed),
   ; then move her up one pixel to lift her off the ground.  This lets
   ; Samus ride the zeelas across the crumble blocks in noob bridge.
+  ; TODO - if we lift samus to just below the top of the enemy, then it
+  ; looks as if the enemy has "picked up" samus
   LDA $0AFA
   CLC
   ADC $0B5C
@@ -195,6 +197,8 @@ move_samus_vert_with_enemy:
   ; If Samus is below the enemy (which can only happen when morphed),
   ; then move her up one pixel to lift her off the ground.  This lets
   ; Samus ride the zeelas across the crumble blocks in noob bridge.
+  ; TODO - if we lift samus to just below the top of the enemy, then it
+  ; looks as if the enemy has "picked up" samus
   LDA $0AFA
   CLC
   ADC $0B5C

@@ -52,8 +52,6 @@ Incomplete
 * WS attic enemies make it challenging after power is on (maybe remove
   kihunters?)
 * Eye doors sometimes still close
-* Ridley needs to somehow drain Samus's health to 1 to encourage player
-    to pick up the e-tank (or maybe just have the door locked)
 * doors exiting baby should be left unlocked
 * baby should ignore samus's shots otherwise it's too hard to shoot the
     seaweed
@@ -71,6 +69,12 @@ Incomplete
     business center)
 * Grapple beam is probably tricky for a child to use
 
+Ideas
+-----
+* Ridley could somehow drain Samus's health to 1 to encourage player
+    to pick up the e-tank (or maybe just have the door locked)
+* Easier wall jumping? (or just wall-hanging ala spiderman?)
+
 Cosmetic
 --------
 
@@ -85,6 +89,9 @@ Cosmetic
 * Broken tube in BT's room is not obvious it was holding a metroid (to
     fix this, I need to create a baby baby metroid enemy that runs away
     when Samus enter's BT's room)
+* Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
+    effect to pick her up by a few more pixels (three pixels less than
+    the top of the enemy works well but needs more testing)
 
 Feedback from E
 ---------------
