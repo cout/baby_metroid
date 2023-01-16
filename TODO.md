@@ -35,8 +35,6 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* On noob bridge, Samus gets stuck in the crumble, then falls once the
-    zeela has moved past Samus
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
 
@@ -66,8 +64,6 @@ Incomplete
     Samus from getting pushed; I would still like them to be able to
     pick her up, because that was fun
 * There is some debug code still left in Draygon's room
-* Samus can still sometimes fall when stuck to a crawling creature (e.g.
-    trying to ride zeelas on the ceiling in noob bridge)
 * There is no visual indicator where to bomb to get to ice beam, and
     riding the novas is frustrating because it is still inconsistent
 * Now that Samus can ride crawling creatures up a wall/ceiling, there

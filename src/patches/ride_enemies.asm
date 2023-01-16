@@ -182,6 +182,14 @@ move_samus_vert_with_enemy:
   STZ $0B2E
 +
 
+  ; If Samus is below the enemy (which can only happen when morphed),
+  ; then move her up one pixel to lift her off the ground.  This lets
+  ; Samus ride the zeelas across the crumble blocks in noob bridge.
+  LDA $0AFA
+  CMP $0F7E,x
+  BMI .return
+  DEC $0AFA
+
 .return:
 
   PLP
