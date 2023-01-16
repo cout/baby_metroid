@@ -66,7 +66,7 @@ class RoomStateFunction(object):
     elif func == 0xE5FF: return cls('main_area_boss', func, *struct.unpack('<H', rom.read(2)))
     elif func == 0xE612: return RoomEventStateFunction('event', func, *struct.unpack('<BH', rom.read(3)))
     elif func == 0xE629: return RoomBossStateFunction('boss', func, *struct.unpack('<BH', rom.read(3)))
-    elif func == 0xE562: return cls('zebes_awake', func, *struct.unpack('<H', rom.read(2)))
+    elif func == 0xE652: return cls('zebes_awake', func, *struct.unpack('<H', rom.read(2)))
     elif func == 0xE669: return cls('pbs', func, *struct.unpack('<H', rom.read(2)))
     else: raise RuntimeError("Unknown event state function %04Xh" % func)
 
