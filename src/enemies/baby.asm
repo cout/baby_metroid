@@ -563,7 +563,6 @@ baby_state_move_samus_to_center:
   BPL +
   EOR #$FFFF
   INC A
-  STA $7FFC00
 + CMP #$0010
   BPL .move_to_center
 

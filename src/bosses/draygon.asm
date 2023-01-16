@@ -335,7 +335,6 @@ draygon_set_samus_drawing_handler:
 
   SEC
   SBC $0915
-  STA $7FFC02
   BMI .samus_off_screen
 
   CMP #$0100
@@ -344,13 +343,11 @@ draygon_set_samus_drawing_handler:
 .samus_on_screen:
   ; use default drawing handler
   LDA #$EB52
-  STA $7FFC00
   BRA .store_drawing_handler
 
 .samus_off_screen:
   ; use null drawing handler
   LDA #$EBF2
-  STA $7FFC00
 
 .store_drawing_handler:
   STA $0A5C
