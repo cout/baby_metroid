@@ -60,8 +60,6 @@ Incomplete
     samus as she is standing, but that was changed in order to prevent
     Samus from getting pushed; I would still like them to be able to
     pick her up, because that was fun
-* There is no visual indicator where to bomb to get to ice beam, and
-    riding the novas is frustrating because it is still inconsistent
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)

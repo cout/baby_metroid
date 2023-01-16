@@ -55,42 +55,36 @@ samus_statue_palette:
 
 samus_statue_lower_crateria_palette:
 dw $7c00, $28e7, $41ad, $5a73, $7f9c, $0844, $0000, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
 samus_statue_warehouse_entrance_palette:
 dw $7c00, $2c22, $4167, $5a2d, $7fb9, $1820, $0000, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
 samus_statue_bubble_mountain_palette:
 dw $7c00, $10c2, $25c5, $4309, $53ec, $0885, $0000, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
 samus_statue_red_norfair_palette:
 dw $7c00, $0c49, $0c72, $0c99, $1e7d, $0c41, $0000, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
 samus_statue_red_brinstar_palette:
 dw $7c00, $104c, $14b0, $2117, $2d7c, $0c48, $0804, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
 samus_statue_red_brinstar_green_palette:
 dw $7c00, $0884, $1529, $19af, $2a54, $0821, $0000, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
 samus_statue_wrecked_ship_green_palette:
 dw $7c00, $04c6, $0d08, $25ce, $3e94, $0843, $0000, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
 samus_statue_yellow_maridia_palette:
 dw $7c00, $0087, $0ce9, $114c, $19f2, $6024, $0000, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
 
 ; TODO: Top line of colors are the right colors, but the statue gets
 ; drawn on top of FX, so the colors show up wrong
 samus_statue_pink_maridia_palette:
 ; dw $7c00, $34AB, $5133, $6A19, $7fff, $2066, $0000, $0000
 dw $7c00, $1C09, $3891, $5177, $675D, $0804, $0000, $0000
-dw $0000, $0000, $0000, $0000, $0000, $0000, $0000, $0000
+
+samus_statue_upper_norfair_metal_palette:
+dw $7c00, $292E, $3DB3, $5EBB, $7FFF, $1486, $0000, $0000
 
 samus_statue_palettes:
 
@@ -103,6 +97,7 @@ dw samus_statue_red_brinstar_green_palette    ; 5
 dw samus_statue_wrecked_ship_green_palette    ; 6
 dw samus_statue_yellow_maridia_palette        ; 7
 dw samus_statue_pink_maridia_palette          ; 8
+dw samus_statue_upper_norfair_metal_palette   ; 9
 
 samus_statue_looking_up_spritemap:
 {
@@ -220,8 +215,6 @@ samus_statue_init_ai:
   LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
   LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
   LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
-  ; LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
-  ; LDA $0000,y : STA $7EC300,x : INY : INY : INX : INX
 
 .return:
   RTL
