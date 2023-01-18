@@ -1028,6 +1028,8 @@ TODO: Move this to an appropriate location
 | Address    | Bytes | Description                     | Initial value        |
 | ---------- | ----- | ------------------------------- | -------------------- |
 | $7E:0DDE   | 2     | Current projectile index?       |                      |
+| $7E:0B64+y | 2     | Projectile X position           |                      |
+| $7E:0B78+y | 2     | Projectile Y position           |                      |
 | $7E:0BDC+y | 2     | Projectile X speed              |                      |
 | $7E:0BF0+y | 2     | Projectile Y speed              |                      |
 | $7E:0C18+y | 2     | Projectile type                 |                      |
