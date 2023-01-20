@@ -30,10 +30,7 @@ org !intro_text_page_3
   dw $0E01, "BABY METROID, DESTROYING THE"
   dw $1001, "STATION AND EVERYONE ON IT..."
   dw !intro_text_end
-  dw $0001, $0101, $D683     ; TODO - this is here in case I need an
-                             ; indirect instruction to fix waiting on a
-                             ; button
-  dw !intro_text_page_3_wait ; TODO - why doesn't this wait on a button?
+  dw !intro_text_page_3_wait
   dw !intro_text_delete
 }
 
@@ -53,8 +50,10 @@ org !intro_text_page_4
 
 ;;;;;;;;;; SCENE 3 ;;;;;;;;;;
 
-org $8BB0AC
+org $8BB100
 LDA #$C11B
+STA $1F51
+RTS
 
 org $8BC2B8
 JSR ceres_station_cutscene_queue_music
