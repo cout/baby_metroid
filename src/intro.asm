@@ -5,7 +5,7 @@ pushtable
 ;;;;;;;;;; TEXT ;;;;;;;;;;
 
 ; I first battled the metroids
-; on planet Zebes.  It was there
+; on planet Zebes. It was there
 ; that I foiled the plans of
 ; the space pirate leader
 ; Mother Brain to use the
@@ -34,6 +34,20 @@ org !intro_text_page_3
                              ; indirect instruction to fix waiting on a
                              ; button
   dw !intro_text_page_3_wait ; TODO - why doesn't this wait on a button?
+  dw !intro_text_delete
+}
+
+org !intro_text_page_4
+{
+  dw !intro_text_begin
+  dw $0401, "I FOUND THE BABY, NOW FULLY"
+  dw $0601, "GROWN, DEEP IN MOTHER BRAIN'S"
+  dw $0801, "HIDEOUT. I INTENDED TO BRING"
+  dw $0A01, "THE ADOLESCENT METROID TO"
+  dw $0C01, "SAFETY, BUT IN THE END IT WAS"
+  dw $0E01, "I WHO NEEDED SAVING..."
+  dw !intro_text_end
+  dw !intro_text_page_4_wait
   dw !intro_text_delete
 }
 
