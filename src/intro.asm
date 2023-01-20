@@ -73,6 +73,7 @@ ceres_station_cutscene_queue_music:
   LDA $0998
   CMP #$001E : BEQ .ceres_flashback
 
+.ceres_boom_or_escape:
   LDA #$0000 : JSL $808FC1 ; Stop music
   LDA #$FF2D : JSL $808FC1 ; Queue Ceres music data
 
@@ -122,7 +123,7 @@ start_intro_page_4:
 {
   JSR $A395 ; TODO: this also stops music...
   JSR $A66F
-  LDA #wait_for_fade_in_page_4
+  LDA.w #wait_for_fade_in_page_4
   STA $1F51
   RTS
 }
@@ -160,5 +161,30 @@ end_intro_scene_3_freespace_8B:
 !FREESPACE_8B := end_intro_scene_3_freespace_8B
 
 ;;;;;;;;;; SCENE 4 ;;;;;;;;;;
+
+org $8BB131
+JSR set_up_new_mother_brain_fight
+RTS
+
+org !FREESPACE_8B
+
+set_up_new_mother_brain_fight:
+{
+  JSR $AEB8
+
+  LDA.w #cinematic_function_start_new_mother_brain_fight
+  STA $1F51
+
+  RTS
+}
+
+cinematic_function_start_new_mother_brain_fight:
+{
+  JSR $B250
+  RTS
+}
+
+end_intro_scene_4_freespace_8B:
+!FREESPACE_8B := end_intro_scene_4_freespace_8B
 
 pulltable
