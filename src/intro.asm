@@ -169,7 +169,82 @@ org !FREESPACE_8B
 
 set_up_new_mother_brain_fight:
 {
-  JSR $AEB8
+  LDA $1BA3              ;\
+  BEQ .aec2              ;} If [intro Japanese text timer] != 0:
+  DEC A                  ;\
+  STA $1BA3              ;} Decrement intro Japanese text timer
+  RTS
+
+.aec2:
+  LDA $8F                ;\
+  BNE .aec7              ;} If not newly pressed anything:
+  RTS                    ; Return
+
+.aec7:
+  SEP #$20
+  LDA #$50               ;\
+  STA $58                ;} BG1 tilemap base address = $5000, size = 32x32
+  REP #$20
+  LDA #$0002             ;\
+  STA $0A1C              ;} Samus pose = facing left - normal
+  JSL $91F433            ; Execute $91:F433
+  JSL $91FB08            ; Set Samus animation frame if pose changed
+  LDA $0A20              ;\
+  STA $0A24              ;} Samus last different pose = [Samus previous pose]
+  LDA $0A22              ;\
+  STA $0A26              ;} Samus last different pose X direction / movement type = [Samus previous pose X direction / movement type]
+  LDA $0A1C              ;\
+  STA $0A20              ;} Samus previous pose = [Samus pose]
+  LDA $0A1E              ;\
+  STA $0A22              ;} Samus previous pose X direction / movement type = Samus pose X direction / movement type
+  LDA #$009B             ;\
+  STA $0AF6              ;} Samus X position = 9Bh
+  STA $0B10              ; Samus previous X position = [Samus X position]
+  LDA #$0073             ;\
+  STA $0AFA              ;} Samus Y position = 73h
+  STA $0B14              ; Samus previous Y position = [Samus Y position]
+  STZ $1993              ; $1993 = 0
+  LDA #$007F
+  STA $1A4B
+  ; LDY #$CE55             ;\
+  ; STZ $12                ;} Spawn cinematic sprite object $CE55 to index 0 (intro Mother Brain)
+  ; JSR $93A2              ;/
+  ; LDY #$CF27             ;\
+  ; JSR $938A              ;} Spawn cinematic sprite object $CF27 (rinka spawner)
+  ; LDX #$0000             ;\
+
+.af21:                   ;|
+  ; LDA $8CBEC3,x          ;|
+  LDA scene_4_level_data,x
+  STA $7F0002,x          ;|
+  INX                    ;} Level data = [$8C:BEC3..C082] (old Mother Brain room)
+  INX                    ;|
+  CPX #$01C0             ;|
+  BMI .af21              ;/
+  LDX #$0000             ;\
+  LDA #$0000             ;|
+
+.af36:                   ;|
+  STA $7F6402,x          ;|
+  INX                    ;} BTS = 0
+  INX                    ;|
+  CPX #$0200             ;|
+  BMI .af36              ;/
+
+  LDA #$0001             ;\
+  STA $09D2              ;} HUD item index = missiles
+  LDA #$E6C9             ;\
+  STA $0A42              ;} $0A42 = $E6C9 (demo)
+  LDA #$E833             ;\
+  STA $0A44              ;} $0A44 = $E833 (intro demo)
+  JSL $918370            ; Execute $91:8370
+  JSL $91834E            ; Execute $91:834E (Set up Samus for game input)
+  LDY #$8784             ; Y = $8784
+  JSL $918395            ; Execute $91:8395 (Load demo input object)
+  LDA #$FFFF             ;\
+  STA $1A57              ;} Set Samus to be displayed over cinematic sprite objects
+  ; JMP $B018              ; Go to set up intro crossfade into Samus gameplay
+  JSR $B018
 
   LDA.w #cinematic_function_start_new_mother_brain_fight
   STA $1F51
@@ -185,5 +260,52 @@ cinematic_function_start_new_mother_brain_fight:
 
 end_intro_scene_4_freespace_8B:
 !FREESPACE_8B := end_intro_scene_4_freespace_8B
+
+org $8BB2CA
+RTS
+
+org !FREESPACE_8C
+
+pushtable
+' ' = $0000
+'8' = $8000
+'1' = $1000
+
+scene_4_level_data:
+{
+  ; dw "                "
+  ; dw "8888888888888888"
+  ; dw "888888   8      "
+  ; dw "888888  888     "
+  ; dw "88888           "
+  ; dw "888888          "
+  ; dw "8888            "
+  ; dw "8888            "
+  ; dw "8888     1  1111"
+  ; dw "888888   8  8888"
+  ; dw "8888888  8      "
+  ; dw "8888888  8      "
+  ; dw "8888888  88     "
+  ; dw "8888888888888888"
+  dw "                "
+  dw "8888888888888888"
+  dw "8               "
+  dw "8               "
+  dw "8               "
+  dw "8               "
+  dw "8               "
+  dw "8               "
+  dw "8               "
+  dw "8               "
+  dw "8               "
+  dw "8111111111111111"
+  dw "8888888888888888"
+  dw "8888888888888888"
+}
+
+pulltable
+
+end_intro_scene_4_freespace_8c:
+!FREESPACE_8C := end_intro_scene_4_freespace_8c
 
 pulltable

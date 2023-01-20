@@ -95,6 +95,7 @@ Cosmetic
     you just see her shadow
 * The easy blue suit patch causes Samus to briefly be visible in color
     before the first flashback scene in the intro
+* Disable Japanese text option
 
 Feedback from E
 ---------------
