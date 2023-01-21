@@ -3,7 +3,13 @@ __pycache__
 src/rooms/orig:
 src/rooms/*.bin
 src/rooms/*.bin.orig
+src/rooms/orig/
+src/experimental/
+src/bk/
 resources/sm_orig.sfc
 resources/sm_orig.srm
+tools/SuperFamiconv/
+tools/chrgfx/
+tools/bk/
 *~
-*.bk
+*.bk*
