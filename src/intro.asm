@@ -222,6 +222,10 @@ org $8BB100
 JSR set_up_new_mother_brain_fight
 RTS
 
+org $96FF14
+incbin "intro_bg1_tilemap.bin"
+warnpc $9788CC
+
 org !FREESPACE_8B
 
 set_up_new_mother_brain_fight:
