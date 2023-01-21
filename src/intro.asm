@@ -23,7 +23,7 @@ org !intro_text_page_1
   dw !intro_text_delete
 }
 
-org !intro_text_page_3
+org !intro_text_page_2
 {
   dw !intro_text_begin
   dw $0401, "I DELIVERED IT TO SCIENTISTS"
@@ -34,11 +34,11 @@ org !intro_text_page_3
   dw $0E01, "BABY METROID, DESTROYING THE"
   dw $1001, "STATION AND EVERYONE ON IT..."
   dw !intro_text_end
-  dw !intro_text_page_3_wait
+  dw !intro_text_page_2_wait
   dw !intro_text_delete
 }
 
-org !intro_text_page_4
+org !intro_text_page_3
 {
   dw !intro_text_begin
   dw $0401, "I FOUND THE BABY, NOW FULLY"
@@ -48,7 +48,7 @@ org !intro_text_page_4
   dw $0C01, "SAFETY, BUT IN THE END IT WAS"
   dw $0E01, "I WHO NEEDED SAVING..."
   dw !intro_text_end
-  dw !intro_text_page_4_wait
+  dw !intro_text_page_3_wait
   dw !intro_text_delete
 }
 
@@ -66,6 +66,10 @@ org $8BAE61
   RTS
 }
 warnpc $8BAE91
+
+; Go to page 2 after discovery scene
+org $8BCB91
+dw $B336
 
 org !FREESPACE_8B
 
@@ -86,12 +90,10 @@ intro_clear_bts:
 end_intro_scene_1_freespace_8B:
 !FREESPACE_8B := end_intro_scene_1_freespace_8B
 
-;;;;;;;;;; SCENE 3 ;;;;;;;;;;
+;;;;;;;;;; SCENE 2 ;;;;;;;;;;
 
-org $8BB100
-LDA #$C11B
-STA $1F51
-RTS
+org $8BAEB1
+LDA.w #wait_for_input_and_start_ceres_flashback
 
 org $8BC2B8
 JSR ceres_station_cutscene_queue_music
@@ -101,9 +103,27 @@ org $8BC37B
 JMP ceres_station_falls_init_next_state
 
 org $8BC603
-JMP start_intro_page_4
+JMP start_intro_page_3
 
 org !FREESPACE_8B
+
+wait_for_input_and_start_ceres_flashback:
+{
+  LDA #$0001
+  STA $7FFC00
+
+  LDA $8F
+  BNE +
+  RTS
++
+
+  LDA #$0002
+  STA $7FFC00
+
+  LDA #$C11B
+  STA $1F51
+  RTS
+}
 
 ceres_station_cutscene_queue_music:
 {
@@ -155,16 +175,16 @@ ceres_station_falls_init_next_state:
   RTS
 }
 
-start_intro_page_4:
+start_intro_page_3:
 {
   JSR $A395 ; TODO: this also stops music...
   JSR $A66F
-  LDA.w #wait_for_fade_in_page_4
+  LDA.w #wait_for_fade_in_page_3
   STA $1F51
   RTS
 }
 
-wait_for_fade_in_page_4:
+wait_for_fade_in_page_3:
 {
   ; wait for music to be not queued (TODO - we don't want this)
   JSL $808EF4
@@ -187,7 +207,7 @@ wait_for_fade_in_page_4:
   LDA #$007F
   STA $1A4B
 
-  JMP $B346 ; start intro page 4
+  JMP $B33E ; start intro page 3
 
 .return:
   RTS
@@ -196,9 +216,9 @@ wait_for_fade_in_page_4:
 end_intro_scene_3_freespace_8B:
 !FREESPACE_8B := end_intro_scene_3_freespace_8B
 
-;;;;;;;;;; SCENE 4 ;;;;;;;;;;
+;;;;;;;;;; SCENE 3 ;;;;;;;;;;
 
-org $8BB131
+org $8BB100
 JSR set_up_new_mother_brain_fight
 RTS
 
