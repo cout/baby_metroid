@@ -1,23 +1,27 @@
+; Skip "the last metroid is in captivity..."
+org $8BA5AD
+LDA #$A66F
+
 pushtable
 
 %use_intro_text_table()
 
 ;;;;;;;;;; TEXT ;;;;;;;;;;
 
-; I first battled the metroids
-; on planet Zebes. It was there
-; that I foiled the plans of
-; the space pirate leader
-; Mother Brain to use the
-; creater to attack
-; Galactic Civilization...
-
-; I next fought the metroids on
-; their home world, SR388. I
-; completely eradicated them
-; except for a larva, which
-; after hatching followed me
-; like a confused child...
+org !intro_text_page_1
+{
+  dw !intro_text_begin
+  dw $0401, "AFTER FIGHTING THE METROIDS"
+  dw $0601, "ON THEIR HOME WORLD, SR388,"
+  dw $0801, "I THOUGHT THEY WERE GONE"
+  dw $0A01, "FOREVER. BUT THERE WAS ONE"
+  dw $0C01, "LARVA, A BABY, WHICH AFTER"
+  dw $0E01, "HATCHING FOLLOWED ME LIKE A"
+  dw $1001, "CONFUSED CHILD..."
+  dw !intro_text_end
+  dw !intro_text_page_1_wait
+  dw !intro_text_delete
+}
 
 org !intro_text_page_3
 {
@@ -47,6 +51,40 @@ org !intro_text_page_4
   dw !intro_text_page_4_wait
   dw !intro_text_delete
 }
+
+;;;;;;;;;; SCENE 1 ;;;;;;;;;;
+
+; Set up for baby metroid discovery
+org $8BAE61
+{
+  ; Clear BTS (this is normally done by the Old Mother Brain fight)
+  JSR intro_clear_bts
+
+  LDA.w #$AF6C
+  STA $1F51
+
+  RTS
+}
+warnpc $8BAE91
+
+org !FREESPACE_8B
+
+intro_clear_bts:
+{
+  LDX #$0000
+  LDA #$0000
+.loop:
+  STA $7F6402,x
+  INX
+  INX
+  CPX #$0200
+  BMI .loop
+
+  RTS
+}
+
+end_intro_scene_1_freespace_8B:
+!FREESPACE_8B := end_intro_scene_1_freespace_8B
 
 ;;;;;;;;;; SCENE 3 ;;;;;;;;;;
 
@@ -97,7 +135,6 @@ ceres_station_cutscene_queue_music:
   RTS
 
   RTS
-
 }
 
 ceres_station_falls_init_next_state:
