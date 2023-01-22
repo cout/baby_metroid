@@ -81,14 +81,14 @@ build/.stamp:
 build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.ips
 	$(FLIPS) --apply build/baby_metroid.ips resources/sm_orig.sfc build/baby_metroid.sfc
 
-build/baby_metroid.ips: $(ASAR) $(SOURCES) $(ROOMS) src/intro_bg1_tilemap.bin
+build/baby_metroid.ips: $(ASAR) $(SOURCES) $(ROOMS) src/cinematic/intro_bg1_tilemap.bin
 	echo "build/baby_metroid.ips: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.ips.d
 	$(ASAR) $(ASAR_FLAGS) --ips build/baby_metroid.ips "$$@" src/main.asm build/scratch.sfc
 
 src/rooms/%.bin: src/rooms/%.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
 
-src/intro_bg1_tilemap.bin: src/intro_bg1_tilemap.hex
+src/cinematic/intro_bg1_tilemap.bin: src/cinematic/intro_bg1_tilemap.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
 
 $(ASAR):

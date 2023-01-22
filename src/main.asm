@@ -106,8 +106,8 @@ incsrc rooms/below_landing_site.asm
 incsrc rooms/red_brinstar_fireflea.asm
 incsrc rooms/volcano_room.asm
 incsrc rooms/ice_beam_snakes.asm
-incsrc outro/escape.asm
+incsrc cinematic/escape.asm
 incsrc cinematic/intro_text.asm
-incsrc intro.asm
+incsrc cinematic/intro.asm
 
 %VALIDATE_FREESPACE()

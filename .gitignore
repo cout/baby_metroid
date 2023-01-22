@@ -6,7 +6,8 @@ src/rooms/*.bin.orig
 src/rooms/orig/
 src/experimental/
 src/bk/
-src/intro_bg1_tilemap.bin
+src/cinematic/intro_bg1_tilemap.bin
+src/cinematic/bk
 resources/sm_orig.sfc
 resources/sm_orig.srm
 tools/SuperFamiconv/
