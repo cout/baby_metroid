@@ -246,8 +246,15 @@ set_up_new_mother_brain_fight:
   LDA #$50               ;\
   STA $58                ;} BG1 tilemap base address = $5000, size = 32x32
   REP #$20
-  LDA #$0002             ;\
-  STA $0A1C              ;} Samus pose = facing left - normal
+
+  ; Samus pose - injured from rainbow beam
+  ; TODO: Samus should stay in this pose for the whole scene, but part
+  ; way through she changes pose to falling
+  LDA #$00EB
+  STA $0A1C
+  LDA #$EB1B
+  STA $0A1F
+
   JSL $91F433            ; Execute $91:F433
   JSL $91FB08            ; Set Samus animation frame if pose changed
   LDA $0A20              ;\
@@ -258,12 +265,17 @@ set_up_new_mother_brain_fight:
   STA $0A20              ;} Samus previous pose = [Samus pose]
   LDA $0A1E              ;\
   STA $0A22              ;} Samus previous pose X direction / movement type = Samus pose X direction / movement type
-  LDA #$009B             ;\
-  STA $0AF6              ;} Samus X position = 9Bh
-  STA $0B10              ; Samus previous X position = [Samus X position]
-  LDA #$0073             ;\
-  STA $0AFA              ;} Samus Y position = 73h
-  STA $0B14              ; Samus previous Y position = [Samus Y position]
+
+  ; Samus X and previous X
+  LDA #$00B8
+  STA $0AF6
+  STA $0B10
+
+  ; Samus Y and previous Y
+  LDA #$0093
+  STA $0AFA
+  STA $0B14
+
   STZ $1993              ; $1993 = 0
   LDA #$007F
   STA $1A4B
