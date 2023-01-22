@@ -310,7 +310,7 @@ set_up_new_mother_brain_fight:
   STA $0A42              ;} $0A42 = $E6C9 (demo)
   LDA #$E833             ;\
   STA $0A44              ;} $0A44 = $E833 (intro demo)
-  JSL $918370            ; Execute $91:8370
+  JSL $918370            ; Reset demo input
   JSL $91834E            ; Execute $91:834E (Set up Samus for game input)
   LDY #$8784             ; Y = $8784
   JSL $918395            ; Execute $91:8395 (Load demo input object)
@@ -328,6 +328,30 @@ set_up_new_mother_brain_fight:
 cinematic_function_start_new_mother_brain_fight:
 {
   JSR $B250
+  LDA $1F51
+  CMP #$A391
+  BNE .return
+
+  ; TODO: instead of using a timer to advance to the next scene, we
+  ; should use instruction $B346 in a cinematic sprite object
+  LDA.w #cinematic_function_mother_brain_fight_sleep
+  STA $1F51
+  LDA #$0090
+  STA $1A49
+
+.return:
+  RTS
+}
+
+cinematic_function_mother_brain_fight_sleep:
+{
+  DEC $1A49
+  BNE .return
+
+  ; Start intro page 4
+  JMP $B346
+
+.return:
   RTS
 }
 
@@ -365,7 +389,7 @@ scene_4_level_data:
 
 pulltable
 
-end_intro_scene_4_freespace_8c:
-!FREESPACE_8C := end_intro_scene_4_freespace_8c
+end_intro_scene_3_freespace_8c:
+!FREESPACE_8C := end_intro_scene_3_freespace_8c
 
 pulltable
