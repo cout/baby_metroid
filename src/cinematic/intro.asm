@@ -348,6 +348,10 @@ cinematic_function_mother_brain_fight_sleep:
   DEC $1A49
   BNE .return
 
+  ; Set Samus to not be displayed over cinematic objects
+  ; TODO: We need to fade out / cross fade instead of just hiding Samus
+  STZ $1A57
+
   ; Start intro page 4
   JMP $B346
 
