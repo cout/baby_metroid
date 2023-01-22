@@ -52,6 +52,27 @@ org !intro_text_page_3
   dw !intro_text_delete
 }
 
+org !intro_text_page_4
+{
+  dw !intro_text_begin
+  dw $0401, "WITH MY BOUNTY I HAVE SECURED"
+  dw $0601, "A QUANTUM TIME ENGINE AND A"
+  dw $0801, "BIONIC POWER SUIT THAT FULLY"
+  dw $0A01, "PROTECTS ME FROM THE LIFE"
+  dw $0C01, "FORMS ON ZEBES..."
+  dw !intro_text_end
+  dw $0040,$0101,$D683 ; pause
+  dw !intro_text_begin
+  dw $1001, "I WILL HAVE MY REVENGE..."
+  dw !intro_text_end
+  dw $0040,$0101,$D683 ; pause
+  dw !intro_text_begin
+  dw $1401, "THE BABY MUST SURVIVE."
+  dw !intro_text_end
+  dw !intro_text_page_4_wait
+  dw !intro_text_delete
+}
+
 ;;;;;;;;;; SCENE 1 ;;;;;;;;;;
 
 ; Set up for baby metroid discovery
@@ -395,5 +416,11 @@ pulltable
 
 end_intro_scene_3_freespace_8c:
 !FREESPACE_8C := end_intro_scene_3_freespace_8c
+
+;;;;;;;;;; SCENE 3 ;;;;;;;;;;
+
+; Skip "Ceres station was under attack"
+org $8BB131
+JMP $B240
 
 pulltable
