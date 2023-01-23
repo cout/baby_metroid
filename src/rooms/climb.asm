@@ -194,10 +194,6 @@ org $838020
 dw $0000, $08E8, $0010, $FF98 : db $28, $04, $02, $1E, $01, $38, $00, $00
 
 ; Room $96BA, door list index 0: Door
-; TODO - I found the "distance to spawn" through trial-and-error.  The
-; usual way to do this is to have an elevator bring Samus into the room,
-; and the elevator will stop at the right location, but I don't want
-; anyone to see an elevator when the door is opened.
 org $838B3E
 dw $92FD        ; room id
 db $80          ; bitflags
@@ -206,7 +202,8 @@ db $16          ; door cap x
 db $4D          ; door cap y
 db $01          ; screen x
 db $04          ; screen y
-dw $05b0        ; distance to spawn
+dw $01C0        ; distance to spawn
+; dw $B981        ; door subroutine
 dw top_door_sub ; door subroutine
 
 org !FREESPACE_8F
@@ -220,9 +217,16 @@ climb_doors:
 
 top_door_sub:
 {
+  LDA $0E16
+  BEQ .not_on_an_elevator
+
   LDA $0E18
   CMP #$0002
-  BEQ in_door_transition
+  BEQ .in_transition
+
+  ; Set Samus position explicitly
+  LDA #$0180 : STA $0AF6
+  LDA #$04EF : STA $0AFA
 
   ; Set elevator to inactive
   STZ $0E16
@@ -233,7 +237,8 @@ top_door_sub:
   LDA #$000B
   JSL $90F084
 
-  in_door_transition:
+.not_on_an_elevator:
+.in_transition:
   JMP $B981
 }
 
