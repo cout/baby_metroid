@@ -67,5 +67,18 @@ set_minimap_flashing_color:
   RTS
 }
 
+org $82E21E
+JSR restore_target_bg3_colors_for_selected_item
+
+org !FREESPACE_82
+
+restore_target_bg3_colors_for_selected_item:
+{
+  LDA $C03A : STA $C23A
+  LDA $C03C : STA $C23C
+
+  RTS
+}
+
 end_hud_item_colors_freespace_90:
 !FREESPACE_90 := end_hud_item_colors_freespace_90
