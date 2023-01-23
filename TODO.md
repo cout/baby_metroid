@@ -54,6 +54,8 @@ Ideas
 * Ridley could somehow drain Samus's health to 1 to encourage player
     to pick up the e-tank (or maybe just have the door locked)
 * Easier wall jumping? (or just wall-hanging ala spiderman?)
+* Change names of items (morph ball -> spider ball, speed booster ->
+    blue suit)
 
 Probably Won't Fix
 ------------------
