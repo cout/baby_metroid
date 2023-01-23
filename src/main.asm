@@ -14,6 +14,7 @@ incsrc patches/boss_exit_fix.asm
 incsrc patches/spike_damage.asm
 incsrc patches/ammo_station.asm
 incsrc patches/hud_item_colors.asm
+incsrc patches/underwater_blue_suit.asm
 incsrc bosses/torizos.asm
 incsrc bosses/spore_spawn.asm
 incsrc bosses/ceres.asm

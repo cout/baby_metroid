@@ -96,6 +96,9 @@ Cosmetic
 * The easy blue suit patch causes Samus to briefly be visible in color
     before the first flashback scene in the intro
 * Disable Japanese text option
+* Current position on HUD minimap shows up as black during transition
+* If missiles are selected when pausing they temporarily turn white with
+    a yellow border
 
 Feedback from E
 ---------------
