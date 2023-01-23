@@ -27,7 +27,6 @@ Bugs
       pull Samus along, but that may change in the future~~
     - it is the future now, and this has changed, but I can no longer
       trigger the bug
-* It is no longer possible to traverse backward through botwoon's room
 * Geemers (and possibly other enemies) can pull Samus partially up into
     a block when she is morphed (though it is possible this can be
     triggered when she is not morphed)

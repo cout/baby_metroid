@@ -188,9 +188,15 @@ check_samus_is_hiding:
   LDA $0AFA ; samus y
   CMP #$00AD : BMI .clear_samus_is_hiding
 
+  ; Break the column if Samus is inside the bowl
   BRA .set_samus_is_hiding
 
 .test_hiding_right_side:
+  ; Break the column if Samus enters the room from the right side
+  LDA $0AF6
+  CMP #$100 : BPL .set_samus_is_hiding
+
+  ; Break the column if Samus is inside the right-side tunnel
   LDA $0AFA ; samus y
   CMP #$00C8 : BMI .clear_samus_is_hiding
 
@@ -266,6 +272,13 @@ break_botwoon_wall:
   ; Set mini boss bits for current area
   LDA #$0002
   JSL $8081A6
+
+  ; TODO - I cannot remember if the door is intentionally left grey.  I
+  ; think I thought it would be confusing if it were grey, partly
+  ; because I want to push the player toward plasma (especially since
+  ; the sand pits are no longer accessible), and partly because it's
+  ; confusing navigating pre-botwoon hallway if you don't already know
+  ; which blocks to break.
 
 .return:
   RTS
