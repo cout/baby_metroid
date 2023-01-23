@@ -99,6 +99,9 @@ Cosmetic
     a yellow border
 * The pink color for missiles in the HUD is two-tone instead of
     three-tone (not easy to fix)
+* Because Botwoon's movement is fixed on the first screen, it does not
+    really look like Botwoon is breaking the wall, but rather that the
+    wall is crumbling at random.
 
 Feedback from E
 ---------------
