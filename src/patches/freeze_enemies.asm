@@ -74,12 +74,30 @@ check_solid_enemy_detection:
   CMP #$001B
   BEQ .do_normal_solid_checks
 
-  ; TODO - I am unsure whether we want to allow Samus to pass through
-  ; enemies with blue suit (because if we do she cannot stand on them
-  ; with blue suit).  Maybe allow if blue suit and running at full
-  ; speed?
-  ; LDA $0B3E ; blue suit flag
-  ; BNE .do_normal_solid_checks
+  ; If speed boosting, then we want the normal checks; if using easy
+  ; blue suit, we want to treat enemies as solid.
+  LDA $0B3E
+  AND #$FF00
+  CMP #$0400
+  BEQ .speed_boosting
+
+  ; TODO: if Samus is screw attacking and using easy blue suit at the
+  ; same time, then Samus cannot screw attack enemies from the top (only
+  ; from the sides)
+
+  ; Otherwise, treat the enemy as solid if the contact damage index is
+  ; non-zero (i.e. Samus is screw attacking or pseudo-screw attacking).
+  LDA $0A6E
+  BNE .do_normal_solid_checks
+  BRA .treat_enemy_as_solid
+
+.speed_boosting:
+  ; If using easy blue suit, treat the enemy as solid; if speed boosting
+  ; normally, do the normal checks.
+  LDA easy_blue_suit_counter
+  AND #$FF00
+  CMP !FULL_ECHOES_SPEED
+  BNE .do_normal_solid_checks
 
 .treat_enemy_as_solid:
   ; Always treat the enemy as solid:
@@ -111,10 +129,16 @@ end_freeze_enemies_freespace_a0:
 ; solid (you cannot stand on them without the above change).
 ;
 
-org $A09A5A
+; enemy/samus collision handler (extended spritemap)
+; damage contact index == 0 (normal)
+org $A09A95
+PLB
 RTS
 
-org $A0A07A
+; enemy/Samus collision handler
+; damage contact index == 0 (normal)
+org $A0A09B
+PLB
 RTS
 
 ;;
@@ -122,7 +146,7 @@ RTS
 ;
 
 org $A0A4A1 ; common touch AI subroutine
-RTS
+; RTS
 
 ;;
 ; Disable projectile knockback and damage

@@ -5,11 +5,11 @@ lorom
 incsrc freespace.asm
 incsrc enemies.asm
 incsrc physics_constants.asm
+incsrc patches/easy_blue_suit.asm
 incsrc patches/freeze_enemies.asm
 incsrc patches/ride_enemies.asm
 incsrc patches/death_quota.asm
 incsrc patches/enemy_drops.asm
-incsrc patches/easy_blue_suit.asm
 incsrc patches/boss_exit_fix.asm
 incsrc patches/spike_damage.asm
 incsrc patches/ammo_station.asm

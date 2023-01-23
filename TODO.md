@@ -11,7 +11,6 @@ Bugs
 * Cannot run through pirates in croc speedway with speed (I am not sure
     whether this can be fixed in a general way and keep the enemies as
     solid)
-* Screw attack does not work
 * Speed hallway - it is too easy to get stuck under the crumbles
 * E managed to trigger a crash from climb to pit room before getting
     morph, but I don't know how he did it (I cannot reproduce it - E
@@ -48,6 +47,7 @@ Incomplete
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)
 * Grapple beam is probably tricky for a child to use
+* Screw attack does not work with easy blue suit from above an enemy
 
 Ideas
 -----

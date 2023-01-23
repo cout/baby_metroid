@@ -10,6 +10,8 @@
 ; * Samus can acquire blue suit slightly faster the first time easy blue
 ;   suit is used if the memory used by this patch gets initialized to a
 ;   a value between 400h and 4FFh.
+; * Contact damage index ($0A6E) is set to 0 when stationary, 1 when
+;   moving
 ;
 ;;;;;
 
@@ -19,6 +21,7 @@
 ;
 
 !FULL_ECHOES_SPEED = #$0400
+!MAX_ECHOES_SPEED = #$04FF
 !ECHOES_ACCELERATION = #$0040
 
 ;;
@@ -154,7 +157,7 @@ do_easy_blue_suit_check:
   ; somewhere, but I don't know how to do that yet.  It's good to have
   ; this check anyway in case of a stray memory write.
   LDA easy_blue_suit_counter
-  CMP #$04FF
+  CMP !MAX_ECHOES_SPEED
   BCS .cancel_blue_suit
 
   ; If the counter is greater than 400h then we have easy blue suit and
