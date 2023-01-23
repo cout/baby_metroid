@@ -79,10 +79,7 @@ Cosmetic
 --------
 
 * Easy blue suit should not produce echoes
-* Blue suit animation is not visible in lava
 * Pirate hitbox is noticeably tall
-* Can I make the selected item in the HUD be the color of the door it
-    opens?
 * Lights in the tourian escape rooms blink too fast
 * Samus should wiggle during draygon "fight"
 * Rename morph ball to spider ball?
@@ -101,6 +98,8 @@ Cosmetic
 * Current position on HUD minimap shows up as black during transition
 * If missiles are selected when pausing they temporarily turn white with
     a yellow border
+* The pink color for missiles in the HUD is two-tone instead of
+    three-tone (not easy to fix)
 
 Feedback from E
 ---------------
