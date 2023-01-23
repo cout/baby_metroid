@@ -17,7 +17,6 @@ Bugs
     morph, but I don't know how he did it (I cannot reproduce it - E
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
-* Sometimes the top door in Climb is unlocked (it should be locked)
 * door at top of climb before getting morph has peculiar scroll
 * Spore spawn is brown if Samus leaves and comes back
 * Caterpillar room statue is missing
