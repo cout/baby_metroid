@@ -8,15 +8,6 @@ Bugs
     they do not take damage)
 * It is not possible to farm with ice beam, and unfreezing an enemy with
     ice beam kills it
-* Cannot run through pirates in croc speedway with speed (I am not sure
-    whether this can be fixed in a general way and keep the enemies as
-    solid)
-* Speed hallway - it is too easy to get stuck under the crumbles
-* E managed to trigger a crash from climb to pit room before getting
-    morph, but I don't know how he did it (I cannot reproduce it - E
-    came down left side, may have walked over elevator, but that
-    shouldn't matter, and I don't think it's there before morph)
-* I was able to make spore spawn crash with but I am not sure how
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
@@ -30,21 +21,31 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* It is possible to spin jump up through a flying creature, but it is
-    not possible jump straight up through one.
-* I am still able to make enemies splat with blue suit (from below)
+
+Crashes
+-------
+
+* E managed to trigger a crash from climb to pit room before getting
+    morph, but I don't know how he did it (I cannot reproduce it - E
+    came down left side, may have walked over elevator, but that
+    shouldn't matter, and I don't think it's there before morph)
+* I was able to make spore spawn crash with but I am not sure how
 
 Incomplete
 ----------
 
 * Potential softlock at Kraid (all boss fights should start with the
     door unlocked)
-* Potential softlock in speed hallway (though this is less likely)
+* Potential softlock in speed hallway due to running out of ammo
+* Speed hallway has spike tiles where the B is
 * Eye doors sometimes still close
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)
 * Screw attack does not work with easy blue suit from above an enemy
+* It is possible to kill enemies from below with easy blue suit
+* It is possible to spin jump up through a flying creature, but it is
+    not possible jump straight up through one.
 
 Ideas
 -----
@@ -79,7 +80,6 @@ Cosmetic
 * Pirate hitbox is noticeably tall
 * Lights in the tourian escape rooms blink too fast
 * Samus should wiggle during draygon "fight"
-* Rename morph ball to spider ball?
 * Broken tube in BT's room is not obvious it was holding a metroid (to
     fix this, I need to create a baby baby metroid enemy that runs away
     when Samus enter's BT's room)
