@@ -267,8 +267,6 @@ ceres_station_cutscene_queue_music:
 
 ceres_station_falls_init_next_state:
 {
-  ; TODO: we want this scene in B&W
-
   LDA $0998
   CMP #$001E
   BEQ .intro
