@@ -119,6 +119,12 @@ end_intro_scene_1_freespace_8B:
 org $8BAEB1
 LDA.w #wait_for_input_and_start_ceres_flashback
 
+; Use a B&W palette during the intro instead of the usual ceres escape
+; palette
+org $8BC142
+JSR ceres_escape_choose_palette
+JMP $C154
+
 ; After waiting for input, we end up here in $8B:C11B, which sets up for
 ; the cutscene between ceres and zebes.  We don't want to change the
 ; music during the intro, so we change the behavior to only queue
@@ -138,6 +144,32 @@ org $8BC603
 JMP start_intro_page_3
 
 org !FREESPACE_8B
+
+ceres_escape_choose_palette:
+{
+  LDA $0998
+  CMP #$001E : BEQ .intro
+
+.cutscene:
+  LDX #$0000
+- LDA $8CE5E9,x
+  STA $7EC000,x
+  INX
+  INX
+  CPX #$0200
+  BMI -
+
+.intro:
+  LDX #$0000
+- LDA $8CE3E9,x
+  STA $7EC000,x
+  INX
+  INX
+  CPX #$0200
+  BMI -
+
+RTS
+}
 
 wait_for_input_and_start_ceres_flashback:
 {
