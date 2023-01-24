@@ -205,15 +205,15 @@ RTS
 ; flashback_palette_explosions:    dw $3800, $7F5A, $033B, $0216, $0113, $7C1D, $5814, $300A
 ;                                  dw $3BE0, $2680, $1580, $5294, $39CE, $2108, $2484, $03E0
 
-; Converted to greyscale -
-flashback_palette_gunship:       dw $18C6, $6B5A, $4210, $18C6, $0000, $4E73, $39CE, $2D68
-                                 dw $2108, $3DEF, $294A, $18C6, $4210, $294A, $18C6, $7FFF
-flashback_palette_ceres_station: dw $18C6, $6B5A, $5EF7, $4E73, $4210, $318C, $2529, $14A5
-                                 dw $0842, $18C6, $18C6, $18C6, $18C6, $294A, $294A, $0000
-flashback_palette_asteroids:     dw $14A5, $5EF7, $5294, $4A52, $4210, $318C, $2108, $18C6
-                                 dw $0842, $6B5A, $3631, $35AD, $2108, $1084, $0C63, $0000
-flashback_palette_explosions:    dw $14A5, $739C, $4631, $35AD, $2529, $5294, $39CE, $1CE7
-                                 dw $3DEF, $294A, $18C6, $5294, $39CE, $2108, $18C6, $294A
+; Converted to flashback colors:
+flashback_palette_gunship:       dw $10C6, $635A, $3A10, $10C6, $0000, $4673, $31CE, $2568
+                                 dw $1908, $35EF, $214A, $10C6, $3A10, $214A, $10C6, $77FF
+flashback_palette_ceres_station: dw $10C6, $635A, $56F7, $4673, $3A10, $298C, $1D29, $0CA5
+                                 dw $0042, $10C6, $10C6, $10C6, $10C6, $214A, $214A, $0000
+flashback_palette_asteroids:     dw $0CA5, $56F7, $4A94, $4252, $3A10, $298C, $1908, $10C6
+                                 dw $0042, $635A, $2E31, $2DAD, $1908, $0884, $0463, $0000
+flashback_palette_explosions:    dw $0CA5, $6B9C, $3E31, $2DAD, $1D29, $4A94, $31CE, $14E7
+                                 dw $35EF, $214A, $10C6, $4A94, $31CE, $1908, $10C6, $214A
 
 wait_for_input_and_start_ceres_flashback:
 {
