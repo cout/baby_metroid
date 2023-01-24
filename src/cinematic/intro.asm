@@ -135,7 +135,7 @@ RTS
 
 ; Skip the power bomb explosion during the intro
 org $8BC37B
-JMP ceres_station_falls_init_next_state
+JMP ceres_station_skip_power_bomb
 
 ; After the ceres escape video has played for a little while, we need to
 ; transfer control back to the intro; when the ship leaves the screen
@@ -265,7 +265,7 @@ ceres_station_cutscene_queue_music:
   RTS
 }
 
-ceres_station_falls_init_next_state:
+ceres_station_skip_power_bomb:
 {
   LDA $0998
   CMP #$001E
@@ -297,6 +297,7 @@ start_intro_page_3:
 .intro:
   JSR $A395 ; TODO: this also stops music...
   JSR $A66F
+  JSR $B049 ; init crossfade (TODO: do an actual cross-fade instead of cutting to black)
   LDA.w #wait_for_fade_in_page_3
   STA $1F51
   RTS
