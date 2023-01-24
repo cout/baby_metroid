@@ -113,16 +113,27 @@ end_intro_scene_1_freespace_8B:
 
 ;;;;;;;;;; SCENE 2 ;;;;;;;;;;
 
+; Next state after setting the cursor to blink
+; (we don't use $8B:AF6C, because that is repurposed for a different
+; scene)
 org $8BAEB1
 LDA.w #wait_for_input_and_start_ceres_flashback
 
+; After waiting for input, we end up here in $8B:C11B, which sets up for
+; the cutscene between ceres and zebes.  We don't want to change the
+; music during the intro, so we change the behavior to only queue
+; ceres escape cutscene music during the cutscene game state.
 org $8BC2B8
 JSR ceres_station_cutscene_queue_music
 RTS
 
+; Skip the power bomb explosion during the intro
 org $8BC37B
 JMP ceres_station_falls_init_next_state
 
+; After the ceres escape video has played for a little while, we need to
+; transfer control back to the intro; when the ship leaves the screen
+; good time to do that.
 org $8BC603
 JMP start_intro_page_3
 
@@ -198,6 +209,18 @@ ceres_station_falls_init_next_state:
 
 start_intro_page_3:
 {
+  LDA $0998
+  CMP #$001E
+  BEQ .intro
+
+.cutscene:
+  LDA #$C610
+  STA $1F51
+  LDA #$00C0
+  STA $1A49
+  RTS
+
+.intro:
   JSR $A395 ; TODO: this also stops music...
   JSR $A66F
   LDA.w #wait_for_fade_in_page_3
