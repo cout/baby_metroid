@@ -16,7 +16,7 @@ Bugs
     morph, but I don't know how he did it (I cannot reproduce it - E
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
-* Spore spawn is brown if Samus leaves and comes back
+* I was able to make spore spawn crash with but I am not sure how
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
