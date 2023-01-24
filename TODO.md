@@ -17,7 +17,6 @@ Bugs
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
 * Spore spawn is brown if Samus leaves and comes back
-* Caterpillar room statue is missing
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
@@ -73,6 +72,7 @@ Probably Won't Fix
     (workaround: use bombs)
 * WS attic enemies make it challenging after power is on (E. was able to
     do this room just fine)
+* There is no statue in caterpillar room (E. did fine without it)
 
 Cosmetic
 --------
