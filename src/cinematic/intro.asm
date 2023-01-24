@@ -1,7 +1,3 @@
-; Skip "the last metroid is in captivity..."
-org $8BA5AD
-LDA #$A66F
-
 pushtable
 
 %use_intro_text_table()
@@ -72,6 +68,49 @@ org !intro_text_page_4
   dw !intro_text_page_4_wait
   dw !intro_text_delete
 }
+
+;;;;;;;;;; SCENE "0" ;;;;;;;;;;
+
+; Skip "the last metroid is in captivity..."
+org $8BA5AD
+LDA #$A66F
+
+; Do not stop music
+org $8BA598
+RTS
+
+; Do not wait for music to be queued
+org $8BA5A7
+JMP $A5AD
+
+; Only start intro music if it is not already started
+org $8BA70C
+JSR queue_intro_music
+JMP $A724
+
+org !FREESPACE_8B
+
+queue_intro_music:
+{
+  LDA $063D
+  CMP #$0005
+  BEQ .return
+
+.initial:
+  LDA #$0000
+  JSL $808FC1
+  LDA #$FF36
+  JSL $808FC1
+  LDA #$0005
+  LDY #$000E
+  JSL $808FF7
+
+.return:
+  RTS
+}
+
+end_intro_scene_0_freespace_8B:
+!FREESPACE_8B := end_intro_scene_0_freespace_8B
 
 ;;;;;;;;;; SCENE 1 ;;;;;;;;;;
 
@@ -217,16 +256,10 @@ flashback_palette_explosions:    dw $0CA5, $6B9C, $3E31, $2DAD, $1D29, $4A94, $3
 
 wait_for_input_and_start_ceres_flashback:
 {
-  LDA #$0001
-  STA $7FFC00
-
   LDA $8F
   BNE +
   RTS
 +
-
-  LDA #$0002
-  STA $7FFC00
 
   LDA #$C11B
   STA $1F51
@@ -295,9 +328,9 @@ start_intro_page_3:
   RTS
 
 .intro:
-  JSR $A395 ; TODO: this also stops music...
-  JSR $A66F
-  JSR $B049 ; init crossfade (TODO: do an actual cross-fade instead of cutting to black)
+  JSR $A395 ; re-initialize intro graphics
+  JSR $A66F ; re-initialize intro text cinematic objects
+  JSR $B049 ; init crossfade (TODO: can we do an actual cross-fade instead of cutting to black?)
   LDA.w #wait_for_fade_in_page_3
   STA $1F51
   RTS
