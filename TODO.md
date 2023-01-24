@@ -46,7 +46,6 @@ Incomplete
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)
-* Grapple beam is probably tricky for a child to use
 * Screw attack does not work with easy blue suit from above an enemy
 
 Ideas
