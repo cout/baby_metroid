@@ -161,15 +161,59 @@ ceres_escape_choose_palette:
 
 .intro:
   LDX #$0000
-- LDA $8CE3E9,x
-  STA $7EC000,x
+- LDA flashback_palette_gunship,x
+  STA $7EC0A0,x
   INX
   INX
-  CPX #$0200
+  CPX #$0020
   BMI -
 
+  LDX #$0000
+- LDA flashback_palette_ceres_station,x
+  STA $7EC0C0,x
+  INX
+  INX
+  CPX #$0020
+  BMI -
+
+  LDX #$0000
+- LDA flashback_palette_asteroids,x
+  STA $7EC180,x
+  INX
+  INX
+  CPX #$0020
+  BMI -
+
+
+  LDX #$0000
+- LDA flashback_palette_explosions,x
+  STA $7EC1A0,x
+  INX
+  INX
+  CPX #$0020
+  BMI -
 RTS
 }
+
+; Original colors -
+; flashback_palette_gunship:       dw $1580, $4BBE, $06B9, $00EA, $0000, $173A, $0276, $01F2
+;                                  dw $014D, $3BE0, $2680, $1580, $49EF, $3129, $20A5, $7FFF
+; flashback_palette_ceres_station: dw $1580, $631F, $56BB, $4E36, $41D2, $354D, $28E9, $2064
+;                                  dw $1400, $1580, $1580, $1580, $1580, $001F, $001F, $0000
+; flashback_palette_asteroids:     dw $3800, $373F, $2E9E, $2E3B, $25D8, $1D33, $14AE, $144A
+;                                  dw $0803, $7DFF, $6819, $5413, $340A, $2004, $1403, $0000
+; flashback_palette_explosions:    dw $3800, $7F5A, $033B, $0216, $0113, $7C1D, $5814, $300A
+;                                  dw $3BE0, $2680, $1580, $5294, $39CE, $2108, $2484, $03E0
+
+; Converted to greyscale -
+flashback_palette_gunship:       dw $18C6, $6B5A, $4210, $18C6, $0000, $4E73, $39CE, $2D68
+                                 dw $2108, $3DEF, $294A, $18C6, $4210, $294A, $18C6, $7FFF
+flashback_palette_ceres_station: dw $18C6, $6B5A, $5EF7, $4E73, $4210, $318C, $2529, $14A5
+                                 dw $0842, $18C6, $18C6, $18C6, $18C6, $294A, $294A, $0000
+flashback_palette_asteroids:     dw $14A5, $5EF7, $5294, $4A52, $4210, $318C, $2108, $18C6
+                                 dw $0842, $6B5A, $3631, $35AD, $2108, $1084, $0C63, $0000
+flashback_palette_explosions:    dw $14A5, $739C, $4631, $35AD, $2529, $5294, $39CE, $1CE7
+                                 dw $3DEF, $294A, $18C6, $5294, $39CE, $2108, $18C6, $294A
 
 wait_for_input_and_start_ceres_flashback:
 {
