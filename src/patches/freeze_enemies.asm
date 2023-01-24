@@ -145,8 +145,9 @@ RTS
 ; Disable touch AI - disables knockback and damage.
 ;
 
-org $A0A4A1 ; common touch AI subroutine
-; RTS
+; common touch AI, damage contact index == 0 (normal)
+org $A0A562
+RTS
 
 ;;
 ; Disable projectile knockback and damage
