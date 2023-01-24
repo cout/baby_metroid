@@ -54,12 +54,6 @@ dw $0000     ; Library background (bank $8F)
 dw $91D5     ; Room setup routine (bank $8F)
 
 ; Room $9DC7 state $9DD9: Enemy population
-org $A1A0FD
-;  enemy  x      y      init   props  extra  param1 param2
-dw $DF3F, $0080, $0270, $0000, $2800, $0004, $0000, $0000 ; spore spawn
-dw $FFFF     ; end of list
-db $00       ; death quota
-
 ; Room $9DC7 state $9DF3: Enemy population
 org $A1A0FD
 ;  enemy  x      y      init   props  extra  param1 param2
@@ -68,11 +62,6 @@ dw $FFFF     ; end of list
 db $00       ; death quota
 
 ; Room $9DC7 state $9DD9: Enemy graphics set
-org $B48663
-;  enemy  palette
-dw $DF3F, $0001 ; spore spawn
-dw $FFFF     ; end of list
-
 ; Room $9DC7 state $9DF3: Enemy graphics set
 org $B48663
 ;  enemy  palette
@@ -80,10 +69,6 @@ dw $DF3F, $0001 ; spore spawn
 dw $FFFF     ; end of list
 
 ; Room $9DC7 state $9DD9: FX
-org $83826E
-;  door   base   target veloc     time  type  A    B    C   pal  anim blend
-dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $08, $00, $00
-
 ; Room $9DC7 state $9DF3: FX
 org $83826E
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
