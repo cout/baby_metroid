@@ -279,8 +279,7 @@ ceres_station_cutscene_queue_music:
   CMP #$0025 : BNE .ceres_escape
 
 .ceres_flashback:
-; TODO - to crossfade into the next scene do something like in $8B:B018
-
+  ; TODO - is it possible to crossfade into the next scene?
   RTS
 
 .ceres_boom:
@@ -338,17 +337,7 @@ start_intro_page_3:
 
 wait_for_fade_in_page_3:
 {
-  ; wait for music to be not queued (TODO - we don't want this)
-  JSL $808EF4
-  BCS .return
-
-  ; advance fade in and return if not max brightness
-  ; JSR $911B
-  ; BCC .return
-
   ; force max brightness
-  ; TODO - the next scene fades in with a cross-fade, so I think we need
-  ; to initialize that correctly
   SEP #$30
   LDA #$0F
   STA $51
