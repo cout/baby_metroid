@@ -491,7 +491,7 @@ cinematic_function_mother_brain_fight_sleep:
 
   ; Set Samus to not be displayed over cinematic objects
   ; TODO: We need to fade out / cross fade instead of just hiding Samus
-  STZ $1A57
+  ; STZ $1A57
 
   ; Start intro page 4
   JMP $B346
@@ -503,6 +503,11 @@ cinematic_function_mother_brain_fight_sleep:
 end_intro_scene_4_freespace_8B:
 !FREESPACE_8B := end_intro_scene_4_freespace_8B
 
+; Use Samus scene crossfade into page 4
+org $8BB38A
+LDA #$B3F4
+
+; Skip spawning old mother brain lights
 org $8BB2CA
 RTS
 
