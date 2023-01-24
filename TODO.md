@@ -35,6 +35,7 @@ Bugs
     not possible jump straight up through one.
 * It is currently not possible to exit ceres, because the cutscene jumps
     back to the intro
+* I am still able to make enemies splat with blue suit (from below)
 
 Incomplete
 ----------

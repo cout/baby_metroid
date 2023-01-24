@@ -7,6 +7,7 @@ incsrc enemies.asm
 incsrc physics_constants.asm
 incsrc patches/easy_blue_suit.asm
 incsrc patches/easy_grapple.asm
+incsrc patches/easy_xray.asm
 incsrc patches/freeze_enemies.asm
 incsrc patches/ride_enemies.asm
 incsrc patches/death_quota.asm
