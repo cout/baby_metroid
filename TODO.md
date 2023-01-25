@@ -11,8 +11,8 @@ Bugs
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
       pull Samus along, but that may change in the future~~
-    - it is the future now, and this has changed, but I can no longer
-      trigger the bug
+    - it is the future now, and this has changed, ~~but I can no longer
+      trigger the bug~~, and I have been able to trigger the bug.
 * Geemers (and possibly other enemies) can pull Samus partially up into
     a block when she is morphed (though it is possible this can be
     triggered when she is not morphed)
@@ -20,6 +20,9 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* Beetoms seem to not drop items when frozen
+* I cannot freeze crabs
+* Game freezes at draygon!
 
 Crashes
 -------
@@ -29,6 +32,8 @@ Crashes
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
 * I was able to make spore spawn crash with but I am not sure how
+* In the room above croc, I was able to get stuck crouching between an
+    enemy and a ceiling slope, resulting in samus oscillating
 
 Incomplete
 ----------
@@ -46,11 +51,16 @@ Incomplete
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
 * BT door should stay locked until after crumble sequence
+* One zeela in noob bridge should move fast so the room isn't so slow
+* It is not obvious where to bomb down in warehouse
+* Kraid's ceiling is half-gone after defeating Kraid
+* Statue in red tower should not be visible until speed is acquired
+* It should be possible to bomb jump with blue suit
+* Ridley should be vulnerable to non-charge
+* Ridley e-tank should be required
 
 Ideas
 -----
-* Ridley could somehow drain Samus's health to 1 to encourage player
-    to pick up the e-tank (or maybe just have the door locked)
 * Easier wall jumping? (or just wall-hanging ala spiderman?)
 * Change names of items (morph ball -> spider ball, speed booster ->
     blue suit)
@@ -100,6 +110,8 @@ Cosmetic
 * Because Botwoon's movement is fixed on the first screen, it does not
     really look like Botwoon is breaking the wall, but rather that the
     wall is crumbling at random.
+* Missile icon turns red at the very end of a transition
+* Some of the seahorses in writg face the wrong direction initially
 
 Feedback from E
 ---------------
