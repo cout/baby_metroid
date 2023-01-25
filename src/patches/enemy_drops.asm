@@ -15,11 +15,7 @@ org !FREESPACE_A0
 
 handle_projectile_damage_beam:
 {
-  ; If we have ice and this enemy is vulnerable to ice, then freeze the
-  ; enemy.
-  ; TODO - this only works for enemies that take one shot to freeze; it
-  ; does not work e.g. for fish
-  ; TODO - we want to get drops if we shoot a frozen enemy
+  ; If we have ice and this enemy is one-shot to ice, freeze the enemy.
   LDA $0E40
   CMP #$00FF
   BEQ .freeze_enemy
@@ -43,6 +39,19 @@ handle_projectile_damage_beam:
   PLX
   CMP #$03E8
   BCS .handle_beam_shot
+  BIT #$0002
+  BNE .spawn_drops
+
+.ice_beam:
+  ; If enemy is frozen, spawn drops
+  LDA $0F9E,x
+  BNE .refreeze_and_spawn_drops
+
+  ; If enemy is not frozen, freeze without spawning drops
+  BRA .freeze_enemy
+
+.refreeze_and_spawn_drops:
+  JSR freeze_enemy
 
 .spawn_drops:
   LDA $0F7A,x : STA $12 ; $12 = enemy x pos
@@ -59,6 +68,30 @@ handle_projectile_damage_beam:
 
 .freeze_enemy:
   JMP $A7D5
+}
+
+; This is a duplicate of $A0:A88A (which crashes if I try to call it as
+; a subroutine even if I PHB first)
+freeze_enemy:
+{
+  LDY #$0190
+  LDA $079F
+  CMP #$0002
+  BNE +
+  LDY #$012C
++
+
+  TYA
+  STA $0F9E,x
+  LDA $0F8A,x
+  ORA #$0004
+  STA $0F8A,x
+  LDA #$000A
+  STA $0FA0,x
+  LDA #$000A
+  JSL $809139
+
+  RTS
 }
 
 end_enemy_drops_freespace_a0:

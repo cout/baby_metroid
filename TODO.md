@@ -4,10 +4,6 @@ TODO
 Bugs
 ----
 
-* Ice beam cannot freeze enemies that take more than one shot (because
-    they do not take damage)
-* It is not possible to farm with ice beam, and unfreezing an enemy with
-    ice beam kills it
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
