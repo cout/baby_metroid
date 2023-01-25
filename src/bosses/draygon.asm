@@ -512,3 +512,12 @@ permagunk_pre_instruction:
 
 end_draygon_freespace_86:
 !FREESPACE_86 := end_draygon_freespace_86
+
+print "Draygon states:"
+print "  initial - ", hex(draygon_state_initial&$FFFF)
+print "  samus struggles - ", hex(draygon_state_samus_struggles&$FFFF)
+print "  scroll screen left - ", hex(draygon_state_scroll_screen_left&$FFFF)
+print "  draygon arrives - ", hex(draygon_state_draygon_arrives&$FFFF)
+print "  player control - ", hex(draygon_state_player_control&$FFFF)
+print "  wait for samus to fall - ", hex(draygon_state_wait_for_samus_to_fall&$FFFF)
+print "  chill - ", hex(draygon_state_chill&$FFFF)
