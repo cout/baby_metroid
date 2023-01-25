@@ -67,6 +67,9 @@ set_minimap_flashing_color:
   RTS
 }
 
+end_hud_item_colors_freespace_90:
+!FREESPACE_90 := end_hud_item_colors_freespace_90
+
 org $82E21E
 JSR restore_target_bg3_colors_for_selected_item
 
@@ -80,5 +83,5 @@ restore_target_bg3_colors_for_selected_item:
   RTS
 }
 
-end_hud_item_colors_freespace_90:
-!FREESPACE_90 := end_hud_item_colors_freespace_90
+end_hud_item_colors_freespace_82:
+!FREESPACE_82 := end_hud_item_colors_freespace_82
