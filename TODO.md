@@ -4,6 +4,8 @@ TODO
 Bugs
 ----
 
+* Japanese text will either not work or not make sense or maybe crash
+    the game (I have not tested it), so it should be removed
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
