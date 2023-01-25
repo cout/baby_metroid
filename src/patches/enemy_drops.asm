@@ -36,9 +36,10 @@ handle_projectile_damage_beam:
   ; Hyper beam is detected by checking the projectile damage amount; if
   ; it is 1000 or more we assume this is hyper beam.
   PHX
-  LDA $18A6
+  LDA $18A6   ; projectile index
+  ASL A
   TAX
-  LDA $0C2C,x
+  LDA $0C2C,x ; projectile damage
   PLX
   CMP #$03E8
   BCS .handle_beam_shot
