@@ -39,8 +39,9 @@ handle_projectile_damage_beam:
   PLX
   CMP #$03E8
   BCS .handle_beam_shot
+  LDA $0C22,x ; projectile type
   BIT #$0002
-  BNE .spawn_drops
+  BEQ .spawn_drops
 
 .ice_beam:
   ; If enemy is frozen, spawn drops
