@@ -7,7 +7,7 @@
 
 org $A0A722
 
-JML handle_projectile_damage_beam
+JMP handle_projectile_damage_beam
 
 spawn_enemy_drops = $A0920E
 
@@ -51,14 +51,14 @@ handle_projectile_damage_beam:
   JSL spawn_enemy_drops
 
   ; return with no damage
-  JML $A0A7D2
+  JMP $A7D2
 
 .handle_beam_shot:
   ; handle the beam shot
-  JML $A0A72D
+  JMP $A72D
 
 .freeze_enemy:
-  JML $A0A7D5
+  JMP $A7D5
 }
 
 end_enemy_drops_freespace_a0:
