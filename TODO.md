@@ -22,7 +22,6 @@ Bugs
     on top.
 * Beetoms seem to not drop items when frozen
 * I cannot freeze crabs
-* Game freezes at draygon!
 
 Crashes
 -------
