@@ -20,8 +20,8 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* Beetoms seem to not drop items when frozen
-* I cannot freeze crabs
+* Beetoms seem to not drop items when frozen (maybe fixed?)
+* Game crashes when I spark through a crab in crab shaft
 
 Crashes
 -------
