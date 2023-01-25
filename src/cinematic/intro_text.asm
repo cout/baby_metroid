@@ -138,7 +138,6 @@ intro_text_end:
   ; If this is cursor coordinates then move the cursor
   CMP #$0000
   BMI .draw
-  STA $7FFC04
   STA intro_text_position,x
   LDA intro_text_pointer,x
   INC
@@ -150,8 +149,6 @@ intro_text_end:
   PLY
 
 .draw:
-  STA $7FFC06
-
   ; Character to draw
   STA $19B5,x
 
