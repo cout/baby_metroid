@@ -4,6 +4,7 @@ TODO
 Bugs
 ----
 
+* Ceres escape cutscene shows up in greyscale instead of color
 * Japanese text will either not work or not make sense or maybe crash
     the game (I have not tested it), so it should be removed
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
@@ -44,6 +45,7 @@ Incomplete
 * It is possible to kill enemies from below with easy blue suit
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
+* BT door should stay locked until after crumble sequence
 
 Ideas
 -----
