@@ -1665,8 +1665,8 @@ register X.  It then stores the following into memory:
 | $7E:1CD7+x | PLM pre-instruction               |
 | $7E:1D27+x | PLM instruction list pointer      |
 | $7E:1D77+x | PLM loop timer                    |
-| $7E:1DC7+x |                                   |
-| $7E:1E17+x |                                   |
+| $7E:1DC7+x | PLM room argument                 |
+| $7E:1E17+x | PLM variable                      |
 | $7E:1E67   | Dynamic PLM draw instruction list |
 | $7E:DE1C+x | PLM instruction timer             |
 | $7E:DE6C+x | PLM draw timer                    |
