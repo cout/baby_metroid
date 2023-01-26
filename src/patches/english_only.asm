@@ -1,0 +1,3 @@
+org $82EDDA
+STZ $09E2
+JMP $EDED
