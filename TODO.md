@@ -52,7 +52,6 @@ Incomplete
 * It is possible to kill enemies from below with easy blue suit
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
-* BT door should stay locked until after crumble sequence
 * One zeela in noob bridge should move fast so the room isn't so slow
 * It is not obvious where to bomb down in warehouse
 * Kraid's ceiling is half-gone after defeating Kraid
