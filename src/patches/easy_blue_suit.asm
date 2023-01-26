@@ -71,6 +71,16 @@ org $90A768 : JSL do_easy_blue_suit_check ; ran into a wall
 ; refactoring.
 
 ;;
+; Set damage contact index to normal with easy blue suit
+;
+; This allows bomb jumping while pressed against a wall.
+;
+
+org $909821
+JSR set_speed_boost_damage_contact_index
+
+
+;;
 ; Routine to give easy blue suit
 ;
 
@@ -225,6 +235,21 @@ queue_echoes_sound:
   JSL $80914D
 
   PLA
+  RTS
+}
+
+set_speed_boost_damage_contact_index:
+{
+  LDA easy_blue_suit_counter
+  AND #$FF00
+  CMP !FULL_ECHOES_SPEED
+  BEQ .return
+
+  ; Only set damage contact for real blue suit
+  LDA #$0001
+  STA $0A6E
+
+.return
   RTS
 }
 
