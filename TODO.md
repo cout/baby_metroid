@@ -52,7 +52,6 @@ Incomplete
     not possible jump straight up through one.
 * Kraid's ceiling is half-gone after defeating Kraid
 * Ridley should be vulnerable to non-charge
-* Ridley e-tank should be required
 * Pirates still explode when shot twice with ice - do any other enemies
     do this?
 * Metroid in Ridley etank room should be invincible - is it?

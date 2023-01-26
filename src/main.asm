@@ -96,6 +96,7 @@ incsrc rooms/pillars.asm
 incsrc rooms/writg.asm
 incsrc rooms/red_kihunter_shaft.asm
 incsrc rooms/wasteland.asm
+incsrc rooms/ridley.asm
 incsrc rooms/ridley_etank.asm
 incsrc rooms/firefleas.asm
 incsrc rooms/spring_ball_maze.asm
