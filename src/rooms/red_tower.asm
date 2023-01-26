@@ -29,7 +29,8 @@ dw $83F1     ; Enemy graphics set offset (bank $B4)
 dw $C1C1     ; Layer 2 scroll
 dw $A284     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
-dw $0000     ; Room main routine (bank $8F)
+; dw $0000     ; Room main routine (bank $8F)
+dw red_tower_main
 dw $8854     ; Room PLM list address (bank $8F)
 dw $BB7B     ; Library background (bank $8F)
 dw $91D6     ; Room setup routine (bank $8F)
@@ -65,3 +66,26 @@ dw $FFFF     ; end of list
 org $83834E
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $06, $03, $00
+
+org !FREESPACE_8F
+
+; TODO - the idiomatic way to do this would be to add a new state, but
+; that is not easy the way I am repointing
+red_tower_main:
+{
+  ; Check if speed has been acquired
+  LDA $09A4
+  BIT #$2000
+  BNE .return
+
+  ; Delete statue
+  LDA $0F86+($40*9)
+  ORA #$0200
+  STA $0F86+($40*9)
+
+.return
+  RTS
+}
+
+end_red_tower_freespace_8f:
+!FREESPACE_8F := end_red_tower_freespace_8f

@@ -56,7 +56,6 @@ Incomplete
 * One zeela in noob bridge should move fast so the room isn't so slow
 * It is not obvious where to bomb down in warehouse
 * Kraid's ceiling is half-gone after defeating Kraid
-* Statue in red tower should not be visible until speed is acquired
 * It should be possible to bomb jump with blue suit
 * Ridley should be vulnerable to non-charge
 * Ridley e-tank should be required
