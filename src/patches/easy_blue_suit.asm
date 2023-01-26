@@ -135,13 +135,6 @@ do_easy_blue_suit_check:
   JSR queue_echoes_sound
 
 .full_run_speed
-  ; TODO - set Samus contact damage index to 1 ($0A6E)?
-  ; (I think the answer is no)
-  ; PHA
-  ; LDA #$0001
-  ; STA $0A6E
-  ; PLA
-
   ; Simulate the oscillator in the least significant byte of the real
   ; speed counter (though I do not think this has any real effect)
   EOR #$0001

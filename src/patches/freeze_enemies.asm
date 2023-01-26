@@ -68,35 +68,7 @@ org !FREESPACE_A0
 
 check_solid_enemy_detection:
 {
-  ; If shine sparking then we want to do the normal checks
-  LDA $0A1F
-  AND #$00FF
-  CMP #$001B
-  BEQ .do_normal_solid_checks
-
-  ; If speed boosting, then we want the normal checks; if using easy
-  ; blue suit, we want to treat enemies as solid.
-  LDA $0B3E
-  AND #$FF00
-  CMP #$0400
-  BEQ .speed_boosting
-
-  ; TODO: if Samus is screw attacking and using easy blue suit at the
-  ; same time, then Samus cannot screw attack enemies from the top (only
-  ; from the sides)
-
-  ; Otherwise, treat the enemy as solid if the contact damage index is
-  ; non-zero (i.e. Samus is screw attacking or pseudo-screw attacking).
   LDA $0A6E
-  BNE .do_normal_solid_checks
-  BRA .treat_enemy_as_solid
-
-.speed_boosting:
-  ; If using easy blue suit, treat the enemy as solid; if speed boosting
-  ; normally, do the normal checks.
-  LDA easy_blue_suit_counter
-  AND #$FF00
-  CMP !FULL_ECHOES_SPEED
   BNE .do_normal_solid_checks
 
 .treat_enemy_as_solid:

@@ -48,13 +48,10 @@ Incomplete
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
     should be crawling creatures on the floors of tall-ish shafts (e.g.
     business center)
-* Screw attack does not work with easy blue suit from above an enemy
-* It is possible to kill enemies from below with easy blue suit
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
 * One zeela in noob bridge should move fast so the room isn't so slow
 * Kraid's ceiling is half-gone after defeating Kraid
-* It should be possible to bomb jump with blue suit
 * Ridley should be vulnerable to non-charge
 * Ridley e-tank should be required
 * Pirates still explode when shot twice with ice - do any other enemies
@@ -63,6 +60,8 @@ Incomplete
 * Escape music in Climb feels out of place?
 * It may be hard to get through the gap in pants room, maybe widen it or
     add speed blocks next to the grapple block
+* Samus loses easy blue suit when taking damage, which can be
+    frustrating when trying to shine spark to get through single chamber
 
 Ideas
 -----
