@@ -32,9 +32,7 @@ Crashes
     morph, but I don't know how he did it (I cannot reproduce it - E
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
-* I was able to make spore spawn crash with but I am not sure how
-* In the room above croc, I was able to get stuck crouching between an
-    enemy and a ceiling slope, resulting in samus oscillating
+* I was able to make spore spawn crash but I am not sure how
 
 Softlocks
 ---------
@@ -46,7 +44,6 @@ Softlocks
 Incomplete
 ----------
 
-* Speed hallway has spike tiles where the B is
 * Eye doors sometimes still close
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
     should be crawling creatures on the floors of tall-ish shafts (e.g.
@@ -108,9 +105,6 @@ Cosmetic
 * Sometimes when using blue suit (I've seen this in Below Landing Site
     and Acid Snakes Room) Samus turns completely black for a moment like
     you just see her shadow
-* The easy blue suit patch causes Samus to briefly be visible in color
-    before the first flashback scene in the intro
-* Disable Japanese text option
 * Current position on HUD minimap shows up as black during transition
 * If missiles are selected when pausing they temporarily turn white with
     a yellow border
@@ -121,6 +115,8 @@ Cosmetic
     wall is crumbling at random.
 * Missile icon turns red at the very end of a transition
 * Some of the seahorses in writg face the wrong direction initially
+* In the room above croc, I was able to get stuck crouching between an
+    enemy and a ceiling slope, resulting in samus oscillating
 
 Feedback from E
 ---------------
