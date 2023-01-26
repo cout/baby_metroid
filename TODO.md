@@ -54,7 +54,6 @@ Incomplete
 * Ridley should be vulnerable to non-charge
 * Pirates still explode when shot twice with ice - do any other enemies
     do this?
-* Metroid in Ridley etank room should be invincible - is it?
 * Escape music in Climb feels out of place?
 * It may be hard to get through the gap in pants room, maybe widen it or
     add speed blocks next to the grapple block

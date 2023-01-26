@@ -47,7 +47,7 @@ org !FREESPACE_A1
 ridley_etank_enemy_population:
 
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $DD7F, $0060, $0060, $0000, $2000, $0000, $0000, $0005
+dw small_baby, $0060, $0060, $0000, $2000, $0000, $0000, $0005
 dw $FFFF     ; end of list
 db $00       ; death quota
 
@@ -58,7 +58,7 @@ org !FREESPACE_B4
 
 ridley_etank_enemy_graphics_set:
 ;  enemy  palette
-dw $DD7f, $0001
+dw small_baby, $0001
 dw $FFFF     ; end of list
 
 end_ridley_etank_freesapce_b4:
