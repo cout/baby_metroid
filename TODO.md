@@ -34,12 +34,16 @@ Crashes
 * In the room above croc, I was able to get stuck crouching between an
     enemy and a ceiling slope, resulting in samus oscillating
 
+Softlocks
+---------
+
+* Kraid - run out of missiles
+* Speed hallway - run out of missiles
+* Spring ball - easy to access without gravity suit
+
 Incomplete
 ----------
 
-* Potential softlock at Kraid (all boss fights should start with the
-    door unlocked)
-* Potential softlock in speed hallway due to running out of ammo
 * Speed hallway has spike tiles where the B is
 * Eye doors sometimes still close
 * Now that Samus can ride crawling creatures up a wall/ceiling, there
@@ -57,6 +61,9 @@ Incomplete
 * It should be possible to bomb jump with blue suit
 * Ridley should be vulnerable to non-charge
 * Ridley e-tank should be required
+* Pirates still explode when shot twice with ice - do any other enemies
+    do this?
+* Metroid in Ridley etank room should be invincible - is it?
 
 Ideas
 -----
