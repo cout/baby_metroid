@@ -53,7 +53,6 @@ Incomplete
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
 * One zeela in noob bridge should move fast so the room isn't so slow
-* It is not obvious where to bomb down in warehouse
 * Kraid's ceiling is half-gone after defeating Kraid
 * It should be possible to bomb jump with blue suit
 * Ridley should be vulnerable to non-charge
