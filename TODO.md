@@ -61,6 +61,8 @@ Incomplete
     do this?
 * Metroid in Ridley etank room should be invincible - is it?
 * Escape music in Climb feels out of place?
+* It may be hard to get through the gap in pants room, maybe widen it or
+    add speed blocks next to the grapple block
 
 Ideas
 -----
@@ -114,6 +116,7 @@ Cosmetic
 * Some of the seahorses in writg face the wrong direction initially
 * In the room above croc, I was able to get stuck crouching between an
     enemy and a ceiling slope, resulting in samus oscillating
+* Cursor has the wrong shape on the last page of the intro
 
 Feedback from E
 ---------------
