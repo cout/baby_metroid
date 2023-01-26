@@ -50,7 +50,6 @@ Incomplete
     business center)
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
-* One zeela in noob bridge should move fast so the room isn't so slow
 * Kraid's ceiling is half-gone after defeating Kraid
 * Ridley should be vulnerable to non-charge
 * Ridley e-tank should be required
