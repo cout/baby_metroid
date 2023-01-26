@@ -198,6 +198,8 @@ ceres_escape_choose_palette:
   CPX #$0200
   BMI -
 
+  RTS
+
 .intro:
   LDX #$0000
 - LDA flashback_palette_gunship,x
@@ -231,7 +233,8 @@ ceres_escape_choose_palette:
   INX
   CPX #$0020
   BMI -
-RTS
+
+  RTS
 }
 
 ; Original colors -

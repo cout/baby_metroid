@@ -10,7 +10,6 @@ Bugs
     again and finally goes through the door.
 * It is possible to freeze zebetite columns (and possible other enemies
     that aren't supposed to be freezable)
-* Ceres escape cutscene shows up in greyscale instead of color
 * Japanese text will either not work or not make sense or maybe crash
     the game (I have not tested it), so it should be removed
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
