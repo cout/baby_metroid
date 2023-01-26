@@ -14,7 +14,6 @@ incsrc patches/death_quota.asm
 incsrc patches/enemy_drops.asm
 incsrc patches/boss_exit_fix.asm
 incsrc patches/spike_damage.asm
-incsrc patches/ammo_station.asm
 incsrc patches/hud_item_colors.asm
 incsrc patches/underwater_blue_suit.asm
 incsrc bosses/torizos.asm
@@ -38,6 +37,7 @@ incsrc plm/blue_suit_block.asm
 incsrc plm/power_control.asm
 incsrc plm/eye_door.asm
 incsrc plm/animals_escape.asm
+incsrc plm/ammo_station.asm
 incsrc src/fx/waterflea.asm
 incsrc rooms/pit_room.asm
 incsrc rooms/climb.asm
