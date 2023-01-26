@@ -4,6 +4,12 @@ TODO
 Bugs
 ----
 
+* If Samus climbs to the top of Climb room before the baby picks her up,
+    the baby will go off screen.  When the baby finally picks Samus up,
+    Samus will be taken up many many screens before she wraps around
+    again and finally goes through the door.
+* It is possible to freeze zebetite columns (and possible other enemies
+    that aren't supposed to be freezable)
 * Ceres escape cutscene shows up in greyscale instead of color
 * Japanese text will either not work or not make sense or maybe crash
     the game (I have not tested it), so it should be removed
@@ -20,8 +26,7 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* Beetoms seem to not drop items when frozen (maybe fixed?)
-* Game crashes when I spark through a crab in crab shaft
+* Beetoms do not drop items when frozen
 
 Crashes
 -------
@@ -64,6 +69,7 @@ Incomplete
 * Pirates still explode when shot twice with ice - do any other enemies
     do this?
 * Metroid in Ridley etank room should be invincible - is it?
+* Escape music in Climb feels out of place?
 
 Ideas
 -----
