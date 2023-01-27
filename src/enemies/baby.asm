@@ -120,6 +120,8 @@ print "Baby enemy id: ", hex(baby&$FFFF)
 end_baby_freespace_a0:
 !FREESPACE_A0 := end_baby_freespace_a0
 
+baby_accelerate_slowly_toward_point = $A9F451
+
 org !FREESPACE_A9
 
 baby_instruction_list:
@@ -386,7 +388,7 @@ baby_move_to_target_position:
   LDY !BABY_ACCELERATION_TO_TARGET_POSITION
 
   ; Gradually accelerate towards point ([$12], [$14])
-  JSR $F451
+  JSR baby_accelerate_slowly_toward_point
 
   LDA $0F7A,x
   SEC
@@ -552,7 +554,7 @@ baby_state_rush_to_save_samus:
 
   LDY !BABY_ACCELERATION_ESCAPE
 
-  JMP $F451
+  JMP baby_accelerate_slowly_toward_point
 }
 
 baby_state_move_samus_to_center:
@@ -581,7 +583,7 @@ baby_state_move_samus_to_center:
   ; TODO - this is a slower movement than I intended, but I think it
   ; works
   LDY !BABY_ACCELERATION_ESCAPE
-  JSR $F451
+  JSR baby_accelerate_slowly_toward_point
 
   LDA $0F7A,x
   STA $0AF6
@@ -604,7 +606,7 @@ baby_state_climb_climb_climb:
   STA $14
 
   LDY !BABY_ACCELERATION_ESCAPE
-  JSR $F451
+  JSR baby_accelerate_slowly_toward_point
 
   LDA $0F7A,x
   STA $0AF6
@@ -630,7 +632,7 @@ follow_samus:
   LDY !BABY_ACCELERATION_TO_SAMUS
 
   ; Gradually accelerate towards point ([$12], [$14])
-  JMP $F451
+  JMP baby_accelerate_slowly_toward_point
 }
 
 end_baby_freespace_a9:
