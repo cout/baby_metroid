@@ -24,8 +24,6 @@ Bugs
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
 * Beetoms do not drop items when frozen
-* If Samus falls through the speed blocks in red tower, the scroll plms
-    do not activate
 * When starting a new game, controls get reset to default?
 
 Crashes

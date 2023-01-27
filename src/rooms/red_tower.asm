@@ -31,7 +31,8 @@ dw $A284     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
 ; dw $0000     ; Room main routine (bank $8F)
 dw red_tower_main
-dw $8854     ; Room PLM list address (bank $8F)
+; dw $8854     ; Room PLM list address (bank $8F)
+dw red_tower_room_plm_list
 dw $BB7B     ; Library background (bank $8F)
 dw $91D6     ; Room setup routine (bank $8F)
 
@@ -85,6 +86,17 @@ red_tower_main:
 
 .return
   RTS
+}
+
+red_tower_room_plm_list:
+{
+  dw $B703, $6A09, $A28E
+  dw $B63B, $6A0A, $8000
+  dw $C878, $9601, $0038
+  dw $C860, $6601, $0039
+  dw $B703, $6A07, $A28E ; new scroll plm
+  dw $B703, $6A08, $A28E ; new scroll plm
+  dw $0000
 }
 
 end_red_tower_freespace_8f:
