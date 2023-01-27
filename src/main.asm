@@ -120,4 +120,6 @@ incsrc cinematic/escape.asm
 incsrc cinematic/intro_text.asm
 incsrc cinematic/intro.asm
 
+incsrc metconst/CrashHandler.asm
+
 %VALIDATE_FREESPACE()
