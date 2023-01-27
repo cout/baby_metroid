@@ -49,6 +49,8 @@ Incomplete
 * Escape music in Climb feels out of place?
 * Samus loses easy blue suit when taking damage, which can be
     frustrating when trying to shine spark to get through single chamber
+* The baby should move more quickly toward Samus if it is very far away
+    from Samus
 
 Ideas
 -----
@@ -105,6 +107,8 @@ Cosmetic
 * Warehouse statue is not visible when entering the room; it only
     becomes visible after the room's main routine executes for the first
     time.
+* In climb escape, Samus is briefly visible at the bottom of the screen
+    after passing through the door
 
 Feedback from E
 ---------------
