@@ -54,8 +54,6 @@ Incomplete
 * Pirates still explode when shot twice with ice - do any other enemies
     do this?
 * Escape music in Climb feels out of place?
-* It may be hard to get through the gap in pants room, maybe widen it or
-    add speed blocks next to the grapple block
 * Samus loses easy blue suit when taking damage, which can be
     frustrating when trying to shine spark to get through single chamber
 
