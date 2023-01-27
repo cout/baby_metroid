@@ -23,7 +23,6 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* Beetoms do not drop items when frozen
 * When starting a new game, controls get reset to default?
 
 Crashes

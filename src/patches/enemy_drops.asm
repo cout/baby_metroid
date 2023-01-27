@@ -15,11 +15,6 @@ org !FREESPACE_A0
 
 handle_projectile_damage_beam:
 {
-  ; If we have ice and this enemy is one-shot to ice, freeze the enemy.
-  LDA $0E40
-  CMP #$00FF
-  BEQ .freeze_enemy
-
   LDX $0E54 ; X = current enemy index
 
   ; If this enemy has an extended spritemap, then handle the beam shot
@@ -40,6 +35,7 @@ handle_projectile_damage_beam:
   CMP #$03E8
   BCS .handle_beam_shot
 
+  ; If we do not have ice beam then just spawn drops without freezing
   PHX
   LDA $18A6   ; projectile index
   ASL A
