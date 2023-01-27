@@ -8,8 +8,6 @@ Bugs
     the baby will go off screen.  When the baby finally picks Samus up,
     Samus will be taken up many many screens before she wraps around
     again and finally goes through the door.
-* It is possible to freeze zebetite columns (and possible other enemies
-    that aren't supposed to be freezable)
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
