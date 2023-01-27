@@ -330,6 +330,7 @@ start_intro_page_3:
   RTS
 
 .intro:
+  JSR $BC75 ; restore button assignments so we don't wipe them out
   JSR $A395 ; re-initialize intro graphics
   JSR $A66F ; re-initialize intro text cinematic objects
   JSR $B049 ; init crossfade (TODO: can we do an actual cross-fade instead of cutting to black?)
