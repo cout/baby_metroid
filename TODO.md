@@ -26,6 +26,7 @@ Bugs
 * Beetoms do not drop items when frozen
 * If Samus falls through the speed blocks in red tower, the scroll plms
     do not activate
+* When starting a new game, controls get reset to default?
 
 Crashes
 -------
@@ -109,6 +110,9 @@ Cosmetic
 * In the room above croc, I was able to get stuck crouching between an
     enemy and a ceiling slope, resulting in samus oscillating
 * Cursor has the wrong shape on the last page of the intro
+* Warehouse statue is not visible when entering the room; it only
+    becomes visible after the room's main routine executes for the first
+    time.
 
 Feedback from E
 ---------------
@@ -128,7 +132,7 @@ Feedback from E
 * it is hard to get on top of crabs in noob bridge - fixed?
 * confusing to see samus statue in red tower before the clue is usable -
     fixed
-* ditto warehouse entrance statue
+* ditto warehouse entrance statue - fixed
 * which block to bomb in red tower is hard
 * there should be a gate in noob bridge otherwise it's a long trip back
     if you return to green hill zone - fixed by making zeelas move
