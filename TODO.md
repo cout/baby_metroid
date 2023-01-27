@@ -41,9 +41,6 @@ Incomplete
 ----------
 
 * Eye doors sometimes still close
-* Now that Samus can ride crawling creatures up a wall/ceiling, there
-    should be crawling creatures on the floors of tall-ish shafts (e.g.
-    business center)
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
 * Kraid's ceiling is half-gone after defeating Kraid
@@ -76,6 +73,8 @@ Probably Won't Fix
 * WS attic enemies make it challenging after power is on (E. was able to
     do this room just fine)
 * There is no statue in caterpillar room (E. did fine without it)
+* Put a nova on the floor of business center to help Samus climb (Samus
+    can always knock one down with a super)
 
 Cosmetic
 --------
