@@ -51,7 +51,6 @@ Incomplete
 * It is possible to spin jump up through a flying creature, but it is
     not possible jump straight up through one.
 * Kraid's ceiling is half-gone after defeating Kraid
-* Ridley should be vulnerable to non-charge
 * Pirates still explode when shot twice with ice - do any other enemies
     do this?
 * Escape music in Climb feels out of place?
