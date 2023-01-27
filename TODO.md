@@ -24,6 +24,8 @@ Bugs
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
 * Beetoms do not drop items when frozen
+* If Samus falls through the speed blocks in red tower, the scroll plms
+    do not activate
 
 Crashes
 -------
@@ -55,6 +57,7 @@ Incomplete
 * Escape music in Climb feels out of place?
 * Samus loses easy blue suit when taking damage, which can be
     frustrating when trying to shine spark to get through single chamber
+* Warehouse entrance statue should not be visible until HJB acquired
 
 Ideas
 -----
@@ -87,9 +90,6 @@ Cosmetic
 * Pirate hitbox is noticeably tall
 * Lights in the tourian escape rooms blink too fast
 * Samus should wiggle during draygon "fight"
-* Broken tube in BT's room is not obvious it was holding a metroid (to
-    fix this, I need to create a baby baby metroid enemy that runs away
-    when Samus enter's BT's room)
 * Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
     effect to pick her up by a few more pixels (three pixels less than
     the top of the enemy works well but needs more testing)
@@ -126,16 +126,19 @@ Feedback from E
 * fun to dance with big pink hoppers but they get in the way - fixed
 * cacs are scary - remove them (E thinks they are spiders)
 * it is hard to get on top of crabs in noob bridge - fixed?
-* confusing to see samus statue in red tower before the clue is usable
+* confusing to see samus statue in red tower before the clue is usable -
+    fixed
 * ditto warehouse entrance statue
 * which block to bomb in red tower is hard
 * there should be a gate in noob bridge otherwise it's a long trip back
-    if you return to green hill zone
+    if you return to green hill zone - fixed by making zeelas move
+    faster
 * frozen creatures were confusing (why were they there? will I get
     frozen?) - I did this before I was comfortable with level editing
 * E did not know how to get on rippers in bat room - fixed?
 * E thinks he can "push" enemies but it's really just a collision --
-    maybe I can make enemies get a little push?
+    maybe I can make enemies get a little push? - no, but samus can push
+    croc
 * (related idea - maybe grapple beam can "pull" enemies instead of just
     killing them - but only when samus is walking)
 * norfair spiky room is too hard
@@ -144,7 +147,7 @@ Feedback from E
 * Please shorten volcano room earthquake - fixed
 * Hard to get back up in room next to frog speedway
 * It's really hard to get through rooms when the enemies push Samus
-    (e.g. business center or green brinstar shaft)
+    (e.g. business center or green brinstar shaft) - fixed
 
 Tools
 -----
