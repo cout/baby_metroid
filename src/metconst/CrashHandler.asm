@@ -1,3 +1,6 @@
+warnings push
+warnings disable Wimplicitly_sized_immediate
+warnings disable Wfeature_deprecated
 
 ; ---------------------------
 ; Super Metroid Crash Handler
@@ -1138,3 +1141,4 @@ crash_gfx_table:
     incbin resources/crash_gfx.bin
 print pc, " Crash graphics end"
 
+warnings pull
