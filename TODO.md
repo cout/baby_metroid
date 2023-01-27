@@ -56,7 +56,6 @@ Incomplete
 * Escape music in Climb feels out of place?
 * Samus loses easy blue suit when taking damage, which can be
     frustrating when trying to shine spark to get through single chamber
-* Warehouse entrance statue should not be visible until HJB acquired
 
 Ideas
 -----
