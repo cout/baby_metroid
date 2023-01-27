@@ -47,6 +47,10 @@ Incomplete
     frustrating when trying to shine spark to get through single chamber
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
+* Norfair spiky room is intimidating
+* Hard to get across acid in LN main hall
+* Hard to get out of acid in acid statue room
+
 
 Ideas
 -----
@@ -54,31 +58,10 @@ Ideas
 * Change names of items (morph ball -> spider ball, speed booster ->
     blue suit)
 
-Probably Won't Fix
-------------------
-
-* Kraid fight is still mostly vanilla (I think it's fine)
-* Ice beam gate room is hard without knowing how to use the run button
-    (E. finally knows how to do this, and it's not required for beating
-    the game)
-* Dragons in rising tide should be intangible (E. takes the top
-    route)
-* it is no longer as easy to get on top of wavers as I would like
-    (workaround: use morph ball)
-* Samus can move through enemies going the opposite direction as she is,
-    but she cannot move through enemies going the same direction
-    (workaround: use bombs)
-* WS attic enemies make it challenging after power is on (E. was able to
-    do this room just fine)
-* There is no statue in caterpillar room (E. did fine without it)
-* Put a nova on the floor of business center to help Samus climb (Samus
-    can always knock one down with a super)
-
 Cosmetic
 --------
 
 * Easy blue suit should not produce echoes
-* Pirate hitbox is noticeably tall
 * Lights in the tourian escape rooms blink too fast
 * Samus should wiggle during draygon "fight"
 * Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
@@ -109,6 +92,28 @@ Cosmetic
 * In climb escape, baby does not pick Samus up if Samus runs to the
     right-side wall, because baby is too high
 * In climb escape, baby can take Samus through the right-side door
+
+Probably Won't Fix
+------------------
+
+* Kraid fight is still mostly vanilla (I think it's fine)
+* Ice beam gate room is hard without knowing how to use the run button
+    (E. finally knows how to do this, and it's not required for beating
+    the game)
+* Dragons in rising tide should be intangible (E. takes the top
+    route)
+* it is no longer as easy to get on top of wavers as I would like
+    (workaround: use morph ball)
+* Samus can move through enemies going the opposite direction as she is,
+    but she cannot move through enemies going the same direction
+    (workaround: use bombs)
+* WS attic enemies make it challenging after power is on (E. was able to
+    do this room just fine)
+* There is no statue in caterpillar room (E. did fine without it)
+* Put a nova on the floor of business center to help Samus climb (Samus
+    can always knock one down with a super)
+* Pirate hitbox is noticeably tall (requires changing the spritemaps not
+    just the radius)
 
 Feedback from E
 ---------------
