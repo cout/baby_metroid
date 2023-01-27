@@ -34,6 +34,7 @@ incsrc enemies/baby.asm
 incsrc enemies/baby_top.asm
 incsrc enemies/small_baby.asm
 incsrc enemies/gunship.asm
+incsrc enemies/water_zoomer.asm
 incsrc projectiles/transporter_electricity.asm
 incsrc plm/blue_suit_block.asm
 incsrc plm/power_control.asm
@@ -114,6 +115,7 @@ incsrc rooms/below_landing_site.asm
 incsrc rooms/red_brinstar_fireflea.asm
 incsrc rooms/volcano_room.asm
 incsrc rooms/ice_beam_snakes.asm
+incsrc rooms/spring_ball.asm
 incsrc cinematic/escape.asm
 incsrc cinematic/intro_text.asm
 incsrc cinematic/intro.asm

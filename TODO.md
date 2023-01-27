@@ -39,7 +39,6 @@ Softlocks
 
 * Kraid - run out of missiles
 * Speed hallway - run out of missiles
-* Spring ball - easy to access without gravity suit
 
 Incomplete
 ----------
