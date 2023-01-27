@@ -82,7 +82,8 @@ dw climb_escape_enemy_graphics_set
 dw $C1C1     ; Layer 2 scroll
 dw $9729     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
-dw $C124     ; Room main routine (bank $8F)
+; dw $C124     ; Room main routine (bank $8F)
+dw climb_escape_main
 ; dw $830C     ; Room PLM list address (bank $8F)
 dw climb_escape_room_plm
 dw $B905     ; Library background (bank $8F)
@@ -312,6 +313,22 @@ climb_escape_room_plm:
   dw $C854,$0216,($9000|!TOP_DOOR_INDEX)
 
   dw $0000 ; end of list
+}
+
+climb_escape_main:
+{
+  JSR $C124
+
+  ; Unlock scroll based on Samus's X position rather than relying on
+  ; scroll plms
+  LDA $0AFA
+  CMP #$00D0
+  BMI +
+  LDA #$0001
+  STA $7ECD20+$19
++
+
+  RTS
 }
 
 end_climb_freespace_8f:

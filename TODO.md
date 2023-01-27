@@ -4,10 +4,6 @@ TODO
 Bugs
 ----
 
-* If Samus climbs to the top of Climb room before the baby picks her up,
-    the baby will go off screen.  When the baby finally picks Samus up,
-    Samus will be taken up many many screens before she wraps around
-    again and finally goes through the door.
 * Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
     in acid snake room after getting ice)
     - ~~note this bug no longer gets triggered because the novas cannot
@@ -109,6 +105,10 @@ Cosmetic
     time.
 * In climb escape, Samus is briefly visible at the bottom of the screen
     after passing through the door
+* In climb escape, baby can take Samus through the floor
+* In climb escape, baby does not pick Samus up if Samus runs to the
+    right-side wall, because baby is too high
+* In climb escape, baby can take Samus through the right-side door
 
 Feedback from E
 ---------------
