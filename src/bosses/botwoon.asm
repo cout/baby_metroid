@@ -15,29 +15,46 @@ skip 2
 end_botwoon_freemem_7f:
 !FREEMEM_7F := end_botwoon_freemem_7f
 
+;;
 ; Init extra variables
+;
+
 org $B39663
 JSR botwoon_extra_init
 RTL
 
 warnpc $B39668
 
+;;
 ; Disable botwoon spit
+;
+;
+
 org $B39F0A : JMP $9F17
 org $BE9F57 : JMP $9F61
 
+;;
 ; Disable spit sound effect
+;
+
 org $B39572 : RTL
 
+;;
 ; Keep health above 800
+;
+
 org $B3A036
 LDA #$0320
 STA $0F8C,x
 RTL
 
+;;
 ; Keep botwoon full health behavior even when damaged
+;
 ; TODO - use the flag set in this function ($7E:803E) to override
 ; Botwoon's behavior and force coming out of the hole if Samus is hidden
+;
+
 org $B3995D
 
 botwoon_set_action_from_health:
@@ -87,6 +104,9 @@ botwoon_death_check:
 
 warnpc $B396F5
 
+;;
+; Change when Botwoon comes out of the hole (hide-and-seek game)
+;
 
 org $B398C5
 JSR filter_hole_state
@@ -95,6 +115,15 @@ warnpc $B398C8
 org $B39A1E
 JSR filter_hole_state_after_spitting
 warnpc $B39A21 ; patch for $B3:98C5
+
+
+;;
+; Change Botwoon movement when Samus is hiding (to break the wall)
+;
+
+org $B39958
+JSR botwoon_store_new_movement_state
+RTS
 
 ; -----------------------
 
@@ -227,7 +256,7 @@ check_botwoon_is_near_wall:
   ; Check to see if botwoon is near the wall
   LDX $0E54
   LDA $0F7A,x
-  CMP #$00D0
+  CMP #$00F0
   BMI .return
 
   ; Check to see it botwoon is invisible
@@ -281,6 +310,29 @@ break_botwoon_wall:
   ; which blocks to break.
 
 .return:
+  RTS
+}
+
+botwoon_store_new_movement_state:
+{
+  STA $7E8800,x
+
+  LDA samus_is_hiding
+  BEQ .return
+
+  ; If botwoon is at the right-side hole, do a loop toward the right,
+  ; through the wall
+  ; TODO - I don't think I did this comparison correctly, because it
+  ; changes Botwoon's movement even when coming out of hole other than
+  ; the right-side hole
+  LDA $7E8800,x
+  CMP #$0060
+  BMI .return
+
+  LDA #$0018
+  STA $7E8800,x
+
+.return
   RTS
 }
 

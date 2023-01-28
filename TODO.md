@@ -65,9 +65,6 @@ Cosmetic
 * Sometimes when using blue suit (I've seen this in Below Landing Site
     and Acid Snakes Room) Samus turns completely black for a moment like
     you just see her shadow
-* Because Botwoon's movement is fixed on the first screen, it does not
-    really look like Botwoon is breaking the wall, but rather that the
-    wall is crumbling at random.
 * Some of the seahorses in writg face the wrong direction initially
 * In the room above croc, I was able to get stuck crouching between an
     enemy and a ceiling slope, resulting in samus oscillating
