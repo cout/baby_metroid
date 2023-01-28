@@ -46,15 +46,15 @@ Incomplete
     frustrating when trying to shine spark to get through single chamber
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
-* Norfair spiky room is intimidating
-* Hard to get out of acid in acid statue room
-
 
 Ideas
 -----
 * Easier wall jumping? (or just wall-hanging ala spiderman?)
 * Change names of items (morph ball -> spider ball, speed booster ->
     blue suit)
+* Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
+    effect to pick her up by a few more pixels (three pixels less than
+    the top of the enemy works well but needs more testing)
 
 Cosmetic
 --------
@@ -62,9 +62,6 @@ Cosmetic
 * Easy blue suit should not produce echoes
 * Lights in the tourian escape rooms blink too fast
 * Samus should wiggle during draygon "fight"
-* Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
-    effect to pick her up by a few more pixels (three pixels less than
-    the top of the enemy works well but needs more testing)
 * Sometimes when using blue suit (I've seen this in Below Landing Site
     and Acid Snakes Room) Samus turns completely black for a moment like
     you just see her shadow
@@ -73,6 +70,8 @@ Cosmetic
     a yellow border
 * The pink color for missiles in the HUD is two-tone instead of
     three-tone (not easy to fix)
+* Dialogs show up as pink instead of yellow
+* Reserves show up as pink instead of yellow
 * Because Botwoon's movement is fixed on the first screen, it does not
     really look like Botwoon is breaking the wall, but rather that the
     wall is crumbling at random.
@@ -146,7 +145,8 @@ Feedback from E
     killing them - but only when samus is walking)
 * norfair spiky room is too hard
 * hard to get across acid in LN main hall - fixed
-* hard to get out of acid in acid statue room
+* hard to get out of acid in acid statue room - I'm not sure why we
+    though this was hard
 * Please shorten volcano room earthquake - fixed
 * Hard to get back up in room next to frog speedway
 * It's really hard to get through rooms when the enemies push Samus
