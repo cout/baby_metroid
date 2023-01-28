@@ -115,7 +115,7 @@ org $A7C398
   LDA kraid_death_timer
   STA $0FAC
 }
-warnpc $A7C3A4
+%assertpc($A7C3A4)
 
 org $A7B269 ; unused routine
 
