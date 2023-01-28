@@ -109,13 +109,15 @@ warnpc $A7BCCF
 ;
 
 org $A7C398
+{
+  LDA.w #kraid_death_sequence
+  STA $0FAA
+  LDA kraid_death_timer
+  STA $0FAC
+}
+warnpc $A7C3A4
 
-LDA.w #kraid_death_sequence
-STA $0FAA
-LDA kraid_death_timer
-STA $0FAC
-
-org $A7B269
+org $A7B269 ; unused routine
 
 kraid_death_timer:
 dw $0012, $97C8, $9788, $FFFF ; 0
@@ -136,3 +138,5 @@ dw $0012, $9DC8, $9798, $97B8 ; 2
 dw $0012, $9AC8, $9790, $97B0 ; 1
 dw $0012, $97C8, $9788, $FFFF ; 0
 dw $FFFF
+
+warnpc $A7B337
