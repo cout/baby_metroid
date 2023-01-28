@@ -65,17 +65,9 @@ Cosmetic
 * Sometimes when using blue suit (I've seen this in Below Landing Site
     and Acid Snakes Room) Samus turns completely black for a moment like
     you just see her shadow
-* Current position on HUD minimap shows up as black during transition
-* If missiles are selected when pausing they temporarily turn white with
-    a yellow border
-* The pink color for missiles in the HUD is two-tone instead of
-    three-tone (not easy to fix)
-* Dialogs show up as pink instead of yellow
-* Reserves show up as pink instead of yellow
 * Because Botwoon's movement is fixed on the first screen, it does not
     really look like Botwoon is breaking the wall, but rather that the
     wall is crumbling at random.
-* Missile icon turns red at the very end of a transition
 * Some of the seahorses in writg face the wrong direction initially
 * In the room above croc, I was able to get stuck crouching between an
     enemy and a ceiling slope, resulting in samus oscillating

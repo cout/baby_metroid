@@ -1,87 +1,56 @@
-; selected item palette (loading game)
-org $809B2E
-JSR pick_item_selected_palette
+org $809616+$04 : dw begin_hud_drawing_hook
+org $809616+$06 : dw end_hud_drawing_hook
 
-; selected item palette (playing game)
-org $809C5D
-JSR pick_item_selected_palette
-
-; auto-cancel hud palette
-org $809CA1
-JSR pick_item_selected_palette
-
-org $809CEA
-JSR update_palette
-
-; Change the minimap flashing color
-org $90AB56
-JSR set_minimap_flashing_color
+begin_hud_drawing = $80968B
+end_hud_drawing = $8096A9
 
 org !FREESPACE_80
 
-pick_item_selected_palette:
+begin_hud_drawing_hook:
 {
-  PHA
   LDA $09D2
   ASL
+  ASL
+  ASL
   TAX
-  LDA selected_item_palette,x
-  TAX
-  PLA
-  RTS
+  JSR hud_set_palette
+
+  JMP begin_hud_drawing
 }
 
-selected_item_palette:
+end_hud_drawing_hook:
 {
-  dw #$1000 ; nothing
-  dw #$1C00 ; missiles
-  dw #$1000 ; super missiles
-  dw #$0000 ; power bombs
-  dw #$1000 ; grapple beam
-  dw #$1000 ; xray
+  LDA #$0000
+  TAX
+  JSR hud_set_palette
+
+  JMP end_hud_drawing
 }
 
-update_palette:
+hud_selected_item_palette:
 {
-  PHA
-  ; We can't use all 4 color slots, because the final slot (black) is
-  ; used by scene elements.  In addition, the default pink door color is
-  ; too similar to the minimap color, which makes it look bland.  The
-  ; colors chosen here are slightly darker, to compensate.
-  LDA #$5DDC : STA $7EC03A : STA $7EC23A
-  LDA #$3079 : STA $7EC03C : STA $7EC23C
-  PLA
-  STX $077C
+  dw $0000, $0BB1, $1EA9, $0145 ; nothing (and green doors)
+  dw $0000, $72BC, $48FB, $1816 ; missiles
+  dw $0000, $0BB1, $1EA9, $0145 ; super missiles
+  dw $0000, $02DF, $01D7, $00AC ; power bombs
+  dw $0000, $72B2, $71C7, $4D03 ; grapple beam
+  dw $0000, $72B2, $71C7, $4D03 ; xray
+}
+
+hud_set_palette:
+{
+  SEP #$20
+  LDA #$10 : STA $2121 : LDA hud_selected_item_palette,x : STA $2122 : INX
+                         LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA #$11 : STA $2121 : LDA hud_selected_item_palette,x : STA $2122 : INX
+                         LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA #$12 : STA $2121 : LDA hud_selected_item_palette,x : STA $2122 : INX
+                         LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA #$13 : STA $2121 : LDA hud_selected_item_palette,x : STA $2122 : INX
+                         LDA hud_selected_item_palette,x : STA $2122 : INX
+  REP #$20
   RTS
 }
 
 end_hud_item_colors_freespace_80:
 !FREESPACE_80 := end_hud_item_colors_freespace_80
-
-org !FREESPACE_90
-
-set_minimap_flashing_color:
-{
-  AND #$E3FF
-  ORA #$0000
-  RTS
-}
-
-end_hud_item_colors_freespace_90:
-!FREESPACE_90 := end_hud_item_colors_freespace_90
-
-org $82E21E
-JSR restore_target_bg3_colors_for_selected_item
-
-org !FREESPACE_82
-
-restore_target_bg3_colors_for_selected_item:
-{
-  LDA $C03A : STA $C23A
-  LDA $C03C : STA $C23C
-
-  RTS
-}
-
-end_hud_item_colors_freespace_82:
-!FREESPACE_82 := end_hud_item_colors_freespace_82
