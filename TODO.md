@@ -47,7 +47,6 @@ Incomplete
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
 * Norfair spiky room is intimidating
-* Hard to get across acid in LN main hall
 * Hard to get out of acid in acid statue room
 
 
@@ -146,7 +145,7 @@ Feedback from E
 * (related idea - maybe grapple beam can "pull" enemies instead of just
     killing them - but only when samus is walking)
 * norfair spiky room is too hard
-* hard to get across acid in LN main hall
+* hard to get across acid in LN main hall - fixed
 * hard to get out of acid in acid statue room
 * Please shorten volcano room earthquake - fixed
 * Hard to get back up in room next to frog speedway

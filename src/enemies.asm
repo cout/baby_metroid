@@ -20,7 +20,7 @@
 !oum                       = $A0D37F
 !hiru                      = $A0D3BF
 !ripper2                   = $A0D3FF
-!ripper2                   = $A0D43F
+!ripper2_norfair           = $A0D43F
 !ripper                    = $A0D47F
 !dragon                    = $A0D4BF
 !shutter                   = $A0D4FF
