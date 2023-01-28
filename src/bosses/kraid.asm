@@ -41,6 +41,16 @@ org $A7C8AF
 LDA #$0003
 
 ;;
+; Skip clearing the ceiling when Kraid is defeated
+;
+
+org $A7A9CF
+{
+  JSR kraid_lock_camera
+}
+%assertpc($A7A9D2)
+
+;;
 ; Clear the spikes and unfix the camera
 ;
 
@@ -138,5 +148,12 @@ dw $0012, $9DC8, $9798, $97B8 ; 2
 dw $0012, $9AC8, $9790, $97B0 ; 1
 dw $0012, $97C8, $9788, $FFFF ; 0
 dw $FFFF
+
+kraid_lock_camera:
+{
+  LDA #$0000
+  STA $7ECD20
+  RTS
+}
 
 warnpc $A7B337
