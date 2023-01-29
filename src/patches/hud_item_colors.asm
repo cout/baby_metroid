@@ -12,9 +12,6 @@ begin_hud_drawing_hook:
   ASL
   ASL
   ASL
-  CLC
-  ADC #hud_selected_item_palette
-  STA $7FFC00
   TAX
   JSR hud_set_palette
 
@@ -45,14 +42,14 @@ hud_set_palette:
 {
   SEP #$20
   LDA #$10 : STA $2121
-  LDA $0000,x : STA $2122
-  LDA $0001,x : STA $2122
-  LDA $0002,x : STA $2122
-  LDA $0003,x : STA $2122
-  LDA $0004,x : STA $2122
-  LDA $0005,x : STA $2122
-  LDA $0006,x : STA $2122
-  LDA $0007,x : STA $2122
+  LDA (hud_selected_item_palette+$00),x : STA $2122
+  LDA (hud_selected_item_palette+$01),x : STA $2122
+  LDA (hud_selected_item_palette+$02),x : STA $2122
+  LDA (hud_selected_item_palette+$03),x : STA $2122
+  LDA (hud_selected_item_palette+$04),x : STA $2122
+  LDA (hud_selected_item_palette+$05),x : STA $2122
+  LDA (hud_selected_item_palette+$06),x : STA $2122
+  LDA (hud_selected_item_palette+$07),x : STA $2122
   REP #$20
   RTS
 }
