@@ -1,4 +1,4 @@
-!hud_selected_item_palette_index = $09EC
+!hud_selected_item_palette_index = $C1
 
 !main_gameplay_begin_hud_drawing_irq_command    = #$0004
 !main_gameplay_end_hud_drawing_irq_command      = #$0006
@@ -296,7 +296,7 @@ store_hud_item_index:
   ASL
   ASL
   ASL
-  STA $09EC
+  STA !hud_selected_item_palette_index
   RTS
 }
 
