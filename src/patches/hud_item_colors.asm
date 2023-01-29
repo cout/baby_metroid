@@ -1,14 +1,50 @@
-!begin_hud_colors_irq_command = #begin_hud_colors_entry-$9616
-!end_hud_colors_0_irq_command = #end_hud_colors_0_entry-$9616
-!end_hud_colors_1_irq_command = #end_hud_colors_1_entry-$9616
+!main_gameplay_begin_hud_drawing_irq_command    = #$0004
+!main_gameplay_end_hud_drawing_irq_command      = #$0006
+!start_transition_begin_hud_drawing_irq_command = #$0008
+!start_transition_end_hud_drawing_irq_command   = #$000A
+!draygon_begin_hud_drawing_irq_command          = #$000C
+!draygon_end_hud_drawing_irq_command            = #$000E
+!vert_transition_begin_hud_drawing_irq_command  = #$0010
+!vert_transition_end_hud_drawing_irq_command    = #$0012
+!vert_transition_end_drawing                    = #$0014
+!horiz_transition_begin_hud_drawing_irq_command = #$0016
+!horiz_transition_end_hud_drawing_irq_command   = #$0018
+!horiz_transition_end_drawing                   = #$001A
 
-org $80969F : LDA.w !end_hud_colors_0_irq_command
+!main_gameplay_begin_hud_colors_irq_command     = #main_gameplay_begin_hud_colors_entry-$9616
+!main_gameplay_end_hud_colors_0_irq_command     = #main_gameplay_end_hud_colors_0_entry-$9616
+!main_gameplay_end_hud_colors_1_irq_command     = #main_gameplay_end_hud_colors_1_entry-$9616
+!start_transition_begin_hud_colors_irq_command  = #start_transition_begin_hud_colors_entry-$9616
+!start_transition_end_hud_colors_0_irq_command  = #start_transition_end_hud_colors_0_entry-$9616
+!start_transition_end_hud_colors_1_irq_command  = #start_transition_end_hud_colors_1_entry-$9616
+!draygon_begin_hud_colors_irq_command           = #draygon_begin_hud_colors_entry-$9616
+!draygon_end_hud_colors_0_irq_command           = #draygon_end_hud_colors_0_entry-$9616
+!draygon_end_hud_colors_1_irq_command           = #draygon_end_hud_colors_1_entry-$9616
+
+org $80969F : LDA.w !main_gameplay_end_hud_colors_0_irq_command
 org $8096A2 : LDY #$001D
 org $8096A5 : LDX #$0090
 
-org $8096C9 : LDA.w !begin_hud_colors_irq_command
+org $8096C9 : LDA.w !main_gameplay_begin_hud_colors_irq_command
 org $8096CC : LDY #$00F5
 org $8096CF : LDX #$0000
+
+org $8096E7 : LDA.w !start_transition_end_hud_colors_0_irq_command
+org $8096A2 : LDY #$001D
+org $8096A5 : LDX #$0090
+
+org $809710 : LDA.w !start_transition_begin_hud_colors_irq_command
+org $809713 : LDY #$00F5
+org $809716 : LDX #$0000
+
+org $8096E7 : LDA.w !draygon_end_hud_colors_0_irq_command
+org $8096A2 : LDY #$001D
+org $8096A5 : LDX #$0090
+
+org $809710 : LDA.w !draygon_begin_hud_colors_irq_command
+org $809713 : LDY #$00F5
+org $809716 : LDX #$0000
+
 
 begin_hud_drawing = $80968B
 end_hud_drawing = $8096A9
@@ -22,36 +58,102 @@ JSR store_hud_item_index
 org !FREESPACE_80
 
 extra_irq_commands:
-begin_hud_colors_entry: dw begin_hud_colors_irq_command_handler
-end_hud_colors_0_entry: dw end_hud_colors_0_irq_command_handler
-end_hud_colors_1_entry: dw end_hud_colors_1_irq_command_handler
+main_gameplay_begin_hud_colors_entry:    dw main_gameplay_begin_hud_colors_irq_command_handler
+main_gameplay_end_hud_colors_0_entry:    dw main_gameplay_end_hud_colors_0_irq_command_handler
+main_gameplay_end_hud_colors_1_entry:    dw main_gameplay_end_hud_colors_1_irq_command_handler
+start_transition_begin_hud_colors_entry: dw start_transition_begin_hud_colors_irq_command_handler
+start_transition_end_hud_colors_0_entry: dw start_transition_end_hud_colors_0_irq_command_handler
+start_transition_end_hud_colors_1_entry: dw start_transition_end_hud_colors_1_irq_command_handler
+draygon_begin_hud_colors_entry:          dw draygon_begin_hud_colors_irq_command_handler
+draygon_end_hud_colors_0_entry:          dw draygon_end_hud_colors_0_irq_command_handler
+draygon_end_hud_colors_1_entry:          dw draygon_end_hud_colors_1_irq_command_handler
 
-begin_hud_colors_irq_command_handler:
+main_gameplay_begin_hud_colors_irq_command_handler:
 {
   JSR set_hud_colors
 
-  LDA #$0004
+  LDA !main_gameplay_begin_hud_drawing_irq_command
   LDY #$0000
   LDX #$0098
   RTS
 }
 
-end_hud_colors_0_irq_command_handler:
+main_gameplay_end_hud_colors_0_irq_command_handler:
 {
   JSR restore_green_door_colors_0
 
-  LDA !end_hud_colors_1_irq_command
+  LDA.w !main_gameplay_end_hud_colors_1_irq_command
+  LDY #$001E
+  LDX #$0090
+  RTS
+}
+
+main_gameplay_end_hud_colors_1_irq_command_handler:
+{
+  JSR restore_green_door_colors_1
+
+  LDA !main_gameplay_end_hud_drawing_irq_command
+  LDY #$001F
+  LDX #$0098
+  RTS
+}
+
+start_transition_begin_hud_colors_irq_command_handler:
+{
+  JSR set_hud_colors
+
+  LDA.w !start_transition_end_hud_colors_1_irq_command
+  LDY #$0000
+  LDX #$0098
+  RTS
+}
+
+start_transition_end_hud_colors_0_irq_command_handler:
+{
+  JSR restore_green_door_colors_0
+
+  LDA.w !start_transition_end_hud_colors_1_irq_command
+  LDY #$001E
+  LDX #$0090
+  RTS
+}
+
+start_transition_end_hud_colors_1_irq_command_handler:
+{
+  JSR restore_green_door_colors_1
+
+  LDA !start_transition_end_hud_drawing_irq_command
+  LDY #$001F
+  LDX #$0098
+  RTS
+}
+
+draygon_begin_hud_colors_irq_command_handler:
+{
+  JSR set_hud_colors
+
+  LDA.w !draygon_end_hud_colors_1_irq_command
+  LDY #$0000
+  LDX #$0098
+  RTS
+}
+
+draygon_end_hud_colors_0_irq_command_handler:
+{
+  JSR restore_green_door_colors_0
+
+  LDA.w !draygon_end_hud_colors_1_irq_command
   LDY #$001E
   LDX #$0090
   RTS
 }
 
 
-end_hud_colors_1_irq_command_handler:
+draygon_end_hud_colors_1_irq_command_handler:
 {
   JSR restore_green_door_colors_1
 
-  LDA #$0006
+  LDA !draygon_end_hud_drawing_irq_command
   LDY #$001F
   LDX #$0098
   RTS
