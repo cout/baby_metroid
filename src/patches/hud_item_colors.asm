@@ -1,6 +1,12 @@
 org $809616+$04 : dw begin_hud_drawing_hook
 org $809616+$06 : dw end_hud_drawing_hook
 
+org $8096A2 : LDY #$001E
+org $8096A5 : LDX #$0098
+
+org $8096CC : LDX #$0000
+org $8096CF : LDX #$0000
+
 begin_hud_drawing = $80968B
 end_hud_drawing = $8096A9
 
@@ -14,16 +20,45 @@ org !FREESPACE_80
 
 begin_hud_drawing_hook:
 {
+  SEP #$30
   LDX !hud_selected_item_palette_index
-  JSR hud_set_palette
+  LDA #$8F : STA $2100
+  LDA #$11 : STA $2121
+  LDA hud_selected_item_palette+$02,x : STA $2122
+  LDA hud_selected_item_palette+$03,x : STA $2122
+  LDA hud_selected_item_palette+$04,x : STA $2122
+  LDA hud_selected_item_palette+$05,x : STA $2122
+  LDA hud_selected_item_palette+$06,x : STA $2122
+  LDA hud_selected_item_palette+$07,x : STA $2122
+  LDA $51 : STA $2100
+  REP #$30
 
   JMP begin_hud_drawing
 }
 
 end_hud_drawing_hook:
 {
-  LDX #$0000
-  JSR hud_set_palette
+  SEP #$30
+  LDX #$00
+  LDA #$8F : STA $2100
+  LDA #$11 : STA $2121
+  LDA hud_selected_item_palette+$02,x : STA $2122
+  LDA hud_selected_item_palette+$03,x : STA $2122
+  LDA hud_selected_item_palette+$04,x : STA $2122
+  LDA hud_selected_item_palette+$05,x : STA $2122
+  LDA hud_selected_item_palette+$06,x : STA $2122
+  LDA hud_selected_item_palette+$07,x : STA $2122
+  LDA $51 : STA $2100
+  REP #$30
+
+  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
+  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
+  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
+  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
+  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
+  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
+  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
+  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
 
   JMP end_hud_drawing
 }
@@ -37,28 +72,6 @@ print "hud_selected_item_palette: ", pc
   dw $0000, $02DF, $01D7, $00AC ; power bombs
   dw $0000, $72B2, $71C7, $4D03 ; grapple beam
   dw $0000, $72B2, $71C7, $4D03 ; xray
-}
-
-hud_set_palette:
-{
-  SEP #$30
-
-  ; TM=0 (turn off display for main screen)
-  ; This fixes an issue on higan where CGRAM is read at the same time we
-  ; are writing, resulting in visual artifacts
-  ; TODO - there are still some visual artifacts as a result of changing
-  ; the timing on HUD drawing
-  LDA #$00 : STA $212C
-
-  LDA #$11 : STA $2121
-  LDA hud_selected_item_palette+$02,x : STA $2122
-  LDA hud_selected_item_palette+$03,x : STA $2122
-  LDA hud_selected_item_palette+$04,x : STA $2122
-  LDA hud_selected_item_palette+$05,x : STA $2122
-  LDA hud_selected_item_palette+$06,x : STA $2122
-  LDA hud_selected_item_palette+$07,x : STA $2122
-  REP #$30
-  RTS
 }
 
 store_hud_item_index:
