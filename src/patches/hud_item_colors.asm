@@ -1,10 +1,12 @@
 org $809616+$04 : dw begin_hud_drawing_hook
-org $809616+$06 : dw end_hud_drawing_hook
 
+!end_hud_colors_irq_command = #end_hud_colors_entry-$9616
+
+org $80969F : LDA.w !end_hud_colors_irq_command
 org $8096A2 : LDY #$001E
 org $8096A5 : LDX #$0098
 
-org $8096CC : LDX #$0000
+org $8096CC : LDY #$0000
 org $8096CF : LDX #$0000
 
 begin_hud_drawing = $80968B
@@ -17,6 +19,9 @@ JSR store_hud_item_index
 %assertpc($809C72)
 
 org !FREESPACE_80
+
+extra_irq_commands:
+end_hud_colors_entry:   dw end_hud_drawing_hook
 
 begin_hud_drawing_hook:
 {
@@ -51,16 +56,10 @@ end_hud_drawing_hook:
   LDA $51 : STA $2100
   REP #$30
 
-  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
-  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
-  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
-  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
-  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
-  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
-  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
-  NOP : NOP : NOP : NOP : NOP : NOP : NOP : NOP
-
-  JMP end_hud_drawing
+  LDA #$0006
+  LDY #$001F
+  LDX #$0098
+  RTS
 }
 
 hud_selected_item_palette:
