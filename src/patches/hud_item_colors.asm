@@ -41,9 +41,7 @@ print "hud_selected_item_palette: ", pc
 hud_set_palette:
 {
   SEP #$20
-  LDA #$10 : STA $2121
-  LDA (hud_selected_item_palette+$00),x : STA $2122
-  LDA (hud_selected_item_palette+$01),x : STA $2122
+  LDA #$11 : STA $2121
   LDA (hud_selected_item_palette+$02),x : STA $2122
   LDA (hud_selected_item_palette+$03),x : STA $2122
   LDA (hud_selected_item_palette+$04),x : STA $2122
