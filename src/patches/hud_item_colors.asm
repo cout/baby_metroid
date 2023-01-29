@@ -37,6 +37,8 @@ org $8096C9 : LDA.w !main_gameplay_begin_hud_colors_irq_command
 org $8096CC : LDY #$00F5
 org $8096CF : LDX #$0000
 
+; TODO - This IRQ is the cause of the door flickering during transitions
+; (even when the IRQ handler does no work and only sets up the next IRQ)
 org $8096E7 : LDA.w !start_transition_end_hud_colors_0_irq_command
 org $8096A2 : LDY #$001D
 org $8096A5 : LDX #$0090
