@@ -4,15 +4,17 @@ org $809616+$06 : dw end_hud_drawing_hook
 begin_hud_drawing = $80968B
 end_hud_drawing = $8096A9
 
+!hud_selected_item_palette_index = $09EC
+
+org $809C6F
+JSR store_hud_item_index
+%assertpc($809C72)
+
 org !FREESPACE_80
 
 begin_hud_drawing_hook:
 {
-  LDA $09D2
-  ASL
-  ASL
-  ASL
-  TAX
+  LDX !hud_selected_item_palette_index
   JSR hud_set_palette
 
   JMP begin_hud_drawing
@@ -20,8 +22,7 @@ begin_hud_drawing_hook:
 
 end_hud_drawing_hook:
 {
-  LDA #$0000
-  TAX
+  LDX #$0000
   JSR hud_set_palette
 
   JMP end_hud_drawing
@@ -42,13 +43,23 @@ hud_set_palette:
 {
   SEP #$20
   LDA #$11 : STA $2121
-  LDA (hud_selected_item_palette+$02),x : STA $2122
-  LDA (hud_selected_item_palette+$03),x : STA $2122
-  LDA (hud_selected_item_palette+$04),x : STA $2122
-  LDA (hud_selected_item_palette+$05),x : STA $2122
-  LDA (hud_selected_item_palette+$06),x : STA $2122
-  LDA (hud_selected_item_palette+$07),x : STA $2122
+  LDA hud_selected_item_palette+$02,x : STA $2122
+  LDA hud_selected_item_palette+$03,x : STA $2122
+  LDA hud_selected_item_palette+$04,x : STA $2122
+  LDA hud_selected_item_palette+$05,x : STA $2122
+  LDA hud_selected_item_palette+$06,x : STA $2122
+  LDA hud_selected_item_palette+$07,x : STA $2122
   REP #$20
+  RTS
+}
+
+store_hud_item_index:
+{
+  STA $0A0E
+  ASL
+  ASL
+  ASL
+  STA $09EC
   RTS
 }
 
