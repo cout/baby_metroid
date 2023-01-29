@@ -42,6 +42,14 @@ print "hud_selected_item_palette: ", pc
 hud_set_palette:
 {
   SEP #$20
+
+  ; TM=0 (turn off display for main screen)
+  ; This fixes an issue on higan where CGRAM is read at the same time we
+  ; are writing, resulting in visual artifacts
+  ; TODO - there are still some visual artifacts as a result of changing
+  ; the timing on HUD drawing
+  LDA #$00 : STA $212C
+
   LDA #$11 : STA $2121
   LDA hud_selected_item_palette+$02,x : STA $2122
   LDA hud_selected_item_palette+$03,x : STA $2122
