@@ -40,14 +40,15 @@ hud_selected_item_palette:
 hud_set_palette:
 {
   SEP #$20
-  LDA #$10 : STA $2121 : LDA hud_selected_item_palette,x : STA $2122 : INX
-                         LDA hud_selected_item_palette,x : STA $2122 : INX
-  LDA #$11 : STA $2121 : LDA hud_selected_item_palette,x : STA $2122 : INX
-                         LDA hud_selected_item_palette,x : STA $2122 : INX
-  LDA #$12 : STA $2121 : LDA hud_selected_item_palette,x : STA $2122 : INX
-                         LDA hud_selected_item_palette,x : STA $2122 : INX
-  LDA #$13 : STA $2121 : LDA hud_selected_item_palette,x : STA $2122 : INX
-                         LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA #$10 : STA $2121
+  LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA hud_selected_item_palette,x : STA $2122 : INX
+  LDA hud_selected_item_palette,x : STA $2122 : INX
   REP #$20
   RTS
 }
