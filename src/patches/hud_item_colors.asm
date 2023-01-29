@@ -41,7 +41,7 @@ print "hud_selected_item_palette: ", pc
 
 hud_set_palette:
 {
-  SEP #$20
+  SEP #$30
 
   ; TM=0 (turn off display for main screen)
   ; This fixes an issue on higan where CGRAM is read at the same time we
@@ -57,7 +57,7 @@ hud_set_palette:
   LDA hud_selected_item_palette+$05,x : STA $2122
   LDA hud_selected_item_palette+$06,x : STA $2122
   LDA hud_selected_item_palette+$07,x : STA $2122
-  REP #$20
+  REP #$30
   RTS
 }
 
