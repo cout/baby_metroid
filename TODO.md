@@ -17,6 +17,10 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* Cannot freeze or stand on tribbles in ice practice room
+* Cannot jump up through tribbles in ice practice room
+* Screen flashes green during PB
+* Brief flashes in bat room
 
 Crashes
 -------
