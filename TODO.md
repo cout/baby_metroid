@@ -17,7 +17,6 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* Easy blue suit is very slow to appear in wrecked ship rooms
 
 Crashes
 -------
