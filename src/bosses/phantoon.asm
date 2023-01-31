@@ -19,11 +19,20 @@ org $A7CE7E
 ; This is the instruction that sets initial state in init ai (so we skip
 ; D4A9 and D4EE).  After that, the call sequence is:
 ;
-; D508 -> D54A -> D596
+; D508 (pause while fireballs spin, then make phantoon transparent) ->
+; D54A (wavy fade-in) ->
+; D596 (pick pattern for round one)
 ;
 ; and we replace D596 without our own custom state.
 ;
 LDA.w #phantoon_state_initial
+
+;;
+; Keep phantoon invisible if already defeated
+;
+
+org $A7D51E
+JSR phantoon_pick_initial_fade_state
 
 ;;
 ; Make phantoon docile
@@ -85,7 +94,27 @@ begin_tracking_samus_with_eye:
   RTS
 }
 
-warnpc $A7D0F1
+phantoon_pick_initial_fade_state:
+{
+  ; If phantoon is already defeated (i.e. the lights are on), then keep
+  ; phantoon invisible
+  PHX
+  LDX $079F
+  LDA $7ED828,x
+  PLX
+  AND #$0001
+  BEQ .lights_on
+
+.lights_off:
+  LDA.w #phantoon_state_begin_eye_open
+  STA $0FB2,x
+  RTS
+
+.lights_on:
+  LDA.w #phantoon_state_wait_for_lights_out
+  STA $0FB2,x
+  RTS
+}
 
 phantoon_state_initial:
 {
@@ -94,11 +123,14 @@ phantoon_state_initial:
   db $00, $06
   dw $B78B
 
+  ; Initial state for vanilla phantoon fight
   LDA #$D508
   STA $0FB2,x
 
   RTS
 }
+
+warnpc $A7D0F1
 
 org $A7D596 ; pick pattern for phantoon round one
 
@@ -171,7 +203,7 @@ phantoon_begin_fade_out:
   RTS
 }
 
-warnpc $A7D5E7
+warnpc $A7D60D
 
 org $A7D114
 

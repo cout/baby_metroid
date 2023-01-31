@@ -52,9 +52,11 @@ dl phantoon_level_data
 db $04       ; Tileset
 db $00       ; Music data index
 db $03       ; Music track index
-dw $9B62     ; FX address (bank $83)
-dw $C1E4     ; Enemy population offset (bank $A1)
-dw $8C1D     ; Enemy graphics set offset (bank $B4)
+dw $9C44     ; FX address (bank $83)
+; dw $C1E4     ; Enemy population offset (bank $A1)
+; dw $8C1D     ; Enemy graphics set offset (bank $B4)
+dw $CCD4     ; Enemy population offset (bank $A1)
+dw $8D1D     ; Enemy graphics set offset (bank $B4)
 dw $0101     ; Layer 2 scroll
 ; dw $CD5B     ; Room scroll data (bank $8F)
 dw phantoon_room_scroll ; Room scroll data (bank $8F)

@@ -17,8 +17,7 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* If the player leaves phantoon after turning the lights on, then comes
-    back in and turns the lights off, phantoon is not there
+* Easy blue suit is very slow to appear in wrecked ship rooms
 
 Crashes
 -------
@@ -74,6 +73,8 @@ Cosmetic
 * In escape climb, baby can briefly take Samus through the floor
 * In escape climb, shine spark and/or echoes should be stopped when baby
     picks up Samus.
+* The bomb blocks in phantoon's room leave behind black background
+    instead of background that matches
 
 Probably Won't Fix
 ------------------
