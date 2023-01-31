@@ -609,7 +609,7 @@ baby_state_climb_climb_climb:
   LDA #$0180
   STA $12
 
-  LDA $0000
+  LDA #$0000
   STA $14
 
   LDY !BABY_ACCELERATION_ESCAPE
