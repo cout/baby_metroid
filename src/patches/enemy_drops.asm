@@ -45,8 +45,12 @@ handle_projectile_damage_beam:
   BIT #$0002
   BEQ .spawn_drops
 
-  ; If enemy is not vulnerable to ice, then spawn jobs without freezing
+  ; If enemy is one-shot to ice, then freeze or refreeze it
   LDA $0E40
+  BIT #$00FF
+  BNE .ice_beam
+
+  ; If enemy is not vulnerable to ice, then spawn jobs without freezing
   BIT #$0080
   BNE .spawn_drops
 

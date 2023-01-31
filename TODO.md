@@ -17,7 +17,6 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* Cannot freeze or stand on tribbles in ice practice room
 * If the player leaves phantoon after turning the lights on, then comes
     back in and turns the lights off, phantoon is not there
 
