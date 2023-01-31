@@ -68,8 +68,16 @@ org !FREESPACE_A0
 
 check_solid_enemy_detection:
 {
+  ; If contact damage index is nonzero then Samus can damage enemies on
+  ; contact, so do the normal checks
   LDA $0A6E
   BNE .do_normal_solid_checks
+
+  ; If Samus is moving upward, do not treat the enemy as solid (so Samus
+  ; can more easily jump up through enemies)
+  LDA $0B36
+  CMP #$0001
+  BEQ .do_normal_solid_checks
 
 .treat_enemy_as_solid:
   ; Always treat the enemy as solid:

@@ -18,7 +18,6 @@ Bugs
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
 * Cannot freeze or stand on tribbles in ice practice room
-* Cannot jump up through tribbles in ice practice room
 * If the player leaves phantoon after turning the lights on, then comes
     back in and turns the lights off, phantoon is not there
 
@@ -41,8 +40,6 @@ Incomplete
 ----------
 
 * Eye doors sometimes still close
-* It is possible to spin jump up through a flying creature, but it is
-    not possible jump straight up through one.
 * Pirates still explode when shot twice with ice - do any other enemies
     do this?
 * Escape music in Climb feels out of place?
