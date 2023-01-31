@@ -39,7 +39,7 @@
 !end_hud_colors_0_v_counter_target = #$001C
 !end_hud_colors_1_v_counter_target = #$001D
 !end_hud_colors_2_v_counter_target = #$001E
-!end_hud_colors_h_counter_target = #$0090
+!end_hud_colors_h_counter_target = #$0088
 !end_hud_drawing_v_counter_target = #$001F
 !end_hud_drawing_h_counter_target = #$0098
 !begin_hud_colors_v_counter_target = #$00F5
