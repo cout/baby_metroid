@@ -1,6 +1,10 @@
-org $C4E58C
+org !FREESPACE_B8
+
+phantoon_level_data:
 incbin "phantoon.bin"
-warnpc $C4E78C
+
+end_phantoon_freespace_b8:
+!FREESPACE_B8 := end_phantoon_freespace_b8
 
 ; Room $CD13: Header
 org $8FCD13
@@ -22,7 +26,8 @@ dw $E5E6     ; State $CD25 function (default)
 ; Room $CD13 state $CD25: Header
 ; (default)
 org $8FCD25
-dl $C4E58C   ; Level data address
+; dl $C4E58C   ; Level data address
+dl phantoon_level_data
 db $05       ; Tileset
 db $27       ; Music data index
 db $06       ; Music track index
@@ -42,7 +47,8 @@ dw $C8D0     ; Room setup routine (bank $8F)
 ; Room $CD13 state $CD3F: Header
 ; (boss bit 01h)
 org $8FCD3F
-dl $C4E58C   ; Level data address
+; dl $C4E58C   ; Level data address
+dl phantoon_level_data
 db $04       ; Tileset
 db $00       ; Music data index
 db $03       ; Music track index

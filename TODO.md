@@ -21,6 +21,8 @@ Bugs
 * Cannot jump up through tribbles in ice practice room
 * Screen flashes green during PB
 * Brief flashes in bat room
+* If the player leaves phantoon after turning the lights on, then comes
+    back in and turns the lights off, phantoon is not there
 
 Crashes
 -------
