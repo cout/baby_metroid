@@ -541,6 +541,8 @@ baby_state_rush_to_save_samus:
   LDA.w #baby_state_move_samus_to_center
   STA $0FA8,x
 
+  JMP baby_state_move_samus_to_center
+
 .move_to_samus:
   ; $12 = Samus X position
   LDA $0AF6
