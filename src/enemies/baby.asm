@@ -535,7 +535,7 @@ baby_state_rush_to_save_samus:
   BPL +
   EOR #$FFFF
   INC A
-+ CMP #$0010
++ CMP #$0020
   BPL .move_to_samus
 
   LDA.w #baby_state_move_samus_to_center
@@ -586,7 +586,10 @@ baby_state_move_samus_to_center:
   JSR baby_accelerate_slowly_toward_point
 
   LDA $0F7A,x
-  STA $0AF6
+  CMP #$01E0
+  BMI +
+  LDA #$01E0
++ STA $0AF6
 
   ; TODO - this is too low - I can barely see Samus's legs.  But if I
   ; move Samus down then the baby will move down too and they will both

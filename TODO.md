@@ -20,11 +20,10 @@ Bugs
 * If the player leaves phantoon after turning the lights on, then comes
     back in and turns the lights off, phantoon is not there
 * In climb escape, baby can take Samus through the floor
-* In climb escape, baby does not pick Samus up if Samus runs to the
-    right-side wall, because baby is too high
-* In climb escape, baby can take Samus through the right-side door
 * In climb escape, stop shine spark and/or echoes when baby picks up
     Samus
+* In climb escape, if Samus runs for the right-side wall, baby moves too
+    fast after picking Samus up
 
 Crashes
 -------
