@@ -19,11 +19,6 @@ Bugs
     on top.
 * If the player leaves phantoon after turning the lights on, then comes
     back in and turns the lights off, phantoon is not there
-* In climb escape, baby can take Samus through the floor
-* In climb escape, stop shine spark and/or echoes when baby picks up
-    Samus
-* In climb escape, if Samus runs for the right-side wall, baby moves too
-    fast after picking Samus up
 
 Crashes
 -------
@@ -76,6 +71,9 @@ Cosmetic
 * Warehouse statue is not visible when entering the room; it only
     becomes visible after the room's main routine executes for the first
     time.
+* In escape climb, baby can briefly take Samus through the floor
+* In escape climb, shine spark and/or echoes should be stopped when baby
+    picks up Samus.
 
 Probably Won't Fix
 ------------------
