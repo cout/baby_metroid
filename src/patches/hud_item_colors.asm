@@ -39,7 +39,7 @@
 !end_hud_colors_0_v_counter_target = #$001C
 !end_hud_colors_1_v_counter_target = #$001D
 !end_hud_colors_2_v_counter_target = #$001E
-!end_hud_colors_h_counter_target = #$0088
+!end_hud_colors_h_counter_target = #$0078
 !end_hud_drawing_v_counter_target = #$001F
 !end_hud_drawing_h_counter_target = #$0098
 !begin_hud_colors_v_counter_target = #$00F5
@@ -342,9 +342,11 @@ restore_green_door_colors_0:
 {
   SEP #$30
   LDA #$11 : STA $2121
+  LDX hud_selected_item_palette+$02
+  LDY hud_selected_item_palette+$03
   LDA #$8F : STA $2100
-  LDA hud_selected_item_palette+$02 : STA $2122
-  LDA hud_selected_item_palette+$03 : STA $2122
+  STX $2122
+  STY $1222
   LDA $51 : STA $2100
   REP #$30
   RTS
@@ -354,9 +356,11 @@ restore_green_door_colors_1:
 {
   SEP #$30
   LDA #$12 : STA $2121
+  LDX hud_selected_item_palette+$04
+  LDY hud_selected_item_palette+$05
   LDA #$8F : STA $2100
-  LDA hud_selected_item_palette+$04 : STA $2122
-  LDA hud_selected_item_palette+$05 : STA $2122
+  STX $2122
+  STY $1222
   LDA $51 : STA $2100
   REP #$30
   RTS
@@ -366,9 +370,11 @@ restore_green_door_colors_2:
 {
   SEP #$30
   LDA #$13 : STA $2121
+  LDX hud_selected_item_palette+$06
+  LDY hud_selected_item_palette+$07
   LDA #$8F : STA $2100
-  LDA hud_selected_item_palette+$06 : STA $2122
-  LDA hud_selected_item_palette+$07 : STA $2122
+  STX $2122
+  STY $1222
   LDA $51 : STA $2100
   REP #$30
   RTS
