@@ -573,6 +573,8 @@ baby_state_move_samus_to_center:
   LDA.w #baby_state_climb_climb_climb
   STA $0FA8,x
 
+  JMP baby_state_climb_climb_climb
+
 .move_to_center
   LDA #$0180
   STA $12
