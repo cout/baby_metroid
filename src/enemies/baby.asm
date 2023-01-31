@@ -614,6 +614,23 @@ baby_state_climb_climb_climb:
   LDA $0F7E,x
   STA $0AFA
 
+  ; Make the baby invisible when it reaches the top of the room (this
+  ; prevents us from seeing the baby at the bottom of the screen)
+  CMP #$0020
+  BPL +
+  LDA $0F86,x
+  ORA #$0100
+  STA $0F86,x
++
+
+  ; Prevent Samus from going past the top of the room (this prevents us
+  ; from seeing the Samus at the bottom of the screen)
+  LDA $0AFA
+  BPL +
+  STZ $0AFA
++
+
+.return
   RTS
 }
 

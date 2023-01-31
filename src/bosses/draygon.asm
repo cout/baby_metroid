@@ -353,7 +353,6 @@ draygon_set_samus_drawing_handler:
   STA $0A5C
 
 .return:
-  STA $0A5C
   RTS
 }
 

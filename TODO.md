@@ -19,6 +19,12 @@ Bugs
     on top.
 * If the player leaves phantoon after turning the lights on, then comes
     back in and turns the lights off, phantoon is not there
+* In climb escape, baby can take Samus through the floor
+* In climb escape, baby does not pick Samus up if Samus runs to the
+    right-side wall, because baby is too high
+* In climb escape, baby can take Samus through the right-side door
+* In climb escape, stop shine spark and/or echoes when baby picks up
+    Samus
 
 Crashes
 -------
@@ -41,7 +47,6 @@ Incomplete
 * Eye doors sometimes still close
 * Pirates still explode when shot twice with ice - do any other enemies
     do this?
-* Escape music in Climb feels out of place?
 * Samus loses easy blue suit when taking damage, which can be
     frustrating when trying to shine spark to get through single chamber
 * The baby should move more quickly toward Samus if it is very far away
@@ -72,12 +77,6 @@ Cosmetic
 * Warehouse statue is not visible when entering the room; it only
     becomes visible after the room's main routine executes for the first
     time.
-* In climb escape, Samus is briefly visible at the bottom of the screen
-    after passing through the door
-* In climb escape, baby can take Samus through the floor
-* In climb escape, baby does not pick Samus up if Samus runs to the
-    right-side wall, because baby is too high
-* In climb escape, baby can take Samus through the right-side door
 
 Probably Won't Fix
 ------------------
