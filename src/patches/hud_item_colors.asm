@@ -1,4 +1,5 @@
 !hud_selected_item_palette_index = $C1
+!hud_selected_item_palette_pointer = $C3
 
 !main_gameplay_begin_hud_drawing_irq_command    = #$0004
 !main_gameplay_end_hud_drawing_irq_command      = #$0006
@@ -39,7 +40,7 @@
 !end_hud_colors_0_v_counter_target = #$001C
 !end_hud_colors_1_v_counter_target = #$001D
 !end_hud_colors_2_v_counter_target = #$001E
-!end_hud_colors_h_counter_target = #$0078
+!end_hud_colors_h_counter_target = #$0050
 !end_hud_drawing_v_counter_target = #$001F
 !end_hud_drawing_h_counter_target = #$0098
 !begin_hud_colors_v_counter_target = #$00F5
@@ -325,58 +326,51 @@ hud_selected_item_palette:
 
 set_hud_colors:
 {
-  SEP #$30
-  LDX !hud_selected_item_palette_index
-  LDA #$11 : STA $2121
-  LDA hud_selected_item_palette+$02,x : STA $2122
-  LDA hud_selected_item_palette+$03,x : STA $2122
-  LDA hud_selected_item_palette+$04,x : STA $2122
-  LDA hud_selected_item_palette+$05,x : STA $2122
-  LDA hud_selected_item_palette+$06,x : STA $2122
-  LDA hud_selected_item_palette+$07,x : STA $2122
-  REP #$30
+  SEP #$20
+  STZ $4300 ; mode 0 (register write once)
+  LDY !hud_selected_item_palette_pointer
+  STY $4302 ; source addr
+  LDA #$80
+  STA $4304 ; source bank
+  LDY #$0006
+  STY $4305 ; size
+  LDA #$22
+  STA $4301 ; dest (CGRAM)
+  LDA #$11
+  STA $2121 ; CGRAM address
+  LDA #$01
+  STA $420B ; execute DMA
+  REP #$20
   RTS
 }
 
 restore_green_door_colors_0:
 {
-  SEP #$30
-  LDA #$11 : STA $2121
-  LDX hud_selected_item_palette+$02
-  LDY hud_selected_item_palette+$03
-  LDA #$8F : STA $2100
-  STX $2122
-  STY $1222
-  LDA $51 : STA $2100
-  REP #$30
   RTS
 }
 
 restore_green_door_colors_1:
 {
-  SEP #$30
-  LDA #$12 : STA $2121
-  LDX hud_selected_item_palette+$04
-  LDY hud_selected_item_palette+$05
-  LDA #$8F : STA $2100
-  STX $2122
-  STY $1222
-  LDA $51 : STA $2100
-  REP #$30
   RTS
 }
 
 restore_green_door_colors_2:
 {
-  SEP #$30
-  LDA #$13 : STA $2121
-  LDX hud_selected_item_palette+$06
-  LDY hud_selected_item_palette+$07
-  LDA #$8F : STA $2100
-  STX $2122
-  STY $1222
-  LDA $51 : STA $2100
-  REP #$30
+  SEP #$20
+  STZ $4300 ; mode 0 (register write once)
+  LDY hud_selected_item_palette+$02
+  STY $4302 ; source addr
+  LDA #$80
+  STA $4304 ; source bank
+  LDY #$0006
+  STY $4305 ; size
+  LDA #$22
+  STA $4301 ; dest (CGRAM)
+  LDA #$11
+  STA $2121 ; CGRAM address
+  LDA #$01
+  STA $420B ; execute DMA
+  REP #$20
   RTS
 }
 
@@ -387,6 +381,11 @@ store_hud_item_index:
   ASL
   ASL
   STA !hud_selected_item_palette_index
+
+  CLC
+  ADC #hud_selected_item_palette+$02
+  STA !hud_selected_item_palette_pointer
+
   RTS
 }
 
