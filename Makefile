@@ -30,6 +30,7 @@ ROOMS = \
 	src/rooms/hi_jump_boots.bin \
 	src/rooms/kraid_eye_door.bin \
 	src/rooms/kraid.bin \
+	src/rooms/bat_cave.bin \
 	src/rooms/speed_hallway.bin \
 	src/rooms/red_tower.bin \
 	src/rooms/hellway.bin \

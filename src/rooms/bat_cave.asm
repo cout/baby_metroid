@@ -1,3 +1,7 @@
+org $C8BB21
+incbin "bat_cave.bin"
+warnpc $C8C121
+
 ;;
 ; Replace the skrees with a statue
 ;
