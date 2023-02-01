@@ -19,7 +19,6 @@ Bugs
     on top.
 * There is still some flicker on Mister (maridia tube save station,
     bubble mountain)
-* It is still possible to freeze workrobots and shutters
 
 Crashes
 -------

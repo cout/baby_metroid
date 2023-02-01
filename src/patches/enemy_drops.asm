@@ -17,6 +17,10 @@ handle_projectile_damage_beam:
 {
   LDX $0E54 ; X = current enemy index
 
+  ; If enemy is invulnerable, then handle the shot normally
+  LDA $0E40
+  BEQ .handle_beam_shot
+
   ; If this enemy has an extended spritemap, then handle the beam shot
   ; normally (this is probably a boss)
   LDA $0F88,x ; A = extra properties
@@ -47,8 +51,8 @@ handle_projectile_damage_beam:
 
   ; If enemy is one-shot to ice, then freeze or refreeze it
   LDA $0E40
-  BIT #$00FF
-  BNE .ice_beam
+  CMP #$00FF
+  BEQ .ice_beam
 
   ; If enemy is not vulnerable to ice, then spawn jobs without freezing
   BIT #$0080
