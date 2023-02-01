@@ -30,8 +30,8 @@ Crashes
 Softlocks
 ---------
 
-* Kraid - run out of missiles
-* Speed hallway - run out of missiles
+* Kraid - can run out of missiles
+* Speed hallway - can run out of missiles (unlikely but possible)
 
 Incomplete
 ----------
@@ -43,15 +43,19 @@ Incomplete
     frustrating when trying to shine spark to get through single chamber
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
+* Kraid fight is still mostly vanilla (idea: have missiles falling from
+    the ceiling, which also prevents softlock)
 
 Ideas
 -----
+
 * Easier wall jumping? (or just wall-hanging ala spiderman?)
 * Change names of items (morph ball -> spider ball, speed booster ->
     blue suit)
 * Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
     effect to pick her up by a few more pixels (three pixels less than
     the top of the enemy works well but needs more testing)
+* Easy/hard mode
 
 Cosmetic
 --------
@@ -77,7 +81,6 @@ Cosmetic
 Probably Won't Fix
 ------------------
 
-* Kraid fight is still mostly vanilla (I think it's fine)
 * Ice beam gate room is hard without knowing how to use the run button
     (E. finally knows how to do this, and it's not required for beating
     the game)
