@@ -43,6 +43,7 @@ incsrc plm/eye_door.asm
 incsrc plm/animals_escape.asm
 incsrc plm/ammo_station.asm
 incsrc src/fx/waterflea.asm
+incsrc src/fx/tourian_escape_palette_fx.asm
 incsrc rooms/pit_room.asm
 incsrc rooms/climb.asm
 incsrc rooms/bomb_torizo.asm

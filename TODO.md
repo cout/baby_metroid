@@ -60,7 +60,6 @@ Cosmetic
 --------
 
 * Easy blue suit should not produce echoes
-* Lights in the tourian escape rooms blink too fast
 * Samus should wiggle during draygon "fight"
 * Sometimes when using blue suit (I've seen this in Below Landing Site
     and Acid Snakes Room) Samus turns completely black for a moment like
