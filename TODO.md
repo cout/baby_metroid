@@ -17,6 +17,9 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* There is still some flicker on Mister (maridia tube save station,
+    bubble mountain)
+* It is still possible to freeze workrobots and shutters
 
 Crashes
 -------
