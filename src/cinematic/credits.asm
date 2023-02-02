@@ -1,11 +1,11 @@
 namespace credits
 pushtable
 
-I_goto = $9A06
-I_set_timer = $9A17
-I_loop = $9A0D
-I_end_credits = $F6FE
-I_delete = $99FE
+I_goto = $8B9A06
+I_set_timer = $8B9A17
+I_loop = $8B9A0D
+I_end_credits = $8BF6FE
+I_delete = $8B99FE
 I_draw = $0000
 
 org write_credits
