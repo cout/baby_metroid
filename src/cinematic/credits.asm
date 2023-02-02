@@ -14,6 +14,10 @@ I_write:
 org set_credits_color
 I_color:
 
+!small = %credits_small_font()
+!large1 = %credits_large1_font()
+!large2 = %credits_large2_font()
+
 !credits_separation_lines = $000D
 !credits_end_lines = $0023
 
@@ -50,35 +54,32 @@ baby_metroid_credits:
 - dw I_draw, blank_line
   dw I_loop, -
 
-  %small_font()
-  dw I_color, $0000 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! "  ; 0
-  dw I_color, $0400 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! "  ; 1
-  dw I_color, $0800 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! "  ; 2
-  dw I_color, $0C00 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! "  ; 3
-  dw I_color, $1000 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! "  ; 4
-  dw I_color, $1400 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! "  ; 5
-  dw I_color, $1800 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! "  ; 6
-  dw I_color, $1C00 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! "  ; 7
-
-  %large_font()
-  dw I_color, $0000 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 8
-                      dw I_write, "abcdefghijklmnopqrstuvwxyz.,    "  ; 9
-  dw I_color, $0400 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 10
-                      dw I_write, "abcdefghijklmnopqrstuvwxyz.,    "  ; 11
-  dw I_color, $0800 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 12
-                      dw I_write, "abcdefghijklmnopqrstuvwxyz.,    "  ; 13
-  dw I_color, $0C00 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 14
-                      dw I_write, "abcdefghijklmnopqrstuvwxyz.,    "  ; 15
-  dw I_color, $1000 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 16
-                      dw I_write, "abcdefghijklmnopqrstuvwxyz.,    "  ; 17
-  dw I_color, $1400 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 18
-                      dw I_write, "abcdefghijklmnopqrstuvwxyz.,    "  ; 19
-  dw I_color, $1800 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 20
-                      dw I_write, "abcdefghijklmnopqrstuvwxyz.,    "  ; 21
-  dw I_color, $1C00 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 22
-                      dw I_write, "abcdefghijklmnopqrstuvwxyz.,    "  ; 23
-                      dw I_write, "0123456789                      "  ; 24
-                      dw I_write, ")!@#$%^&*(                      "  ; 25
+  !small  : dw I_color, $0000 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 0
+  !small  : dw I_color, $0400 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 1
+  !small  : dw I_color, $0800 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 2
+  !small  : dw I_color, $0C00 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 3
+  !small  : dw I_color, $1000 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 4
+  !small  : dw I_color, $1400 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 5
+  !small  : dw I_color, $1800 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 6
+  !small  : dw I_color, $1C00 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 7
+  !large1 : dw I_color, $0000 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 8
+  !large2 :                     dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 9
+  !large1 : dw I_color, $0400 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 10
+  !large2 :                     dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 11
+  !large1 : dw I_color, $0800 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 12
+  !large2 :                     dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 13
+  !large1 : dw I_color, $0C00 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 14
+  !large2 :                     dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 15
+  !large1 : dw I_color, $1000 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 16
+  !large2 :                     dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 17
+  !large1 : dw I_color, $1400 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 18
+  !large2 :                     dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 19
+  !large1 : dw I_color, $1800 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 20
+  !large2 :                     dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 21
+  !large1 : dw I_color, $1C00 : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 22
+  !large2 :                     dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 23
+  !large1 :                     dw I_write, "0123456789                      "  ; 24
+  !large2 :                     dw I_write, "0123456789                      "  ; 25
 
   dw I_set_timer, !credits_end_lines
 - dw I_draw, blank_line
@@ -91,5 +92,10 @@ baby_metroid_credits:
 global end_credits_freespace_8c:
 !FREESPACE_8C := end_credits_freespace_8c
 
+undef "small"
+undef "large1"
+undef "large2"
+
 pulltable
 namespace off
+; vim:ft=masm
