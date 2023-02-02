@@ -1,52 +1,52 @@
-org !FREEMEM_7F
+credits_color_white  = $0000
+credits_color_yellow = $0400
+credits_color_cyan   = $0800
+credits_color_green  = $0C00
+credits_color_pink   = $1000
+credits_color_blue   = $1400
+credits_color_orange = $1800
+credits_color_purple = $1C00
 
-credits_color:
-print "Variable credits_color: ", pc
-skip 2
-
-global end_credits_freemem_7f:
-!FREEMEM_7F := end_credits_freemem_7f
-
-macro credits_small_font()
+macro credits_small_font(color)
 {
-  'A' = $0000 : 'B' = $0001 : 'C' = $0002 : 'D' = $0003
-  'E' = $0004 : 'F' = $0005 : 'G' = $0006 : 'H' = $0007
-  'I' = $0008 : 'J' = $0009 : 'K' = $000A : 'L' = $000B
-  'M' = $000C : 'N' = $000D : 'O' = $000E : 'P' = $000F
-  'Q' = $0010 : 'R' = $0011 : 'S' = $0012 : 'T' = $0013
-  'U' = $0014 : 'V' = $0015 : 'W' = $0016 : 'X' = $0017
-  'Y' = $0018 : 'Z' = $0019 : '.' = $001A : ',' = $001B
-  '*' = $001C : ''' = $001D : ':' = $001E : '!' = $001F
-  '"' = $004A : ' ' = $007F
+  'A' = <color>+$00 : 'B' = <color>+$01 : 'C' = <color>+$02 : 'D' = <color>+$03
+  'E' = <color>+$04 : 'F' = <color>+$05 : 'G' = <color>+$06 : 'H' = <color>+$07
+  'I' = <color>+$08 : 'J' = <color>+$09 : 'K' = <color>+$0A : 'L' = <color>+$0B
+  'M' = <color>+$0C : 'N' = <color>+$0D : 'O' = <color>+$0E : 'P' = <color>+$0F
+  'Q' = <color>+$10 : 'R' = <color>+$11 : 'S' = <color>+$12 : 'T' = <color>+$13
+  'U' = <color>+$14 : 'V' = <color>+$15 : 'W' = <color>+$16 : 'X' = <color>+$17
+  'Y' = <color>+$18 : 'Z' = <color>+$19 : '.' = <color>+$1A : ',' = <color>+$1B
+  '*' = <color>+$1C : ''' = <color>+$1D : ':' = <color>+$1E : '!' = <color>+$1F
+  '"' = <color>+$4A : ' ' = <color>+$7F
 }
 endmacro
 
-macro credits_large1_font()
+macro credits_large1_font(color)
 {
-  'A' = $0020 : 'B' = $0021 : 'C' = $0022 : 'D' = $0023
-  'E' = $0024 : 'F' = $0025 : 'G' = $0026 : 'H' = $0027
-  'I' = $0028 : 'J' = $0029 : 'K' = $002A : 'L' = $002B
-  'M' = $002C : 'N' = $002D : 'O' = $002E : 'P' = $002F
-  'Q' = $0040 : 'R' = $0041 : 'S' = $0042 : 'T' = $0043
-  'U' = $0044 : 'V' = $0045 : 'W' = $0046 : 'X' = $0047
-  'Y' = $0048 : 'Z' = $0049 : ''' = $004A : '"' = $004B
-  '0' = $0060 : '1' = $0061 : '2' = $0062 : '3' = $0063
-  '4' = $0064 : '5' = $0065 : '6' = $0066 : '7' = $0067
-  '8' = $0068 : '9' = $0069 : ' ' = $007F
+  'A' = <color>+$20 : 'B' = <color>+$21 : 'C' = <color>+$22 : 'D' = <color>+$23
+  'E' = <color>+$24 : 'F' = <color>+$25 : 'G' = <color>+$26 : 'H' = <color>+$27
+  'I' = <color>+$28 : 'J' = <color>+$29 : 'K' = <color>+$2A : 'L' = <color>+$2B
+  'M' = <color>+$2C : 'N' = <color>+$2D : 'O' = <color>+$2E : 'P' = <color>+$2F
+  'Q' = <color>+$40 : 'R' = <color>+$41 : 'S' = <color>+$42 : 'T' = <color>+$43
+  'U' = <color>+$44 : 'V' = <color>+$45 : 'W' = <color>+$46 : 'X' = <color>+$47
+  'Y' = <color>+$48 : 'Z' = <color>+$49 : ''' = <color>+$4A : '"' = <color>+$4B
+  '0' = <color>+$60 : '1' = <color>+$61 : '2' = <color>+$62 : '3' = <color>+$63
+  '4' = <color>+$64 : '5' = <color>+$65 : '6' = <color>+$66 : '7' = <color>+$67
+  '8' = <color>+$68 : '9' = <color>+$69 : ' ' = <color>+$7F
 }
 endmacro
 
-macro credits_large2_font()
-  'A' = $0030 : 'B' = $0031 : 'C' = $0032 : 'D' = $0033
-  'E' = $0034 : 'F' = $0035 : 'G' = $0036 : 'H' = $0037
-  'I' = $0038 : 'J' = $0039 : 'K' = $003A : 'L' = $003B
-  'M' = $003C : 'N' = $003D : 'O' = $003E : 'P' = $003F
-  'Q' = $0050 : 'R' = $0051 : 'S' = $0052 : 'T' = $0053
-  'U' = $0054 : 'V' = $0055 : 'W' = $0056 : 'X' = $0057
-  'Y' = $0058 : 'Z' = $0059 : '.' = $005A : ',' = $001B
-  '0' = $0070 : '1' = $0071 : '2' = $0072 : '3' = $0073
-  '4' = $0074 : '5' = $0075 : '6' = $0076 : '7' = $0077
-  '8' = $0078 : '9' = $0079 : ' ' = $007F
+macro credits_large2_font(color)
+  'A' = <color>+$30 : 'B' = <color>+$31 : 'C' = <color>+$32 : 'D' = <color>+$33
+  'E' = <color>+$34 : 'F' = <color>+$35 : 'G' = <color>+$36 : 'H' = <color>+$37
+  'I' = <color>+$38 : 'J' = <color>+$39 : 'K' = <color>+$3A : 'L' = <color>+$3B
+  'M' = <color>+$3C : 'N' = <color>+$3D : 'O' = <color>+$3E : 'P' = <color>+$3F
+  'Q' = <color>+$50 : 'R' = <color>+$51 : 'S' = <color>+$52 : 'T' = <color>+$53
+  'U' = <color>+$54 : 'V' = <color>+$55 : 'W' = <color>+$56 : 'X' = <color>+$57
+  'Y' = <color>+$58 : 'Z' = <color>+$59 : '.' = <color>+$5A : ',' = <color>+$1B
+  '0' = <color>+$70 : '1' = <color>+$71 : '2' = <color>+$72 : '3' = <color>+$73
+  '4' = <color>+$74 : '5' = <color>+$75 : '6' = <color>+$76 : '7' = <color>+$77
+  '8' = <color>+$78 : '9' = <color>+$79 : ' ' = <color>+$7F
 }
 endmacro
 
@@ -58,17 +58,10 @@ write_credits:
   ASL : ASL : ASL : ASL : ASL : ASL
   TAX
 
-  TYA
-  STA $7FFC00
-
 .loop:
   LDA $0000,y
   BMI .done
-  CMP #$007F
-  BEQ +
-  CLC
-  ADC credits_color
-+ STA $7E3000,x
+  STA $7E3000,x
   INX : INX
   INY : INY
   BRA .loop
@@ -77,19 +70,7 @@ write_credits:
   PLA
   DEY : DEY : DEY : DEY
 
-  TYA
-  STA $7FFC02
-
   JMP $99AD
-}
-
-set_credits_color:
-{
-  LDA $0000,y
-  STA credits_color
-  INY
-  INY
-  RTS
 }
 
 global end_credits_freespace_8b:
