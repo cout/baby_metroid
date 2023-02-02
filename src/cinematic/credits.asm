@@ -18,6 +18,28 @@ I_goto_long:
 !large1 = %credits_large1_font
 !large2 = %credits_large2_font
 
+!w = " : !small(white) : dw "
+!y = " : !large1(yellow) : dw "
+!o = " : !small(orange) : dw "
+!g = " : !small(green) : dw "
+!P = " : !small(purple) : dw "
+!p = " : !small(pink) : dw "
+!b = " : !small(blue) : dw "
+!w1 = " : !large1(white) : dw "
+!y1 = " : !large1(yellow) : dw "
+!o1 = " : !large1(orange) : dw "
+!g1 = " : !large1(green) : dw "
+!P1 = " : !large1(purple) : dw "
+!p1 = " : !large1(pink) : dw "
+!b1 = " : !large1(blue) : dw "
+!w2 = " : !large2(white) : dw "
+!y2 = " : !large2(yellow) : dw "
+!o2 = " : !large2(orange) : dw "
+!g2 = " : !large2(green) : dw "
+!P2 = " : !large2(purple) : dw "
+!p2 = " : !large2(pink) : dw "
+!b2 = " : !large2(blue) : dw "
+
 !credits_separation_lines = $000D
 !credits_end_lines = $0023
 
@@ -108,8 +130,8 @@ baby_metroid_credits:
 !small(cyan)    : dw I_write, "        FOR THE HEX TWEAK       "
 !small(cyan)    : dw I_write, "   THAT INSPIRED THIS ROMHACK   "
 !small(white)   : dw I_write, "                                "
-!large1(yellow) : dw I_write, "         100FD4 TO 6B           "
-!large2(yellow) : dw I_write, "         100FD4 TO 6B           "
+!large1(yellow) : dw I_write, "          100FD4 TO 6B          "
+!large2(yellow) : dw I_write, "          100FD4 TO 6B          "
 !small(white)   : dw I_write, "                                " ; 1
 !small(white)   : dw I_write, "                                " ; 2
 !small(white)   : dw I_write, "                                " ; 3
@@ -125,11 +147,11 @@ baby_metroid_credits:
 !small(white)   : dw I_write, "                                " ; 13
 !small(white)   : dw I_write, "                                " ; 14
 !small(white)   : dw I_write, "                                " ; 15
-!small(pink)    : dw I_write, "  THIS HACK WAS MADE WITH LOVE  "
-!small(pink)    : dw I_write, "   FOR MY SON AND MY DAUGHTER   "
+!small(blue)    : dw I_write, "  THIS HACK WAS MADE WITH " !p "LOVE  "
+!small(blue)    : dw I_write, "   FOR MY SON AND MY DAUGHTER   "
 !small(white)   : dw I_write, "                                "
-!large1(white)  : dw I_write, "           E  AND  G            "
-!large2(white)  : dw I_write, "           E  AND  G            "
+!large1(white)  : dw I_write, "           " !o1 "E" !w1 "  AND  " !o1 "G           "
+!large2(white)  : dw I_write, "           " !y2 "E" !w2 "  AND  " !y2 "G           "
 .extra_credits_end:
 
   dw I_set_timer, !credits_end_lines
