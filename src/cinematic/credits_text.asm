@@ -50,7 +50,25 @@ macro credits_large2_font(color)
 }
 endmacro
 
+!credits_instruction_list_bank = $C7
+
+org $8BE0EA
+JSR init_credits_instruction_list
+
+org $8B9971
+LDA !credits_instruction_list_bank
+PHA
+%assertpc($8B9974)
+
 org !FREESPACE_8B
+
+init_credits_instruction_list:
+{
+  JSR $9932
+  LDA #$8C00
+  STA !credits_instruction_list_bank
+  RTS
+}
 
 write_credits:
 {
@@ -71,6 +89,27 @@ write_credits:
   DEY : DEY : DEY : DEY
 
   JMP $99AD
+}
+
+credits_goto = $8B9A06
+
+credits_goto_long:
+{
+  LDA $0000,y
+  STA $19F7
+  PHA
+
+  LDA $0002,y
+  AND #$00FF
+  XBA
+  STA !credits_instruction_list_bank
+
+  PHA
+  PLB : PLB
+
+  PLY
+
+  RTS
 }
 
 global end_credits_freespace_8b:

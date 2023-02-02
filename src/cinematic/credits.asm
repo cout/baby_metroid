@@ -11,6 +11,9 @@ I_draw = $0000
 org write_credits
 I_write:
 
+org credits_goto_long
+I_goto_long:
+
 !small = %credits_small_font
 !large1 = %credits_large1_font
 !large2 = %credits_large2_font
@@ -50,12 +53,13 @@ org $8CDB4B-$02 : dw !credits_separation_lines
 org $8CDBA3-$02 : dw !credits_separation_lines
 org $8CDC73-$02 : dw !credits_separation_lines
 
-org $8CDC8F-$04 : dw I_goto, baby_metroid_credits
+org $8CDC8F-$04 : dw I_goto_long : dl baby_metroid_credits
 
-org !FREESPACE_8C
+org !FREESPACE_B8
 
 baby_metroid_credits:
 {
+  dw I_set_timer, !credits_separation_lines
   dw I_set_timer, !credits_separation_lines
 - dw I_draw, blank_line
   dw I_loop, -
@@ -95,8 +99,8 @@ baby_metroid_credits:
   dw I_delete
 }
 
-global end_credits_freespace_8c:
-!FREESPACE_8C := end_credits_freespace_8c
+global end_credits_freespace_b8:
+!FREESPACE_B8 := end_credits_freespace_b8
 
 undef "small"
 undef "large1"
