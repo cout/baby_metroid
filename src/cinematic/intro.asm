@@ -515,7 +515,7 @@ LDA #$B3F4
 org $8BB2CA
 RTS
 
-org !FREESPACE_8C
+org !FREESPACE_B8
 
 pushtable
 ' ' = $0000
@@ -543,8 +543,8 @@ scene_4_level_data:
 
 pulltable
 
-end_intro_scene_3_freespace_8c:
-!FREESPACE_8C := end_intro_scene_3_freespace_8c
+end_intro_scene_3_freespace_b8:
+!FREESPACE_B8 := end_intro_scene_3_freespace_b8
 
 ;;;;;;;;;; SCENE 3 ;;;;;;;;;;
 
