@@ -7,7 +7,7 @@ HEX2BIN = tools/hex2bin.py
 COMPRESS = tools/compress.py
 GENERATE_DEPS = tools/generate_deps.py
 
-ASAR_FLAGS = -w1013 --no-title-check
+ASAR_FLAGS = -w1013 --no-title-check --symbols=wla
 
 SOURCES = \
 src/main.asm
@@ -84,7 +84,7 @@ build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.ip
 
 build/baby_metroid.ips: $(ASAR) $(SOURCES) $(ROOMS) src/cinematic/intro_bg1_tilemap.bin
 	echo "build/baby_metroid.ips: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.ips.d
-	$(ASAR) $(ASAR_FLAGS) --ips build/baby_metroid.ips "$$@" src/main.asm build/scratch.sfc
+	$(ASAR) $(ASAR_FLAGS) --symbols-path=build/baby_metroid.sym --ips build/baby_metroid.ips "$$@" src/main.asm build/scratch.sfc
 
 src/rooms/%.bin: src/rooms/%.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
