@@ -30,44 +30,46 @@ org !FREEMEM_7F
 ; TODO - ideally these should use the current enemy index but this is
 ; fine since there will only ever be one baby
 
+print "Baby variables:"
+
 baby_targeted_enemy:
-print "Variable baby_targeted_enemy: $", pc
+print "  baby_targeted_enemy - $", pc
 skip 2
 
 baby_start_position_x:
-print "Variable baby_start_position_x: $", pc
+print "  baby_start_position_x - $", pc
 skip 2
 
 baby_start_position_y:
-print "Variable baby_start_position_y: $", pc
+print "  baby_start_position_y - $", pc
 skip 2
 
 baby_target_position_x:
-print "Variable baby_target_position_x: $", pc
+print "  baby_target_position_x - $", pc
 skip 2
 
 baby_target_position_y:
-print "Variable baby_target_position_y: $", pc
+print "  baby_target_position_y - $", pc
 skip 2
 
 baby_last_firing_angle:
-print "Variable baby_last_firing_angle: $", pc
+print "  baby_last_firing_angle - $", pc
 skip 2
 
 baby_last_firing_direction:
-print "Variable baby_last_firing_direction: $", pc
+print "  baby_last_firing_direction - $", pc
 skip 2
 
 baby_targeted_enemy_position_x:
-print "Variable baby_targeted_enemy_position_x: $", pc
+print "  baby_targeted_enemy_position_x - $", pc
 skip 2
 
 baby_targeted_enemy_position_y:
-print "Variable baby_targeted_enemy_position_y: $", pc
+print "  baby_targeted_enemy_position_y - $", pc
 skip 2
 
 baby_unable_to_fire:
-print "Variable baby_unable_to_fire: $", pc
+print "  baby_unable_to_fire - $", pc
 skip 2
 
 end_baby_freemem_7f:

@@ -6,24 +6,26 @@ org !FREEMEM_7F
 ; TODO - ideally these should use the current enemy index but this is
 ; fine since there will only ever be one draygon
 
+print "Draygon variables:"
+
 draygon_previous_x_position:
-print "Variable draygon_previous_x_position: $", pc
+print "  draygon_previous_x_position - $", pc
 skip 2
 
 draygon_previous_x_sub_position:
-print "Variable draygon_previous_x_sub_position: $", pc
+print "  draygon_previous_x_sub_position - $", pc
 skip 2
 
 draygon_previous_y_position:
-print "Variable draygon_previous_y_position: $", pc
+print "  draygon_previous_y_position - $", pc
 skip 2
 
 draygon_previous_y_sub_position:
-print "Variable draygon_previous_y_sub_position: $", pc
+print "  draygon_previous_y_sub_position - $", pc
 skip 2
 
 draygon_holding_samus:
-print "Variable draygon_holding_samus: $", pc
+print "  draygon_holding_samus - $", pc
 skip 2
 
 end_draygon_freemem_7f:

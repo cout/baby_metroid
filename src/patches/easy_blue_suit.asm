@@ -30,20 +30,22 @@
 
 org !FREEMEM_7F
 
+print "Easy blue suit variables:"
+
 ; Counter: mimics $0B3E (speed counter)
 ; Most significant byte is the speed counter (0, 1, 2, 3, or 4)
 ; Least significant byte oscillates between 1/2 when at full speed
 easy_blue_suit_counter:
-print "Variable easy_blue_suit_counter: $", pc
+print "  easy_blue_suit_counter - $", pc
 skip 2
 
 ; Room where easy blue suit was acquired
 easy_blue_suit_room:
-print "Variable easy_blue_suit_room: $", pc
+print "  easy_blue_suit_room - $", pc
 skip 2
 
 easy_blue_suit_held_run_last_check:
-print "Variable easy_blue_suit_held_run_last_check: $", pc
+print "  easy_blue_suit_held_run_last_check - $", pc
 skip 2
 
 easy_blue_suit_end_freemem_7f:

@@ -1,15 +1,17 @@
 org !FREEMEM_7F
 
+print "Botwoon variables:"
+
 samus_is_hiding:
-print "Variable samus_is_hiding: $", pc
+print "  samus_is_hiding - $", pc
 skip 2
 
 botwoon_is_seeking:
-print "Variable botwoon_is_seeking: $", pc
+print "  botwoon_is_seeking - $", pc
 skip 2
 
 botwoon_wall_crumble_started:
-print "Variable botwoon_wall_crumble_started: $", pc
+print "  botwoon_wall_crumble_started - $", pc
 skip 2
 
 end_botwoon_freemem_7f:
