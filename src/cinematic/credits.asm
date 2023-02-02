@@ -68,8 +68,8 @@ baby_metroid_credits:
   !small(blue)    : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 5
   !small(orange)  : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 6
   !small(purple)  : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,':! " ; 7
-  !large1(white ) : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 8
-  !large2(white ) : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 9
+  !large1(white)  : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 8
+  !large2(white)  : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 9
   !large1(yellow) : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 10
   !large2(yellow) : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ.,    "  ; 11
   !large1(cyan)   : dw I_write, "ABCDEFGHIJKLMNOPQRSTUVWXYZ  '""  " ; 12
