@@ -27,3 +27,10 @@ org $8385E0 ; Room $ACF0 state $ACFD FX
 skip 4
 
 dw $019A
+
+;;
+; Remove the red door to prevent softlock
+;
+
+org $8F8C6E+12
+dw $0000

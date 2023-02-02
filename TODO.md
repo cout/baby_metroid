@@ -27,11 +27,6 @@ Crashes
     shouldn't matter, and I don't think it's there before morph)
 * I was able to make spore spawn crash but I am not sure how
 
-Softlocks
----------
-
-* Speed hallway - can run out of missiles (unlikely but possible)
-
 Incomplete
 ----------
 
