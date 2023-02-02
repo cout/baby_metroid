@@ -251,7 +251,7 @@ store_hud_item_index:
   STA !hud_selected_item_palette_index
 
   CLC
-  ADC #hud_selected_item_palette+$02
+  ADC.w #hud_selected_item_palette+$02
   STA !hud_selected_item_palette_pointer
 
   RTS
