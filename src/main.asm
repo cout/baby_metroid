@@ -122,6 +122,8 @@ incsrc rooms/spring_ball.asm
 incsrc cinematic/escape.asm
 incsrc cinematic/intro_text.asm
 incsrc cinematic/intro.asm
+incsrc cinematic/credits_text.asm
+incsrc cinematic/credits.asm
 
 incsrc metconst/CrashHandler.asm
 
