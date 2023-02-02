@@ -32,7 +32,8 @@ dw $85EF     ; Enemy graphics set offset (bank $B4)
 dw $0101     ; Layer 2 scroll
 dw $A5E9     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
-dw $0000     ; Room main routine (bank $8F)
+; dw $0000     ; Room main routine (bank $8F)
+dw kraid_room_main_routine
 dw $8A2E     ; Room PLM list address (bank $8F)
 dw $B815     ; Library background (bank $8F)
 dw $91D6     ; Room setup routine (bank $8F)
@@ -77,41 +78,54 @@ org $B485EF
 dw $E2BF, $0007 ; kraid
 dw $FFFF     ; end of list
 
-; Room $A59F state $A5B1: FX
-; Room $A59F state $A5CB: FX
-org $8383F4
-;  door   base   target veloc     time  type  A    B    C   pal  anim blend
-dw $FFFF, $0000, $FFFF, $FFFF : db $00, $00, $00, $0C, $02, $30, $00, $80
-dw $6200, $FFFF, $FFFF, $0000 : db $B0, $00, $FF, $01, $00, $00, $00, $26
-dw $1802, $0001, $4800, $0000 : db $FF, $FF, $FF, $FF, $00, $00, $00, $00
-dw $022A, $0000, $0000, $FFFF : db $FF, $FF, $FF, $FF, $00, $00, $B8, $00
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $02, $02, $00, $00, $B1, $01
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $00, $02, $00, $00, $D0, $01
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $03, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $00, $00, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0000, $0202 : db $00, $00, $00, $00, $00, $00, $B2, $00
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $00, $00, $00, $02, $00, $00, $B8, $02
-dw $FFFF, $0000, $0200, $1E02 : db $03, $1F, $03, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $03, $1F, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $02, $02, $00, $00, $C6, $00
-dw $FFFF, $0000, $0400, $1E02 : db $81, $00, $01, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $01, $00, $00, $02, $00, $00, $B8, $01
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $01, $00, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0000, $0202 : db $03, $00, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $01, $00, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $03, $1F, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0000, $0202 : db $00, $00, $00, $00, $00, $00, $C8, $00
-dw $FFFF, $0000, $0400, $1E02 : db $41, $00, $02, $00, $00, $00, $B8, $00
-dw $FFFF, $0000, $0600, $1802 : db $83, $00, $00, $48, $00, $00, $B4, $02
-dw $FFFF, $0000, $0400, $1E02 : db $80, $00, $00, $00, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0000, $0202 : db $00, $00, $00, $00, $00, $00, $C0, $00
-dw $FFFF, $0000, $0600, $1802 : db $83, $00, $00, $48, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0000, $0202 : db $00, $00, $03, $00, $00, $00, $C7, $00
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $00, $02, $00, $00, $C6, $00
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $00, $02, $00, $00, $FF, $FF
-dw $FFFF, $0000, $0200, $1E02 : db $03, $00, $02, $02, $BE, $95, $DA, $01
-dw $00B0, $0000, $02F0, $1E02 : db $0B, $1F, $02, $02, $00, $00, $DA, $01
-dw $FFFF, $0000, $0200, $1E02 : db $0B, $1F, $02, $02, $00, $00, $DA, $00
-dw $0000, $0000, $0220, $1E02 : db $0B, $1F, $00, $02, $00, $00, $FF, $FF
+org !FREESPACE_8F
+
+kraid_room_main_routine:
+{
+  LDA $05B6
+  BIT #$000F
+  BNE .fall
+
+.spawn:
+  JSL $808111
+  AND #$0030
+  CLC
+  ADC #$0070
+  STA $12
+
+  LDA #$0100
+  STA $14
+
+  LDA #falling_drop : TAY
+  ; TODO: X=enemy index
+  LDA #$0000
+  JSL $868027
+
+.fall:
+  LDY #$0022
+
+.loop:
+  LDA $1997,y
+  BEQ .next
+
+  LDA $1A93,y
+  INC
+  STA $1A93,y
+
+  CMP #$0180
+  BMI .next
+  LDA #$0000
+  STA $1997,y
+
+.next:
+  DEY : DEY
+  BPL .loop
+
+.return:
+  RTS
+}
+
+end_kraid_room_freespace_8f:
+!FREESPACE_8F := end_kraid_room_freespace_8f
+
+; vim:ft=pic

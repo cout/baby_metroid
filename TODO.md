@@ -30,7 +30,6 @@ Crashes
 Softlocks
 ---------
 
-* Kraid - can run out of missiles
 * Speed hallway - can run out of missiles (unlikely but possible)
 
 Incomplete
@@ -43,8 +42,6 @@ Incomplete
     frustrating when trying to shine spark to get through single chamber
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
-* Kraid fight is still mostly vanilla (idea: have missiles falling from
-    the ceiling, which also prevents softlock)
 
 Ideas
 -----

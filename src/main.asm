@@ -37,6 +37,7 @@ incsrc enemies/small_baby.asm
 incsrc enemies/gunship.asm
 incsrc enemies/water_zoomer.asm
 incsrc projectiles/transporter_electricity.asm
+incsrc projectiles/falling_drop.asm
 incsrc plm/blue_suit_block.asm
 incsrc plm/power_control.asm
 incsrc plm/eye_door.asm
@@ -56,11 +57,10 @@ incsrc rooms/bat_room.asm
 incsrc rooms/below_spazer.asm
 incsrc rooms/hi_jump_boots.asm
 incsrc rooms/warehouse_zeelas.asm
-incsrc rooms/mini_kraid.asm
-incsrc rooms/kraid_eye_door.asm
-incsrc rooms/kraid.asm
 incsrc rooms/warehouse_entrance.asm
 incsrc rooms/kraid_kihunters.asm
+incsrc rooms/mini_kraid.asm
+incsrc rooms/kraid_eye_door.asm
 incsrc rooms/kraid.asm
 incsrc rooms/rising_tide.asm
 incsrc rooms/bat_cave.asm
