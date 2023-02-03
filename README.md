@@ -17,6 +17,6 @@ Features:
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 | -------- | -------- | -------- |
 | ![](/images/samus_statue.png) | ![](./images/blue_suit.png) | ![](./images/catch_a_ride.png) |
-| Statues of Samus Aran guide the player to hidden blocks.| Single-button blue suit for players who have not yet learned how to use multiple buttons at once. | Sticky morph ball makes navigating tough rooms easier and turns the game into a playground.|
-| ![](./images/color_hud.png) | ![](./images/no_spikes.png) | |
-Colorized HUD so the item color matches the color of the door it opens. | Spikes and other scary/dangerous elements have been removed or modified to be less intimidating. | |
+| Statues of Samus Aran guide the player to hidden blocks | Single-button blue suit for players who have not yet learned how to use multiple buttons at once | Sticky morph ball makes navigating tough rooms easier and turns the game into a playground |
+| ![](./images/color_hud.png) | ![](./images/no_spikes.png) | ![](./images/kraid.png) |
+Colorized HUD so the item color matches the color of the door it opens. | Spikes and other scary/dangerous elements have been removed or modified to be less intimidating | New logic turns boss fights into puzzles |
