@@ -226,7 +226,7 @@ restore_green_door_colors:
 {
   SEP #$20
   STZ $4300 ; mode 0 (register write once)
-  LDY hud_selected_item_palette+$02
+  LDY #hud_selected_item_palette+$02
   STY $4302 ; source addr
   LDA #$80
   STA $4304 ; source bank
