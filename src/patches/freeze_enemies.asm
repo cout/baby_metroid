@@ -1,51 +1,5 @@
-;;;;;
-;
-; Overview:
-;
-; (*) indicates this is one of the instructions that we hook
-;
-; 9FD4 - Main enemy routine
-;   |
-;   +----- 903C - checks whether an enemy is frozen
-;     |
-;     +----- 903E - handle not-frozen enemies
-;     |      |
-;     |      +----- JSR 9758 - check for enemy collsion (below)
-;     |      +----- 904C - enemy was killed from collsion
-;     |      +----- 9118 - enemy was not killed from collsion
-;     |
-;     +---- 904C - handle frozen enemies
-;
-; 9758 - Enemy collision handler (called from 903E above)
-;  |
-;  +----- 976A - check whether enemy uses extended spritemaps
-;    |
-;    +----- 976C - enemy does use extended spritemaps
-;    |      |
-;    |      +----- 976C - JSR 9B7F - call enemy/projectile handler
-;    |      +----- 976F - JSR 9D23 - call enemy/bomb handler
-;    |      +----- 9772 - JSR 9A5A - call enemy/samus handler
-;    |
-;    +----- 9778 - enemy does not use extended spritemaps
-;           |
-;           +----- 9778 - JSR A143 - call enemy/projectile handler
-;           +----- 977B - JSR A236 - call enemy/bomb handler
-;           +----- 977E - JSR A07A - call enemy/samus handler
-;
-; (*) A07A - enemy / samus collsion detection (called from 977E above)
-;  |
-;  +----- A210 - JSL to A226 (execute enemy shot)
-;          |
-;          +-(*)- A226 - execute enemy shot
-;
-; A8F0 - Samus / solid enemy collision detection (called from routines in bank
-;  |     $80 that move Samus)
-;  |
-;  +-(*)- A9DF - check for collsion with frozen enemy
-;  
-;;;;;
-
-
+!effective_contact_damage_index = $0A70
+!effective_invincibility_timer = $1866
 
 ;;
 ; Treat all enemies as solid (but they can still hurt Samus).
@@ -77,6 +31,12 @@ check_solid_enemy_detection:
   BEQ .easy_mode
 
 .hard_mode:
+  LDA $0A6E
+  STA !effective_contact_damage_index
+
+  LDA $18A8
+  STA !effective_invincibility_timer
+
   ; In hard mode, treat enemies as solid only when Samus is morphed
   PHX
   LDA $0A1F
@@ -87,8 +47,13 @@ check_solid_enemy_detection:
   AND #$00FF
   CMP #$0001
   BNE .do_normal_solid_checks
+  BRA .check_samus_moving_upward
 
 .easy_mode:
+  LDA #$0001
+  STA !effective_contact_damage_index
+
+.check_samus_moving_upward:
   ; If Samus is moving upward, do not treat the enemy as solid (so Samus
   ; can more easily jump up through enemies)
   LDA $0B36
@@ -120,48 +85,44 @@ end_freeze_enemies_freespace_a0:
 !FREESPACE_A0 := end_freeze_enemies_freespace_a0
 
 ;;
-; Disable Samus/enemy collsion handling.  This causes enemies to be
-; treated as frozen (so they do not hurt Samus) but does not make them
-; solid (you cannot stand on them without the above change).
+; Disable Samus/enemy collsion handling in easy mode.  This causes
+; enemies to be treated as frozen (so they do not hurt Samus) but does
+; not make them solid (you cannot stand on them without the above
+; change).
 ;
 
-; enemy/samus collision handler (extended spritemap)
-; damage contact index == 0 (normal)
+; extended spritemap
 org $A09A95
-PLB
-RTS
+LDA !effective_invincibility_timer
 
-; enemy/Samus collision handler
-; damage contact index == 0 (normal)
+; normal spritemap
 org $A0A09B
-PLB
-RTS
+LDA !effective_invincibility_timer
 
 ;;
-; Disable touch AI - disables knockback and damage.
+; Disable touch knockback and damage in easy mode
 ;
 
-; common touch AI, damage contact index == 0 (normal)
-org $A0A562
-RTS
+org $A0A4A1
+LDA !effective_contact_damage_index
 
 ;;
-; Disable projectile knockback and damage
+; Disable projectile knockback and damage in easy mode
 ;
 
-org $A0994B
-STZ $18AA
-RTS
+org $A098AC
+LDA !effective_contact_damage_index
 
 ;;
-; Disable damage to Samus
+; Disable all damage to Samus in easy mode
 ;
 
-org $91DF51 ; subroutine called by touch AI and projectile collsion handler to deal damage
-RTL
-
-org $91DF71 ; instruction within deal damage subroutine that decrements Samus's health
-RTL
+org $91DF5B
+LDA !hard_mode_flag
+BEQ skip_deal_damage
+NOP
+%assertpc($91DF61)
+skip_deal_damage = $91DF79
 
 ;;
 ; Do block collision detection when standing on solid/frozen enemies
