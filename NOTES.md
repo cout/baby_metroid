@@ -1,19 +1,22 @@
 NOTES
 =====
 
-Links
------
+These are my personal notes for what I have learned while writing this
+romhack.  I hope others may find it useful, but it is mostly for my own
+posterity.
 
-Elevators - https://m2k2.taigaforum.com/post/smile_releasehelp_thread1041.html#smile_releasehelp_thread1041
-Editing graphics - nintoaster says to check out yychr
+Sources
+-------
 
-Compression
------------
-
-* https://everything2.com/title/Nintendo+compression
-* https://github.com/Maseya/MushROMs
-* https://github.com/bonimy/MushROMs/issues/35
-* https://www.romhacking.net/documents/243/
+* Super Metroid Mod Manual (SMMM) - https://www.metroidconstruction.com/SMMM/
+* Metconst wiki - https://wiki.metroidconstruction.com/doku.php?id=super_metroid
+    * Room data - https://wiki.metroidconstruction.com/doku.php?id=super:technical_information:room_header_format
+    * Data structures - https://wiki.metroidconstruction.com/doku.php?id=super:technical_information:data_structures
+    * Enemies - https://wiki.metroidconstruction.com/doku.php?id=super:enemy:list_of_enemies
+* Pjboy's bank logs - https://patrickjohnston.org/bank/index.html
+* Pjboy's lists - https://patrickjohnston.org/ASM/Lists/Super%20Metroid/
+* Kejardon's RAM map - https://jathys.zophar.net/supermetroid/kejardon/RAMMap.txt
+* Compression - https://everything2.com/title/Nintendo+compression
 
 Memory Banks
 ============
