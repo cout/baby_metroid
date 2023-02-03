@@ -29,10 +29,12 @@ macro credits_large1_font(color)
   'M' = <color>+$2C : 'N' = <color>+$2D : 'O' = <color>+$2E : 'P' = <color>+$2F
   'Q' = <color>+$40 : 'R' = <color>+$41 : 'S' = <color>+$42 : 'T' = <color>+$43
   'U' = <color>+$44 : 'V' = <color>+$45 : 'W' = <color>+$46 : 'X' = <color>+$47
-  'Y' = <color>+$48 : 'Z' = <color>+$49 : ''' = <color>+$4A : '"' = <color>+$4B
+  'Y' = <color>+$48 : 'Z' = <color>+$49 : ':' = <color>+$1A : ';' = <color>+$1A
+  '.' = <color>+$7F : ',' = <color>+$7F : ''' = <color>+$4A : '"' = <color>+$4B
   '0' = <color>+$60 : '1' = <color>+$61 : '2' = <color>+$62 : '3' = <color>+$63
   '4' = <color>+$64 : '5' = <color>+$65 : '6' = <color>+$66 : '7' = <color>+$67
-  '8' = <color>+$68 : '9' = <color>+$69 : ' ' = <color>+$7F
+  '8' = <color>+$68 : '9' = <color>+$69
+  '%' = <color>+$6A : '&' = <color>+$7B : '!' = <color>+$53 : : ' ' = <color>+$7F
 }
 endmacro
 
@@ -43,10 +45,12 @@ macro credits_large2_font(color)
   'M' = <color>+$3C : 'N' = <color>+$3D : 'O' = <color>+$3E : 'P' = <color>+$3F
   'Q' = <color>+$50 : 'R' = <color>+$51 : 'S' = <color>+$52 : 'T' = <color>+$53
   'U' = <color>+$54 : 'V' = <color>+$55 : 'W' = <color>+$56 : 'X' = <color>+$57
-  'Y' = <color>+$58 : 'Z' = <color>+$59 : '.' = <color>+$5A : ',' = <color>+$1B
+  'Y' = <color>+$58 : 'Z' = <color>+$59 : ':' = <color>+$1A : ';' = <color>+$1B
+  '.' = <color>+$1A : ',' = <color>+$1B : ''' = <color>+$7F : '"' = <color>+$7F
   '0' = <color>+$70 : '1' = <color>+$71 : '2' = <color>+$72 : '3' = <color>+$73
   '4' = <color>+$74 : '5' = <color>+$75 : '6' = <color>+$76 : '7' = <color>+$77
-  '8' = <color>+$78 : '9' = <color>+$79 : ' ' = <color>+$7F
+  '8' = <color>+$78 : '9' = <color>+$79
+  '%' = <color>+$7A : '&' = <color>+$7C : '!' = <color>+$5A : ' ' = <color>+$7F
 }
 endmacro
 
