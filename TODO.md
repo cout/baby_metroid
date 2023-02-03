@@ -17,6 +17,8 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* Green doors show up as black???
+    (broke in a2a52f9 - use DMA to transfer colors)
 
 Crashes
 -------
