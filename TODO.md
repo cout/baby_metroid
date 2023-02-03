@@ -17,6 +17,7 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* Enemies (wavers) explode on contact in easy mode.
 
 Crashes
 -------
@@ -37,6 +38,8 @@ Incomplete
     frustrating when trying to shine spark to get through single chamber
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
+* There are bones left if you revisit Croc
+* Acid damage is still reduced in hard mode
 
 Ideas
 -----
@@ -47,6 +50,7 @@ Ideas
 * Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
     effect to pick her up by a few more pixels (three pixels less than
     the top of the enemy works well but needs more testing)
+* Make it possible to grapple all enemies
 
 Cosmetic
 --------
