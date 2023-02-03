@@ -46,7 +46,7 @@ warehouse_zeelas_enemy_population:
 dw $DC7F, $006A, $0040, $0001, $2800, $0000, $0002, $0002 ; zeela
 dw $DC7F, $006A, $0068, $0001, $2800, $0000, $0002, $0002 ; zeela
 dw $DC7F, $002B, $00E8, $0003, $2800, $0000, $0002, $0002 ; zeela
-dw !samus_statue, $002A, $00A0, $0000, $2400, $0000, $0002, $0005 ; statue
+dw !samus_statue, $002A, $00A0, $0000, $2400, $0000, $0000, $0205 ; statue
 dw $FFFF     ; end of list
 db $03       ; death quota
 

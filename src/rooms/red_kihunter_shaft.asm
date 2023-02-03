@@ -39,7 +39,7 @@ org $A1A428
 ; dw $EBBF, $0087, $02F2, $0000, $2800, $0000, $0050, $0000 ; hachi3 (red ki-hunter)
 ; dw $EBFF, $0087, $02F2, $0000, $2C00, $0000, $0020, $0000 ; hachi3 (red ki-hunter)
 ;  enemy          x      y      init   props  extra  param1 param2
-dw !samus_statue, $006D, $0091, $0000, $2400, $0000, $0002, $0003 ; statue
+dw !samus_statue, $006D, $0091, $0000, $2400, $0000, $0000, $0203 ; statue
 dw $FFFF     ; end of list
 db $03       ; death quota
 

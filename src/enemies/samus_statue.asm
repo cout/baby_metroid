@@ -191,16 +191,18 @@ samus_statue_init_ai:
   ; X = current enemy index
   LDX $0E54
 
-  ; Pick instruction list based on parameter 1
-  LDA $0FB4,x
+  ; Pick instruction list based on high byte of parameter 2
+  LDA $0FB7,x
+  AND #$00FF
   ASL
   TAY
   LDA samus_statue_instruction_lists,y
   STA $0F92,x
 
-  ; Copy palette based on parameter 2
+  ; Copy palette based on low byte of parameter 2
   LDA $0FB6,x
-  CMP $FFFF
+  AND #$00FF
+  CMP $00FF
   BEQ .return
   ASL
   TAY

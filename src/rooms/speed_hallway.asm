@@ -9,7 +9,7 @@ skip 16 ; geruda
 skip 16 ; geruda
 
 ;                    x      y   init  props   xtra     p1     p2
-dw !samus_statue, $0100, $00D4, $0000, $2400, $0000, $0001, $0003
+dw !samus_statue, $0100, $00D4, $0000, $2400, $0000, $0000, $0103
 dw $FFFF
 db $00
 

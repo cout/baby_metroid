@@ -42,7 +42,7 @@ org $A1AB80
 ; dw $E6FF, $01D0, $00D8, $0000, $A000, $0000, $0100, $0F07 ; fune
 ; dw $E6FF, $01F0, $0380, $0000, $A000, $0000, $0100, $0F07 ; fune
 ;  enemy          x      y      init   props  extra  param1 param2
-dw !samus_statue, $0130, $0094, $0000, $2400, $0000, $0003, $0000 ; statue
+dw !samus_statue, $0130, $0094, $0000, $2400, $0000, $0000, $0300 ; statue
 dw $DFBF,         $01F0, $0380, $0000, $2000, $0000, $0000, $0080 ; boulder
 dw $DFBF,         $0150, $0130, $0050, $2000, $0000, $0000, $0080 ; boulder
 dw $DFBF,         $01B8, $01D0, $0050, $2800, $0000, $0100, $0080 ; boulder

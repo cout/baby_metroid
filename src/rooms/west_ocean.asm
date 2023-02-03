@@ -11,7 +11,7 @@ org $A18684
 ;  enemy          x      y      init   props  extra  param1 param2
 dw $D6FF,         $04A4, $0570, $0000, $2000, $0000, $0010, $0210 ; fish
 dw $D6FF,         $03CB, $057A, $0000, $2000, $0000, $0110, $0210 ; fish
-dw !samus_statue, $0154, $0260, $0000, $2400, $0000, $0002, $0006 ; statue
+dw !samus_statue, $0154, $0260, $0000, $2400, $0000, $0000, $0206 ; statue
 dw $D3FF,         $0590, $0430, $0010, $2800, $0000, $0560, $05C0 ; ripper2 (green)
 dw $D7FF,         $0150, $00D8, $0000, $A000, $0000, $0000, $0010 ; horizontal kamer
 dw $D7FF,         $0388, $0058, $0000, $A000, $0000, $0000, $0010 ; horizontal kamer
