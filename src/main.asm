@@ -1,5 +1,7 @@
 !USE_BELOW_LANDING_SITE = 0
 
+!hard_mode_flag = $09EC
+
 lorom
 
 incsrc freespace.asm

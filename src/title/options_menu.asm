@@ -1,5 +1,3 @@
-!hard_mode_flag = $09EC
-
 pushtable
 
 org $82EC66

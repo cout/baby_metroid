@@ -73,6 +73,22 @@ check_solid_enemy_detection:
   LDA $0A6E
   BNE .do_normal_solid_checks
 
+  LDA !hard_mode_flag
+  BEQ .easy_mode
+
+.hard_mode:
+  ; In hard mode, treat enemies as solid only when Samus is morphed
+  PHX
+  LDA $0A1F
+  AND #$00FF
+  TAX
+  LDA.l pose_collision_type_table,x
+  PLX
+  AND #$00FF
+  CMP #$0001
+  BNE .do_normal_solid_checks
+
+.easy_mode:
   ; If Samus is moving upward, do not treat the enemy as solid (so Samus
   ; can more easily jump up through enemies)
   LDA $0B36

@@ -37,6 +37,8 @@ Incomplete
     frustrating when trying to shine spark to get through single chamber
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
+* Hard mode - use regulard damage for spikes, enemies
+* hard mode - allow dboost
 
 Ideas
 -----
@@ -47,7 +49,6 @@ Ideas
 * Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
     effect to pick her up by a few more pixels (three pixels less than
     the top of the enemy works well but needs more testing)
-* Easy/hard mode
 
 Cosmetic
 --------
