@@ -27,8 +27,7 @@ dw warehouse_entrance_enemy_graphics_set
 dw $C1C1     ; Layer 2 scroll
 dw $A6D0     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
-; dw $0000     ; Room main routine (bank $8F)
-dw warehouse_entrance_main
+dw $0000     ; Room main routine (bank $8F)
 dw $8A5C     ; Room PLM list address (bank $8F)
 dw $BC53     ; Library background (bank $8F)
 dw $91F4     ; Room setup routine (bank $8F)
@@ -56,7 +55,7 @@ warehouse_entrance_enemy_population:
 
 ;                     x      y   init  props   xtra     p1     p2
 dw !elevator,     $0080, $00A0, $0000, $2C00, $0000, $0000, $0140
-dw !samus_statue, $00E4, $0094, $0000, $2500, $0000, $0000, $0101
+dw !samus_statue, $00E4, $0094, $0000, $2400, $0000, test_samus_has_hi_jump, $0101
 dw $FFFF
 db $00
 
@@ -69,36 +68,3 @@ db $00
 
 end_warehouse_entrance_freespace_b4:
 !FREESPACE_B4 := end_warehouse_entrance_freespace_b4
-
-org !FREESPACE_8F
-
-; TODO - the idiomatic way to do this would be to add a new state, but
-; that is not easy the way I am repointing
-warehouse_entrance_main:
-{
-	; Check if HJB has been acquired.  If it has, show the statue,
-	; otherwise delete it.  It is less jarring to have the statue show up
-	; a frame late than to have it disappear after a frame.
-  LDA $09A4
-  BIT #$0100
-  BNE .show_statue
-
-.delete_statue:
-  LDA $0F86+($40*1)
-  ORA #$0300
-  STA $0F86+($40*1)
-	LDA #$0000
-	STA $7FFC00
-	RTS
-
-.show_statue:
-  LDA $0F86+($40*1)
-  AND #$FEFF
-  STA $0F86+($40*1)
-	LDA #$0001
-	STA $7FFC00
-  RTS
-}
-
-end_warehouse_entrance_freespace_8f:
-!FREESPACE_8F := end_warehouse_entrance_freespace_8f

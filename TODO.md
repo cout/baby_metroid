@@ -61,9 +61,6 @@ Cosmetic
 * In the room above croc, I was able to get stuck crouching between an
     enemy and a ceiling slope, resulting in samus oscillating
 * Cursor has the wrong shape on the last page of the intro
-* Warehouse statue is not visible when entering the room; it only
-    becomes visible after the room's main routine executes for the first
-    time.
 * In escape climb, baby can briefly take Samus through the floor
 * In escape climb, shine spark and/or echoes should be stopped when baby
     picks up Samus.

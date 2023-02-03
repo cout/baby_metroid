@@ -191,6 +191,22 @@ samus_statue_init_ai:
   ; X = current enemy index
   LDX $0E54
 
+  LDA $0FB4,x
+  BEQ .init
+
+  STA $12
+  PEA .addr-1
+  JMP ($0012)
+.addr:
+  BNE .init
+
+.delete:
+  LDA $0F86,x
+  ORA #$0200
+  STA $0F86,x
+  RTL
+
+.init:
   ; Pick instruction list based on high byte of parameter 2
   LDA $0FB7,x
   AND #$00FF
@@ -239,6 +255,20 @@ samus_statue_shot:
   ; Invoke the normal enemy shot AI
   JSL $A0A63D
   RTL
+}
+
+test_samus_has_hi_jump:
+{
+  LDA $09A4
+  AND #$0100
+  RTS
+}
+
+test_samus_has_speed:
+{
+  LDA $09A4
+  AND #$2000
+  RTS
 }
 
 end_samus_statue_freespace_a3:

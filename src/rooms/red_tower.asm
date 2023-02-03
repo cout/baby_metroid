@@ -29,8 +29,7 @@ dw $83F1     ; Enemy graphics set offset (bank $B4)
 dw $C1C1     ; Layer 2 scroll
 dw $A284     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
-; dw $0000     ; Room main routine (bank $8F)
-dw red_tower_main
+dw $0000     ; Room main routine (bank $8F)
 ; dw $8854     ; Room PLM list address (bank $8F)
 dw red_tower_room_plm_list
 dw $BB7B     ; Library background (bank $8F)
@@ -50,7 +49,7 @@ dw $D47F, $009D, $0888, $0000, $2000, $0000, $0010, $0000 ; ripper
 dw $D47F, $0068, $0800, $0000, $2000, $0000, $0010, $0001 ; ripper
 ; dw $F253, $0018, $0530, $0000, $6100, $0000, $0000, $0020 ; geega
 ; dw $F253, $00C8, $0550, $0000, $6100, $0000, $0001, $0020 ; geega
-dw !samus_statue, $0078, $099C, $0000, $2400, $0000, $0000, $0205
+dw !samus_statue, $0078, $099C, $0000, $2400, $0000, test_samus_has_speed, $0205
 dw $FFFF     ; end of list
 db $0B       ; death quota
 
@@ -69,24 +68,6 @@ org $83834E
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $06, $03, $00
 
 org !FREESPACE_8F
-
-; TODO - the idiomatic way to do this would be to add a new state, but
-; that is not easy the way I am repointing
-red_tower_main:
-{
-  ; Check if speed has been acquired
-  LDA $09A4
-  BIT #$2000
-  BNE .return
-
-  ; Delete statue
-  LDA $0F86+($40*9)
-  ORA #$0200
-  STA $0F86+($40*9)
-
-.return
-  RTS
-}
 
 red_tower_room_plm_list:
 {
