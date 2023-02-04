@@ -22,11 +22,9 @@ init_falling_drop:
   PHY
   JSL $808111
   AND #$0007
-  STA $7FFC00
   TAY
   LDA .drop_type,y
   AND #$00FF
-  STA $7FFC02
   PLY
 
   JMP $EF45
