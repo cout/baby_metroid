@@ -17,7 +17,6 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* Enemies (wavers) explode on contact in easy mode.
 
 Crashes
 -------

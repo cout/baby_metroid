@@ -103,8 +103,25 @@ LDA !effective_invincibility_timer
 ; Disable touch knockback and damage in easy mode
 ;
 
-org $A0A4A1
-LDA !effective_contact_damage_index
+org $A0A4A6
+JMP handle_touch_damage_and_knockback
+
+org !FREESPACE_A0
+
+handle_touch_damage_and_knockback:
+{
+  LDA !hard_mode_flag
+  BEQ .easy_mode
+
+.hard_mode:
+  JMP $A562
+
+.easy_mode:
+  RTS
+}
+
+end_freeze_enemies_2_freespace_a0:
+!FREESPACE_A0 := end_freeze_enemies_2_freespace_a0
 
 ;;
 ; Disable projectile knockback and damage in easy mode
