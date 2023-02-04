@@ -39,6 +39,10 @@ Incomplete
     from Samus
 * There are bones left if you revisit Croc
 * Acid damage is still reduced in hard mode
+* Need to test custom PLMs with xray
+* Need to test croc fight in hard mode
+* Easy grapple patch should fire grapple the full length without holding
+    the fire button
 
 Ideas
 -----
