@@ -15,23 +15,27 @@ LDY #$BBAE
 org $A487E5
 LDY #$BBAE
 
+;;
+; Keep Croc from pushing Samus into the wall
+;
+
+org $A49029
+JSL move_croc_with_wall_check
+
 org !FREESPACE_A4
 
-move_croc_left:
+move_croc_with_wall_check:
 {
-  LDA $12
-  EOR #$FFFF
-  INC
-  STA $12
-  LDA $14
-  EOR #$FFFF
-  INC
-  STA $14
-  JML $A0C6AB
+  LDA $0F7A
+  CMP #$0280
+  BPL +
+  SEC
+  RTL
++ JML $A0C6AB
 }
 
-end_move_croc_left_freespace_a4:
-!FREESPACE_A4 := end_move_croc_left_freespace_a4
+end_move_croc_with_wall_check_freespace_a4:
+!FREESPACE_A4 := end_move_croc_with_wall_check_freespace_a4
 
 ;;
 ; Disable croc fireball
