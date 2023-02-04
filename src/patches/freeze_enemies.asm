@@ -53,6 +53,9 @@ check_solid_enemy_detection:
   LDA #$0001
   STA !effective_contact_damage_index
 
+  LDA #$0001
+  STA !effective_invincibility_timer
+
 .check_samus_moving_upward:
   ; If Samus is moving upward, do not treat the enemy as solid (so Samus
   ; can more easily jump up through enemies)
