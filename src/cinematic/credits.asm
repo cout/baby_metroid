@@ -161,7 +161,7 @@ baby_metroid_credits:
   dw I_end_credits
   dw I_delete
 
-  !extra_credit_lines_used := (.extra_credits_end-.extra_credits_start)/68-1
+  !extra_credit_lines_used := floor((.extra_credits_end-.extra_credits_start)/68)-1
   print "Extra credit lines used: ", dec(!extra_credit_lines_used)
 
   assert !extra_credit_lines_used = !extra_credit_lines
