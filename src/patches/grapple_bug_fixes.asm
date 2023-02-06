@@ -1,4 +1,3 @@
-
 ; TODO -
 ;
 ; Test all grapple glitches in the physics compendium (e.g. remaining
@@ -12,6 +11,52 @@
 ; TODO -
 ; I was able to get stuck in the left wall by grappling mochtroids to
 ; the right of Samus in coliseum
+
+; --------------------------------------------------
+
+org $91EF4F
+JSL update_samus_pose_for_grapple_connected_swinging
+
+org !FREESPACE_9B
+
+update_samus_pose_for_grapple_connected_swinging:
+{
+  LDA $0AF6 : PHA
+  LDA $0AFA : PHA
+
+  JSL $9BBD95 ; Update Samus pose and position for grapple swinging
+
+  ; TODO - grapple angle is set at $9B:C564 -- can we do collision testing
+  ; there or is that too early? (because we don't know what pose yet)
+
+  JSL grapple_connected_swinging_pose_change_collision_check
+  BCC .no_collision
+
+.cancel:
+  PLA : STA $0AFA
+  PLA : STA $0AF6
+  LDA #$C8C5 : STA $0D32
+  RTL
+
+.no_collision:
+  PLA
+  PLA
+  RTL
+}
+
+end_update_samus_pose_for_grapple_connected_swinging_freespace_9B:
+!FREESPACE_9B := end_update_samus_pose_for_grapple_connected_swinging_freespace_9B
+
+org !FREESPACE_94
+
+grapple_connected_swinging_pose_change_collision_check:
+{
+  JSR $ABE6 ; Grapple swinging collision detection
+  RTL
+}
+
+end_update_samus_pose_for_grapple_connected_swinging_freespace_94:
+!FREESPACE_94 := end_update_samus_pose_for_grapple_connected_swinging_freespace_94
 
 ; --------------------------------------------------
 
