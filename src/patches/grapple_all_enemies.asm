@@ -8,6 +8,11 @@
 ; tell grapple to stop lengthening (or only lengthen while I am holding
 ; down).
 
+; TODO -
+;
+; Also, when grappling an enemy at floor level, Samus sinks into the
+; floor (but gets ejected when she stops grappling).
+
 ; --------------------------------------------------
 
 ; Fix horizontal/vertical extension post-grapple collsion handling
