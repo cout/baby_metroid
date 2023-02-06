@@ -13,6 +13,11 @@
 ; Also, when grappling an enemy at floor level, Samus sinks into the
 ; floor (but gets ejected when she stops grappling).
 
+; TODO -
+;
+; There may be some other bugs to work around, e.g. remaining grappled
+; to an enemy while touching a transition tile.
+
 ; --------------------------------------------------
 
 ; Fix horizontal/vertical extension post-grapple collsion handling
