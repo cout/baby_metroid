@@ -19,11 +19,6 @@
 ; grappling b) positioning horizontal to the ledge c) releasing grapple.
 
 ; TODO -
-;
-; When grappling an enemy at floor level (which results in Samus being
-; "stuck"), the grapple start position is wrong.
-
-; TODO -
 ; I was able to get stuck in the left wall by grappling mochtroids to
 ; the right of Samus in coliseum
 
@@ -36,9 +31,12 @@ org !FREESPACE_9B
 
 pre_grapple_locked_in_place_collision_detection:
 {
-  ; use post-grapple collision detection since Samus is in a standing
+  ; Use post-grapple collision detection since Samus is in a standing
   ; pose rather than a swinging pose
   JSL $90EF22
+
+  ; Update grapple start position
+  JSL $9BBF1B
 
   PLB
   PLP
