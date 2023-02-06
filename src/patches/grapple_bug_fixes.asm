@@ -47,15 +47,6 @@ org $948301+(2*$0C) : dw $9447
 
 ; --------------------------------------------------
 
-; Change Samus's hitbox size when using grapple
-; (this does not have any effect because it is not used when grappling,
-; but it seems like the right thing to do since she really is that long
-; when grappling)
-org $91BBB9+$06 : db $15
-org $91BBC1+$06 : db $15
-
-; --------------------------------------------------
-
 !minimum_grapple_length = #$0000
 
 org $94AC4B
