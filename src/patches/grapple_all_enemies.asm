@@ -10,13 +10,43 @@
 
 ; TODO -
 ;
-; Also, when grappling an enemy at floor level, Samus sinks into the
-; floor (but gets ejected when she stops grappling).
+; There may be some other bugs to work around, e.g. remaining grappled
+; to an enemy while touching a transition tile.
 
 ; TODO -
 ;
-; There may be some other bugs to work around, e.g. remaining grappled
-; to an enemy while touching a transition tile.
+; Samus can still fall through a 1-tile high ledge by: a) jumping and
+; grappling b) positioning horizontal to the ledge c) releasing grapple.
+
+; TODO -
+;
+; When grappling an enemy at floor level (which results in Samus being
+; "stuck"), the grapple start position is wrong.
+
+; TODO -
+; I was able to get stuck in the left wall by grappling mochtroids to
+; the right of Samus in coliseum
+
+; --------------------------------------------------
+
+org $9BBF18
+JMP pre_grapple_locked_in_place_collision_detection
+
+org !FREESPACE_9B
+
+pre_grapple_locked_in_place_collision_detection:
+{
+  ; use post-grapple collision detection since Samus is in a standing
+  ; pose rather than a swinging pose
+  JSL $90EF22
+
+  PLB
+  PLP
+  RTL
+}
+
+end_pre_grapple_collision_detection_freespace_9b:
+!FREESPACE_9B := end_pre_grapple_collision_detection_freespace_9b
 
 ; --------------------------------------------------
 
