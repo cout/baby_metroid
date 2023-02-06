@@ -1,17 +1,7 @@
 ; TODO -
 ;
-; I think this covers most of the cases of clipping through an up-facing
-; door.
-;
-; Sadly, swinging on grapple above a ledge, grapple gets lengthened as
-; soon as I swing away from the ledge.  Something needs to set a flag to
-; tell grapple to stop lengthening (or only lengthen while I am holding
-; down).
-
-; TODO -
-;
-; There may be some other bugs to work around, e.g. remaining grappled
-; to an enemy while touching a transition tile.
+; Test all grapple glitches in the physics compendium (e.g. remaining
+; grappled to an enemy while touching a transition tile).
 
 ; TODO -
 ;
@@ -75,6 +65,16 @@ CMP !minimum_grapple_length
 
 org $94AC50
 LDA !minimum_grapple_length
+
+; --------------------------------------------------
+
+; Zero-out grapple length delta if there is a collision during growing
+; or shrinking
+org $94AC9B
+JMP $ACF2
+
+org $94ACF2
+STZ $0D00
 
 ; --------------------------------------------------
 
