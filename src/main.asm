@@ -20,6 +20,7 @@ incsrc patches/spike_damage.asm
 incsrc patches/hud_item_colors.asm
 incsrc patches/underwater_blue_suit.asm
 incsrc patches/english_only.asm
+incsrc patches/grapple_bug_fixes.asm
 incsrc patches/grapple_all_enemies.asm
 incsrc bosses/torizos.asm
 incsrc bosses/spore_spawn.asm
