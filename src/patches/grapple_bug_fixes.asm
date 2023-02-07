@@ -18,6 +18,9 @@
 
 ; --------------------------------------------------
 
+!saved_samus_x_position = $1886
+!saved_samus_y_position = $1888
+
 org $91EF4F
 JSL update_samus_pose_for_grapple_connected_swinging
 
@@ -25,8 +28,8 @@ org !FREESPACE_9B
 
 update_samus_pose_for_grapple_connected_swinging:
 {
-  LDA $0AF6 : PHA
-  LDA $0AFA : PHA
+  LDA $0AF6 : STA !saved_samus_x_position
+  LDA $0AFA : STA !saved_samus_y_position
 
   JSL $9BBD95 ; Update Samus pose and position for grapple swinging
 
@@ -37,14 +40,11 @@ update_samus_pose_for_grapple_connected_swinging:
   BCC .no_collision
 
 .cancel:
-  PLA : STA $0AFA
-  PLA : STA $0AF6
+  LDA !saved_samus_x_position : STA $0AF6
+  LDA !saved_samus_y_position : STA $0AFA
   LDA #$C8C5 : STA $0D32
-  RTL
 
 .no_collision:
-  PLA
-  PLA
   RTL
 }
 
@@ -71,8 +71,8 @@ org !FREESPACE_9B
 
 pre_grapple_locked_in_place_collision_detection:
 {
-  LDA $0AF6 : STA $1886
-  LDA $0AFA : STA $1888
+  LDA $0AF6 : STA !saved_samus_x_position
+  LDA $0AFA : STA !saved_samus_y_position
 
   JSL $9BBEEB
 
@@ -88,8 +88,8 @@ pre_grapple_locked_in_place_collision_detection:
   BRA .return
 
 .cancel_grapple:
-  LDA $1886 : STA $0AF6
-  LDA $1888 : STA $0AFA
+  LDA !saved_samus_x_position : STA $0AF6
+  LDA !saved_samus_y_position : STA $0AFA
   LDA #$C8C5 : STA $0D32
 
 .return:
