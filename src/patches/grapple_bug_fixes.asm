@@ -12,6 +12,10 @@
 ; I was able to get stuck in the left wall by grappling mochtroids to
 ; the right of Samus in coliseum
 
+; TODO -
+; Grappling an enemy that is at floor-level, Samus moves forward or backward a
+; few pixels
+
 ; --------------------------------------------------
 
 org $91EF4F
@@ -60,13 +64,15 @@ end_update_samus_pose_for_grapple_connected_swinging_freespace_94:
 
 ; --------------------------------------------------
 
-org $9BBF18
-JMP pre_grapple_locked_in_place_collision_detection
+org $91EFBC
+JSL pre_grapple_locked_in_place_collision_detection
 
 org !FREESPACE_9B
 
 pre_grapple_locked_in_place_collision_detection:
 {
+  JSL $9BBEEB
+
   ; Use post-grapple collision detection since Samus is in a standing
   ; pose rather than a swinging pose
   JSL $90EF22
@@ -74,8 +80,6 @@ pre_grapple_locked_in_place_collision_detection:
   ; Update grapple start position
   JSL $9BBF1B
 
-  PLB
-  PLP
   RTL
 }
 
