@@ -71,6 +71,9 @@ org !FREESPACE_9B
 
 pre_grapple_locked_in_place_collision_detection:
 {
+  LDA $0AF6 : STA $1886
+  LDA $0AFA : STA $1888
+
   JSL $9BBEEB
 
   ; Use post-grapple collision detection since Samus is in a standing
@@ -80,6 +83,16 @@ pre_grapple_locked_in_place_collision_detection:
   ; Update grapple start position
   JSL $9BBF1B
 
+  JSL $9484C4 : LDA $0E04 : ORA $0E06 : BNE .cancel_grapple
+  JSL $9484CD : LDA $0E04 : ORA $0E06 : BNE .cancel_grapple
+  BRA .return
+
+.cancel_grapple:
+  LDA $1886 : STA $0AF6
+  LDA $1888 : STA $0AFA
+  LDA #$C8C5 : STA $0D32
+
+.return:
   RTL
 }
 
