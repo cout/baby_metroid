@@ -9,12 +9,11 @@
 ; grappling b) positioning horizontal to the ledge c) releasing grapple.
 
 ; TODO -
-; I was able to get stuck in the left wall by grappling mochtroids to
-; the right of Samus in coliseum
-
-; TODO -
 ; Grappling an enemy that is at floor-level, Samus moves forward or backward a
 ; few pixels
+
+; TODO -
+; It is no longer possible to enter a walljump pose while grappling
 
 ; --------------------------------------------------
 
@@ -109,6 +108,8 @@ org $948301+(2*$0C) : dw $9447
 
 ; --------------------------------------------------
 
+; TODO - This prevents entering a walljump pose
+
 !minimum_grapple_length = #$0000
 
 org $94AC4B
@@ -131,6 +132,8 @@ org $94ACF2
 STZ $0D00
 
 ; --------------------------------------------------
+
+; TODO - This also prevents entering a walljump pose
 
 org $94ABE6 ; number of iterations
 LDA #$000D
