@@ -200,17 +200,17 @@ def get_enemy_pops(state_headers, rom):
   return [ ((addr, RoomEnemyPopulation.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
 
 def get_enemy_graphics_sets(state_headers, rom):
-  d = { hdr.state_id: hdr.enemy_pop_addr for (func, hdr) in state_headers }
+  d = { hdr.state_id: hdr.enemy_graphics_set_addr for (func, hdr) in state_headers }
   l = groupby(d.keys(), lambda state_id: d[state_id])
   return [ ((addr, RoomEnemyGraphicsSet.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
 
 def get_fx_lists(state_headers, rom):
-  d = { hdr.state_id: hdr.enemy_pop_addr for (func, hdr) in state_headers }
+  d = { hdr.state_id: hdr.fx_addr for (func, hdr) in state_headers }
   l = groupby(d.keys(), lambda state_id: d[state_id])
   return [ ((addr, RoomFxList.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
 
 def get_plm_lists(state_headers, rom):
-  d = { hdr.state_id: hdr.enemy_pop_addr for (func, hdr) in state_headers }
+  d = { hdr.state_id: hdr.plm_list_addr for (func, hdr) in state_headers }
   l = groupby(d.keys(), lambda state_id: d[state_id])
   return [ ((addr, RoomPlmList.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
 
