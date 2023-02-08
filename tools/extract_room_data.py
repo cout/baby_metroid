@@ -158,24 +158,25 @@ org $83{addr:04X}
 
 def get_state_headers(room_header, rom):
   state_functions = room_header.state_functions
-  state_header_addrs = sorted(func.state_header_addr for func in state_functions)
-  state_header_addr_to_func = { func.state_header_addr : func for func in state_functions }
-  state_headers = [ (state_header_addr_to_func[addr], RoomStateHeader.extract(rom, addr)) for addr in state_header_addrs ]
+  addrs = sorted(func.state_header_addr for func in state_functions)
+  addr_to_func = { func.state_header_addr : func for func in state_functions }
+  state_headers = [ (addr_to_func[addr], RoomStateHeader.extract(rom, addr)) for addr in addrs ]
   return state_headers
 
 def get_enemy_pops(state_headers, rom):
-  enemy_pop_addrs = sorted((state_header.state_id, state_header.enemy_pop_addr) for (func, state_header) in state_headers)
-  enemy_pops = [ (state_id, addr, RoomEnemyPopulation.extract(rom, addr)) for (state_id, addr) in enemy_pop_addrs ]
+  addrs = sorted((hdr.state_id, hdr.enemy_pop_addr) for (func, hdr) in state_headers)
+  enemy_pops = [ (state_id, addr, RoomEnemyPopulation.extract(rom, addr)) for (state_id, addr) in addrs ]
   return enemy_pops
 
 def get_enemy_graphics_sets(state_headers, rom):
-  enemy_graphics_set_addrs = sorted((state_header.state_id, state_header.enemy_graphics_set_addr) for (func, state_header) in state_headers)
-  enemy_graphics_sets = [ (state_id, addr, RoomEnemyGraphicsSet.extract(rom, addr)) for (state_id, addr) in enemy_graphics_set_addrs ]
+  addrs = sorted((hdr.state_id, hdr.enemy_graphics_set_addr) for (func, hdr) in state_headers)
+  enemy_graphics_sets = [ (state_id, addr, RoomEnemyGraphicsSet.extract(rom, addr)) for (state_id, addr) in addrs ]
   return enemy_graphics_sets
 
 def get_fx_lists(state_headers, rom):
-  fx_list_addrs = sorted((state_header.state_id, state_header.fx_addr) for (func, state_header) in state_headers)
-  fx_lists = [ (state_id, addr, RoomFxList.extract(rom, addr)) for (state_id, addr) in fx_list_addrs ]
+  addrs = sorted((hdr.state_id, hdr.fx_addr) for (func, hdr) in state_headers)
+  fx_lists = [ (state_id, addr, RoomFxList.extract(rom, addr)) for (state_id, addr) in addrs ]
+  return fx_lists
 
 def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
   state_headers = get_state_headers(room_header, rom)
