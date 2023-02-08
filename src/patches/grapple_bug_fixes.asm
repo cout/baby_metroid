@@ -13,7 +13,7 @@
 ; few pixels
 
 ; TODO -
-; It is no longer possible to enter a walljump pose while grappling
+; It is no longer possible to enter a wallgrab pose while grappling
 
 ; --------------------------------------------------
 
@@ -108,9 +108,10 @@ org $948301+(2*$0C) : dw $9447
 
 ; --------------------------------------------------
 
-; TODO - This prevents entering a walljump pose
+; TODO - This prevents entering a wallgrab pose
 
-!minimum_grapple_length = #$0000
+!minimum_grapple_length = #$0008
+!minimum_grapple_length_for_wallgrab_pose = #$0008
 
 org $94AC4B
 BPL $06
@@ -120,6 +121,14 @@ CMP !minimum_grapple_length
 
 org $94AC50
 LDA !minimum_grapple_length
+
+org $94ADD5
+CMP !minimum_grapple_length_for_wallgrab_pose
+BPL $0F
+
+org $94AEA5
+CMP !minimum_grapple_length_for_wallgrab_pose
+BPL $0F
 
 ; --------------------------------------------------
 
@@ -133,7 +142,7 @@ STZ $0D00
 
 ; --------------------------------------------------
 
-; TODO - This also prevents entering a walljump pose
+; TODO - This also prevents entering a wallgrab pose
 
 org $94ABE6 ; number of iterations
 LDA #$000D
