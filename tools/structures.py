@@ -136,7 +136,7 @@ class RoomStateHeader(object):
   room_scroll: HexValue
   room_var: HexValue
   room_main_func: HexValue
-  plm: HexValue
+  plm_list_addr: HexValue
   library_background: HexValue
   room_setup_func: HexValue
 

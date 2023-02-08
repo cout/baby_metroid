@@ -79,7 +79,7 @@ dw ${state_header.layer_2_scroll          :04X} ; Layer 2 scroll
 dw ${state_header.room_scroll             :04X} ; Room scroll data (bank $8F)
 dw ${state_header.room_var                :04X} ; Room var
 dw ${state_header.room_main_func          :04X} ; Room main routine (bank $8F)
-dw ${state_header.plm                     :04X} ; Room PLM list address (bank $8F)
+dw ${state_header.plm_list_addr           :04X} ; Room PLM list address (bank $8F)
 dw ${state_header.library_background      :04X} ; Library background (bank $8F)
 dw ${state_header.room_setup_func         :04X} ; Room setup routine (bank $8F)
 '''.strip())
