@@ -43,6 +43,7 @@ Incomplete
 * Need to test croc fight in hard mode
 * Easy grapple patch should fire grapple the full length without holding
     the fire button
+* Add a way to get downstairs from botwoon energy tank room
 
 Ideas
 -----
