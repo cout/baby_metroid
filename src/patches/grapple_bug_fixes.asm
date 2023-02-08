@@ -12,9 +12,6 @@
 ; Grappling an enemy that is at floor-level, Samus moves forward or backward a
 ; few pixels
 
-; TODO -
-; It is no longer possible to enter a wallgrab pose while grappling
-
 ; --------------------------------------------------
 
 !saved_samus_x_position = $1886
@@ -108,7 +105,7 @@ org $948301+(2*$0C) : dw $9447
 
 ; --------------------------------------------------
 
-; TODO - This prevents entering a wallgrab pose
+; TODO - This prevents entering a wallgrab pose if I set it below 8
 
 !minimum_grapple_length = #$0008
 !minimum_grapple_length_for_wallgrab_pose = #$0008
@@ -142,13 +139,27 @@ STZ $0D00
 
 ; --------------------------------------------------
 
-; TODO - This also prevents entering a wallgrab pose
+!grapple_collision_test_iterations = #$000D
+!grapple_collision_test_initial_length = #$0008
+!grapple_collision_test_length_increment = #$0004
 
-org $94ABE6 ; number of iterations
-LDA #$000D
+org $94ABE6
+LDA !grapple_collision_test_iterations
 
-org $94ABEC ; initial extra test length
-LDA #$0004
+org $94ABEC
+LDA !grapple_collision_test_initial_length
 
-org $94AC02 ; test length per iteration
-ADC #$0004
+org $94AC02
+ADC !grapple_collision_test_length_increment
+
+org $94ADC8
+CMP !grapple_collision_test_iterations
+
+org $94ADCD
+CMP !grapple_collision_test_iterations-1
+
+org $94AE98
+CMP !grapple_collision_test_iterations
+
+org $94AE9D
+CMP !grapple_collision_test_iterations-1
