@@ -17,6 +17,7 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* The game crashes entering GT
 
 Crashes
 -------
@@ -52,7 +53,6 @@ Ideas
 * Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
     effect to pick her up by a few more pixels (three pixels less than
     the top of the enemy works well but needs more testing)
-* Make it possible to grapple all enemies
 
 Cosmetic
 --------
