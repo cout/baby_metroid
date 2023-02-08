@@ -353,8 +353,8 @@ class RoomPlmList(list):
     entries = cls()
     while True:
       entry = RoomPlmEntry.read_from(rom)
-      entries.append(entry)
       if entry.plm_id == 0: break
+      entries.append(entry)
     return entries
 
   @classmethod
