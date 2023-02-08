@@ -161,10 +161,10 @@ org $94ADC8
 CMP !grapple_collision_test_iterations
 
 org $94ADCD
-CMP !grapple_collision_test_iterations-1
+CMP.w !grapple_collision_test_iterations-1
 
 org $94AE98
 CMP !grapple_collision_test_iterations
 
 org $94AE9D
-CMP !grapple_collision_test_iterations-1
+CMP.w !grapple_collision_test_iterations-1

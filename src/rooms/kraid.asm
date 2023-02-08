@@ -96,7 +96,7 @@ kraid_room_main_routine:
   LDA #$0100
   STA $14
 
-  LDA #falling_drop : TAY
+  LDA.w #falling_drop : TAY
   ; TODO: X=enemy index
   LDA #$0000
   JSL $868027
