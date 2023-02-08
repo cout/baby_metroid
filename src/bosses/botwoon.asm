@@ -340,3 +340,10 @@ botwoon_store_new_movement_state:
 
 end_botwoon_freespace_b3:
 !FREESPACE_B3 := end_botwoon_freespace_b3
+
+;;
+; Make the wall break immediately instead of waiting 40 frames
+;
+
+org $84AB29
+LDA #$0001
