@@ -298,18 +298,10 @@ break_botwoon_wall:
   JSL $8483D7
   db $0F, $04
   dw $B79B
-  RTS
 
   ; Set mini boss bits for current area
   LDA #$0002
   JSL $8081A6
-
-  ; TODO - I cannot remember if the door is intentionally left grey.  I
-  ; think I thought it would be confusing if it were grey, partly
-  ; because I want to push the player toward plasma (especially since
-  ; the sand pits are no longer accessible), and partly because it's
-  ; confusing navigating pre-botwoon hallway if you don't already know
-  ; which blocks to break.
 
 .return:
   RTS
