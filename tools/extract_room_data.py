@@ -158,10 +158,9 @@ org $83{addr:04X}
 
 def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
   state_functions = room_header.state_functions
-  state_header_addrs = sorted(set(func.state_header_addr for func in room_header.state_functions))
-  state_header_addr_to_func = { func.state_header_addr : func for func in room_header.state_functions }
-  state_headers = [ (state_header_addr_to_func[addr],
-    RoomStateHeader.extract(rom, addr)) for addr in state_header_addrs ]
+  state_header_addrs = sorted(set(func.state_header_addr for func in state_functions))
+  state_header_addr_to_func = { func.state_header_addr : func for func in state_functions }
+  state_headers = [ (state_header_addr_to_func[addr], RoomStateHeader.extract(rom, addr)) for addr in state_header_addrs ]
   enemy_pop_addrs = sorted(set((state_header.state_id, state_header.enemy_pop_addr) for (func, state_header) in state_headers))
   enemy_pops = [ (state_id, addr, RoomEnemyPopulation.extract(rom, addr)) for (state_id, addr) in enemy_pop_addrs ]
   enemy_graphics_set_addrs = sorted(set((state_header.state_id, state_header.enemy_graphics_set_addr) for (func, state_header) in state_headers))
