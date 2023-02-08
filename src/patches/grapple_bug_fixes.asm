@@ -7,10 +7,15 @@
 ;
 ; Samus can still fall through a 1-tile high ledge by: a) jumping and
 ; grappling b) positioning horizontal to the ledge c) releasing grapple.
+; (I can no longer reproduce this so it may be fixed)
 
 ; TODO -
 ; Grappling an enemy that is at floor-level, Samus moves forward or backward a
 ; few pixels
+
+; TODO -
+; It is possible to get lodged slightly inside some blocks (door caps, slopes,
+; possibly others)
 
 ; --------------------------------------------------
 

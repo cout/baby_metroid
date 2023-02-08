@@ -66,6 +66,10 @@ ROOMS = \
 	src/rooms/below_landing_site.bin \
 	src/rooms/red_brinstar_fireflea.bin \
 
+GRAPHICS = \
+	src/cinematic/intro_bg1_tilemap.bin \
+	src/title/title_tiles.bin \
+
 all: build/baby_metroid.sfc
 
 .PHONY: all
@@ -82,7 +86,7 @@ build/.stamp:
 build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.ips
 	$(FLIPS) --apply build/baby_metroid.ips resources/sm_orig.sfc build/baby_metroid.sfc
 
-build/baby_metroid.ips: $(ASAR) $(SOURCES) $(ROOMS) src/cinematic/intro_bg1_tilemap.bin
+build/baby_metroid.ips: $(ASAR) $(SOURCES) $(ROOMS) $(GRAPHICS)
 	echo "build/baby_metroid.ips: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.ips.d
 	$(ASAR) $(ASAR_FLAGS) --symbols-path=build/baby_metroid.sym --ips build/baby_metroid.ips "$$@" src/main.asm build/scratch.sfc
 
@@ -91,6 +95,9 @@ src/rooms/%.bin: src/rooms/%.hex
 
 src/cinematic/intro_bg1_tilemap.bin: src/cinematic/intro_bg1_tilemap.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
+
+src/title/title_tiles.bin: src/title/title_tiles.chr
+	cat $< | $(COMPRESS) > $@
 
 $(ASAR):
 	mkdir -p $(ASAR_DIR)/build && cd $(ASAR_DIR)/build && cmake ../src && make

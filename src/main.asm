@@ -129,6 +129,7 @@ incsrc cinematic/intro_text.asm
 incsrc cinematic/intro.asm
 incsrc cinematic/credits_text.asm
 incsrc cinematic/credits.asm
+incsrc title/title.asm
 incsrc title/title_menu_text.asm
 incsrc title/options_menu.asm
 incsrc title/baby_arrow.asm
