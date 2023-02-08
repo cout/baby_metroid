@@ -1,4 +1,5 @@
 !USE_BELOW_LANDING_SITE = 0
+!USE_HITBOX_VIEWER = 0
 
 !hard_mode_flag = $09EC
 
@@ -22,7 +23,9 @@ incsrc patches/underwater_blue_suit.asm
 incsrc patches/english_only.asm
 incsrc patches/grapple_bug_fixes.asm
 incsrc patches/grapple_all_enemies.asm
-incsrc patches/grapple_hitbox_viewer.asm
+if !USE_HITBOX_VIEWER
+  incsrc patches/grapple_hitbox_viewer.asm
+endif
 incsrc bosses/torizos.asm
 incsrc bosses/spore_spawn.asm
 incsrc bosses/ceres.asm
