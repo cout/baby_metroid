@@ -2,6 +2,7 @@
 
 import sys
 import os
+from itertools import groupby
 
 from rom import Rom
 from lc_lz3 import decompress
@@ -89,9 +90,11 @@ def format_room_enemy_population_entry(enemy_pop, enemies):
 dw ${enemy_pop.enemy_id:04X}, ${enemy_pop.x:04X}, ${enemy_pop.y:04X}, ${enemy_pop.init_param:04X}, ${enemy_pop.properties:04X}, ${enemy_pop.extra_properties:04X}, ${enemy_pop.parameter_1:04X}, ${enemy_pop.parameter_2:04X} ; {enemy_name}
 '''.strip()
 
-def format_room_enemy_population(room_id, state_id, addr, enemy_pop, enemies):
-  s = align_comments(f'''
-; Room ${room_id:04X} state ${state_id:04X}: Enemy population
+def format_room_enemy_population(room_id, state_ids, addr, enemy_pop, enemies):
+  s = ''
+  for state_id in state_ids:
+    s += f'; Room ${room_id:04X} state ${state_id:04X}: Enemy population\n'
+  s += align_comments(f'''
 org $A1{addr:04X}
 ;  enemy  x      y      init   props  extra  param1 param2
 '''.strip())
@@ -110,9 +113,11 @@ def format_room_enemy_graphics_set_entry(entry, enemies):
 dw ${entry.enemy_id:04X}, ${entry.palette_index:04X} ; {enemy_name}
 '''.strip()
 
-def format_room_enemy_graphics_set(room_id, state_id, addr, enemy_graphics_set, enemies):
-  s = align_comments(f'''
-; Room ${room_id:04X} state ${state_id:04X}: Enemy graphics set
+def format_room_enemy_graphics_set(room_id, state_ids, addr, enemy_graphics_set, enemies):
+  s = ''
+  for state_id in state_ids:
+    s += f'; Room ${room_id:04X} state ${state_id:04X}: Enemy graphics set\n'
+  s += align_comments(f'''
 org $B4{addr:04X}
 ;  enemy  palette
 '''.strip())
@@ -124,8 +129,11 @@ dw $FFFF                        ; end of list
 '''.strip())
   return s
 
-def format_room_fx_long(room_id, state_id, addr, fx):
-  return align_comments(f'''
+def format_room_fx_long(room_id, state_ids, addr, fx):
+  s = ''
+  for state_id in state_ids:
+    s += f'; Room ${room_id:04X} state ${state_id:04X}: FX\n'
+  return s + align_comments(f'''
 org $B4{addr:04X}
 dw ${fx.door_id:04X}            ; Door ID
 dw ${fx.base_y_position:04X}    ; Base Y position
@@ -146,9 +154,11 @@ def format_room_fx_short(fx):
 dw ${fx.door_id:04X}, ${fx.base_y_position:04X}, ${fx.target_y_position:04X}, ${fx.y_velocity:04X} : db ${fx.timer:02X}, ${fx.fx_type:02X}, ${fx.fx_a:02X}, ${fx.fx_b:02X}, ${fx.fx_c:02X}, ${fx.palette_fx:02X}, ${fx.animated_tiles:02X}, ${fx.palette_blend:02X}
 '''.strip()
 
-def format_room_fx_list(room_id, state_id, addr, fx_list):
-  s = align_comments(f'''
-; Room ${room_id:04X} state ${state_id:04X}: FX
+def format_room_fx_list(room_id, state_ids, addr, fx_list):
+  s = ''
+  for state_id in state_ids:
+    s += f'; Room ${room_id:04X} state ${state_id:04X}: FX\n'
+  s += align_comments(f'''
 org $83{addr:04X}
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 '''.strip())
@@ -164,19 +174,19 @@ def get_state_headers(room_header, rom):
   return state_headers
 
 def get_enemy_pops(state_headers, rom):
-  addrs = sorted((hdr.state_id, hdr.enemy_pop_addr) for (func, hdr) in state_headers)
-  enemy_pops = [ (state_id, addr, RoomEnemyPopulation.extract(rom, addr)) for (state_id, addr) in addrs ]
-  return enemy_pops
+  d = { hdr.state_id: hdr.enemy_pop_addr for (func, hdr) in state_headers }
+  l = groupby(d.keys(), lambda state_id: d[state_id])
+  return [ ((addr, RoomEnemyPopulation.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
 
 def get_enemy_graphics_sets(state_headers, rom):
-  addrs = sorted((hdr.state_id, hdr.enemy_graphics_set_addr) for (func, hdr) in state_headers)
-  enemy_graphics_sets = [ (state_id, addr, RoomEnemyGraphicsSet.extract(rom, addr)) for (state_id, addr) in addrs ]
-  return enemy_graphics_sets
+  d = { hdr.state_id: hdr.enemy_pop_addr for (func, hdr) in state_headers }
+  l = groupby(d.keys(), lambda state_id: d[state_id])
+  return [ ((addr, RoomEnemyGraphicsSet.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
 
 def get_fx_lists(state_headers, rom):
-  addrs = sorted((hdr.state_id, hdr.fx_addr) for (func, hdr) in state_headers)
-  fx_lists = [ (state_id, addr, RoomFxList.extract(rom, addr)) for (state_id, addr) in addrs ]
-  return fx_lists
+  d = { hdr.state_id: hdr.enemy_pop_addr for (func, hdr) in state_headers }
+  l = groupby(d.keys(), lambda state_id: d[state_id])
+  return [ ((addr, RoomFxList.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
 
 def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
   state_headers = get_state_headers(room_header, rom)
@@ -193,17 +203,17 @@ def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
     print('', file=out)
     print(format_room_state_header(room_id, func, state_header), file=out)
 
-  for (state_id, addr, enemy_pop) in enemy_pops:
+  for ((addr, enemy_pop), state_ids) in enemy_pops:
     print('', file=out)
-    print(format_room_enemy_population(room_id, state_id, addr, enemy_pop, enemies))
+    print(format_room_enemy_population(room_id, state_ids, addr, enemy_pop, enemies))
 
-  for (state_id, addr, enemy_graphics_set) in enemy_graphics_sets:
+  for ((addr, enemy_graphics_set), state_ids) in enemy_graphics_sets:
     print('', file=out)
-    print(format_room_enemy_graphics_set(room_id, state_id, addr, enemy_graphics_set, enemies))
+    print(format_room_enemy_graphics_set(room_id, state_ids, addr, enemy_graphics_set, enemies))
 
-  for (state_id, addr, fx_list) in fx_lists:
+  for ((addr, fx_list), state_ids) in fx_lists:
     print('', file=out)
-    print(format_room_fx_list(room_id, state_id, addr, fx_list))
+    print(format_room_fx_list(room_id, state_ids, addr, fx_list))
 
 def main():
   filename = sys.argv[1]
