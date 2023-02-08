@@ -347,3 +347,14 @@ end_botwoon_freespace_b3:
 
 org $84AB29
 LDA #$0001
+
+;;
+; Make the wall crumble faster
+;
+
+!botwoon_wall_crumble_delay = $0002
+
+org $84AB39+$00 : dw !botwoon_wall_crumble_delay
+org $84AB39+$04 : dw !botwoon_wall_crumble_delay
+org $84AB39+$08 : dw !botwoon_wall_crumble_delay
+org $84AB39+$0C : dw !botwoon_wall_crumble_delay
