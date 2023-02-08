@@ -30,7 +30,6 @@ Crashes
 Incomplete
 ----------
 
-* Eye doors sometimes still close
 * Pirates still explode when shot twice with ice - do any other enemies
     do this?
 * Samus loses easy blue suit when taking damage, which can be
