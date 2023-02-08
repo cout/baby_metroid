@@ -22,6 +22,7 @@ incsrc patches/underwater_blue_suit.asm
 incsrc patches/english_only.asm
 incsrc patches/grapple_bug_fixes.asm
 incsrc patches/grapple_all_enemies.asm
+incsrc patches/grapple_hitbox_viewer.asm
 incsrc bosses/torizos.asm
 incsrc bosses/spore_spawn.asm
 incsrc bosses/ceres.asm
