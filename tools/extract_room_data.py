@@ -7,7 +7,7 @@ from itertools import groupby
 from rom import Rom
 from lc_lz3 import decompress
 from room2hex import room2hex
-from structures import RoomHeader, RoomStateHeader, RoomEnemyPopulation, RoomEnemyGraphicsSet, RoomFxList
+from structures import RoomHeader, RoomStateHeader, RoomEnemyPopulation, RoomEnemyGraphicsSet, RoomFxList, RoomPlmList
 from enemies import Enemies
 
 def align_comment(s, pos):
@@ -166,6 +166,27 @@ org $83{addr:04X}
     s += "\n%s" % align_comments(format_room_fx_short(fx))
   return s
 
+def format_room_plm(entry):
+  return f'''
+dw ${entry.plm_id:04X}, ${entry.y:02X}{entry.x:02X}, ${entry.param:04X}
+'''.strip()
+
+def format_room_plm_list(room_id, state_ids, addr, fx_list):
+  s = ''
+  for state_id in state_ids:
+    s += f'; Room ${room_id:04X} state ${state_id:04X}: PLM\n'
+  s += align_comments(f'''
+org $83{addr:04X}
+;  plm_id y/x    param
+'''.strip())
+  for fx in fx_list:
+    s += "\n%s" % align_comments(format_room_plm(fx))
+  s += "\n"
+  s += align_comments(f'''
+dw $0000                        ; end of list
+'''.strip())
+  return s
+
 def get_state_headers(room_header, rom):
   state_functions = room_header.state_functions
   addrs = sorted(func.state_header_addr for func in state_functions)
@@ -188,11 +209,17 @@ def get_fx_lists(state_headers, rom):
   l = groupby(d.keys(), lambda state_id: d[state_id])
   return [ ((addr, RoomFxList.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
 
+def get_plm_lists(state_headers, rom):
+  d = { hdr.state_id: hdr.enemy_pop_addr for (func, hdr) in state_headers }
+  l = groupby(d.keys(), lambda state_id: d[state_id])
+  return [ ((addr, RoomPlmList.extract(rom, addr)), list(ids)) for (addr, ids) in l ]
+
 def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
   state_headers = get_state_headers(room_header, rom)
   enemy_pops = get_enemy_pops(state_headers, rom)
   enemy_graphics_sets = get_enemy_graphics_sets(state_headers, rom)
   fx_lists = get_fx_lists(state_headers, rom)
+  plm_lists = get_plm_lists(state_headers, rom)
 
   print(format_room_header(room_id, room_header), file=out)
 
@@ -214,6 +241,10 @@ def print_full_room_data(rom, room_id, room_header, enemies, out=sys.stdout):
   for ((addr, fx_list), state_ids) in fx_lists:
     print('', file=out)
     print(format_room_fx_list(room_id, state_ids, addr, fx_list))
+
+  for ((addr, plm_list), state_ids) in plm_lists:
+    print('', file=out)
+    print(format_room_plm_list(room_id, state_ids, addr, plm_list))
 
 def main():
   filename = sys.argv[1]

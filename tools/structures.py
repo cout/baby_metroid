@@ -323,3 +323,42 @@ class RoomFxList(list):
     addr = (bank << 16) | offset
     rom.seek(addr)
     return cls.read_from(rom)
+
+@dataclass
+class RoomPlmEntry(object):
+  fmt = struct.Struct('<HBBH')
+
+  plm_id: HexValue
+  x: HexValue
+  y: HexValue
+  param: HexValue
+
+  @classmethod
+  def read_from(cls, rom):
+    b = rom.read(cls.fmt.size)
+    values = cls.fmt.unpack(b)
+    values = [ HexValue(v) if type(v) is int else v for v in values ]
+    return cls(*values)
+
+  @classmethod
+  def extract(cls, rom, offset, bank=0x8F):
+    addr = (bank << 16) | offset
+    rom.seek(addr)
+    return cls.read_from(rom)
+
+@dataclass
+class RoomPlmList(list):
+  @classmethod
+  def read_from(cls, rom):
+    entries = cls()
+    while True:
+      entry = RoomPlmEntry.read_from(rom)
+      entries.append(entry)
+      if entry.plm_id == 0: break
+    return entries
+
+  @classmethod
+  def extract(cls, rom, offset, bank=0x8F):
+    addr = (bank << 16) | offset
+    rom.seek(addr)
+    return cls.read_from(rom)
