@@ -28,9 +28,44 @@ macro title_large2(color)
 }
 endmacro
 
+macro title_small(color)
+{
+  '1' = <color>+$01F5 : '2' = <color>+$01F6 : '3' = <color>+$01F7 : '4' = <color>+$01F8
+  '5' = <color>+$01F9 : '6' = <color>+$C1FA : '7' = <color>+$01FB : '8' = <color>+$81FC
+  '9' = <color>+$01FD : '0' = <color>+$01F4 : ' ' = <color>+$00F0 : '.' = <color>+$01F3
+  'A' = <color>+$01D0 : 'B' = <color>+$01D1 : 'C' = <color>+$01D2 : 'D' = <color>+$01D3
+  'E' = <color>+$01D4 : 'F' = <color>+$01D5 : 'G' = <color>+$01D6 : 'H' = <color>+$01D7
+  'I' = <color>+$01D8 : 'J' = <color>+$01D9 : 'K' = <color>+$01DA : 'L' = <color>+$01DB
+  'M' = <color>+$01DC : 'N' = <color>+$01DD : 'O' = <color>+$01DE : 'P' = <color>+$01DF
+  'Q' = <color>+$01E0 : 'R' = <color>+$01E1 : 'S' = <color>+$01E2 : 'T' = <color>+$01E3
+  'U' = <color>+$01E4 : 'V' = <color>+$01E5 : 'W' = <color>+$01E6 : 'X' = <color>+$01E7
+  'Y' = <color>+$01E8 : 'Z' = <color>+$01E9
+}
+endmacro
+
+function title_registed_tm_symbol(color) = (color+$01C0)
+function title_copyright_symbol(color) = (color+$01C1)
+function title_year_1994_a(color) = (color+$01C2)
+function title_year_1994_b(color) = (color+$01C3)
+function title_nintendo_1(color) = (color+$01C4)
+function title_nintendo_2(color) = (color+$01C5)
+function title_nintendo_3(color) = (color+$01C6)
+function title_nintendo_4(color) = (color+$01C7)
+function title_nintendo_5(color) = (color+$01C8)
+function title_nintendo_6(color) = (color+$01C9)
+function title_nintendo_7(color) = (color+$01CA)
+
 macro title_char(x, y, ch)
   %title_large1($3200) : dw <x> : db <y>+$00 : dw "<ch>"
   %title_large2($3200) : dw <x> : db <y>+$08 : dw "<ch>"
+endmacro
+
+macro title_char_special(x, y, ch)
+  dw <x> : db <y>+$00 : dw <ch>
+endmacro
+
+macro title_char_small(x, y, ch)
+  %title_small($3200) : dw <x> : db <y>+$00 : dw "<ch>"
 endmacro
 
 !title_list_counter = 0
