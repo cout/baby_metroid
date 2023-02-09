@@ -162,10 +162,10 @@
 !END_FREESPACE_B8 = $B80000+$10000
 
 macro VALIDATE_FREESPACE_bank(bank)
-  assert !FREESPACE_<bank> >= $<bank>0000
-  assert !FREESPACE_<bank> < $<bank>0000+$10000
-  assert !FREESPACE_<bank> >= !START_FREESPACE_<bank>
-  assert !FREESPACE_<bank> < !END_FREESPACE_<bank>
+  assert !FREESPACE_<bank> >= $<bank>0000, "Freespace for bank $<bank> ($", hex(!FREESPACE_<bank>), ") ends before bank starts"
+  assert !FREESPACE_<bank> < $<bank>0000+$10000, "Freespace for bank $<bank> ($", hex(!FREESPACE_<bank>), ") ends after bank ends"
+  assert !FREESPACE_<bank> >= !START_FREESPACE_<bank>, "Freespace for bank $<bank> ($", hex(!FREESPACE_<bank>), ") ends before START_FREESPACE_<bank> ($", hex(!START_FREESPACE_<bank>), ")"
+  assert !FREESPACE_<bank> < !END_FREESPACE_<bank>, "Freespace for bank $<bank> ($", hex(!FREESPACE_<bank>), ") ends after END_FREESPACE_<bank> ($", hex(!END_FREESPACE_<bank>), ")"
 endmacro
 
 macro VALIDATE_FREESPACE()
