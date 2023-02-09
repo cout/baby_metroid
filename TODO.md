@@ -17,7 +17,6 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* The game crashes entering GT
 
 Crashes
 -------
