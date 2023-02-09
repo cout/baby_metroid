@@ -59,6 +59,9 @@ macro title_char(x, y, ch)
   if stringsequal("<ch>", "8")
     %title_large1($3200) : dw <x> : db <y>+$00 : dw "<ch>"
     %title_large2($3200) : dw <x> : db <y>+$07 : dw "<ch>"
+  elseif stringsequal("<ch>", ".")
+    %title_large1($3200) : dw <x> : db <y>+$00 : dw "<ch>"
+    %title_large2($3200) : dw <x> : db <y>+$06 : dw "<ch>"
   else
     %title_large1($3200) : dw <x> : db <y>+$00 : dw "<ch>"
     %title_large2($3200) : dw <x> : db <y>+$08 : dw "<ch>"
