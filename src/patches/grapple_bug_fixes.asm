@@ -25,7 +25,7 @@
 org $91EF4F
 JSL update_samus_pose_for_grapple_connected_swinging
 
-org !FREESPACE_9B
+%BEGIN_FREESPACE(9B)
 
 update_samus_pose_for_grapple_connected_swinging:
 {
@@ -49,10 +49,9 @@ update_samus_pose_for_grapple_connected_swinging:
   RTL
 }
 
-end_update_samus_pose_for_grapple_connected_swinging_freespace_9B:
-!FREESPACE_9B := end_update_samus_pose_for_grapple_connected_swinging_freespace_9B
+%END_FREESPACE(9B)
 
-org !FREESPACE_94
+%BEGIN_FREESPACE(94)
 
 grapple_connected_swinging_pose_change_collision_check:
 {
@@ -60,15 +59,14 @@ grapple_connected_swinging_pose_change_collision_check:
   RTL
 }
 
-end_update_samus_pose_for_grapple_connected_swinging_freespace_94:
-!FREESPACE_94 := end_update_samus_pose_for_grapple_connected_swinging_freespace_94
+%END_FREESPACE(94)
 
 ; --------------------------------------------------
 
 org $91EFBC
 JSL pre_grapple_locked_in_place_collision_detection
 
-org !FREESPACE_9B
+%BEGIN_FREESPACE(9B)
 
 pre_grapple_locked_in_place_collision_detection:
 {
@@ -97,8 +95,7 @@ pre_grapple_locked_in_place_collision_detection:
   RTL
 }
 
-end_pre_grapple_collision_detection_freespace_9b:
-!FREESPACE_9B := end_pre_grapple_collision_detection_freespace_9b
+%END_FREESPACE(9B)
 
 ; --------------------------------------------------
 

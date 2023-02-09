@@ -220,3 +220,14 @@ macro VALIDATE_FREESPACE()
   %VALIDATE_FREESPACE_bank(B7)
   %VALIDATE_FREESPACE_bank(B8)
 endmacro
+
+macro BEGIN_FREESPACE(bank)
+  org !FREESPACE_<bank>
+endmacro
+
+macro END_FREESPACE(bank)
+  !freespace_counter_<bank> ?= 0
+  end_freespace_<bank>_!freespace_counter_<bank>:
+  !FREESPACE_<bank> := end_freespace_<bank>_!freespace_counter_<bank>
+  !freespace_counter_<bank> #= !freespace_counter_<bank>+1
+endmacro
