@@ -33,4 +33,16 @@ macro title_char(x, y, ch)
   %title_large2($3200) : dw <x> : db <y>+$08 : dw "<ch>"
 endmacro
 
+!title_list_counter = 0
+
+macro begin_title_list()
+  dw datasize(list_!{title_list_counter})/5
+  list_!{title_list_counter}:
+endmacro
+
+macro end_title_list()
+  end_list_!{title_list_counter}:
+  !title_list_counter #= !title_list_counter+1
+endmacro
+
 ; vim:ft=pic
