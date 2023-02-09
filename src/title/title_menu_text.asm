@@ -1,4 +1,4 @@
-macro title_large(color)
+macro title_menu_large(color)
 {
   ' ' = <color>+$000F
   'A' = <color>+$000A : 'a' = <color>+$001A
@@ -24,7 +24,7 @@ macro title_large(color)
 }
 endmacro
 
-macro title_small(color)
+macro title_menu_small(color)
 {
   ' ' = <color>+$000F
   'A' = $006A
