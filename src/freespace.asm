@@ -239,3 +239,19 @@ macro END_FREESPACE(bank)
   !current_freespace_bank = -1
   %VALIDATE_FREESPACE_bank(<bank>)
 endmacro
+
+macro BEGIN_FREEMEM(bank)
+  assert !current_freespace_bank < 0, "BEGIN_FREEMEM without END_FREEMEM"
+  org !FREEMEM_<bank>
+  !current_freespace_bank = <bank>
+endmacro
+
+macro END_FREEMEM(bank)
+  assert $!current_freespace_bank >= 0, "END_FREEMEM without BEGIN_FREEMEM"
+  assert $<bank> = $!current_freespace_bank, "END_FREEMEM bank (<bank>) does not match BEGIN_FREEMEM bank (!current_freespace_bank)"
+  !freespace_counter_<bank> ?= 0
+  global end_freespace_<bank>_!freespace_counter_<bank>:
+  !FREEMEM_<bank> := end_freespace_<bank>_!freespace_counter_<bank>
+  !freespace_counter_<bank> #= !freespace_counter_<bank>+1
+  !current_freespace_bank = -1
+endmacro

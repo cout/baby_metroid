@@ -25,7 +25,7 @@
 !BABY_FLASH_TIMER = $7E780C,x
 !BABY_PALETTE_FUNCTION = $7E781E,x
 
-org !FREEMEM_7F
+%BEGIN_FREEMEM(7F)
 
 ; TODO - ideally these should use the current enemy index but this is
 ; fine since there will only ever be one baby
@@ -72,8 +72,7 @@ baby_unable_to_fire:
 print "  baby_unable_to_fire - $", pc
 skip 2
 
-end_baby_freemem_7f:
-!FREEMEM_7F := end_baby_freemem_7f
+%END_FREEMEM(7F)
 
 %BEGIN_FREESPACE(A0)
 

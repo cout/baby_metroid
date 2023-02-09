@@ -72,14 +72,13 @@ org $83A104
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $78, $00, $00
 
-org !FREEMEM_7F
+%BEGIN_FREEMEM(7F)
 
 tourian_escape_1_samus_cooldown:
 print "Variable tourian_escape_1_samus_cooldown: $", pc
 skip 2
 
-end_tourian_escape_1_freemem_7f:
-!FREEMEM_7F := end_tourian_escape_1_freemem_7f
+%END_FREEMEM(7F)
 
 %BEGIN_FREESPACE(8F)
 

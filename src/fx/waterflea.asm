@@ -1,13 +1,12 @@
 !WATERFLEA_FX_INDEX = $16
 
-org !FREEMEM_7F
+%BEGIN_FREEMEM(7F)
 
 waterflea_color_factor:
 print "Variable waterflea_color_factor: $", pc
 skip 2
 
-end_waterflea_freemem_7f:
-!FREEMEM_7F := end_waterflea_freemem_7f
+%END_FREEMEM(7F)
 
 org $7E1778
 

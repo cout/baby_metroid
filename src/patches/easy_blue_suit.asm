@@ -28,7 +28,7 @@
 ; Memory used by this patch
 ;
 
-org !FREEMEM_7F
+%BEGIN_FREEMEM(7F)
 
 print "Easy blue suit variables:"
 
@@ -50,7 +50,7 @@ skip 2
 
 easy_blue_suit_end_freemem_7f:
 
-!FREEMEM_7F := easy_blue_suit_end_freemem_7f
+%END_FREEMEM(7F)
 
 ;;
 ; Easy blue suit hooks for various Samus positions

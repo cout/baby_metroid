@@ -1,7 +1,7 @@
 !SAMUS_STUCK_X = #$01C9
 !SAMUS_STUCK_Y = #$016D
 
-org !FREEMEM_7F
+%BEGIN_FREEMEM(7F)
 
 ; TODO - ideally these should use the current enemy index but this is
 ; fine since there will only ever be one draygon
@@ -28,8 +28,7 @@ draygon_holding_samus:
 print "  draygon_holding_samus - $", pc
 skip 2
 
-end_draygon_freemem_7f:
-!FREEMEM_7F := end_draygon_freemem_7f
+%END_FREEMEM(7F)
 
 org $A586DD : LDA.w #draygon_state_initial
 

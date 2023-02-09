@@ -88,7 +88,7 @@ endmacro
 !intro_text_begin = intro_text_begin
 !intro_text_end = intro_text_end
 
-org !FREEMEM_7F
+%BEGIN_FREEMEM(7F)
 
 intro_text_pointer:
 print "Variable intro_text_pointer: ", pc
@@ -98,8 +98,7 @@ intro_text_position:
 print "Variable intro_text_position: ", pc
 skip 8
 
-end_intro_text_freemem_7f:
-!FREEMEM_7F := end_intro_text_freemem_7f
+%END_FREEMEM(7F)
 
 %BEGIN_FREESPACE(8B)
 

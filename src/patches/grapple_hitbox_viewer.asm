@@ -9,7 +9,7 @@
 ;
 ;;;;;;
 
-org !FREEMEM_7F
+%BEGIN_FREEMEM(7F)
 
 grapple_collision_test_tiles:
 skip 64
@@ -21,8 +21,7 @@ skip 2
 last_next_grapple_collision_test_tile:
 skip 2
 
-end_grapple_collision_test_tiles_freemem_7f:
-!FREEMEM_7F := end_grapple_collision_test_tiles_freemem_7f
+%END_FREEMEM(7F)
 
 org $9ADAE0
 db $FF, $FF, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80, $80

@@ -1,4 +1,4 @@
-org !FREEMEM_7F
+%BEGIN_FREEMEM(7F)
 
 print "Botwoon variables:"
 
@@ -14,8 +14,7 @@ botwoon_wall_crumble_started:
 print "  botwoon_wall_crumble_started - $", pc
 skip 2
 
-end_botwoon_freemem_7f:
-!FREEMEM_7F := end_botwoon_freemem_7f
+%END_FREEMEM(7F)
 
 ;;
 ; Init extra variables
