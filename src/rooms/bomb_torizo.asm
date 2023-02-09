@@ -24,6 +24,7 @@ dw $E629     ; State $9835 function (boss)
 db $04       ; Boss
 dw $9835     ; State header address
 dw $E5E6     ; State $981B function (default)
+%assertpc($8F981B)
 
 ; Room $9804 state $981B: Header
 ; (default)
@@ -42,6 +43,7 @@ dw $0000     ; Room main routine (bank $8F)
 dw $83FE     ; Room PLM list address (bank $8F)
 dw $B905     ; Library background (bank $8F)
 dw $91D4     ; Room setup routine (bank $8F)
+%assertpc($8F9835)
 
 ; Room $9804 state $9835: Header
 ; (boss bit 04h)
@@ -60,6 +62,7 @@ dw $0000     ; Room main routine (bank $8F)
 dw $83FE     ; Room PLM list address (bank $8F)
 dw $B905     ; Library background (bank $8F)
 dw $91D4     ; Room setup routine (bank $8F)
+%assertpc($8F984F)
 
 ; Room $9804 state $984F: Header
 ; (event bit 0eh)
@@ -78,14 +81,9 @@ dw $C124     ; Room main routine (bank $8F)
 dw $8412     ; Room PLM list address (bank $8F)
 dw $B905     ; Library background (bank $8F)
 dw $91B2     ; Room setup routine (bank $8F)
+%assertpc($8F9869)
 
 ; Room $9804 state $981B: Enemy population
-org $A184ED
-;  enemy  x      y      init   props  extra  param1 param2
-dw $EEFF, $00DB, $00B3, $0000, $2000, $0000, $0000, $0000 ; bomb torizo
-dw $FFFF     ; end of list
-db $00       ; death quota
-
 ; Room $9804 state $9835: Enemy population
 org $A184ED
 ;  enemy  x      y      init   props  extra  param1 param2
@@ -104,11 +102,6 @@ dw $FFFF     ; end of list
 db $04       ; death quota
 
 ; Room $9804 state $981B: Enemy graphics set
-org $B480B3
-;  enemy  palette
-dw $EEFF, $0001 ; bomb torizo
-dw $FFFF     ; end of list
-
 ; Room $9804 state $9835: Enemy graphics set
 org $B480B3
 ;  enemy  palette
@@ -123,18 +116,6 @@ dw $F313, $0007 ; escape dachora
 dw $FFFF     ; end of list
 
 ; Room $9804 state $981B: FX
-org $8381BE
-;  door   base   target veloc     time  type  A    B    C   pal  anim blend
-dw $FFFF, $FFFF, $FFFF, $0000 : db $E0, $07, $FF, $FF, $00, $00, $00, $04
-dw $1E02, $0040, $4802, $0000 : db $FF, $FF, $FF, $FF, $00, $00, $00, $00
-dw $0228, $0000, $6200, $0000 : db $FF, $FF, $FF, $FF, $00, $00, $00, $00
-dw $0228, $0000, $6200, $0000 : db $FF, $FF, $FF, $FF, $00, $00, $00, $00
-dw $0202, $0000, $0000, $0000 : db $FF, $FF, $FF, $FF, $00, $00, $00, $00
-dw $0202, $0100, $0000, $0000 : db $FF, $FF, $FF, $FF, $00, $00, $00, $08
-dw $0A02, $0000, $0000, $FFFF : db $FF, $FF, $FF, $FF, $FF, $FF, $00, $00
-dw $FFFF, $FFFF, $0000, $2400 : db $02, $02, $00, $00, $00, $00, $FF, $FF
-dw $0000, $FFFF, $FFFF, $0000 : db $00, $08, $02, $0A, $00, $00, $00, $00
-
 ; Room $9804 state $9835: FX
 org $8381BE
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend

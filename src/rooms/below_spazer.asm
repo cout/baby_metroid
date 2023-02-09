@@ -11,6 +11,7 @@ db $A0       ; Down scroller
 db $00       ; Special graphics bits
 dw $A42F     ; Door out
 dw $E5E6     ; State $A415 function (default)
+%assertpc($8FA415)
 
 ; Room $A408 state $A415: Header
 ; (default)
@@ -29,6 +30,7 @@ dw $0000     ; Room main routine (bank $8F)
 dw $891E     ; Room PLM list address (bank $8F)
 dw $BC02     ; Library background (bank $8F)
 dw $91D6     ; Room setup routine (bank $8F)
+%assertpc($8FA42F)
 
 ; Room $A408 state $A415: Enemy population
 org $A195E4
@@ -38,6 +40,7 @@ org $A195E4
 dw $CFFF, $0108, $0193, $0000, $2000, $0000, $0100, $0200 ; cacatac
 dw $FFFF     ; end of list
 db $01       ; death quota
+warnpc $A1961A
 
 ; Room $A408 state $A415: Enemy graphics set
 org $B48449
@@ -45,8 +48,11 @@ org $B48449
 ; dw $E7BF, $0001 ; yapping maw
 dw $CFFF, $0002 ; cacatac
 dw $FFFF     ; end of list
+db $00       ; death quota
+warnpc $B48454
 
 ; Room $A408 state $A415: FX
 org $8383C0
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $01BE, $FFFF, $0000 : db $00, $06, $02, $18, $03, $00, $01, $48
+%assertpc($8383D0)
