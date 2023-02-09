@@ -69,8 +69,6 @@ Cosmetic
     picks up Samus.
 * The bomb blocks in phantoon's room leave behind black background
     instead of background that matches
-* "1994" in title sequence is white instead of read
-* Copyright notice is blue instead of white
 * There are dead people on the title screen
 
 Probably Won't Fix
