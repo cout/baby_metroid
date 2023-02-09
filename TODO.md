@@ -69,7 +69,6 @@ Cosmetic
     picks up Samus.
 * The bomb blocks in phantoon's room leave behind black background
     instead of background that matches
-* There are dead people on the title screen
 
 Probably Won't Fix
 ------------------

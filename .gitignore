@@ -9,6 +9,7 @@ src/bk/
 src/cinematic/intro_bg1_tilemap.bin
 src/cinematic/bk
 src/title/title_tiles.bin
+src/title/title_bg_tilemap.bin
 resources/sm_orig.sfc
 resources/sm_orig.srm
 tools/SuperFamiconv/

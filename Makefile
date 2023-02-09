@@ -70,6 +70,7 @@ ROOMS = \
 GRAPHICS = \
 	src/cinematic/intro_bg1_tilemap.bin \
 	src/title/title_tiles.bin \
+	src/title/title_bg_tilemap.bin \
 
 all: build/baby_metroid.sfc
 
@@ -99,6 +100,9 @@ src/cinematic/intro_bg1_tilemap.bin: src/cinematic/intro_bg1_tilemap.hex
 
 src/title/title_tiles.bin: src/title/title_tiles.chr
 	cat $< | $(COMPRESS) > $@
+
+src/title/title_bg_tilemap.bin: src/title/title_bg_tilemap.hex
+	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
 
 $(ASAR):
 	mkdir -p $(ASAR_DIR)/build && cd $(ASAR_DIR)/build && cmake ../src && make

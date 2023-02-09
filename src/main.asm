@@ -141,6 +141,7 @@ incsrc title/options_menu.asm
 incsrc title/baby_arrow.asm
 incsrc title/title_text.asm
 incsrc title/from_planet_sr388.asm
+incsrc title/title_bg_tilemap.asm
 
 incsrc metconst/CrashHandler.asm
 
