@@ -116,6 +116,7 @@ org $8C8A88
 %title_char($0008, $F8, "3")
 %title_char($0010, $F8, "8")
 %end_title_list()
+warnpc $8C8AB2
 
 org $8C8AB2
 %begin_title_list()
@@ -125,6 +126,7 @@ org $8C8AB2
 %title_char($0008, $F8, "8")
 %title_char($0010, $F8, "8")
 %end_title_list()
+warnpc $8C8AE6
 
 org $8C8AE6
 %begin_title_list()
@@ -134,6 +136,7 @@ org $8C8AE6
 %title_char($0008, $F8, "8")
 %title_char($0010, $F8, "8")
 %end_title_list()
+warnpc $8C8B24
 
 org $8C8B24
 %begin_title_list()
@@ -143,6 +146,7 @@ org $8C8B24
 %title_char($0008, $F8, "8")
 %title_char($0010, $F8, "8")
 %end_title_list()
+warnpc $8C8B6C
 
 org $8C8B6C
 %begin_title_list()
@@ -152,6 +156,7 @@ org $8C8B6C
 %title_char($0008, $F8, "8")
 %title_char($0010, $F8, "8")
 %end_title_list()
+warnpc $8C8BBE
 
 org $8C8BBE
 %begin_title_list()
