@@ -36,7 +36,6 @@ Incomplete
     frustrating when trying to shine spark to get through single chamber
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
-* There are bones left if you revisit Croc
 * Acid damage is still reduced in hard mode
 * Need to test custom PLMs with xray
 * Need to test croc fight in hard mode

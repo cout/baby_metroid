@@ -342,3 +342,10 @@ crocomire_check_for_collision_with_samus:
 }
 
 warnpc $A48CCB
+
+;;
+; Don't draw skull when reentering the room after Croc is defeated
+;
+
+org $A4E1CC
+dw $812F
