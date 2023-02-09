@@ -129,6 +129,7 @@ incsrc rooms/ice_beam_snakes.asm
 incsrc rooms/spring_ball.asm
 incsrc rooms/left_sandpit.asm
 incsrc rooms/right_sandpit.asm
+incsrc rooms/dead_scientist_room.asm
 incsrc cinematic/escape.asm
 incsrc cinematic/intro_text.asm
 incsrc cinematic/intro.asm

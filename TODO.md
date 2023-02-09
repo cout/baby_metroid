@@ -100,7 +100,7 @@ Feedback from E
 * business center is hard
 * hard to get out of construction zone
 * hard to hit chozo orb (can I make power beam hitbox bigger?)
-* dead people in ceres (wife noticed)
+* dead people in ceres (wife noticed) - fixed
 * hard to get up parlor - fixed?
 * parlor bats are scary
 * dachora room bats are scary

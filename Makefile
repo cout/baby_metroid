@@ -65,6 +65,7 @@ ROOMS = \
 	src/rooms/escape_landing_site.bin \
 	src/rooms/below_landing_site.bin \
 	src/rooms/red_brinstar_fireflea.bin \
+	src/rooms/dead_scientist_room.bin \
 
 GRAPHICS = \
 	src/cinematic/intro_bg1_tilemap.bin \
