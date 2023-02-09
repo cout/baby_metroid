@@ -1,7 +1,7 @@
 macro title_large1(color)
 {
   '1' = <color>+$0100 : '2' = <color>+$41A7 : '3' = <color>+$0101 : '4' = <color>+$0120
-  '5' = <color>+$016B : '6' = <color>+$C176 : '7' = <color>+$F199 : '8' = <color>+$01DE
+  '5' = <color>+$016B : '6' = <color>+$C176 : '7' = <color>+$F199 : '8' = <color>+$01F4
   '9' = <color>+$0166 : '0' = <color>+$018C : ' ' = <color>+$00F0 : '.' = <color>+$00F0
   'A' = <color>+$0167 : 'B' = <color>+$0168 : 'C' = <color>+$0169 : 'D' = <color>+$016A
   'E' = <color>+$016B : 'F' = <color>+$016C : 'G' = <color>+$016D : 'H' = <color>+$016E
@@ -16,7 +16,7 @@ endmacro
 macro title_large2(color)
 {
   '1' = <color>+$0110 : '2' = <color>+$01BE : '3' = <color>+$0111 : '4' = <color>+$0130
-  '5' = <color>+$0111 : '6' = <color>+$C166 : '7' = <color>+$01BD : '8' = <color>+$81DE
+  '5' = <color>+$0111 : '6' = <color>+$C166 : '7' = <color>+$01BD : '8' = <color>+$81F4
   '9' = <color>+$0176 : '0' = <color>+$019C : ' ' = <color>+$00F0 : '.' = <color>+$01F3
   'A' = <color>+$0177 : 'B' = <color>+$0178 : 'C' = <color>+$0179 : 'D' = <color>+$017A
   'E' = <color>+$017B : 'F' = <color>+$017C : 'G' = <color>+$017D : 'H' = <color>+$017E
@@ -56,8 +56,13 @@ function title_nintendo_6(color) = (color+$01C9)
 function title_nintendo_7(color) = (color+$01CA)
 
 macro title_char(x, y, ch)
-  %title_large1($3200) : dw <x> : db <y>+$00 : dw "<ch>"
-  %title_large2($3200) : dw <x> : db <y>+$08 : dw "<ch>"
+  if stringsequal("<ch>", "8")
+    %title_large1($3200) : dw <x> : db <y>+$00 : dw "<ch>"
+    %title_large2($3200) : dw <x> : db <y>+$07 : dw "<ch>"
+  else
+    %title_large1($3200) : dw <x> : db <y>+$00 : dw "<ch>"
+    %title_large2($3200) : dw <x> : db <y>+$08 : dw "<ch>"
+  endif
 endmacro
 
 macro title_char_special(x, y, ch)
