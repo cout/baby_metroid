@@ -53,11 +53,11 @@ def format_grid(rows, fmt):
   rows = add_seps(rows)
   return '\n'.join(rows)
 
-def format_tilemap(tilemap, w, h):
+def format_tilemap(tilemap, w, h=0):
   rows = split_into_rows(tilemap, w, len(tilemap)//w)
   return format_grid(rows, '%04X')
 
-def format_bts(bts, w, h):
+def format_bts(bts, w, h=0):
   rows = split_into_rows(bts, w, len(bts)//w)
   return format_grid(rows, ' %02X ')
 
