@@ -4,7 +4,7 @@
 ; Note: when changing image mode to Indexed in GIMP, make sure to
 ; uncheck "remove unused colors" to ensure correct color order.
 
-org !FREESPACE_A0
+%BEGIN_FREESPACE(A0)
 
 samus_statue:
 !samus_statue = samus_statue
@@ -41,10 +41,9 @@ dw $F3F2                  ; drop chances
 dw $EEC6                  ; vulnerabilities
 dw $E2E5                  ; enemy name
 
-end_samus_statue_freespace_a0:
-!FREESPACE_A0 := end_samus_statue_freespace_a0
+%END_FREESPACE(A0)
 
-org !FREESPACE_A3
+%BEGIN_FREESPACE(A3)
 
 samus_statue_tile_data:
 incbin "samus_statue_tiles.bin"
@@ -271,5 +270,4 @@ test_samus_has_speed:
   RTS
 }
 
-end_samus_statue_freespace_a3:
-!FREESPACE_A3 := end_samus_statue_freespace_a3
+%END_FREESPACE(A3)

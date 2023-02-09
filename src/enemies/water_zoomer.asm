@@ -1,4 +1,4 @@
-org !FREESPACE_A0
+%BEGIN_FREESPACE(A0)
 
 water_zoomer:
 
@@ -42,5 +42,4 @@ dw $F224          ; drop chances
 dw $EEC6           ; vulnerabilities (invulnerable)
 dw $E1DB          ; enemy name
 
-end_water_zoomer_freespace_a0:
-!FREESPACE_A0 := end_water_zoomer_freespace_a0
+%END_FREESPACE(A0)

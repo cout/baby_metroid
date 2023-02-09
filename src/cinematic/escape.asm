@@ -92,7 +92,7 @@ warnpc $8BF35A
 org $8BDBBD
 JMP play_stardrive_sound_and_transition_to_dbc4
 
-org !FREESPACE_8B
+%BEGIN_FREESPACE(8B)
 
 play_stardrive_sound_and_transition_to_dbc4:
 {
@@ -108,8 +108,7 @@ play_stardrive_sound_and_transition_to_dbc4:
   RTS
 }
 
-end_escape_freespace_8b:
-!FREESPACE_8B := end_escape_freespace_8b
+%END_FREESPACE(8B)
 
 ; Cinematic function $DB4C
 ; Skip setting math subscreen backdrop color so we don't cut to white
@@ -143,7 +142,7 @@ STA $48
 LDA.w #gunship_with_baby_tiles
 STA $47
 
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 ; TODO:
 ; 1. The colors for the baby are wrong, but fixing them requires
@@ -153,5 +152,4 @@ org !FREESPACE_B8
 gunship_with_baby_tiles:
 incbin "gunship_with_baby.bin"
 
-end_escape_freespace_99:
-!FREESPACE_B8 := end_escape_freespace_99
+%END_FREESPACE(B8)

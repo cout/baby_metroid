@@ -1,6 +1,6 @@
 !BLUE_SUIT_BLOCK_BTS = $11
 
-org !FREESPACE_84
+%BEGIN_FREESPACE(84)
 
 blue_suit_plm_instruction_list:
 {
@@ -50,8 +50,7 @@ blue_suit_plm:
   dw blue_suit_plm_init, blue_suit_plm_instruction_list
 }
 
-blue_suit_plm_end_freespace_84:
-!FREESPACE_84 := blue_suit_plm_end_freespace_84
+%END_FREESPACE(84)
 
 org $949139+(2*!BLUE_SUIT_BLOCK_BTS) : dw blue_suit_plm ; special air/block collision
 org $9491D9+(2*!BLUE_SUIT_BLOCK_BTS) : dw blue_suit_plm ; special air/block collision (replaceable)

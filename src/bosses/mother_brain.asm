@@ -159,7 +159,7 @@ LDA.w #mother_brain_state_disable_earthquake
 STA $0FA8
 RTS
 
-org !FREESPACE_A9
+%BEGIN_FREESPACE(A9)
 
 mother_brain_state_disable_earthquake:
 {
@@ -178,5 +178,4 @@ mother_brain_state_final:
   RTS
 }
 
-end_mother_brain_freespace_a9:
-!FREESPACE_A9 = end_mother_brain_freespace_a9
+%END_FREESPACE(A9)

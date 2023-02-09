@@ -32,7 +32,7 @@ dw $C4EF     ; Room PLM list address (bank $8F)
 dw $0000     ; Library background (bank $8F)
 dw $C8D1     ; Room setup routine (bank $8F)
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 crab_shaft_enemy_population:
 
@@ -46,13 +46,12 @@ dw !samus_statue, $0076, $029D, $0000, $2400, $0000, $0000, $0208 ; statue
 dw $FFFF     ; end of list
 db $04       ; death quota
 
-end_crab_shaft_freespace_a1:
-!FREESPACE_A1 := end_crab_shaft_freespace_a1
+%END_FREESPACE(A1)
  
 
 ; Room $D1A3 state $D1B0: Enemy graphics set
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 crab_shaft_enemy_graphics_set:
 ;  enemy          palette
@@ -60,5 +59,4 @@ dw $D77F,         $0001 ; sciser
 dw !samus_statue, $0002 ; statue
 dw $FFFF     ; end of list
 
-end_crab_shaft_freespace_b4:
-!FREESPACE_B4 := end_crab_shaft_freespace_b4
+%END_FREESPACE(B4)

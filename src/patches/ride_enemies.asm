@@ -44,7 +44,7 @@ do_move_enemy_vert = $A0C790
 org $A3E6C2
 BRL move_samus_with_geemer_main_ai
 
-org !FREESPACE_A0
+%BEGIN_FREESPACE(A0)
 
 move_samus_horiz_with_enemy:
 {
@@ -399,10 +399,9 @@ check_samus_is_standing_on_enemy:
   RTL
 }
 
-end_ride_enemies_freespace_a0:
-!FREESPACE_A0 := end_ride_enemies_freespace_a0
+%END_FREESPACE(A0)
 
-org !FREESPACE_A3
+%BEGIN_FREESPACE(A3)
 
 move_samus_with_geemer_main_ai:
 {
@@ -464,5 +463,4 @@ geemer_function_trampoline:
   JMP ($0FB2,x)
 }
 
-end_ride_enemies_freespace_a3:
-!FREESPACE_A3 := end_ride_enemies_freespace_a3
+%END_FREESPACE(A3)

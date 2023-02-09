@@ -56,7 +56,7 @@ db $0B       ; death quota
 ;;; dw $D6FF, $0003 ; fish
 ;;; dw $FFFF     ; end of list
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 plasma_spark_room_enemy_graphics_set:
 
@@ -70,5 +70,4 @@ dw $D6FF,         $0003 ; fish
 dw !samus_statue, $0007 ; statue
 dw $FFFF     ; end of list
 
-end_plasma_spark_room_freespace_b4:
-!FREESPACE_B4 := end_plasma_spark_room_freespace_b4
+%END_FREESPACE(B4)

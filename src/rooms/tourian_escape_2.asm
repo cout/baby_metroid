@@ -34,7 +34,7 @@ dw $E454     ; Library background (bank $8F)
 ; dw $C933     ; Room setup routine (bank $8F)
 dw $C945     ; Room setup routine (bank $8F)
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 tourian_escape_2_enemy_population:
 
@@ -47,10 +47,9 @@ dw $F493, $00D0, $0128, $0000, $2000, $0004, $0001, $00A0 ; batta1Tu (tourian si
 dw $FFFF     ; end of list
 db $02       ; death quota
 
-end_tourian_escape_2_freespace_a1:
-!FREESPACE_A1 := end_tourian_escape_2_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 tourian_escape_2_enemy_graphics_set:
 
@@ -61,8 +60,7 @@ dw $F493, $0001 ; batta1Tu (tourian silver wall pirate)
 dw !baby, $0007 ; baby
 dw $FFFF     ; end of list
 
-end_tourian_escape_2_freespace_b4:
-!FREESPACE_B4 := end_tourian_escape_2_freespace_b4
+%END_FREESPACE(B4)
 
 ; Room $DE7A state $DE87: FX
 org $83A114

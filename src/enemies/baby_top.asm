@@ -1,4 +1,4 @@
-org !FREESPACE_A0
+%BEGIN_FREESPACE(A0)
 
 baby_top:
 
@@ -39,10 +39,9 @@ dw $0000                  ; enemy name
 
 !baby_top = baby_top
 
-end_baby_top_freespace_a0:
-!FREESPACE_A0 := end_baby_top_freespace_a0
+%END_FREESPACE(A0)
 
-org !FREESPACE_A9
+%BEGIN_FREESPACE(A9)
 
 ; TODO: we shouldn't manually change $0F86; it should be set in the
 ; enemy population like other enemies
@@ -167,10 +166,9 @@ baby_top_spritemap:
 .bottom:
 }
 
-end_baby_top_freespace_a9:
-!FREESPACE_A9 := end_baby_top_freespace_a9
+%END_FREESPACE(A9)
 
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 ; TODO - there are some unused tiles here (indicated by 'x'), but I don't think I can remove them and still use 16x16 tiles in the spritemap.
 baby_top_tiles:
@@ -212,5 +210,4 @@ baby_top_tiles:
   ; db $01,$37,$CD,$79, $FD,$11,$FE,$00, $1F,$00,$CF,$C0, $6F,$E0,$2B,$E0, $C8,$7F,$86,$FF, $0E,$FF,$E3,$FF, $F8,$FF,$3C,$FF, $1E,$FF,$1E,$FF ; x
 }
 
-end_baby_top_freespace_b8:
-!FREESPACE_B8 := end_baby_top_freespace_b8
+%END_FREESPACE(B8)

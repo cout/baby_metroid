@@ -35,7 +35,7 @@ org $A586DD : LDA.w #draygon_state_initial
 
 org $A593BD : JMP draygon_big_hug
 
-org !FREESPACE_A5
+%BEGIN_FREESPACE(A5)
 
 draygon_state_initial:
 {
@@ -429,10 +429,9 @@ draygon_big_hug:
   RTL
 }
 
-end_draygon_freespace_a5:
-!FREESPACE_A5 = end_draygon_freespace_a5
+%END_FREESPACE(A5)
 
-org !FREESPACE_90
+%BEGIN_FREESPACE(90)
 
 draygon_pause_check:
 {
@@ -440,10 +439,9 @@ draygon_pause_check:
   RTL
 }
 
-end_draygon_freespace_90:
-!FREESPACE_90 := end_draygon_freespace_90
+%END_FREESPACE(90)
 
-org !FREESPACE_86
+%BEGIN_FREESPACE(86)
 
 permagunk:
 ; dw $8D04 ; init ai
@@ -511,8 +509,7 @@ permagunk_pre_instruction:
   RTS
 }
 
-end_draygon_freespace_86:
-!FREESPACE_86 := end_draygon_freespace_86
+%END_FREESPACE(86)
 
 print "Draygon states:"
 print "  initial - ", hex(draygon_state_initial&$FFFF)

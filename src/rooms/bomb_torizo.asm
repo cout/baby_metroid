@@ -147,7 +147,7 @@ endif
 }
 warnpc $8F8420
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 bomb_torizo_door_list:
 {
@@ -155,10 +155,9 @@ bomb_torizo_door_list:
   dw bomb_torizo_animals_escape_door
 }
 
-end_bomb_torizo_freespace_8f:
-!FREESPACE_8F := end_bomb_torizo_freespace_8f
+%END_FREESPACE(8F)
 
-org !FREESPACE_83
+%BEGIN_FREESPACE(B3)
 
 bomb_torizo_animals_escape_door:
 {
@@ -177,5 +176,4 @@ bomb_torizo_animals_escape_door:
                   ; if needed but flyway to alcatraz door does this)
 }
 
-end_bomb_torizo_freespace_83:
-!FREESPACE_83 := end_bomb_torizo_freespace_83
+%END_FREESPACE(B3)

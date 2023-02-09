@@ -134,7 +134,7 @@ BRL spore_spawn_projectile_check
 
 spore_spawn_damage = $A5ED6D
 
-org !FREESPACE_A5
+%BEGIN_FREESPACE(A5)
 
 spore_spawn_projectile_check:
 {
@@ -242,5 +242,4 @@ play_happy_sound:
 ;   softlock!)
 ; * Spore spawn color change during fight is too subtle
 
-end_spore_spawn_freespace_a5:
-!FREESPACE_A5 := end_spore_spawn_freespace_a5
+%END_FREESPACE(A5)

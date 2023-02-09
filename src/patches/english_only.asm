@@ -7,7 +7,7 @@ JMP $EDED
 org $8180E8
 JSR load_map
 
-org !FREESPACE_81
+%BEGIN_FREESPACE(81)
 
 load_map:
 {
@@ -15,5 +15,4 @@ load_map:
   JMP $82E4
 }
 
-end_english_only_freespace_81:
-!FREESPACE_81 := end_english_only_freespace_81
+%END_FREESPACE(81)

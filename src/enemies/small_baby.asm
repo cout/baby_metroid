@@ -1,4 +1,4 @@
-org !FREESPACE_A0
+%BEGIN_FREESPACE(A0)
 
 small_baby:
 
@@ -41,5 +41,4 @@ dw $DFAB           ; enemy name
 ; TODO - if the baby is frozen, it should set a power bomb to unfreeze
 ; itself
 
-end_small_baby_freespace_A0:
-!FREESPACE_A0 := end_small_baby_freespace_A0
+%END_FREESPACE(A0)

@@ -78,7 +78,7 @@ org $809C6F
 JSR store_hud_item_index
 %assertpc($809C72)
 
-org !FREESPACE_80
+%BEGIN_FREESPACE(80)
 
 extra_irq_commands:
 main_gameplay_begin_hud_colors_entry:    dw main_gameplay_begin_hud_colors_handler
@@ -257,5 +257,4 @@ store_hud_item_index:
   RTS
 }
 
-end_hud_item_colors_freespace_80:
-!FREESPACE_80 := end_hud_item_colors_freespace_80
+%END_FREESPACE(80)

@@ -18,7 +18,7 @@ treat_enemy_as_solid = $A0A9EC
 ; this is the branch that is taken if the enemy is not frozen or solid
 treat_enemy_as_ethereal = $A0AABF
 
-org !FREESPACE_A0
+%BEGIN_FREESPACE(A0)
 
 check_solid_enemy_detection:
 {
@@ -84,8 +84,7 @@ check_solid_enemy_detection:
   JMP treat_enemy_as_ethereal
 }
 
-end_freeze_enemies_freespace_a0:
-!FREESPACE_A0 := end_freeze_enemies_freespace_a0
+%END_FREESPACE(A0)
 
 ;;
 ; Disable Samus/enemy collsion handling in easy mode.  This causes
@@ -109,7 +108,7 @@ LDA !effective_invincibility_timer
 org $A0A4A6
 JMP handle_touch_damage_and_knockback
 
-org !FREESPACE_A0
+%BEGIN_FREESPACE(A0)
 
 handle_touch_damage_and_knockback:
 {
@@ -123,8 +122,7 @@ handle_touch_damage_and_knockback:
   RTS
 }
 
-end_freeze_enemies_2_freespace_a0:
-!FREESPACE_A0 := end_freeze_enemies_2_freespace_a0
+%END_FREESPACE(A0)
 
 ;;
 ; Disable projectile knockback and damage in easy mode
@@ -160,7 +158,7 @@ warnpc $90945B
 
 move_samus_down_no_enemy_collision = $90945B
 
-org !FREESPACE_90
+%BEGIN_FREESPACE(90)
 
 move_samus_down_enemy_collision:
 {
@@ -170,5 +168,4 @@ move_samus_down_enemy_collision:
   RTS
 }
 
-end_freeze_enemies_freespace_90:
-!FREESPACE_90 := end_freeze_enemies_freespace_90
+%END_FREESPACE(90)

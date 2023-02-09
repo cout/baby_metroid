@@ -48,7 +48,7 @@ org $839EF4
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $00B0, $FFFF, $0000 : db $00, $06, $02, $14, $82, $01, $00, $E8
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 spring_ball_room_enemy_population:
 ; Room $D6D0 state $D6DD: Enemy population
@@ -57,10 +57,9 @@ dw water_zoomer, $011B, $0169, $0000, $2801, $0000, $0002, $0000
 dw $FFFF     ; end of list
 db $00       ; death quota
 
-end_spring_ball_room_freespace_a1:
-!FREESPACE_A1 := end_spring_ball_room_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 spring_ball_room_enemy_graphics_set:
 ; Room $D6D0 state $D6DD: Enemy graphics set
@@ -70,5 +69,4 @@ spring_ball_room_enemy_graphics_set:
 dw water_zoomer, $0001
 dw $FFFF     ; end of list
 
-end_spring_ball_room_freespace_b4:
-!FREESPACE_B4 := end_spring_ball_room_freespace_b4
+%END_FREESPACE(B4)

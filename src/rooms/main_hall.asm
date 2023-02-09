@@ -80,7 +80,7 @@ dw $FFFF     ; end of list
 db $05       ; death quota
 warnpc $A1B11D
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 main_hall_enemy_graphics_set:
 ; Room $B236 state $B243: Enemy graphics set
@@ -92,8 +92,7 @@ dw $F213, $0007 ; gamet
 dw !ripper2_norfair, $0002
 dw $FFFF     ; end of list
 
-end_main_hall_freespace_b4:
-!FREESPACE_B4 := end_main_hall_freespace_b4
+%END_FREESPACE(B4)
 
 ; Room $B236 state $B243: FX
 org $83878A

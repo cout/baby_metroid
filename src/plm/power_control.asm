@@ -6,7 +6,7 @@
 !POWER_CONTROL_ACTIVE_LEFT_BLOCK = $18F
 !POWER_CONTROL_ACTIVE_RIGHT_BLOCK = $18C
 
-org !FREESPACE_84
+%BEGIN_FREESPACE(84)
 
 ; TODO - Move these instructions to another file so they can be used in other
 ; PLMs
@@ -336,8 +336,7 @@ power_control_right_plm:
 
 activate_station = $84B146
 
-end_power_control_plm_freespace_84:
-!FREESPACE_84 := end_power_control_plm_freespace_84
+%END_FREESPACE(84)
 
 org $949139+(2*!POWER_CONTROL_LEFT_BLOCK_BTS)  : dw power_control_left_plm  ; special air/block collision
 org $949139+(2*!POWER_CONTROL_RIGHT_BLOCK_BTS) : dw power_control_right_plm ; special air/block collision

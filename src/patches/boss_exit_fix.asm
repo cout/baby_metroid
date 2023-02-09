@@ -1,4 +1,4 @@
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 boss_exit_fix:
 {
@@ -12,8 +12,7 @@ phantoon_boss_exit_fix:
   JMP $E1FE
 }
 
-boss_exit_fix_end_freespace_8f:
-!FREESPACE_8F := boss_exit_fix_end_freespace_8f
+%END_FREESPACE(8F)
 
 org $83A2C4 ; door header for phantoon to basement
 skip 10     ; custom door asm

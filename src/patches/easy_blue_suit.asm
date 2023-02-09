@@ -86,7 +86,7 @@ JSR set_speed_boost_damage_contact_index
 ; Routine to give easy blue suit
 ;
 
-org !FREESPACE_90
+%BEGIN_FREESPACE(90)
 
 do_easy_blue_suit_check:
 {
@@ -248,5 +248,4 @@ set_speed_boost_damage_contact_index:
   RTS
 }
 
-easy_blue_suit_end_freespace_90:
-!FREESPACE_90 := easy_blue_suit_end_freespace_90
+%END_FREESPACE(90)

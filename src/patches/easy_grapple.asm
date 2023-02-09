@@ -6,7 +6,7 @@ BCC grapple_swinging_no_cancel
 
 grapple_swinging_no_cancel = $9BC7C8
 
-org !FREESPACE_9B
+%BEGIN_FREESPACE(9B)
 
 test_should_cancel_grapple:
 {
@@ -28,5 +28,4 @@ test_should_cancel_grapple:
   RTS
 }
 
-end_easy_grapple_freespace_9b:
-!FREESPACE_9B := end_easy_grapple_freespace_9b
+%END_FREESPACE(9B)

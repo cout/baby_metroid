@@ -35,7 +35,7 @@ dw $E46F     ; Library background (bank $8F)
 ; dw $C953     ; Room setup routine (bank $8F)
 dw $C96D     ; Room setup routine (bank $8F)
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 tourian_escape_4_room_main:
 {
@@ -52,10 +52,9 @@ tourian_escape_4_room_main:
   RTS
 }
 
-end_tourian_escape_4_freespace_8f:
-!FREESPACE_8F := end_tourian_escape_4_freespace_8f
+%END_FREESPACE(8F)
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 tourian_escape_4_enemy_population:
 
@@ -79,10 +78,9 @@ dw $F793, $0278, $0450, $0000, $2000, $0004, $0000, $0010 ; batta3Tu (tourian si
 dw $FFFF     ; end of list
 db $0D       ; death quota
 
-end_tourian_escape_4_freespace_a1:
-!FREESPACE_A1 := end_tourian_escape_4_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 tourian_escape_4_enemy_graphics_set:
 
@@ -95,8 +93,7 @@ dw !baby, $0007 ; baby
 
 dw $FFFF     ; end of list
 
-end_tourian_escape_4_freespace_b4:
-!FREESPACE_B4 := end_tourian_escape_4_freespace_b4
+%END_FREESPACE(B4)
 
 ; Room $DEDE state $DEEB: FX
 org $83A134

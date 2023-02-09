@@ -30,7 +30,7 @@ dw $8B2C     ; Room PLM list address (bank $8F)
 dw $BE5A     ; Library background (bank $8F)
 dw $91F5     ; Room setup routine (bank $8F)
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 ; Room $A8B9 state $A8C6: Enemy population
 ; org $A1B6AD
@@ -46,10 +46,9 @@ dw !samus_statue, $00D4, $00AD, $0000, $2400, $0000, $0000, $0209
 dw $FFFF     ; end of list
 db $07       ; death quota
 
-end_ice_beam_snakes_freespace_a1:
-!FREESPACE_A1 := end_ice_beam_snakes_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 ; Room $A8B9 state $A8C6: Enemy graphics set
 ; org $B48A5B
@@ -59,8 +58,7 @@ dw $E6FF, $0002 ; fune
 dw !samus_statue, $0003 ; statue
 dw $FFFF     ; end of list
 
-end_ice_beam_snakes_freespace_b4:
-!FREESPACE_B4 := end_ice_beam_snakes_freespace_b4
+%END_FREESPACE(B4)
 
 ; Room $A8B9 state $A8C6: FX
 org $8384A0

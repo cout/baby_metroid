@@ -75,7 +75,7 @@ skip 2
 end_baby_freemem_7f:
 !FREEMEM_7F := end_baby_freemem_7f
 
-org !FREESPACE_A0
+%BEGIN_FREESPACE(A0)
 
 baby:
 
@@ -119,12 +119,11 @@ dw $0000                  ; enemy name
 
 print "Baby enemy id: ", hex(baby&$FFFF)
 
-end_baby_freespace_a0:
-!FREESPACE_A0 := end_baby_freespace_a0
+%END_FREESPACE(A0)
 
 baby_accelerate_slowly_toward_point = $A9F451
 
-org !FREESPACE_A9
+%BEGIN_FREESPACE(A9)
 
 baby_instruction_list:
 {
@@ -661,10 +660,9 @@ follow_samus:
   JMP baby_accelerate_slowly_toward_point
 }
 
-end_baby_freespace_a9:
-!FREESPACE_A9 = end_baby_freespace_a9
+%END_FREESPACE(A9)
 
-org !FREESPACE_90
+%BEGIN_FREESPACE(90)
 
 baby_fire_hyper_beam:
 ; Parameters:
@@ -784,8 +782,7 @@ baby_choose_firing_direction:
   RTS
 }
 
-end_baby_freespace_90:
-!FREESPACE_90 := end_baby_freespace_90
+%END_FREESPACE(90)
 
 print "Baby states:"
 print "  pick target - ", hex(baby_state_pick_target&$FFFF)

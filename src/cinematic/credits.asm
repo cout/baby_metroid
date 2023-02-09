@@ -80,7 +80,7 @@ print "Extra credit lines available: ", dec(!extra_credit_lines)
 
 org $8CDC8F-$04 : dw I_goto_long : dl baby_metroid_credits
 
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 baby_metroid_credits:
 {
@@ -167,8 +167,7 @@ baby_metroid_credits:
   assert !extra_credit_lines_used = !extra_credit_lines
 }
 
-global end_credits_freespace_b8:
-!FREESPACE_B8 := end_credits_freespace_b8
+%END_FREESPACE(B8)
 
 undef "small"
 undef "large1"

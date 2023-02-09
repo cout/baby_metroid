@@ -59,12 +59,11 @@ dw !samus_statue, $00E4, $0094, $0000, $2400, $0000, test_samus_has_hi_jump, $01
 dw $FFFF
 db $00
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 warehouse_entrance_enemy_graphics_set:
 
 dw !samus_statue, $0001, $FFFF
 db $00
 
-end_warehouse_entrance_freespace_b4:
-!FREESPACE_B4 := end_warehouse_entrance_freespace_b4
+%END_FREESPACE(B4)

@@ -101,7 +101,7 @@ skip 8
 end_intro_text_freemem_7f:
 !FREEMEM_7F := end_intro_text_freemem_7f
 
-org !FREESPACE_8B
+%BEGIN_FREESPACE(8B)
 
 intro_text_begin:
 {
@@ -208,5 +208,4 @@ intro_text_end:
   RTS
 }
 
-end_intro_text_freespace_8b:
-!FREESPACE_8B := end_intro_text_freespace_8b
+%END_FREESPACE(8B)

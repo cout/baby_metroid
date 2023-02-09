@@ -1,4 +1,4 @@
-org !FREESPACE_86
+%BEGIN_FREESPACE(86)
 
 transporter_electricity:
 
@@ -25,5 +25,4 @@ transporter_electricity_main:
   RTS
 }
 
-ceres_freespace_86_end:
-!FREESPACE_86 := ceres_freespace_86_end
+%END_FREESPACE(86)

@@ -1,12 +1,11 @@
 !TOP_DOOR_INDEX = $D0
 
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 climb_with_elevator_level_data:
 incbin "climb.bin"
 
-end_climb_freespace_b8:
-!FREESPACE_B8 := end_climb_freespace_b8
+%END_FREESPACE(B8)
 
 ; Room $96BA: Header
 org $8F96BA
@@ -127,7 +126,7 @@ dw $FFFF
 db $00
 db $0B       ; death quota
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 climb_escape_enemy_population:
 
@@ -142,8 +141,7 @@ dw $F793, $00C0, $0880, $0000, $2800, $0004, $0000, $0000 ; batta3Tu (tourian si
 dw $FFFF     ; end of list
 db $02       ; death quota
 
-end_climb_freespace_a1:
-!FREESPACE_A1 := end_climb_freespace_a1
+%END_FREESPACE(A1)
 
 ; Room $96BA state $96D1: Enemy graphics set
 org $B4814F
@@ -162,7 +160,7 @@ dw $FFFF     ; end of list
 db $00
 warnpc $B481DA
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 climb_escape_enemy_graphics_set:
 
@@ -175,8 +173,7 @@ dw !baby, $0007 ; baby
 dw $FFFF     ; end of list
 ;warnpc $B48118
 
-end_climb_freespace_b4:
-!FREESPACE_B4 := end_climb_freespace_b4
+%END_FREESPACE(B4)
 
 ; Room $96BA state $96D1: FX
 org $83818E
@@ -207,7 +204,7 @@ dw $01C0        ; distance to spawn
 ; dw $B981        ; door subroutine
 dw top_door_sub ; door subroutine
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 climb_doors:
 {
@@ -331,5 +328,4 @@ climb_escape_main:
   RTS
 }
 
-end_climb_freespace_8f:
-!FREESPACE_8F := end_climb_freespace_8f
+%END_FREESPACE(8F)

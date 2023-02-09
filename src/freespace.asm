@@ -221,13 +221,21 @@ macro VALIDATE_FREESPACE()
   %VALIDATE_FREESPACE_bank(B8)
 endmacro
 
+!current_freespace_bank = -1
+
 macro BEGIN_FREESPACE(bank)
+  assert !current_freespace_bank < 0, "BEGIN_FREESPACE without END_FREESPACE"
   org !FREESPACE_<bank>
+  !current_freespace_bank = <bank>
 endmacro
 
 macro END_FREESPACE(bank)
+  assert $!current_freespace_bank >= 0, "END_FREESPACE without BEGIN_FREESPACE"
+  assert $<bank> = $!current_freespace_bank, "END_FREESPACE bank (<bank>) does not match BEGIN_FREESPACE bank (!current_freespace_bank)"
   !freespace_counter_<bank> ?= 0
-  end_freespace_<bank>_!freespace_counter_<bank>:
+  global end_freespace_<bank>_!freespace_counter_<bank>:
   !FREESPACE_<bank> := end_freespace_<bank>_!freespace_counter_<bank>
   !freespace_counter_<bank> #= !freespace_counter_<bank>+1
+  !current_freespace_bank = -1
+  %VALIDATE_FREESPACE_bank(<bank>)
 endmacro

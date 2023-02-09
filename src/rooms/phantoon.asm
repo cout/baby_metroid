@@ -1,10 +1,9 @@
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 phantoon_level_data:
 incbin "phantoon.bin"
 
-end_phantoon_freespace_b8:
-!FREESPACE_B8 := end_phantoon_freespace_b8
+%END_FREESPACE(B8)
 
 ; Room $CD13: Header
 org $8FCD13
@@ -108,7 +107,7 @@ dw $0000, $0000, $FFFF, $FFFF : db $00, $00, $00, $00, $02, $02, $00, $01
 
 ; new scroll data
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 phantoon_room_plm_list:
 {
@@ -123,5 +122,4 @@ phantoon_room_plm_scroll_1: db $01, $01, $80
 phantoon_room_plm_scroll_2: db $01, $00, $80
 phantoon_room_scroll: db $01, $00
 
-end_phantoon_room_freespace_8f:
-!FREESPACE_8F := end_phantoon_room_freespace_8f
+%END_FREESPACE(8F)

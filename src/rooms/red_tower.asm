@@ -67,7 +67,7 @@ org $83834E
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $06, $03, $00
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 red_tower_room_plm_list:
 {
@@ -80,5 +80,4 @@ red_tower_room_plm_list:
   dw $0000
 }
 
-end_red_tower_freespace_8f:
-!FREESPACE_8F := end_red_tower_freespace_8f
+%END_FREESPACE(8F)

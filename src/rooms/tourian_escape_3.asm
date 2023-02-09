@@ -34,7 +34,7 @@ dw $E46F     ; Library background (bank $8F)
 ; dw $C946     ; Room setup routine (bank $8F)
 dw $C952     ; Room setup routine (bank $8F)
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 tourian_escape_3_enemy_population:
 
@@ -52,10 +52,9 @@ dw $F793, $0560, $0050, $0000, $2000, $0004, $0000, $0010 ; batta3Tu (tourian si
 dw $FFFF     ; end of list
 db $07       ; death quota
 
-end_tourian_escape_3_freespace_a1:
-!FREESPACE_A1 := end_tourian_escape_3_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 tourian_escape_3_enemy_graphics_set:
 
@@ -67,8 +66,7 @@ dw $D4FF, $0002 ; shutter
 dw !baby, $0007 ; baby
 dw $FFFF     ; end of list
 
-end_tourian_escape_3_freespace_b4:
-!FREESPACE_B4 := end_tourian_escape_3_freespace_b4
+%END_FREESPACE(B4)
 
 ; Room $DEA7 state $DEB4: FX
 org $83A124

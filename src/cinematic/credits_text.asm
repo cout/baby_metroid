@@ -64,7 +64,7 @@ LDA !credits_instruction_list_bank
 PHA
 %assertpc($8B9974)
 
-org !FREESPACE_8B
+%BEGIN_FREESPACE(8B)
 
 init_credits_instruction_list:
 {
@@ -116,5 +116,4 @@ credits_goto_long:
   RTS
 }
 
-global end_credits_freespace_8b:
-!FREESPACE_8B := end_credits_freespace_8b
+%END_FREESPACE(8B)

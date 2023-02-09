@@ -22,7 +22,7 @@ LDY #$BBAE
 org $A49029
 JSL move_croc_with_wall_check
 
-org !FREESPACE_A4
+%BEGIN_FREESPACE(A4)
 
 move_croc_with_wall_check:
 {
@@ -34,8 +34,7 @@ move_croc_with_wall_check:
 + JML $A0C6AB
 }
 
-end_move_croc_with_wall_check_freespace_a4:
-!FREESPACE_A4 := end_move_croc_with_wall_check_freespace_a4
+%END_FREESPACE(A4)
 
 ;;
 ; Disable croc fireball

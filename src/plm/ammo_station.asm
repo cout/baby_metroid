@@ -16,7 +16,7 @@ JSR test_ammo_full
 org $84B31E
 JSR test_ammo_full
 
-org !FREESPACE_84
+%BEGIN_FREESPACE(84)
 
 refill_ammo:
 {
@@ -41,5 +41,4 @@ test_ammo_full:
   RTS
 }
 
-end_ammo_station_freespace_84:
-!FREESPACE_84 := end_ammo_station_freespace_84
+%END_FREESPACE(84)

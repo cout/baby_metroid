@@ -11,7 +11,7 @@ org $A6C117 ; ceres escape timer has started
 
 JMP state_start_transport_sequence
 
-org !FREESPACE_A6
+%BEGIN_FREESPACE(A6)
 
 state_start_transport_sequence:
 {
@@ -76,5 +76,4 @@ state_transporter_operating:
   RTS
 }
 
-end_ceres_freespace_a6:
-!FREESPACE_A6 = end_ceres_freespace_a6
+%END_FREESPACE(A6)

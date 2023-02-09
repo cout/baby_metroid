@@ -6,7 +6,7 @@ animals_escape_block_shot_plm_entry:
 
 dw $B978, animals_escape_instruction_list
 
-org !FREESPACE_84
+%BEGIN_FREESPACE(84)
 
 animals_escape_instruction_list:
 {
@@ -58,7 +58,6 @@ I_set_animals_escape_door_bts:
   RTS
 }
 
-end_animals_escape_freespace_84:
-!FREESPACE_84 = end_animals_escape_freespace_84
+%END_FREESPACE(84)
 
 endif

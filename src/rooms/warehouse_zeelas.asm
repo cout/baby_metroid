@@ -37,7 +37,7 @@ org $8383D2
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $04, $00, $00
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 warehouse_zeelas_enemy_population:
 ; Room $A471 state $A47E: Enemy population
@@ -50,10 +50,9 @@ dw !samus_statue, $002A, $00A0, $0000, $2400, $0000, $0000, $0205 ; statue
 dw $FFFF     ; end of list
 db $03       ; death quota
 
-end_warehouse_zeelas_freespace_a1:
-!FREESPACE_A1 := end_warehouse_zeelas_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 warehouse_zeelas_enemy_graphics_set:
 ; Room $A471 state $A47E: Enemy graphics set
@@ -63,5 +62,4 @@ dw $DC7F, $0001 ; zeela
 dw !samus_statue, $0002 ; statue
 dw $FFFF     ; end of list
 
-end_warehouse_zeelas_freespace_b4:
-!FREESPACE_B4 := end_warehouse_zeelas_freespace_b4
+%END_FREESPACE(B4)

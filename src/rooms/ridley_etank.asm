@@ -42,7 +42,7 @@ dw $91F7     ; Room setup routine (bank $8F)
 ;;  ;  enemy  palette
 ;;  dw $FFFF     ; end of list
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 ridley_etank_enemy_population:
 
@@ -51,15 +51,13 @@ dw small_baby, $0060, $0060, $0000, $2000, $0000, $0000, $0005
 dw $FFFF     ; end of list
 db $00       ; death quota
 
-end_ridley_etank_freespace_a1:
-!FREESPACE_A1 := end_ridley_etank_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 ridley_etank_enemy_graphics_set:
 ;  enemy  palette
 dw small_baby, $0001
 dw $FFFF     ; end of list
 
-end_ridley_etank_freesapce_b4:
-!FREESPACE_B4 = end_ridley_etank_freesapce_b4
+%END_FREESPACE(B4)

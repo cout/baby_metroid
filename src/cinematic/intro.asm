@@ -88,7 +88,7 @@ org $8BA70C
 JSR queue_intro_music
 JMP $A724
 
-org !FREESPACE_8B
+%BEGIN_FREESPACE(8B)
 
 queue_intro_music:
 {
@@ -109,8 +109,7 @@ queue_intro_music:
   RTS
 }
 
-end_intro_scene_0_freespace_8B:
-!FREESPACE_8B := end_intro_scene_0_freespace_8B
+%END_FREESPACE(8B)
 
 ;;;;;;;;;; SCENE 1 ;;;;;;;;;;
 
@@ -131,7 +130,7 @@ warnpc $8BAE91
 org $8BCB91
 dw $B336
 
-org !FREESPACE_8B
+%BEGIN_FREESPACE(8B)
 
 intro_clear_bts:
 {
@@ -147,8 +146,7 @@ intro_clear_bts:
   RTS
 }
 
-end_intro_scene_1_freespace_8B:
-!FREESPACE_8B := end_intro_scene_1_freespace_8B
+%END_FREESPACE(8B)
 
 ;;;;;;;;;; SCENE 2 ;;;;;;;;;;
 
@@ -182,7 +180,7 @@ JMP ceres_station_skip_power_bomb
 org $8BC603
 JMP start_intro_page_3
 
-org !FREESPACE_8B
+%BEGIN_FREESPACE(8B)
 
 ceres_escape_choose_palette:
 {
@@ -358,8 +356,7 @@ wait_for_fade_in_page_3:
   RTS
 }
 
-end_intro_scene_3_freespace_8B:
-!FREESPACE_8B := end_intro_scene_3_freespace_8B
+%END_FREESPACE(8B)
 
 ;;;;;;;;;; SCENE 3 ;;;;;;;;;;
 
@@ -368,10 +365,13 @@ JSR set_up_new_mother_brain_fight
 RTS
 
 org $96FF14
+warnings push
+check bankcross off
 incbin "intro_bg1_tilemap.bin"
+warnings pull
 warnpc $9788CC
 
-org !FREESPACE_8B
+%BEGIN_FREESPACE(8B)
 
 set_up_new_mother_brain_fight:
 {
@@ -504,8 +504,7 @@ cinematic_function_mother_brain_fight_sleep:
   RTS
 }
 
-end_intro_scene_4_freespace_8B:
-!FREESPACE_8B := end_intro_scene_4_freespace_8B
+%END_FREESPACE(8B)
 
 ; Use Samus scene crossfade into page 4
 org $8BB38A
@@ -515,7 +514,7 @@ LDA #$B3F4
 org $8BB2CA
 RTS
 
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 pushtable
 ' ' = $0000
@@ -543,8 +542,7 @@ scene_4_level_data:
 
 pulltable
 
-end_intro_scene_3_freespace_b8:
-!FREESPACE_B8 := end_intro_scene_3_freespace_b8
+%END_FREESPACE(B8)
 
 ;;;;;;;;;; SCENE 3 ;;;;;;;;;;
 

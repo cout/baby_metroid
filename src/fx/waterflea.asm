@@ -21,7 +21,7 @@ fx_type_function_table:
 skip !WATERFLEA_FX_INDEX
 dw waterflea_fx_init
 
-org !FREESPACE_88
+%BEGIN_FREESPACE(88)
 
 waterflea_fx_init:
 {
@@ -194,5 +194,4 @@ waterflea_adjust_palette:
   RTS
 }
 
-end_waterflea_freespace_88:
-!FREESPACE_88 := end_waterflea_freespace_88
+%END_FREESPACE(88)

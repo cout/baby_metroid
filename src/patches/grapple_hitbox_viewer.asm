@@ -34,7 +34,7 @@ JSR update_grapple_collision_test_tile
 org $828B98
 JSL draw_grapple_collision_test_tiles
 
-org !FREESPACE_94
+%BEGIN_FREESPACE(94)
 
 reset_grapple_collision_test_tiles:
 {
@@ -89,10 +89,9 @@ update_grapple_collision_test_tile:
   RTS
 }
 
-end_debug_grapple_freespace_94:
-!FREESPACE_94 := end_debug_grapple_freespace_94
+%END_FREESPACE(94)
 
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 !OAM_STACK_POINTER = $0590
 
@@ -163,5 +162,4 @@ draw_grapple_collision_test_tiles:
   RTL
 }
 
-end_grapple_hitbox_viewer_freespace_b8:
-!FREESPACE_B8 := end_grapple_hitbox_viewer_freespace_b8
+%END_FREESPACE(B8)

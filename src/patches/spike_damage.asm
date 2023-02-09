@@ -9,7 +9,7 @@ org $949889 : ADC !air_spike_damage : %assertpc($94988C) ; Air spike (BTS=2)
 org $90E6BC
 JSL inside_block_detection
 
-org !FREESPACE_94
+%BEGIN_FREESPACE(94)
 
 ; TODO - it would be better to set these when the game starts instead of
 ; every frame, but then all my save states would have the wrong spike
@@ -30,5 +30,4 @@ inside_block_detection:
   JMP $9B60
 }
 
-end_spike_damage_freespace_94:
-!FREESPACE_94 := end_spike_damage_freespace_94
+%END_FREESPACE(94)

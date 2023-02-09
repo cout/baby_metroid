@@ -74,7 +74,7 @@ org $8387BC
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $0210, $01D0, $0000 : db $00, $04, $02, $1E, $82, $1F, $00, $00
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 ridley_boss_fight_room_plm_list:
 {
@@ -84,5 +84,4 @@ ridley_boss_fight_room_plm_list:
   dw $0000
 }
 
-end_ridley_room_freesapce_8f:
-!FREESPACE_8F := end_ridley_room_freesapce_8f
+%END_FREESPACE(8F)

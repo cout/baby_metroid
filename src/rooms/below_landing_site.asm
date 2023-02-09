@@ -1,13 +1,12 @@
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 below_landing_site_level_data:
 incbin "below_landing_site.bin"
 
-end_below_landing_site_freespace_b8:
-!FREESPACE_B8 := end_below_landing_site_freespace_b8
+%END_FREESPACE(B8)
 
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 below_landing_site_header:
 {
@@ -99,10 +98,9 @@ below_landing_site_room_plms:
 
 }
 
-end_below_landing_site_freespace_8f:
-!FREESPACE_8F := end_below_landing_site_freespace_8f
+%END_FREESPACE(8F)
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 below_landing_site_enemy_population:
 {
@@ -118,10 +116,9 @@ db $00       ; death quota
 
 }
 
-end_below_landing_site_freespace_a1:
-!FREESPACE_A1 := end_below_landing_site_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 below_landing_site_enemy_graphics_set:
 {
@@ -134,10 +131,10 @@ dw $D0BF, $0007 ; gunship bottom
 dw $FFFF     ; end of list
 
 }
-end_below_landing_site_freespace_b4:
-!FREESPACE_B4 := end_below_landing_site_freespace_b4
 
-org !FREESPACE_83
+%END_FREESPACE(B4)
+
+%BEGIN_FREESPACE(83)
 
 below_landing_site_fx:
 {
@@ -148,5 +145,4 @@ dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $00, $00, $00
 
 }
 
-end_below_landing_site_freespace_83:
-!FREESPACE_83 := end_below_landing_site_freespace_83
+%END_FREESPACE(83)

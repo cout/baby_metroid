@@ -78,7 +78,7 @@ org $B485EF
 dw $E2BF, $0007 ; kraid
 dw $FFFF     ; end of list
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 kraid_room_main_routine:
 {
@@ -125,7 +125,6 @@ kraid_room_main_routine:
   RTS
 }
 
-end_kraid_room_freespace_8f:
-!FREESPACE_8F := end_kraid_room_freespace_8f
+%END_FREESPACE(8F)
 
 ; vim:ft=pic

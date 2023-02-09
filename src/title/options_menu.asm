@@ -13,6 +13,7 @@ org $82EC66
 warnpc $82EC77
 
 org $82EDDA
+toggle_japanese_text:
 {
   STZ $099E
   LDA !hard_mode_flag
@@ -30,7 +31,7 @@ org $82EDDA
   LDA !hard_mode_flag
 }
 
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 option_menu_tilemap:
 {
@@ -69,8 +70,7 @@ option_menu_tilemap:
 }
 option_menu_tilemap_end:
 
-end_hard_mode_freespace_b8:
-!FREESPACE_B8 := end_hard_mode_freespace_b8
+%END_FREESPACE(B8)
 
 pulltable
 ; vim:ft=pic

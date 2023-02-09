@@ -1,4 +1,4 @@
-org !FREESPACE_86
+%BEGIN_FREESPACE(86)
 
 falling_drop:
 ; dw $EF29  ; init
@@ -34,6 +34,5 @@ init_falling_drop:
   db $01, $01, $02, $02, $04, $04, $04, $05
 }
 
-end_falling_drop_freespace_86:
-!FREESPACE_86 := end_falling_drop_freespace_86
+%END_FREESPACE(86)
 ; vim:ft=pic

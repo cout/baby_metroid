@@ -1,10 +1,9 @@
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 escape_parlor_level_data:
 incbin "escape_parlor.bin"
 
-end_parlor_freespace_b8:
-!FREESPACE_B8 := end_parlor_freespace_b8
+%END_FREESPACE(B8)
 
 ; Room $92FD: Header
 org $8F92FD
@@ -192,7 +191,7 @@ org $838010
 ; dw $0000, $04E8, $0010, $FF98 : db $00, $00, $02, $02, $00, $42, $00, $00
 dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $00, $00, $00
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 parlor_escape_setup:
 {
@@ -273,5 +272,4 @@ parlor_escape_main_quiet:
   RTS
 }
 
-end_parlor_freespace_8F:
-!FREESPACE_8F := end_parlor_freespace_8F
+%END_FREESPACE(8F)

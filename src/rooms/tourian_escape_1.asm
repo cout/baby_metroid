@@ -33,7 +33,7 @@ dw $E439     ; Library background (bank $8F)
 ; dw $C91F     ; Room setup routine (bank $8F)
 dw tourian_escape_1_setup ; Room setup routine (bank $8F)
 
-org !FREESPACE_A1
+%BEGIN_FREESPACE(A1)
 
 tourian_escape_1_enemy_population:
 
@@ -52,10 +52,9 @@ dw $D5BF, $00C8, $00C0, $0008, $A800, $00FF, $2000, $0020 ; destructible shutter
 dw $FFFF     ; end of list
 db $00       ; death quota
 
-end_tourian_escape_1_freespace_a1:
-!FREESPACE_A1 := end_tourian_escape_1_freespace_a1
+%END_FREESPACE(A1)
 
-org !FREESPACE_B4
+%BEGIN_FREESPACE(B4)
 
 tourian_escape_1_enemy_graphics_set:
 
@@ -66,8 +65,7 @@ dw $D5BF, $0001 ; destructible shutter2
 dw !baby, $0007 ; baby
 dw $FFFF     ; end of list
 
-end_tourian_escape_1_freespace_b4:
-!FREESPACE_B4 := end_tourian_escape_1_freespace_b4
+%END_FREESPACE(B4)
 
 ; Room $DE4D state $DE5A: FX
 org $83A104
@@ -83,7 +81,7 @@ skip 2
 end_tourian_escape_1_freemem_7f:
 !FREEMEM_7F := end_tourian_escape_1_freemem_7f
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 tourian_escape_1_setup:
 {
@@ -106,5 +104,4 @@ tourian_escape_1_main:
   RTS
 }
 
-end_tourian_escape_1_freespace_8f:
-!FREESPACE_8F := end_tourian_escape_1_freespace_8f
+%END_FREESPACE(8F)

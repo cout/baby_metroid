@@ -1,12 +1,11 @@
 if !USE_BELOW_LANDING_SITE
 
-org !FREESPACE_B8
+%BEGIN_FREESPACE(B8)
 
 escape_landing_site_level_data:
 incbin "escape_landing_site.bin"
 
-end_landing_site_freespace_b8:
-!FREESPACE_B8 := end_landing_site_freespace_b8
+%END_FREESPACE(B8)
 
 else
 
@@ -243,7 +242,7 @@ dw $0000, $FFFF, $FFFF, $0000 : db $00, $00, $02, $02, $00, $04, $00, $00
 ; 1. is it possible to slow down the lightning?
 ; 2. can I add some light rain/thunder?
 
-org !FREESPACE_8F
+%BEGIN_FREESPACE(8F)
 
 landing_site_escape_main:
 {
@@ -251,5 +250,4 @@ landing_site_escape_main:
   RTS
 }
 
-end_landing_site_freespace_8f:
-!FREESPACE_8F := end_landing_site_freespace_8f
+%END_FREESPACE(8F)
