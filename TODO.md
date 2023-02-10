@@ -17,6 +17,7 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* Samus's ship shows up incorrectly in the cutscene before zebes
 
 Crashes
 -------
@@ -26,6 +27,8 @@ Crashes
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
 * I was able to make spore spawn crash but I am not sure how
+    - I was able to trigger this bug again: I fired one or two pea shots
+        then two missiles.
 
 Incomplete
 ----------
@@ -71,6 +74,7 @@ Cosmetic
     picks up Samus.
 * The bomb blocks in phantoon's room leave behind black background
     instead of background that matches
+* Terminator is very laggy
 
 Probably Won't Fix
 ------------------
