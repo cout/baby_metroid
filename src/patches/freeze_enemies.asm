@@ -127,7 +127,19 @@ JMP handle_touch_damage_and_knockback
 
 handle_touch_damage_and_knockback:
 {
+  ; No damage/knockback in easy mode
   LDA !hard_mode_flag
+  BEQ .easy_mode
+
+  ; No damage/knockback if Samus is morphed
+  PHX
+  LDA $0A1F
+  AND #$00FF
+  TAX
+  LDA.l pose_collision_type_table,x
+  PLX
+  AND #$00FF
+  CMP #$0001
   BEQ .easy_mode
 
 .hard_mode:
