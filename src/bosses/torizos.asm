@@ -15,3 +15,22 @@ org $AAC6E0
 LDA #$0004
 JSL $8081A6
 RTS
+warnpc $AAC6FF
+
+;;
+; Disable GT code ;)
+;
+
+org $AAC90A
+BEQ $08
+
+org $AAC91E
+JML $91E355
+
+org $91E358
+EOR #$23FF
+JMP $E390
+
+org $91E3C9
+STZ $0B18
+AND #$FFFB
