@@ -37,7 +37,10 @@ check_solid_enemy_detection:
   LDA $18A8
   STA !effective_invincibility_timer
 
-  ; In hard mode, treat enemies as solid only when Samus is morphed
+  ; TODO TODO - the hard mode checks here might be effectively the same
+  ; as easy mode
+
+  ; In hard mode, treat enemies as solid when Samus is morphed
   PHX
   LDA $0A1F
   AND #$00FF
@@ -46,8 +49,20 @@ check_solid_enemy_detection:
   PLX
   AND #$00FF
   CMP #$0001
-  BNE .do_normal_solid_checks
-  BRA .check_samus_moving_upward
+  BEQ .check_samus_moving_upward
+
+  ; In hard mode, treat enemies as solid if Samus is above the enemy so
+  ; she can still stand on them
+  LDA $0F7E,x
+  SEC
+  SBC $0F84,x
+  SEC
+  SBC $0B00
+  CMP $0AFA
+  BPL .check_samus_moving_upward
+
+  ; Otherwise use the normal logic
+  BRA .do_normal_solid_checks
 
 .easy_mode:
   LDA #$0001

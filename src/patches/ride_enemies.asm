@@ -266,6 +266,9 @@ ride_enemies_check_collision:
 }
 
 pose_collision_type_table:
+; 0 = Normal collision (for easy mode, no collision)
+; 1 = enemy can carry samus (Samus is morphed)
+; 2 = Samus can stand on/ride enemy
 {
   db $02 ; 0: Standing
   db $02 ; 1: Running
@@ -299,9 +302,9 @@ pose_collision_type_table:
 
 pose_collision_routine_table:
 {
-  dw check_samus_always_no_collision
-  dw check_samus_is_inside_enemy
-  dw check_samus_is_standing_on_enemy
+  dw check_samus_always_no_collision   ; collision type 0
+  dw check_samus_is_inside_enemy       ; collision type 1
+  dw check_samus_is_standing_on_enemy  ; collision type 2
 }
 
 check_samus_always_no_collision:
