@@ -43,7 +43,6 @@ Incomplete
     the fire button
 * Golden torizo fight is a vanilla one-shot fight, which is probably too
     scary
-* Ridley baby should not be freezable
 * Ridley baby should leave the room somehow
 * Ridley top door should be grey after Ridley fight
 
