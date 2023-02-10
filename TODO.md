@@ -44,7 +44,6 @@ Incomplete
 * Golden torizo fight is a vanilla one-shot fight, which is probably too
     scary
 * Ridley baby should leave the room somehow
-* Ridley top door should be grey after Ridley fight
 
 Ideas
 -----

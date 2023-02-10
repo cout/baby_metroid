@@ -79,7 +79,7 @@ dw $0000, $0210, $01D0, $0000 : db $00, $04, $02, $1E, $82, $1F, $00, $00
 ridley_boss_fight_room_plm_list:
 {
   ; dw $C842, $060E, $005A ; grey door facing left
-  dw $C842, $060E, $065A ; grey door facing left
+  dw $C842, $060E, $105A ; grey door facing left (keep door locked until player leaves the room)
   dw $C848, $1601, $005B ; grey door facing right
   dw $0000
 }
