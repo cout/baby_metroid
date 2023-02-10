@@ -17,7 +17,6 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* Samus's ship shows up incorrectly in the cutscene before zebes
 
 Crashes
 -------
@@ -72,6 +71,8 @@ Cosmetic
 * The bomb blocks in phantoon's room leave behind black background
     instead of background that matches
 * Terminator is very laggy
+* Samus's ship shows up incorrectly in the cutscene before zebes on
+    Mesen-S
 
 Probably Won't Fix
 ------------------
