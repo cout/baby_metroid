@@ -43,7 +43,6 @@ Incomplete
     the fire button
 * Golden torizo fight is a vanilla one-shot fight, which is probably too
     scary
-* Ridley baby should leave the room somehow
 
 Ideas
 -----

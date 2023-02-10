@@ -12,10 +12,12 @@ db $A3             ; bank
 db $00             ; hurt ai time
 dw $005A           ; cry
 dw $0000           ; boss value
-dw $EA4F           ; init ai routine
+; dw $EA4F           ; init ai routine
+dw small_baby_setup
 dw $0001           ; number of parts
 dw $0000           ; unused
-dw $EB98           ; main ai routine
+; dw $EB98           ; main ai routine
+dw small_baby_main_ai
 dw $800F           ; grapple ai routine
 ; dw $EB33           ; hurt ai routine
 dw $804C           ; hurt ai routine
@@ -46,6 +48,40 @@ dw $DFAB           ; enemy name
 
 %BEGIN_FREESPACE(A3)
 
+small_baby_setup:
+{
+  ; jump to normal metroid setup
+  JMP $EA4F
+}
+
+small_baby_main_ai:
+{
+  ; If the door is open, make a run for it
+  LDA $7F0002+(2*(($10*6)+$0E))
+  CMP #$0082
+  BEQ .escape
+  CMP #$800F
+  BEQ .stop
+
+.metroid_ai:
+  ; jump to normal metroid main ai
+  JMP $EB98
+
+.stop:
+  LDA #$0000 : STA $0FAA,x
+  LDA #$0000 : STA $0FAC,x
+  RTL
+
+.escape:
+  LDA #$0200 : STA $12
+  LDA #$0080 : STA $14
+  LDA #$0040
+  ; LDY #$0001
+  JSL small_baby_accel_to_point
+  JSL $A9C3EF
+  JMP $EBAD
+}
+
 small_baby_shot_routine:
 {
   ; spawn PB explosion
@@ -54,10 +90,8 @@ small_baby_shot_routine:
   LDA $0F7E,x : STA $0CE4
   JSL $888AB0
 
-  ; call normal shot routine
+  ; jump to normal metroid shot routine
   JMP $EF07
-
-  RTL
 }
 
 small_baby_frozen_ai:
@@ -78,3 +112,13 @@ small_baby_frozen_ai:
 }
 
 %END_FREESPACE(A3)
+
+%BEGIN_FREESPACE(A9)
+
+small_baby_accel_to_point:
+{
+  JSR $F5A6
+  RTL
+}
+
+%END_FREESPACE(A9)
