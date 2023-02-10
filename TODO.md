@@ -26,9 +26,6 @@ Crashes
     morph, but I don't know how he did it (I cannot reproduce it - E
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
-* I was able to make spore spawn crash but I am not sure how
-    - I was able to trigger this bug again: I fired one or two pea shots
-        then two missiles.
 
 Incomplete
 ----------

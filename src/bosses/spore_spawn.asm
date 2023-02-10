@@ -14,12 +14,14 @@ dw $0000
 
 org $A5E359 ; initial palette
 dw $3800, $36BA, $29F4, $0089, $0002, $3236, $1DB2, $0D0D, $04CB, $36FC, $19B2, $00CB, $0004, $36FC, $19B2, $00CB
+%assertpc($A5E379)
 
 org $A5E379 ; damage palettes
 dw $3800, $2E78, $25D2, $0088, $0002, $2E14, $1990, $0D0C, $04CA, $32DA, $19B1, $00CB, $0024, $2EBC, $1593, $00CB
 dw $3800, $2A55, $21B1, $0087, $0001, $25F2, $156F, $08EB, $04A9, $32B9, $1991, $04EA, $0024, $269D, $1173, $00AB
 dw $3800, $2213, $1D8F, $0086, $0001, $21D0, $114D, $08EA, $04A8, $2E97, $1990, $04EA, $0044, $1E5D, $0D54, $00AB
 dw $3800, $1DF1, $156D, $0466, $0001, $198F, $112B, $08C8, $04A7, $2E96, $158F, $08EA, $0045, $1A3E, $0D35, $008C
+%assertpc($A5E3F9)
 
 org $A5E3F9 ; death-sequence palettes
 dw $3800, $2213, $1D8F, $0086, $0001, $21D0, $114D, $08EA, $04A8, $2E97, $1990, $04EA, $0044, $1E5D, $0D54, $00AB
@@ -30,6 +32,7 @@ dw $3800, $094A, $0908, $0463, $0000, $0929, $04C6, $04A5, $0484, $2631, $156D, 
 dw $3800, $15EF, $156B, $00A5, $0063, $15AC, $0D49, $0907, $04C6, $36D6, $21D0, $114B, $00A6, $025F, $0137, $008D
 dw $3800, $2A92, $21CC, $00C4, $0062, $260E, $15AA, $0D27, $04E5, $475A, $2E52, $198C, $00C6, $033F, $01B6, $008F
 dw $0000, $3F57, $2E4D, $00E2, $0060, $3AB0, $220B, $1166, $0924, $57FF, $3AB5, $1DCE, $00E7, $03FF, $0216, $00B0
+%assertpc($A5E4F9)
 
 org $A5E4F9 ; level palette
 dw $0000, $6318, $6318, $0089, $19B2, $0D0D, $0089, $0002, $04CB, $04CB, $092E, $0004, $3236, $29F4, $19B2, $0002
@@ -39,6 +42,7 @@ dw $0000, $6318, $6318, $0CA5, $19AD, $1908, $1085, $0400, $118A, $114A, $0D29, 
 dw $0000, $6318, $6318, $14C4, $1DAC, $2126, $18A4, $0C00, $19EA, $196A, $1147, $0001, $2A6F, $112A, $22B1, $0001
 dw $2003, $6318, $6318, $18C3, $1DAA, $2524, $1CA3, $1000, $1E2A, $1D8A, $1145, $0000, $2A8D, $0CE7, $22F1, $0001
 dw $2003, $6318, $6318, $1CE1, $1DA9, $2923, $24A1, $1400, $2269, $21C9, $1544, $0420, $268B, $04C5, $2731, $0000
+%assertpc($A5E5D9)
 
 org $A5E5D9 ; background palette
 dw $3800, $19B2, $0D0D, $0089, $19B2, $0D0D, $0089, $0002, $04CB, $04CB, $092E, $0004, $7FFF, $7FFF, $19B2, $0002
@@ -48,6 +52,7 @@ dw $3800, $356B, $24C9, $0C65, $1D4A, $14E7, $0885, $0821, $0DB4, $0D30, $0D0E, 
 dw $3800, $4169, $2CA7, $0C64, $2128, $14C6, $0C84, $0821, $0DF6, $0D72, $110E, $0C45, $7FFF, $7FFF, $1659, $0401
 dw $3800, $4947, $3486, $1063, $2105, $18C4, $1083, $0C21, $1239, $1194, $110E, $1065, $7FFF, $7FFF, $167B, $0401
 dw $3800, $5544, $3C84, $1441, $24E3, $18A2, $1081, $0C40, $129C, $11B5, $14EE, $1066, $7FFF, $7FFF, $16BD, $0800
+%assertpc($A5E6B9)
 
 ;; Make spore spawn vulnerable to uncharged beam
 ;
@@ -57,11 +62,12 @@ org $B4F094
 ;  $80,$82,$82,$82,$80,$82,$82,$82,$82,$82,$82,$82, $82,$82,$80,$80,$80,$80,$80,$04,$80,$80
 db $02,$82,$82,$82,$80,$82,$82,$82,$82,$82,$82,$82, $82,$82,$80,$80,$80,$80,$80,$04,$80,$80
 
+%assertpc($B4F094+22)
+
 ;;
 ; Spore spawn instruction lists
 
 org $A5E6C7
-
 instruction_list_spore_spawn_alive:
 {
   dw $E91C, $0000
@@ -69,26 +75,30 @@ instruction_list_spore_spawn_alive:
   dw $E8BA, $EB1B        ; start fight
   dw $812F               ; sleep
 }
+%assertpc($A5E6D5)
 
+org $A5E6D5
 instruction_list_spore_spawn_fight_started:
 {
   dw $E82D, $0000, $0000 ; speed = 00h, angle delta = 0
-}
-
-instruction_list_spore_spawn_main_loop:
-{
-  dw $E8BA, $EB52        ; handle spore spawn movement
+  dw $E8BA, $EB52        ; set enemy function to $EB52
   dw $812F               ; sleep
 }
 
+; Prevent the mouth from closing
 org $A5E729
-
 instruction_list_spore_spawn_close_mouth:
 {
-  ; Prevent the mouth from closing
+  ; reset flag $801E to prevent a projectile from resetting the close
+  ; sequence; if we don't do this, then the next projectile will not
+  ; affect the palette (see $A5:ED98)
+  ; TODO - do we need to do this since we don't want the mouth to close
+  ; anyway?
   dw $E771
+
   dw $80ED, instruction_list_spore_spawn_fight_started
 }
+warnpc $A5E75F
 
 ;;
 ; Skip the descent into the room
@@ -102,17 +112,24 @@ org $A5EB1B ; spore spawn descent function
   STA $0F92,x
   RTS
 }
+warnpc $A5EB52
 
 ;;
 ; Disable spore spawn movement reaction to being shot
 
-org $A5EC49 ; update spore spawn stalk segment positions
-
+; Disable updating spore spawn stalk segment positions.  This is called
+; from multiple places, so we still need to RTS here, even if we skip
+; calling this routine in $EB55.
+org $A5EC49
 RTS
 
-org $A5EB55 ; second instruction in spore spawn movement function
-
-JMP $EB8A
+; Skip setting X/Y position in spore spawn movement function.  This
+; still sets the angle, which IIRC is required (TODO - verify that this
+; is true).
+; org $A5EB55
+; JMP $EB8A
+org $A5EB52
+RTS
 
 ;;
 ; Disable spore spawn death explosions
@@ -155,10 +172,12 @@ spore_spawn_projectile_check:
   STA $12
 
   ; A = projectile type
+  PHX
   LDA $18A6
   ASL A
   TAX
   LDA $0C18,x
+  PLX
 
   BIT #$0700
   BNE .missiles_or_supers
