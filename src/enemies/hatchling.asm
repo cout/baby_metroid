@@ -40,6 +40,45 @@ dw $DF9D          ; enemy name
 
 %assertpc(hatchling+$40)
 
+big_hatchling:
+
+dw $0400          ; tile data size
+dw $A725          ; palette
+; dw $E9AF          ; palette
+dw $0064          ; health
+dw $005A          ; damage
+dw $0008          ; x radius
+dw $0008          ; y radius
+db $A3            ; bank
+db $00            ; hurt ai time
+dw $0058          ; cry
+dw $0000          ; boss value
+; dw $A77D          ; init ai routine
+dw big_hatchling_setup
+dw $0001          ; number of parts
+dw $0000          ; unused
+; dw $A790          ; main ai routine
+dw hatchling_main_ai
+dw $800A          ; grapple ai routine
+dw $804C          ; hurt ai routine
+dw $8041          ; frozen ai routine
+dw $0000          ; time is frozen ai routine
+dw $0002          ; death animation
+dd $00000000      ; unused
+dw $0000          ; power bomb reaction
+dw $0000          ; unknown
+dd $00000000      ; unused
+dw $A953          ; touch routine
+dw $A9A8          ; shot routine
+dw $0000          ; unknown
+dl $AC9400        ; tile data
+db $05            ; layer
+dw $F218          ; drop chances
+dw $EC1C          ; vulnerabilities (invulnerable)
+dw $DF9D          ; enemy name
+
+%assertpc(big_hatchling+$40)
+
 %END_FREESPACE(A0)
 
 %BEGIN_FREESPACE(A3)
@@ -55,6 +94,23 @@ hatchling_setup:
   LDA #$0001
   STA $0F94,x
 
+  JSR hatchling_set_exit_block
+
+  RTL
+}
+
+big_hatchling_setup:
+{
+  ; call mochtroid setup
+  JSL $A3A77D
+
+  JSR hatchling_set_exit_block
+
+  RTL
+}
+
+hatchling_set_exit_block:
+{
   ; $0FB0,x = position of block to test for an exit
   SEP #$20
   LDA $0FB4,x : STA $4202
@@ -66,7 +122,7 @@ hatchling_setup:
   ASL
   STA $0FB0,x ; unused mochtroid variable
 
-  RTL
+  RTS
 }
 
 hatchling_instruction_list:

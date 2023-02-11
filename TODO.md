@@ -46,8 +46,8 @@ Incomplete
 * Hatchling does not interact with Samus beam
 * Hatchling should not be in the room if Samus leaves and comes back
 * Hatchling should only try to escape after Samus has defeated BT
-* Add an enemy similar to hatchling to screw attack room using mochtroid
-    graphics or original metroid graphics
+* Screw attack hatchling should have graphics or color different from
+    mochtroid
 
 Ideas
 -----

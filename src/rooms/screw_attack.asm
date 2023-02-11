@@ -37,8 +37,8 @@ dw $91F7     ; Room setup routine (bank $8F)
 screw_attack_enemy_population:
 ; Room $B6C1 state $B6CE: Enemy population
 ;org $A1AEAE
-;  enemy      x      y      init   props  extra  param1 param2
-dw hatchling, $00CC, $026B, $0000, $A400, $0000, $0E06, $0000
+;  enemy          x      y      init   props  extra  param1 param2
+dw big_hatchling, $00CC, $026B, $0000, $A400, $0000, $0E06, $0000
 dw $FFFF     ; end of list
 db $00       ; death quota
 
@@ -50,7 +50,7 @@ screw_attack_enemy_graphics_set:
 ; Room $B6C1 state $B6CE: Enemy graphics set
 ;org $B488FD
 ;  enemy  palette
-dw hatchling, $0001
+dw big_hatchling, $0001
 dw $FFFF     ; end of list
 
 %END_FREESPACE(B4)
