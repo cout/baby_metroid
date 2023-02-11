@@ -43,6 +43,11 @@ Incomplete
 * Golden torizo fight is a vanilla one-shot fight, which is probably too
     scary
 * Baby in various forms should not damage Samus in hard mode
+* Hatchling does not interact with Samus beam
+* Hatchling should not be in the room if Samus leaves and comes back
+* Hatchling should only try to escape after Samus has defeated BT
+* Add an enemy similar to hatchling to screw attack room using mochtroid
+    graphics or original metroid graphics
 
 Ideas
 -----
