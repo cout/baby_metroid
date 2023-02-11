@@ -176,7 +176,7 @@ def format_room_plm_list(room_id, state_ids, addr, fx_list):
   for state_id in state_ids:
     s += f'; Room ${room_id:04X} state ${state_id:04X}: PLM\n'
   s += align_comments(f'''
-org $83{addr:04X}
+org $8F{addr:04X}
 ;  plm_id y/x    param
 '''.strip())
   for fx in fx_list:
