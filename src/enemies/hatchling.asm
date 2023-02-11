@@ -120,7 +120,7 @@ big_hatchling_setup:
   JSL $8081DC
   BCC .sleep
 
-  ; Hatchling is gone after escaping through screw attack room exit
+  ; Big hatchling is gone after escaping through screw attack room exit
   LDA !EVENT_HATCHLING_ESCAPE
   JSL $808233
   BCS .sleep

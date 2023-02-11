@@ -25,6 +25,8 @@ Crashes
     morph, but I don't know how he did it (I cannot reproduce it - E
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
+* In hard mode, the game crashed going from below spazer room to bat
+    room
 
 Incomplete
 ----------
