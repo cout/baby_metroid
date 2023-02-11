@@ -42,6 +42,7 @@ Incomplete
     the fire button
 * Golden torizo fight is a vanilla one-shot fight, which is probably too
     scary
+* Baby in various forms should not damage Samus in hard mode
 
 Ideas
 -----
