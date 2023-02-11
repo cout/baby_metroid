@@ -38,7 +38,7 @@ screw_attack_enemy_population:
 ; Room $B6C1 state $B6CE: Enemy population
 ;org $A1AEAE
 ;  enemy          x      y      init   props  extra  param1 param2
-dw big_hatchling, $00CC, $026B, $0000, $A400, $0000, $0E06, $0000
+dw big_hatchling, $00CC, $026B, $0000, $AC00, $0000, $0E06, $0000
 dw $FFFF     ; end of list
 db $00       ; death quota
 

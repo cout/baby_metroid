@@ -8,6 +8,7 @@ lorom
 incsrc freespace.asm
 incsrc assertpc.asm
 incsrc enemies.asm
+incsrc events.asm
 incsrc physics_constants.asm
 incsrc patches/easy_blue_suit.asm
 incsrc patches/easy_grapple.asm

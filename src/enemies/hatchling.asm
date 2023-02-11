@@ -58,7 +58,7 @@ dw big_hatchling_setup
 dw $0001          ; number of parts
 dw $0000          ; unused
 ; dw $A790          ; main ai routine
-dw hatchling_main_ai
+dw big_hatchling_main_ai
 dw $800A          ; grapple ai routine
 dw $804C          ; hurt ai routine
 dw $8041          ; frozen ai routine
@@ -97,6 +97,14 @@ hatchling_setup:
 
   JSR hatchling_set_exit_block
 
+  ; Hatchling is gone after escaping through flyway exit
+  LDA !EVENT_HATCHLING_ESCAPE
+  JSL $808233
+  BCC +
+  LDA #$0000
+  STA $0F94,x
++
+
   RTL
 }
 
@@ -107,6 +115,23 @@ big_hatchling_setup:
 
   JSR hatchling_set_exit_block
 
+  ; Big hatchling is gone after Ridley is visited
+  LDA #$0001
+  JSL $8081DC
+  BCC .sleep
+
+  ; Hatchling is gone after escaping through screw attack room exit
+  LDA !EVENT_HATCHLING_ESCAPE
+  JSL $808233
+  BCS .sleep
+
+  BRA .return
+
+.sleep:
+  LDA #$0000
+  STA $0F94,x
+
+.return:
   RTL
 }
 
@@ -159,12 +184,42 @@ dw $0000 : db $00 : dw $210F
 
 hatchling_main_ai:
 {
-  JSR hatchling_try_to_escape
-  BCS .return
+  ; Only try to escape if player has bombs
+  ; (TODO - BT code?)
+  LDA $09A4
+  AND #$1000
+  BEQ .main_ai
 
+  LDA !EVENT_HATCHLING_ESCAPE
+  JSL $8081FA
+
+  JSR hatchling_try_to_escape
+  BCS .escaped
+
+.main_ai:
   JMP $A790
 
-.return:
+.escaped:
+  RTL
+}
+
+big_hatchling_main_ai:
+{
+  ; Only try to escape if GT has been visited
+  LDA #$0004
+  JSL $8081DC
+  BCC .main_ai
+
+  LDA !EVENT_BIG_HATCHLING_ESCAPE
+  JSL $8081FA
+
+  JSR hatchling_try_to_escape
+  BCS .escaped
+
+.main_ai:
+  JMP $A790
+
+.escaped:
   RTL
 }
 
@@ -196,7 +251,6 @@ hatchling_try_to_escape:
   ASL : ASL : ASL : ASL
   SEC : SBC #$0020
   STA $12
-  STA $7FFC00
   BRA .escape
 
 .escape_right:
@@ -205,7 +259,6 @@ hatchling_try_to_escape:
   ASL : ASL : ASL : ASL
   CLC : ADC #$0020
   STA $12
-  STA $7FFC00
 
 .escape:
   LDA $0FB4,x
