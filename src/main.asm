@@ -106,6 +106,7 @@ incsrc rooms/east_cactus_alley.asm
 incsrc rooms/butterfly_room.asm
 incsrc rooms/main_hall.asm
 incsrc rooms/acid_statue.asm
+incsrc rooms/screw_attack.asm
 incsrc rooms/pillars.asm
 incsrc rooms/writg.asm
 incsrc rooms/red_kihunter_shaft.asm
