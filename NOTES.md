@@ -1214,7 +1214,7 @@ The format of a spritemap entry is:
     \-----word------/ \-byte-/ \-----word------/
 
 The format is similar to (the same as?) used for OAM sprite properties
-(TODO - I think it's the first byte is the size and the next for bytes
+(TODO - I think it's the first byte is the size and the next four bytes
 are the OAM properties for the sprite slot);
 see:
 * https://sneslab.net/wiki/YXPPCCCT)
