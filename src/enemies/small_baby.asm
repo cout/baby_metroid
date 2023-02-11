@@ -50,11 +50,47 @@ dw $DFAB           ; enemy name
 
 small_baby_setup:
 {
+  ; Small baby is gone after escaping through exit door
+  LDA !EVENT_SMALL_BABY_ESCAPE
+  JSL $808233
+  BCS .delete
+
   ; jump to normal metroid setup
   JMP $EA4F
+
+.delete:
+  LDX $0E54
+  LDA #$0000
+  STA $0F94,x
+
+  LDA $0F86,x
+  ORA #$0200
+  STA $0F86,x
+
+  RTL
 }
 
 small_baby_main_ai:
+{
+  LDA !EVENT_SMALL_BABY_ESCAPE
+  JSL $8081FA
+
+  JSR small_baby_try_to_escape
+  BCS .escaping
+
+.main_ai:
+  ; Invoke main AI to follow Samus
+  JMP $EB98
+
+.escaping:
+  ; Move metroid core along with the shell (invokes main AI but skips
+  ; moving to Samus)
+  ; TODO - it would be cleaner to always jump to $EB98 but set $EC09 so
+  ; the baby does not try to follow Samus while escaping the room
+  JMP $EBAD
+}
+
+small_baby_try_to_escape:
 {
   ; If the door is open, make a run for it
   LDA $7F0002+(2*(($10*6)+$0E))
@@ -63,23 +99,27 @@ small_baby_main_ai:
   CMP #$800F
   BEQ .stop
 
-.metroid_ai:
-  ; jump to normal metroid main ai
-  JMP $EB98
+  CLC
+  RTS
 
 .stop:
   LDA #$0000 : STA $0FAA,x
   LDA #$0000 : STA $0FAC,x
-  RTL
+  SEC
+  RTS
 
 .escape:
+  ; Set X/Y target position
   LDA #$0200 : STA $12
   LDA #$0080 : STA $14
+
+  ; Accelerate and move toward target
   LDA #$0040
-  ; LDY #$0001
   JSL small_baby_accel_to_point
   JSL $A9C3EF
-  JMP $EBAD
+
+  SEC
+  RTS
 }
 
 small_baby_shot_routine:

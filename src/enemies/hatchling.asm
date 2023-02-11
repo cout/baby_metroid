@@ -254,6 +254,7 @@ hatchling_try_to_escape:
   BRA .escape
 
 .escape_right:
+  ; Set X target position
   LDA $0FB5,x
   AND #$00FF
   ASL : ASL : ASL : ASL
@@ -261,6 +262,7 @@ hatchling_try_to_escape:
   STA $12
 
 .escape:
+  ; Set Y target position
   LDA $0FB4,x
   AND #$00FF
   INC
@@ -268,9 +270,11 @@ hatchling_try_to_escape:
   STA $14
   STA $7FFC02
 
+  ; Accelerate and move toward target
   LDA #$0040
   JSL hatchling_accel_to_point
   JSL $A9C3EF
+
   SEC
   RTS
 }
