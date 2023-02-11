@@ -55,6 +55,17 @@ hatchling_setup:
   LDA #$0001
   STA $0F94,x
 
+  ; $0FB0,x = position of block to test for an exit
+  SEP #$20
+  LDA $0FB4,x : STA $4202
+  LDA $07A5   : STA $4203
+  REP #$20
+  LDA $0FB5,x : AND #$00FF
+  CLC
+  ADC $4216
+  ASL
+  STA $0FB0,x ; unused mochtroid variable
+
   RTL
 }
 
@@ -91,32 +102,67 @@ dw $0000 : db $00 : dw $210F
 
 hatchling_main_ai:
 {
-;   ; If the door is open, make a run for it
-;   LDA $7F0002+(2*(($10*6)+$0E))
-;   CMP #$0082
-;   BEQ .escape
-;   CMP #$800F
-;   BEQ .stop
-; 
-; .metroid_ai:
-;   ; jump to normal metroid main ai
-;   JMP $EB98
-; 
-; .stop:
-;   LDA #$0000 : STA $0FAA,x
-;   LDA #$0000 : STA $0FAC,x
-;   RTL
-; 
-; .escape:
-;   LDA #$0200 : STA $12
-;   LDA #$0080 : STA $14
-;   LDA #$0040
-;   ; LDY #$0001
-;   JSL hatchling_accel_to_point
-;   JSL $A9C3EF
-;   JMP $EBAD
+  JSR hatchling_try_to_escape
+  BCS .return
 
   JMP $A790
+
+.return:
+  RTL
+}
+
+hatchling_try_to_escape:
+{
+  ; If the door is open, make a run for it
+  PHX
+  LDA $0FB0,x
+  TAX
+  LDA $7F0002,x
+  PLX
+  CMP #$0082 : BEQ .escape_right
+  CMP #$0482 : BEQ .escape_left
+  AND #$F0FF
+  CMP #$800F : BEQ .stop
+
+  CLC
+  RTS
+
+.stop:
+  LDA #$0000 : STA $0FAA,x
+  LDA #$0000 : STA $0FAC,x
+  SEC
+  RTS
+
+.escape_left:
+  LDA $0FB5,x
+  AND #$00FF
+  ASL : ASL : ASL : ASL
+  SEC : SBC #$0020
+  STA $12
+  STA $7FFC00
+  BRA .escape
+
+.escape_right:
+  LDA $0FB5,x
+  AND #$00FF
+  ASL : ASL : ASL : ASL
+  CLC : ADC #$0020
+  STA $12
+  STA $7FFC00
+
+.escape:
+  LDA $0FB4,x
+  AND #$00FF
+  INC
+  ASL : ASL : ASL : ASL
+  STA $14
+  STA $7FFC02
+
+  LDA #$0040
+  JSL hatchling_accel_to_point
+  JSL $A9C3EF
+  SEC
+  RTS
 }
 
 hatchling_shot_routine:
