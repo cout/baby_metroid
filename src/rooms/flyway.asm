@@ -76,38 +76,22 @@ dw $B8EA     ; Library background (bank $8F)
 dw $91D4
 
 ; Room $9879 state $9890: Enemy population
-org $A18364
-;  enemy  x      y      init   props  extra  param1 param2
-dw $D0FF, $00ED, $0061, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $015E, $005C, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $011B, $0060, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $0132, $0049, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $013A, $0065, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $00EA, $0042, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $01CA, $006B, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $0100, $0076, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $019A, $0058, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $0190, $007E, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $017F, $003E, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $01C2, $0041, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $FFFF     ; end of list
-db $00       ; death quota
-
 ; Room $9879 state $98AA: Enemy population
 org $A18364
 ;  enemy  x      y      init   props  extra  param1 param2
-dw $D0FF, $00ED, $0061, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $015E, $005C, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $011B, $0060, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $0132, $0049, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $013A, $0065, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $00EA, $0042, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $01CA, $006B, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $0100, $0076, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $019A, $0058, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $0190, $007E, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $017F, $003E, $0000, $2000, $0000, $0000, $0000 ; mero
-dw $D0FF, $01C2, $0041, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $00ED, $0061, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $015E, $005C, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $011B, $0060, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $0132, $0049, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $013A, $0065, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $00EA, $0042, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $01CA, $006B, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $0100, $0076, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $019A, $0058, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $0190, $007E, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $017F, $003E, $0000, $2000, $0000, $0000, $0000 ; mero
+; dw $D0FF, $01C2, $0041, $0000, $2000, $0000, $0000, $0000 ; mero
+dw hatchling, $00ED, $0061, $0000, $2400, $0000, $0000, $0000
 dw $FFFF     ; end of list
 db $00       ; death quota
 
@@ -118,17 +102,12 @@ dw $FFFF     ; end of list
 db $00       ; death quota
 
 ; Room $9879 state $9890: Enemy graphics set
-org $B4807D
-;  enemy  palette
-dw $D63F, $0001 ; waver
-dw $D0FF, $0002 ; mero
-dw $FFFF     ; end of list
-
 ; Room $9879 state $98AA: Enemy graphics set
 org $B4807D
 ;  enemy  palette
-dw $D63F, $0001 ; waver
-dw $D0FF, $0002 ; mero
+; dw $D63F, $0001 ; waver
+; dw $D0FF, $0002 ; mero
+dw hatchling, $0001
 dw $FFFF     ; end of list
 
 ; Room $9879 state $98C4: Enemy graphics set
@@ -137,12 +116,6 @@ org $B482B5
 dw $FFFF     ; end of list
 
 ; Room $9879 state $9890: FX
-org $8381C0
-;  door   base   target veloc     time  type  A    B    C   pal  anim blend
-dw $FFFF, $FFFF, $0000, $07E0 : db $FF, $FF, $00, $00, $00, $04, $02, $1E
-dw $0040, $4802, $0000, $FFFF : db $FF, $FF, $00, $00, $00, $00, $28, $02
-dw $0000, $6200, $0000, $FFFF : db $FF, $FF, $00, $00, $00, $00, $28, $02
-
 ; Room $9879 state $98AA: FX
 org $8381C0
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend

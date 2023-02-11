@@ -42,6 +42,7 @@ incsrc enemies/zebetite.asm
 incsrc enemies/baby.asm
 incsrc enemies/baby_top.asm
 incsrc enemies/small_baby.asm
+incsrc enemies/hatchling.asm
 incsrc enemies/gunship.asm
 incsrc enemies/water_zoomer.asm
 incsrc projectiles/transporter_electricity.asm
