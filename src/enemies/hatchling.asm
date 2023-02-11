@@ -71,7 +71,8 @@ dd $00000000      ; unused
 dw $A953          ; touch routine
 dw $A9A8          ; shot routine
 dw $0000          ; unknown
-dl $AC9400        ; tile data
+; dl $AC9400        ; tile data
+dl big_hatchling_tile_data
 db $05            ; layer
 dw $F218          ; drop chances
 dw $EC1C          ; vulnerabilities (invulnerable)
@@ -268,5 +269,8 @@ hatchling_accel_to_point:
 
 hatchling_tile_data:
 incbin "hatchling.chr"
+
+big_hatchling_tile_data:
+incbin "big_hatchling.chr"
 
 %END_FREESPACE(B8)
