@@ -61,7 +61,7 @@ org $8388CC
 dw $0000, $02DD, $FFFF, $0000 : db $00, $04, $02, $1E, $82, $1F, $00, $00
 
 ; Room $B6C1 state $B6CE: PLM
-org $839110
+org $8F9110
 ;  plm_id y/x    param
 dw $EF73, $280B, $004F
 dw $0000     ; end of list
