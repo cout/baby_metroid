@@ -31,7 +31,7 @@ dd $00000000       ; unused
 dw $0000           ; power bomb reaction
 dw $0000           ; unknown
 dd $00000000       ; unused
-dw $EDEB           ; touch routine
+dw $804C           ; touch routine
 ; dw $EF07           ; shot routine
 dw small_baby_shot_routine
 dw $0000           ; unknown
