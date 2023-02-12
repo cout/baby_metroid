@@ -326,9 +326,6 @@ crocomire_check_for_collision_with_samus:
   SBC #$0003
   BPL .return
 
-  ; Execute normal enemy touch AI
-  JSL $A0A477
-
   ; Move croc back 1 pixel if there is a collision
   ; TODO - this is not as smooth as I would like
   LDA $0F7A

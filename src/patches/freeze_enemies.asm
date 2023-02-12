@@ -1,6 +1,11 @@
 !effective_contact_damage_index = $0A70
 !effective_invincibility_timer = $1866
 
+; Always use full invincibility with enemies that have extended
+; spritemaps (usually bosses) -- this has implications for Croc, because
+; without this, the fight doesn't work.
+!extended_spritemap_invincibility_timer = #$0001
+
 ;;
 ; Treat all enemies as solid (but they can still hurt Samus).
 ;
@@ -110,7 +115,7 @@ check_solid_enemy_detection:
 
 ; extended spritemap
 org $A09A95
-LDA !effective_invincibility_timer
+LDA !extended_spritemap_invincibility_timer
 
 ; normal spritemap
 org $A0A09B
