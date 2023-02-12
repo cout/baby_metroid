@@ -78,6 +78,8 @@ Cosmetic
 * Terminator is very laggy
 * Samus's ship shows up incorrectly in the cutscene before zebes on
     Mesen-S
+* There is a graphical glitch with the HUD just after a PB goes off in
+    GT room when jumping up to get the super
 
 Probably Won't Fix
 ------------------
