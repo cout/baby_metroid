@@ -17,6 +17,9 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
+* Damage contact index seems to be unused in hard mode, which results in
+    being unable to run through terminator and frog speedway
+* Big Baby in MB room should not attach to Samus
 
 Crashes
 -------
@@ -37,15 +40,12 @@ Incomplete
     from Samus
 * Acid damage is still reduced in hard mode
 * Need to test custom PLMs with xray
-* Need to test croc fight in hard mode
 * Easy grapple patch should fire grapple the full length without holding
     the fire button
 * Golden torizo fight is a vanilla one-shot fight, which is probably too
     scary
 * Baby in various forms should not damage Samus in hard mode
 * Hatchling does not interact with Samus beam
-* Hatchling should not be in the room if Samus leaves and comes back
-* Hatchling should only try to escape after Samus has defeated BT
 
 Ideas
 -----
