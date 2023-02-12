@@ -101,8 +101,8 @@ hatchling_setup:
   LDA !EVENT_HATCHLING_ESCAPE
   JSL $808233
   BCC +
-  LDA #$0000
-  STA $0F94,x
+  LDA #hatchling_sleep_instruction_list
+  STA $0F92,x
 +
 
   RTL
@@ -118,7 +118,7 @@ big_hatchling_setup:
   ; Big hatchling is gone after Ridley is visited
   LDA #$0001
   JSL $8081DC
-  BCC .sleep
+  BCS .sleep
 
   ; Big hatchling is gone after escaping through screw attack room exit
   LDA !EVENT_HATCHLING_ESCAPE
@@ -128,8 +128,8 @@ big_hatchling_setup:
   BRA .return
 
 .sleep:
-  LDA #$0000
-  STA $0F94,x
+  LDA #hatchling_sleep_instruction_list
+  STA $0F92,x
 
 .return:
   RTL
@@ -149,6 +149,11 @@ hatchling_set_exit_block:
   STA $0FB0,x ; unused mochtroid variable
 
   RTS
+}
+
+hatchling_sleep_instruction_list:
+{
+  dw $812F
 }
 
 hatchling_instruction_list:
