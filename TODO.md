@@ -17,8 +17,8 @@ Bugs
     position relative to the geemer every now and then; this effect is
     amplified if Samus is morphed inside the geemer rather than riding
     on top.
-* Damage contact index seems to be unused in hard mode, which results in
-    being unable to run through terminator and frog speedway
+* Contact damage index is ignored for blue suit if easy blue suit is
+     canceled when entering the room
 * Big Baby in MB room should not attach to Samus
 
 Crashes
