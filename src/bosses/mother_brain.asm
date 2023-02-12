@@ -178,3 +178,10 @@ mother_brain_state_final:
 }
 
 %END_FREESPACE(A9)
+
+;;
+; Keep baby from attaching to Samus in hard mode
+;
+
+org $A0ECBF+$30
+dw $804C
