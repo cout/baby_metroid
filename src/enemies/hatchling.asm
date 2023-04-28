@@ -101,7 +101,7 @@ hatchling_setup:
   LDA !EVENT_HATCHLING_ESCAPE
   JSL $808233
   BCC +
-  LDA #hatchling_sleep_instruction_list
+  LDA.w #hatchling_sleep_instruction_list
   STA $0F92,x
 +
 
@@ -128,7 +128,7 @@ big_hatchling_setup:
   BRA .return
 
 .sleep:
-  LDA #hatchling_sleep_instruction_list
+  LDA.w #hatchling_sleep_instruction_list
   STA $0F92,x
 
 .return:
