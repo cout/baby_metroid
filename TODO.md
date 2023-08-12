@@ -31,6 +31,9 @@ Bugs
 * Add baby to room before spore spawn?
 * Joonie was able to clip past crocomire to get the etank, but the scene
      worked out okay in the end
+* Looking at the code, I think the big hatchling will disapper if Samus
+    enters GT room after already defeating GT.  The big hatchling should
+    only disappear once the door is open.
 
 Crashes
 -------
