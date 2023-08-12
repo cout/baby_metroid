@@ -28,7 +28,6 @@ Bugs
 * Terminator has an intense amount of lag in hard mode (and maybe in
     easy mode) with my usual strat.  Not sure if it has to do with Samus
     firing or just collision detection.
-* Add a faster zeela in noob bridge?
 * Add baby to room before spore spawn?
 
 Crashes
