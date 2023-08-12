@@ -43,9 +43,18 @@ draygon_state_initial:
   LDA #$0000
   STA draygon_holding_samus
 
+  ; Prevent Samus from firing by setting a nonzero cooldown
+  LDA #$00C0
+  STA $0CCC
+
+  ; TODO - prevent use of grapple
+  ; TODO - prevent jumping
+
+  ; Keep Samus at the intended X position
   LDA !SAMUS_STUCK_X
   STA $0AF6
 
+  ; Keep decrementing Samus's Y position until she has reached the trap
   LDA $0AFA
   CLC
   ADC #$0001
@@ -320,6 +329,7 @@ draygon_keep_samus_stuck:
 
   JSL cancel_blue_suit
 
+  ; Keep Samus in her intended position
   LDA !SAMUS_STUCK_X : STA $0AF6 ; samus x
   LDA !SAMUS_STUCK_Y : STA $0AFA ; samus y
 
