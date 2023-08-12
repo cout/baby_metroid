@@ -28,6 +28,10 @@ Bugs
     firing or just collision detection.
 * Joonie was able to clip past crocomire to get the etank, but the scene
      worked out okay in the end
+* When Joonie fought Botwoon, Botwoon came out of the hole but never
+    re-entered the hole AND did not break the wall.  I think Joonie
+    came out of the hole at the right time to trigger a race condition.
+    The fix was for Samus to "hide" again.
 
 Crashes
 -------
@@ -56,6 +60,8 @@ Incomplete
 * Hatchling does not interact with Samus beam
 * Missing scroll block in bat cave, so if you don't shoot the block, the
     screen won't scroll
+* Add credits for jooniejoone and somerando (caauyjip) and everyone who
+    posted to the metroidconstruction forum
 
 Ideas
 -----
