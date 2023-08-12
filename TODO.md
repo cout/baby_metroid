@@ -20,6 +20,16 @@ Bugs
 * Contact damage index is ignored for blue suit if easy blue suit is
      canceled when entering the room
 * Big Baby in MB room should not attach to Samus
+* The baby disappears if Samus re-enters BT room instead of exiting to
+    parlor
+* In hard mode (and maybe easy mode too?), Samus can walk straight
+    through the green pirates, but Samus can only roll through the
+    pirates if they are walking toward her.
+* Terminator has an intense amount of lag in hard mode (and maybe in
+    easy mode) with my usual strat.  Not sure if it has to do with Samus
+    firing or just collision detection.
+* Add a faster zeela in noob bridge?
+* Add baby to room before spore spawn?
 
 Crashes
 -------
