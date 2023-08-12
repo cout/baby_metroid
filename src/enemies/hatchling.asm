@@ -35,7 +35,7 @@ dw $0000          ; unknown
 dl hatchling_tile_data
 db $05            ; layer
 dw $F218          ; drop chances
-dw $EC1C          ; vulnerabilities (invulnerable)
+dw $F12E          ; vulnerabilities (invulnerable)
 dw $DF9D          ; enemy name
 
 %assertpc(hatchling+$40)
@@ -75,7 +75,7 @@ dw $0000          ; unknown
 dl big_hatchling_tile_data
 db $05            ; layer
 dw $F218          ; drop chances
-dw $EC1C          ; vulnerabilities (invulnerable)
+dw $F12E          ; vulnerabilities (invulnerable)
 dw $DF9D          ; enemy name
 
 %assertpc(big_hatchling+$40)

@@ -46,7 +46,7 @@ dw $91F7     ; Room setup routine (bank $8F)
 
 ridley_etank_enemy_population:
 
-;  enemy  x      y      init   props  extra  param1 param2
+;  enemy       x      y      init   props  extra  param1 param2
 dw small_baby, $0060, $0060, $0000, $2000, $0000, $0000, $0005
 dw $FFFF     ; end of list
 db $00       ; death quota
