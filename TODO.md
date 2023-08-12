@@ -70,6 +70,7 @@ Ideas
     effect to pick her up by a few more pixels (three pixels less than
     the top of the enemy works well but needs more testing)
 * Samus should take damage when grappling enemies in hard mode
+* Small baby should have a reaction when shot more then just a cry
 
 Cosmetic
 --------

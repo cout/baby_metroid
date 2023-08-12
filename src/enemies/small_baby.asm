@@ -1,3 +1,13 @@
+%BEGIN_FREEMEM(7F)
+
+print "Small baby variables:"
+
+baby_palette_timer:
+print "  baby_palette_timer - $", pc
+skip 2
+
+%END_FREEMEM(7F)
+
 %BEGIN_FREESPACE(A0)
 
 small_baby:
@@ -72,6 +82,8 @@ small_baby_setup:
 
 small_baby_main_ai:
 {
+  ; There is only one door out of the room, so we can safely always set
+  ; the escape flag if Samus seems the baby.
   LDA !EVENT_SMALL_BABY_ESCAPE
   JSL $8081FA
 
@@ -124,11 +136,8 @@ small_baby_try_to_escape:
 
 small_baby_shot_routine:
 {
-  ; spawn PB explosion
-  LDX $0E54
-  LDA $0F7A,x : STA $0CE2
-  LDA $0F7E,x : STA $0CE4
-  JSL $888AB0
+  ; TODO - Rotate palette colors or something so it's clear the baby is
+  ; invulnerable (would be nice if we could use hyper beam palette)
 
   ; jump to normal metroid shot routine
   JMP $EF07
