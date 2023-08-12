@@ -1,13 +1,3 @@
-%BEGIN_FREEMEM(7F)
-
-print "Small baby variables:"
-
-baby_palette_timer:
-print "  baby_palette_timer - $", pc
-skip 2
-
-%END_FREEMEM(7F)
-
 %BEGIN_FREESPACE(A0)
 
 small_baby:
