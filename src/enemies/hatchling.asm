@@ -195,16 +195,16 @@ hatchling_main_ai:
   AND #$1000
   BEQ .main_ai
 
-  LDA !EVENT_HATCHLING_ESCAPE
-  JSL $8081FA
-
   JSR hatchling_try_to_escape
-  BCS .escaped
+  BCS .escaping
 
 .main_ai:
   JMP $A790
 
-.escaped:
+.escaping:
+  LDA !EVENT_HATCHLING_ESCAPE
+  JSL $8081FA
+
   RTL
 }
 
@@ -215,16 +215,16 @@ big_hatchling_main_ai:
   JSL $8081DC
   BCC .main_ai
 
-  LDA !EVENT_BIG_HATCHLING_ESCAPE
-  JSL $8081FA
-
   JSR hatchling_try_to_escape
-  BCS .escaped
+  BCS .escaping
 
 .main_ai:
   JMP $A790
 
-.escaped:
+.escaping:
+  LDA !EVENT_BIG_HATCHLING_ESCAPE
+  JSL $8081FA
+
   RTL
 }
 
