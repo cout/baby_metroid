@@ -29,6 +29,8 @@ Bugs
     easy mode) with my usual strat.  Not sure if it has to do with Samus
     firing or just collision detection.
 * Add baby to room before spore spawn?
+* Joonie was able to clip past crocomire to get the etank, but the scene
+     worked out okay in the end
 
 Crashes
 -------
@@ -55,6 +57,8 @@ Incomplete
     scary
 * Baby in various forms should not damage Samus in hard mode
 * Hatchling does not interact with Samus beam
+* Missing scroll block in bat cave, so if you don't shoot the block, the
+    screen won't scroll
 
 Ideas
 -----
