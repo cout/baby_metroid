@@ -70,11 +70,11 @@ botwoon_set_action_from_health:
 
 .samus_is_hiding:
   ; Come out of the hole if Samus is hiding
-  LDA #$0002 : STA $7E803E,x
-  LDA #$0003 : STA $7E8030,x
-  LDA #$000C : STA $7E0FAC,x
+  LDA #$0002 : STA $7E803E,x ; movement pattern (0/1/2)
+  LDA #$0003 : STA $7E8030,x ; movement speed
+  LDA #$000C : STA $7E0FAC,x ; unknown - used to set movement angle
 
-  ; Set the seeking flag is Samus is hiding
+  ; Set the seeking flag if Samus is hiding
   ; TODO - I think this should be unnecessary, but apparently this flag
   ; does not get set in some cases from the other two places it can get
   ; set, and I don't know why.
@@ -82,7 +82,7 @@ botwoon_set_action_from_health:
   STA botwoon_is_seeking
   BRA .return
 
-.samus_is_not_hiding
+.samus_is_not_hiding:
   LDA #$0000
   STA botwoon_is_seeking
 
@@ -194,7 +194,7 @@ filter_hole_state_after_spitting: ; patch for $B3:9A1E (AND #$0001)
   ; If Samus is hiding, set the seeking flag
   ; TODO - I thought setting the seeking flag here would be unnecessary
   ; (and the wrong thing to do -- since other than on init this makes
-  ; botwoon_is_seeking the same as checking $7E;8026.
+  ; botwoon_is_seeking the same as checking $7E:8026.
   LDA #$0001
   STA botwoon_is_seeking
 
@@ -218,15 +218,16 @@ check_samus_is_hiding:
   LDA $0AFA ; samus y
   CMP #$00AD : BMI .clear_samus_is_hiding
 
-  ; Break the column if Samus is inside the bowl
+  ; Samus is hiding inside the bowl
   BRA .set_samus_is_hiding
 
 .test_hiding_right_side:
-  ; Break the column if Samus enters the room from the right side
+  ; Check if Samus is "hiding" on the right side of the column (entering
+  ; the room from the right side)
   LDA $0AF6
   CMP #$100 : BPL .set_samus_is_hiding
 
-  ; Break the column if Samus is inside the right-side tunnel
+  ; Check if Samus is inside the right-side tunnel
   LDA $0AFA ; samus y
   CMP #$00C8 : BMI .clear_samus_is_hiding
 
