@@ -4,6 +4,9 @@ TODO
 Bugs
 ----
 
+* Enemies that pull Samus offscreen might do not trigger scrolling.  To
+    reproduce: allow all three novas to go ahead of Samus leaving ice,
+    then get pulled along (not pushed) by the 3rd nova.
 * Contact damage index is ignored for blue suit if easy blue suit is
      canceled when entering the room
 * Big Baby in MB room should not attach to Samus
@@ -60,8 +63,6 @@ Cosmetic
     Mesen-S
 * There is a graphical glitch with the HUD just after a PB goes off in
     GT room when jumping up to get the super
-* Enemies that pull Samus offscreen might not trigger scrolling (I
-    believe this has been fixed for most cases)
 
 Probably Won't Fix
 ------------------
