@@ -10,44 +10,29 @@ Bugs
       pull Samus along, but that may change in the future~~
     - it is the future now, and this has changed, ~~but I can no longer
       trigger the bug~~, and I have been able to trigger the bug.
-* Geemers (and possibly other enemies) can pull Samus partially up into
-    a block when she is morphed (though it is possible this can be
-    triggered when she is not morphed)
-* When riding a geemer up a slope, Samus loses just a little bit of X
-    position relative to the geemer every now and then; this effect is
-    amplified if Samus is morphed inside the geemer rather than riding
-    on top.
 * Contact damage index is ignored for blue suit if easy blue suit is
      canceled when entering the room
 * Big Baby in MB room should not attach to Samus
-* In hard mode (and maybe easy mode too?), Samus can walk straight
-    through the green pirates, but Samus can only roll through the
-    pirates if they are walking toward her.
-* Terminator has an intense amount of lag in hard mode (and maybe in
-    easy mode) with my usual strat.  Not sure if it has to do with Samus
-    firing or just collision detection.
-* Joonie was able to clip past crocomire to get the etank, but the scene
-     worked out okay in the end
 * When Joonie fought Botwoon, Botwoon came out of the hole but never
     re-entered the hole AND did not break the wall.  I think Joonie
     came out of the hole at the right time to trigger a race condition.
     The fix was for Samus to "hide" again.
 
-Crashes
--------
+Crashes/Softlocks
+-----------------
 
 * E managed to trigger a crash from climb to pit room before getting
     morph, but I don't know how he did it (I cannot reproduce it - E
     came down left side, may have walked over elevator, but that
     shouldn't matter, and I don't think it's there before morph)
+* Joonie managed to softlock in old mother brain room by getting pinned
+    between an etecoon and the ceiling.
 
 Incomplete
 ----------
 
-* Pirates still explode when shot twice with ice - do any other enemies
-    do this?
-* Samus loses easy blue suit when taking damage, which can be
-    frustrating when trying to shine spark to get through single chamber
+* Green pirates are OHKO (or two shots with ice); other enemies do not
+    behave this way
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
 * Acid damage is still reduced in hard mode
@@ -60,24 +45,10 @@ Incomplete
     posted to the metroidconstruction forum
 * It is possible to kill Draygon
 
-Ideas
------
-
-* Easier wall jumping? (or just wall-hanging ala spiderman?)
-* Change names of items (morph ball -> spider ball, speed booster ->
-    blue suit)
-* Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
-    effect to pick her up by a few more pixels (three pixels less than
-    the top of the enemy works well but needs more testing)
-* Samus should take damage when grappling enemies in hard mode
-* Small baby should have a reaction when shot more then just a cry
-* Add baby to room before spore spawn?
-
 Cosmetic
 --------
 
 * Easy blue suit should not produce echoes
-* Samus should wiggle during draygon "fight"
 * Sometimes when using blue suit (I've seen this in Below Landing Site
     and Acid Snakes Room) Samus turns completely black for a moment like
     you just see her shadow
@@ -99,6 +70,18 @@ Cosmetic
 Probably Won't Fix
 ------------------
 
+* Geemers (and possibly other enemies) can pull Samus partially up into
+    a block when she is morphed (though it is possible this can be
+    triggered when she is not morphed)
+* When riding a geemer up a slope, Samus loses just a little bit of X
+    position relative to the geemer every now and then; this effect is
+    amplified if Samus is morphed inside the geemer rather than riding
+    on top.
+* Terminator has an intense amount of lag in hard mode (and maybe in
+    easy mode) with my usual strat.  Not sure if it has to do with Samus
+    firing or just collision detection.
+* It is possible to clip past Crocomire.  This looks a little glitchy,
+    but everything works correctly.
 * Ice beam gate room is hard without knowing how to use the run button
     (E. finally knows how to do this, and it's not required for beating
     the game)
@@ -116,6 +99,8 @@ Probably Won't Fix
     can always knock one down with a super)
 * Pirate hitbox is noticeably tall (requires changing the spritemaps not
     just the radius)
+* Samus can jump over the green pirates' feet, but Samus can only walk
+    or roll through the pirates if they are walking toward her.
 
 Feedback from E
 ---------------
@@ -156,6 +141,20 @@ Feedback from E
 * Hard to get back up in room next to frog speedway
 * It's really hard to get through rooms when the enemies push Samus
     (e.g. business center or green brinstar shaft) - fixed
+
+Future Ideas
+------------
+
+* Easier wall jumping? (or just wall-hanging ala spiderman?)
+* Change names of items (morph ball -> spider ball, speed booster ->
+    blue suit)
+* Geemers/zeelas/etc only pick samus up by one pixel, but it is a nice
+    effect to pick her up by a few more pixels (three pixels less than
+    the top of the enemy works well but needs more testing)
+* Samus should take damage when grappling enemies in hard mode
+* Small baby could have a shot reaction that is more than just a cry
+* Add a hatchling to the room before spore spawn
+* Make Samus wiggle during draygon "fight"
 
 Tools
 -----
