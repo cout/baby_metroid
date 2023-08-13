@@ -8,6 +8,10 @@
 
 print "Draygon variables:"
 
+draygon_samus_falling_y_position:
+print "  draygon_samus_falling_y_position - $", pc
+skip 2
+
 draygon_previous_x_position:
 print "  draygon_previous_x_position - $", pc
 skip 2
@@ -40,6 +44,15 @@ draygon_state_initial:
 {
   ; TODO - spawn gunk at Samus's position
 
+  LDA $0AFA
+  STA draygon_samus_falling_y_position
+
+  LDA.w #draygon_state_samus_falling
+  STA $0FA8,x
+}
+
+draygon_state_samus_falling:
+{
   LDA #$0000
   STA draygon_holding_samus
 
@@ -47,21 +60,20 @@ draygon_state_initial:
   LDA #$00C0
   STA $0CCC
 
-  ; TODO - prevent use of grapple
-  ; TODO - prevent jumping
-
   ; Keep Samus at the intended X position
   LDA !SAMUS_STUCK_X
   STA $0AF6
 
   ; Keep decrementing Samus's Y position until she has reached the trap
-  LDA $0AFA
+  LDA draygon_samus_falling_y_position
   CLC
   ADC #$0001
   STA $0AFA
+  STA draygon_samus_falling_y_position
   CMP #$016D
   BMI .return
 
+.next_state:
   ; Spawn gunk projectile
   LDY.w #permagunk
   LDA #$0002
