@@ -62,6 +62,7 @@ Incomplete
     screen won't scroll
 * Add credits for jooniejoone and somerando (caauyjip) and everyone who
     posted to the metroidconstruction forum
+* It is possible to kill Draygon
 
 Ideas
 -----
