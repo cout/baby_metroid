@@ -206,7 +206,7 @@ draygon_state_player_control:
   ; (and facing right -- though it might be possible to trigger this
   ; while facing left too)
 
-  ; TODO - prevent Draygon from straying off screen
+  JSR draygon_keep_draygon_in_bounds
 
   JSR draygon_set_samus_drawing_handler
 
@@ -351,6 +351,45 @@ draygon_keep_samus_stuck:
   RTS
 }
 
+draygon_keep_draygon_in_bounds:
+{
+.check_x:
+  LDA $0F7A,x
+  BMI .clamp_left
+  CMP #$0200
+  BPL .clamp_right
+  BRA .check_y
+
+.clamp_left:
+  LDA #$0000
+  STA $0F7A,x
+  BRA .check_y
+
+.clamp_right:
+  LDA #$0200
+  STA $0F7A,x
+  BRA .check_y
+
+.check_y:
+  LDA $0F7E,x
+  BMI .clamp_top
+  CMP #$0200
+  BPL .clamp_bottom
+  BRA .return
+
+.clamp_top:
+  LDA #$0000
+  STA $0F7E,x
+  BRA .return
+
+.clamp_bottom:
+  LDA #$0200
+  STA $0F7E,x
+  BRA .return
+
+.return:
+  RTS
+}
 
 draygon_set_samus_drawing_handler:
 {
