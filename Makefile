@@ -86,7 +86,7 @@ build/.stamp:
 	touch build/.stamp
 
 build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.asar.ips
-	$(FLIPS) --apply build/baby_metroid.ips resources/sm_orig.sfc build/baby_metroid.sfc
+	$(FLIPS) --apply build/baby_metroid.asar.ips resources/sm_orig.sfc build/baby_metroid.sfc
 
 build/baby_metroid.asar.ips: $(ASAR) $(SOURCES) $(ROOMS) $(GRAPHICS)
 	echo "build/baby_metroid.asar.ips: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.asar.ips.d
