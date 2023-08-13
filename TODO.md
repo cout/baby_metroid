@@ -56,8 +56,6 @@ Incomplete
     scary
 * Baby in various forms should not damage Samus in hard mode
 * Hatchling does not interact with Samus beam
-* Missing scroll block in bat cave, so if you don't shoot the block, the
-    screen won't scroll
 * Add credits for jooniejoone and somerando (caauyjip) and everyone who
     posted to the metroidconstruction forum
 * It is possible to kill Draygon

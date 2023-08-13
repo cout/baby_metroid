@@ -30,7 +30,8 @@ dw $0000     ; Layer 2 scroll
 dw $B0A5     ; Room scroll data (bank $8F)
 dw $0000     ; Room var
 dw $0000     ; Room main routine (bank $8F)
-dw $8DA6     ; Room PLM list address (bank $8F)
+; dw $8DA6     ; Room PLM list address (bank $8F)
+dw bat_cave_room_plm_list
 dw $0000     ; Library background (bank $8F)
 dw $91F6     ; Room setup routine (bank $8F)
 
@@ -62,15 +63,23 @@ org $838730
 ;  door   base   target veloc     time  type  A    B    C   pal  anim blend
 dw $0000, $01B4, $FFFF, $0000 : db $00, $02, $02, $1E, $03, $1F, $00, $02
 
+%BEGIN_FREESPACE(8F)
+
+bat_cave_room_plm_list:
+
 ; Room $B07A state $B087: PLM
-org $8F8DA6
+; org $8F8DA6
 ;  plm_id y/x    param
-dw $B703, $0C09, $B0A7
-dw $B63B, $0C0A, $8000
-dw $B703, $1009, $B0AC
-dw $B63B, $100A, $8000
-dw $B703, $1306, $B0B1
-dw $B63B, $1307, $8000
-dw $B63B, $1308, $8000
-dw $B63B, $1309, $8000
+dw $B703, $0C08, $B0A7 ; scroll plm
+dw $B63B, $0C09, $8000 ; rightward extension
+dw $B63B, $0C0A, $8000 ; rightward extension
+dw $B703, $1008, $B0AC ; scroll plm
+dw $B63B, $1009, $8000 ; rightward extension
+dw $B63B, $100A, $8000 ; rightward extension
+dw $B703, $1306, $B0B1 ; scroll plm
+dw $B63B, $1307, $8000 ; rightward extension
+dw $B63B, $1308, $8000 ; rightward extension
+dw $B63B, $1309, $8000 ; rightward extension
 dw $0000     ; end of list
+
+%END_FREESPACE(8F)
