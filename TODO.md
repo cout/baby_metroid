@@ -4,12 +4,6 @@ TODO
 Bugs
 ----
 
-* Enemies that pull Samus offscreen seem to not trigger scrolling (e.g.
-    in acid snake room after getting ice)
-    - ~~note this bug no longer gets triggered because the novas cannot
-      pull Samus along, but that may change in the future~~
-    - it is the future now, and this has changed, ~~but I can no longer
-      trigger the bug~~, and I have been able to trigger the bug.
 * Contact damage index is ignored for blue suit if easy blue suit is
      canceled when entering the room
 * Big Baby in MB room should not attach to Samus
@@ -66,6 +60,8 @@ Cosmetic
     Mesen-S
 * There is a graphical glitch with the HUD just after a PB goes off in
     GT room when jumping up to get the super
+* Enemies that pull Samus offscreen might not trigger scrolling (I
+    believe this has been fixed for most cases)
 
 Probably Won't Fix
 ------------------
