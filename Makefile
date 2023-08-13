@@ -13,7 +13,7 @@ SOURCES = \
 src/main.asm
 
 DEPENDENCY_FILES = \
-	build/baby_metroid.ips.d \
+	build/baby_metroid.asar.ips.d \
 
 TARGETS = \
 	build/baby_metroid.sfc \
@@ -72,7 +72,7 @@ GRAPHICS = \
 	src/title/title_tiles.bin \
 	src/title/title_bg_tilemap.bin \
 
-all: build/baby_metroid.sfc
+all: build/baby_metroid.sfc build/baby_metroid.ips
 
 .PHONY: all
 
@@ -85,12 +85,15 @@ build/.stamp:
 	mkdir -p build
 	touch build/.stamp
 
-build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.ips
+build/baby_metroid.sfc: build/.stamp resources/sm_orig.sfc build/baby_metroid.asar.ips
 	$(FLIPS) --apply build/baby_metroid.ips resources/sm_orig.sfc build/baby_metroid.sfc
 
-build/baby_metroid.ips: $(ASAR) $(SOURCES) $(ROOMS) $(GRAPHICS)
-	echo "build/baby_metroid.ips: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.ips.d
-	$(ASAR) $(ASAR_FLAGS) --symbols-path=build/baby_metroid.sym --ips build/baby_metroid.ips "$$@" src/main.asm build/scratch.sfc
+build/baby_metroid.asar.ips: $(ASAR) $(SOURCES) $(ROOMS) $(GRAPHICS)
+	echo "build/baby_metroid.asar.ips: `$(GENERATE_DEPS) src/main.asm`" > build/baby_metroid.asar.ips.d
+	$(ASAR) $(ASAR_FLAGS) --symbols-path=build/baby_metroid.sym --ips build/baby_metroid.asar.ips "$$@" src/main.asm build/scratch.sfc
+
+build/baby_metroid.ips: build/baby_metroid.sfc
+	$(FLIPS) --create resources/sm_orig.sfc build/baby_metroid.sfc build/baby_metroid.ips
 
 src/rooms/%.bin: src/rooms/%.hex
 	cat $< | $(HEX2BIN) | $(COMPRESS) > $@
