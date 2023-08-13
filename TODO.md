@@ -52,8 +52,6 @@ Incomplete
     from Samus
 * Acid damage is still reduced in hard mode
 * Need to test custom PLMs with xray
-* Easy grapple patch should fire grapple the full length without holding
-    the fire button
 * Golden torizo fight is a vanilla one-shot fight, which is probably too
     scary
 * Baby in various forms should not damage Samus in hard mode
