@@ -12,10 +12,8 @@ Bugs
 * Contact damage index is ignored for blue suit if easy blue suit is
      canceled when entering the room
 * Big Baby in MB room should not attach to Samus
-* When Joonie fought Botwoon, Botwoon came out of the hole but never
-    re-entered the hole AND did not break the wall.  I think Joonie
-    came out of the hole at the right time to trigger a race condition.
-    The fix was for Samus to "hide" again.
+* Botwoon's tail body segments can become disconnected from the rest of
+    the body
 
 Crashes/Softlocks
 -----------------

@@ -64,17 +64,21 @@ botwoon_set_action_from_health:
   LDA $7E8832,x
   BNE .return
 
+  ; Stay out if the wall has crumbled
+  LDA botwoon_wall_crumble_started
+  BNE .come_out_of_the_hole
+
   ; Stay in the hole if Samus is not hiding
   LDA samus_is_hiding
-  BEQ .samus_is_not_hiding
+  BEQ .go_back_into_the_hole
 
-.samus_is_hiding:
-  ; Come out of the hole if Samus is hiding
+.come_out_of_the_hole:
+  ; Come out of the hole
   LDA #$0002 : STA $7E803E,x ; movement pattern (0/1/2)
   LDA #$0003 : STA $7E8030,x ; movement speed
-  LDA #$000C : STA $7E0FAC,x ; unknown - used to set movement angle
+  ; LDA #$000C : STA $7E0FAC,x ; unknown - used to set movement angle
 
-  ; Set the seeking flag if Samus is hiding
+  ; Set the seeking flag
   ; TODO - I think this should be unnecessary, but apparently this flag
   ; does not get set in some cases from the other two places it can get
   ; set, and I don't know why.
@@ -82,7 +86,11 @@ botwoon_set_action_from_health:
   STA botwoon_is_seeking
   BRA .return
 
-.samus_is_not_hiding:
+.go_back_into_the_hole:
+  ; Go back into the hole
+  LDA #$0000 : STA $7E803E,x ; movement pattern (0/1/2)
+  LDA #$0001 : STA $7E8030,x ; movement speed
+
   LDA #$0000
   STA botwoon_is_seeking
 
