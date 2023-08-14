@@ -181,20 +181,64 @@ skip_deal_damage = $91DF79
 ; enemy can pull Samus through the floor, because block collision
 ; detection is skipped when there is enemy collision.
 ;
+; Note that these routines still return the same value as they did
+; before, pretending to have moved Samus as if block collision had not
+; been done when Samus is in contact with an enemy.  Otherwise, Samus
+; ends up in a falling pose when standing on a geemer traveling down.
+;
 
-org $909450
-TAX
-BEQ move_samus_down_no_enemy_collision
+; These snippets would return the same value regardless of whether Samus
+; is standing on an enemy.  The code is simpler, but see comment above.
+;; org $909373 : JMP $937C ; Samus moving left
+;; org $9093C1 : JMP $93CA ; Samus moving right
+;; org $909415 : JMP $941A ; Samus moving up
+;; org $909456 : JMP $945B ; Samus moving down
+
+org $909373
+JMP move_samus_left_enemy_collision
+warnpc $90937C
+
+org $9093C1
+JMP move_samus_right_enemy_collision
+warnpc $9093CA
+
+org $909415
+JMP move_samus_up_enemy_collision
+warnpc $90941A
+
+org $909456
 JMP move_samus_down_enemy_collision
 warnpc $90945B
 
-move_samus_down_no_enemy_collision = $90945B
-
 %BEGIN_FREESPACE(90)
+
+move_samus_left_enemy_collision:
+{
+  LDA $12 : EOR #$FFFF : STA $12
+  LDA $14 : EOR #$FFFF : STA $14
+  JSL $94971E
+  PLP
+  RTS
+}
+
+move_samus_right_enemy_collision:
+{
+  JSL $94971E
+  PLP
+  RTS
+}
+
+move_samus_up_enemy_collision:
+{
+  LDA $12 : EOR #$FFFF : STA $12
+  LDA $14 : EOR #$FFFF : STA $14
+  JSL $949763
+  PLP
+  RTS
+}
 
 move_samus_down_enemy_collision:
 {
-  JSR $E61B
   JSL $949763
   PLP
   RTS

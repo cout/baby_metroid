@@ -1,14 +1,15 @@
 TODO
 ====
 
+Misc
+----
+
+* Asked in metconst - do the patches for collision detection prevent
+    either mochtroid ice clip or ice zeb skip?
+
 Bugs
 ----
 
-* Enemies that pull Samus offscreen might not trigger scrolling.  To
-    reproduce: allow all three novas to go ahead of Samus leaving ice,
-    then follow the third nova along, holding left.  Let go of left soon
-    after Samus is off screen to get the screen to scroll, or continue
-    to hold left to keep the screen from scrolling.
 * Contact damage index is ignored for blue suit if easy blue suit is
      canceled when entering the room
 * Big Baby in MB room should not attach to Samus
