@@ -15,6 +15,12 @@ Bugs
 * Big Baby in MB room should not attach to Samus
 * Botwoon's tail body segments can become disconnected from the rest of
     the body
+* Sometimes Samus cannot bomb jump while pressed against a wall.  This
+    is particularly noticeable when exiting xray room.  Position Samus
+    morphed atop the chozo, press left briefly, lay a bomb, then let go
+    of left.  Samus will fail to bomb jump about half the time.
+* Mochtroid ice clip does not seem to work, because the mochtroid has
+    the wrong hitbox animation.
 
 Crashes/Softlocks
 -----------------
@@ -25,6 +31,8 @@ Crashes/Softlocks
     shouldn't matter, and I don't think it's there before morph)
 * Joonie managed to softlock in old mother brain room by getting pinned
     between an etecoon and the ceiling.
+* Speed zeb skip can cause a softlock if you don't have ammo (can also
+    happen in vanilla)
 
 Incomplete
 ----------
