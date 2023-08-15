@@ -1,6 +1,9 @@
 namespace credits
 pushtable
 
+;;
+; Instructions for credits instruction lists
+
 I_goto = $8B9A06
 I_set_timer = $8B9A17
 I_loop = $8B9A0D
@@ -14,9 +17,27 @@ I_write:
 org credits_goto_long
 I_goto_long:
 
+;;
+; Font sizes
+
 !small = %credits_small_font
 !large1 = %credits_large1_font
 !large2 = %credits_large2_font
+
+;;
+; Font colors
+
+white  = credits_color_white
+yellow = credits_color_yellow
+cyan   = credits_color_cyan
+green  = credits_color_green
+pink   = credits_color_pink
+blue   = credits_color_blue
+orange = credits_color_orange
+purple = credits_color_purple
+
+;;
+; Inline font color/size abbreviations
 
 !w = " : !small(white) : dw "
 !y = " : !large1(yellow) : dw "
@@ -40,19 +61,16 @@ I_goto_long:
 !p2 = " : !large2(pink) : dw "
 !b2 = " : !large2(blue) : dw "
 
-!credits_separation_lines = $000D
-!credits_end_lines = $0023
+;;
+; Misc
 
 blank_line = $1FC0
 
-white  = credits_color_white
-yellow = credits_color_yellow
-cyan   = credits_color_cyan
-green  = credits_color_green
-pink   = credits_color_pink
-blue   = credits_color_blue
-orange = credits_color_orange
-purple = credits_color_purple
+;;
+; Credits
+
+!credits_separation_lines = $000D
+!credits_end_lines = $0023
 
 org $8CD92F-$02 : dw !credits_separation_lines
 org $8CD94B-$02 : dw !credits_separation_lines
