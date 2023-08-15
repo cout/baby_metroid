@@ -4,15 +4,13 @@ TODO
 Misc
 ----
 
-* Asked in metconst - do the patches for collision detection prevent
-    either mochtroid ice clip or ice zeb skip?
+* Add a version number in case I make another release in the future
 
 Bugs
 ----
 
 * Contact damage index is ignored for blue suit if easy blue suit is
      canceled when entering the room
-* Big Baby in MB room should not attach to Samus
 * Botwoon's tail body segments can become disconnected from the rest of
     the body
 * Sometimes Samus cannot bomb jump while pressed against a wall.  This
@@ -42,9 +40,6 @@ Incomplete
 * The baby should move more quickly toward Samus if it is very far away
     from Samus
 * Acid damage is still reduced in hard mode
-* Need to test custom PLMs with xray
-* Golden torizo fight is a vanilla one-shot fight, which is probably too
-    scary
 * Baby in various forms should not damage Samus in hard mode
 * Hatchling does not interact with Samus beam
 * Add credits for jooniejoone and somerando (caauyjip) and everyone who
