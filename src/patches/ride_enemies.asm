@@ -48,6 +48,7 @@ BRL move_samus_with_geemer_main_ai
 
 move_samus_horiz_with_enemy:
 {
+  ; Optimization - do nothing if the enemy is not moving horizontally
   LDA $12
   ORA $14
   BNE .nonzero_movement
@@ -65,10 +66,10 @@ move_samus_horiz_with_enemy:
   JSL ride_enemies_check_collision
   BNE .collision
 
-.no_collision
+.no_collision:
   BRL do_move_enemy_horiz
 
-.collision
+.collision:
 
   LDA $0F7C,x : PHA  ; Push [enemy X sub-pixel pos]
   LDA $0F7A,x : PHA  ; Push [enemy X pos]
@@ -137,6 +138,7 @@ move_samus_horiz_with_enemy:
 
 move_samus_vert_with_enemy:
 {
+  ; Optimization - do nothing if the enemy is not moving vertically
   LDA $12
   ORA $14
   BNE .nonzero_movement
