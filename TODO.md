@@ -1,11 +1,6 @@
 TODO
 ====
 
-Misc
-----
-
-* Add a version number in case I make another release in the future
-
 Bugs
 ----
 

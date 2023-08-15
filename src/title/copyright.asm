@@ -31,6 +31,20 @@ org $8C8103
 %title_char_small(!x, !y, "U") : !x #= !x+8
 %title_char_small(!x, !y, "T") : !x #= !x+8
 
+!x = $01D4
+!y = $FC+10
+%title_char_small(!x, !y, "V") : !x #= !x+8
+%title_char_small(!x, !y, "E") : !x #= !x+8
+%title_char_small(!x, !y, "R") : !x #= !x+8
+%title_char_small(!x, !y, "S") : !x #= !x+8
+%title_char_small(!x, !y, "I") : !x #= !x+8
+%title_char_small(!x, !y, "O") : !x #= !x+8
+%title_char_small(!x, !y, "N") : !x #= !x+8
+%title_char_small(!x, !y, " ") : !x #= !x+8
+%title_char_small(!x, !y, "0") : !x #= !x+8
+%title_char_small(!x, !y, ".") : !x #= !x+8
+%title_char_small(!x, !y, "9") : !x #= !x+8
+
 !x = $01A9
 !y = $FC+20
 %title_char_small(!x, !y, "S") : !x #= !x+8
