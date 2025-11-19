@@ -1,6 +1,94 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; freespace.asm
+; Author: Paul Brannan (cout)
+; License: MIT (see below)
+;
+; This file contains asar macros to automatically position code or data
+; in the unused portions at the end of a ROM or RAM bank.  It is a
+; simpler alternative to using asar's `freespace` command.
+;
+; It can be used in a large project to prevent address collision between
+; two pieces of code.
+;
+; Example:
+;
+;     %BEGIN_FREESPACE(B3)
+;     some_function:
+;     {
+;       RTS
+;     }
+;     %END_FREESPACE(B3)
+;
+;     # ...
+;
+;     %BEGIN_FREESPACE(B3)
+;     some_other_function:
+;     {
+;       RTS
+;     }
+;     %END_FREESPACE(B3)
+;
+; Here `some_function` will be placed at the end of bank B3, and
+; `some_other_function` will be placed after `some_function`.
+;
+; The `END_FRESPACE` macro "remembers" the program counter, so the next
+; time `BEGIN_FREESPACE` is used for the same bank, the program counter
+; will be restored to the where END_FREESPACE left off.
+;
+; There is a separate pair of macros for RAM:
+;
+;     %BEGIN_FREEMEM(7F)
+;     some_2_byte_variable:
+;     skip 2
+;
+;     some_other_2_byte_variable:
+;     skip 2
+;     %END_FREEMEM(7F)
+;
+; The locations here for free space in each bank are for a vanilla Super
+; Metroid ROM.  For other games or mods, these values will have to be
+; modified.
+;
+; The `END_FREESPACE` macro automatically validates that free space
+; intended to be used in one bank does not flow into the next bank, as
+; well as a few other sanity checks.  It is a good idea to validate all
+; banks for extra safety by using `VALIDATE_FREESPACE`:
+;
+;     incsrc file1.asm
+;     incsrc file2.asm
+;     # ...
+;     %VALIDATE_FREESPACE()
+;
+; Copyright 2025 Paul Brannan
+;
+; Permission is hereby granted, free of charge, to any person obtaining
+; a copy of this software and associated documentation files (the
+; "Software"), to deal in the Software without restriction, including
+; without limitation the rights to use, copy, modify, merge, publish,
+; distribute, sublicense, and/or sell copies of the Software, and to
+; permit persons to whom the Software is furnished to do so, subject to
+; the following conditions:
+;
+; The above copyright notice and this permission notice (including the
+; next paragraph) shall be included in all copies or substantial
+; portions of the Software.
+;
+; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+; IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+; CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+; TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+; SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Beginning of free memory in each RAM bank - customize as needed
 !FREEMEM_7E = $7EF4A0
 !FREEMEM_7F = $7FFA02
 
+; Beginning of free memory in each ROM bank - customize as needed
 !START_FREESPACE_80 = $80CD8E
 !START_FREESPACE_81 = $81EF1A
 !START_FREESPACE_82 = $82F70F
@@ -54,6 +142,8 @@
 !START_FREESPACE_B7 = $B7FD00
 !START_FREESPACE_B8 = $B88000
 
+; Set the initial freespace PC values to the start of free space as
+; defined above
 !FREESPACE_80 = !START_FREESPACE_80
 !FREESPACE_81 = !START_FREESPACE_81
 !FREESPACE_82 = !START_FREESPACE_82
@@ -107,11 +197,15 @@
 !FREESPACE_B7 = !START_FREESPACE_B7
 !FREESPACE_B8 = !START_FREESPACE_B8
 
+; Free space in these banks ends before the end of the bank - customize
+; as needed
 !END_FREESPACE_80 = $80FFC0
 !END_FREESPACE_81 = $81FF00
 !END_FREESPACE_94 = $94E000
 !END_FREESPACE_9B = $9BE000
 
+; Free space in these banks goes to the end of the bank - customize as
+; needed
 !END_FREESPACE_82 = $820000+$10000
 !END_FREESPACE_83 = $830000+$10000
 !END_FREESPACE_84 = $840000+$10000
@@ -161,6 +255,10 @@
 !END_FREESPACE_B7 = $B70000+$10000
 !END_FREESPACE_B8 = $B80000+$10000
 
+; Macro: validate free space for the given bank
+;
+; You do not need to use this macro.  It is called for you by
+; `END_FREESPACE`.
 macro VALIDATE_FREESPACE_bank(bank)
   assert !FREESPACE_<bank> >= $<bank>0000, "Freespace for bank $<bank> ($", hex(!FREESPACE_<bank>), ") ends before bank starts"
   assert !FREESPACE_<bank> < $<bank>0000+$10000, "Freespace for bank $<bank> ($", hex(!FREESPACE_<bank>), ") ends after bank ends"
@@ -168,6 +266,10 @@ macro VALIDATE_FREESPACE_bank(bank)
   assert !FREESPACE_<bank> < !END_FREESPACE_<bank>, "Freespace for bank $<bank> ($", hex(!FREESPACE_<bank>), ") ends after END_FREESPACE_<bank> ($", hex(!END_FREESPACE_<bank>), ")"
 endmacro
 
+; Macro: validate free space for all banks
+;
+; This macro is not called automatically.  You can use it after all your
+; other code (see example above).
 macro VALIDATE_FREESPACE()
   %VALIDATE_FREESPACE_bank(80)
   %VALIDATE_FREESPACE_bank(81)
@@ -223,35 +325,68 @@ endmacro
 
 !current_freespace_bank = -1
 
+; Set the PC to the next available free space in <bank>
 macro BEGIN_FREESPACE(bank)
+  ; Sanity check
   assert !current_freespace_bank < 0, "BEGIN_FREESPACE without END_FREESPACE"
+
+  ; Set the PC to the next available free space in <bank>
   org !FREESPACE_<bank>
+
+  ; Set the current free space bank so we can use `END_FREEMEM` without
+  ; an assertion failing
   !current_freespace_bank = <bank>
 endmacro
 
+; Mark the end of code/data in free space for <bank>
+;
+; This macro saves the PC so that the next time `BEGIN_FREESPACE` is
+; called for the same bank, the PC will be restored.
 macro END_FREESPACE(bank)
+  ; Some sanity checks
   assert $!current_freespace_bank >= 0, "END_FREESPACE without BEGIN_FREESPACE"
   assert $<bank> = $!current_freespace_bank, "END_FREESPACE bank (<bank>) does not match BEGIN_FREESPACE bank (!current_freespace_bank)"
+
+  ; Some magic to store the current PC
   !freespace_counter_<bank> ?= 0
   global end_freespace_<bank>_!freespace_counter_<bank>:
   !FREESPACE_<bank> := end_freespace_<bank>_!freespace_counter_<bank>
   !freespace_counter_<bank> #= !freespace_counter_<bank>+1
+
+  ; Reset the current freespace bank so we can use `BEGIN_FREESPACE` or
+  ; `BEGIN_FREEMEM` again without an assertion failing
   !current_freespace_bank = -1
+
+  ; Validate free space for the current bank
   %VALIDATE_FREESPACE_bank(<bank>)
 endmacro
 
+; Set the PC to the next available free space in the RAM bank <bank>
 macro BEGIN_FREEMEM(bank)
+  ; Sanity check
   assert !current_freespace_bank < 0, "BEGIN_FREEMEM without END_FREEMEM"
+
+  ; Set the PC to the next available free space in <bank>
   org !FREEMEM_<bank>
+
+  ; Set the current free space bank so we can use `END_FREEMEM` without
+  ; an assertion failing
   !current_freespace_bank = <bank>
 endmacro
 
+; Mark the end of variables in free space for RAM bank <bank>
 macro END_FREEMEM(bank)
+  ; Some sanity checks
   assert $!current_freespace_bank >= 0, "END_FREEMEM without BEGIN_FREEMEM"
   assert $<bank> = $!current_freespace_bank, "END_FREEMEM bank (<bank>) does not match BEGIN_FREEMEM bank (!current_freespace_bank)"
+
+  ; Some magic to store the current PC
   !freespace_counter_<bank> ?= 0
   global end_freespace_<bank>_!freespace_counter_<bank>:
   !FREEMEM_<bank> := end_freespace_<bank>_!freespace_counter_<bank>
   !freespace_counter_<bank> #= !freespace_counter_<bank>+1
+
+  ; Reset the current freespace bank so we can use `BEGIN_FREESPACE` or
+  ; `BEGIN_FREEMEM` again without an assertion failing
   !current_freespace_bank = -1
 endmacro
