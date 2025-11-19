@@ -1,6 +1,13 @@
 TODO
 ====
 
+Features
+--------
+
+* Perhaps up/down should not break out of spin?
+* Using the grapple beam, I forgot that I had to hold shoot to start the
+    grapple.  Should it just be a single press?
+
 Bugs
 ----
 
