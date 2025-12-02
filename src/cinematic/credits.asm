@@ -111,18 +111,18 @@ baby_metroid_credits:
 !small(green)   : dw I_write, "   WHO HELPED MAKE THIS DREAM   "
 !small(green)   : dw I_write, "        INTO A REALITY          "
 !small(green)   : dw I_write, "                                "
-!large1(white)  : dw I_write, " TESTRUNNER PJBOY INSANEFIREBAT "
+!large1(white)  : dw I_write, " TESTRUNNER PJBOY INSANEFIREBAT " ; 1 extra (centered)
 !large2(white)  : dw I_write, " TESTRUNNER PJBOY INSANEFIREBAT "
-!large1(white)  : dw I_write, "  OI27 MOEHR CRAZY NEEN AMOEBA  "
+!large1(white)  : dw I_write, "  OI27 MOEHR CRAZY NEEN AMOEBA  " ; 3 extra (centered)
 !large2(white)  : dw I_write, "  OI27 MOEHR CRAZY NEEN AMOEBA  "
-!large1(white)  : dw I_write, "  SMILEY OUICHEGEANTE NODEVER2  "
+!large1(white)  : dw I_write, "  SMILEY OUICHEGEANTE NODEVER2  " ; 3 extra (centered)
 !large2(white)  : dw I_write, "  SMILEY OUICHEGEANTE NODEVER2  "
-!large1(white)  : dw I_write, "    METROIDNERD9001 SOMERANDO   "
-!large2(white)  : dw I_write, "    METROIDNERD9001 SOMERANDO   "
-!large1(white)  : dw I_write, "  OB NOBODYNADA STROTLOG YURIK  "
-!large2(white)  : dw I_write, "  OB NOBODYNADA STROTLOG YURIK  "
-!large1(white)  : dw I_write, "     SCYZER EXISTER BENOX50     "
-!large2(white)  : dw I_write, "     SCYZER EXISTER BENOX50     "
+!large1(white)  : dw I_write, "  METROIDNERD9001 SOMERANDO OB  " ; 6 extra
+!large2(white)  : dw I_write, "  METROIDNERD9001 SOMERANDO OB  "
+!large1(white)  : dw I_write, "NOBODYNADA STROTLOG YURIK SCYZER" ; 3 extra (centered)
+!large2(white)  : dw I_write, "NOBODYNADA STROTLOG YURIK SCYZER"
+!large1(white)  : dw I_write, "   EXISTER BENOX50 JOONIEJOONE  " ; 9 extra
+!large2(white)  : dw I_write, "   EXISTER BENOX50 JOONIEJOONE  "
 !large1(white)  : dw I_write, "        AND MANY OTHERS         "
 !large2(white)  : dw I_write, "        AND MANY OTHERS         "
 !small(white)   : dw I_write, "                                " ; 1
