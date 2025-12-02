@@ -87,13 +87,16 @@ build/.stamp:
 	mkdir -p build
 	touch build/.stamp
 
-build/$(NAME).sfc: build/.stamp resources/sm_orig.sfc build/$(NAME).asar.ips
-	$(FLIPS) --apply build/$(NAME).asar.ips resources/sm_orig.sfc build/$(NAME).sfc
-
+# Create a patch using asar to apply to the ROM
 build/$(NAME).asar.ips: $(ASAR) $(SOURCES) $(ROOMS) $(GRAPHICS)
 	echo "build/$(NAME).asar.ips: `$(GENERATE_DEPS) src/main.asm`" > build/$(NAME).asar.ips.d
 	$(ASAR) $(ASAR_FLAGS) --symbols-path=build/$(NAME).sym --ips build/$(NAME).asar.ips "$$@" src/main.asm build/scratch.sfc
 
+# Build a new ROM from the asar patch
+build/$(NAME).sfc: build/.stamp resources/sm_orig.sfc build/$(NAME).asar.ips
+	$(FLIPS) --apply build/$(NAME).asar.ips resources/sm_orig.sfc build/$(NAME).sfc
+
+# Finally, build the official patch from the new ROM
 build/$(NAME).ips: build/$(NAME).sfc
 	$(FLIPS) --create resources/sm_orig.sfc build/$(NAME).sfc build/$(NAME).ips
 
